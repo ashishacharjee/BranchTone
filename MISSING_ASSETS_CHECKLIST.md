@@ -66,11 +66,15 @@ No actual binary audio files were supplied in the initial development pack. `tra
 
 A 5-point formal inquiry was dispatched to the organizing team on 10 November 2026 at 12:03 IST (`PHASE_LOG.md`).
 
+> [!IMPORTANT]
+> **Compliance Rule — Silence Is Not Approval:**  
+> An absent organizer response **DOES NOT constitute approval**. Restricted domain modules (parser, compiler, route simulator, deterministic validation rules, audio signal backend) **MUST remain strictly outside the pre-build baseline**. Their implementation may be undertaken during the live sprint **only to the extent permitted by official event rules**.
+
 | Inquired Item | Question Summary | Current Status | Impact on Live Sprint |
 |---|---|---|---|
-| **Question 1: Domain Engineering** | Are parser, route simulator, and deterministic validation engine allowed in pre-build? | Awaiting written response | If YES $\to$ pre-build them before sprint. If NO $\to$ execute Milestones 1–3 and 5 in live sprint per `LIVE_SPRINT_RUNBOOK.md`. |
-| **Question 2: Audio Engineering** | Does audio upload/decoding and Web Audio scheduling count as pre-build? | Awaiting written response | If YES $\to$ pre-build them before sprint. If NO $\to$ execute Milestone 4 in live sprint. |
-| **Question 3: Report Generation** | Is backend report serialization restricted? | Awaiting written response | Determines whether Milestone 6 is pre-build or live sprint. |
+| **Question 1: Domain Engineering** | Are parser, route simulator, and deterministic validation engine allowed in pre-build? | Awaiting written response (Silence $\ne$ approval) | If YES $\to$ pre-build them before sprint. If NO or UNANSWERED $\to$ execute Milestones 1–3 and 5 in live sprint per `LIVE_SPRINT_RUNBOOK.md` to the extent permitted by event rules. |
+| **Question 2: Audio Engineering** | Does audio upload/decoding and Web Audio scheduling count as pre-build? | Awaiting written response (Silence $\ne$ approval) | If YES $\to$ pre-build them before sprint. If NO or UNANSWERED $\to$ execute Milestone 4 in live sprint. |
+| **Question 3: Report Generation** | Is backend report serialization restricted? | Awaiting written response (Silence $\ne$ approval) | Determines whether Milestone 6 is pre-build or live sprint. |
 | **Question 4: 50% Rubric** | How is the 50% pre-build limit evaluated? | Awaiting written response | Guides team commit and milestone accounting. |
 | **Question 5: Scaffolding vs Logic** | Can interfaces and tests remain prepared ahead of sprint? | Awaiting written response | Confirms current baseline scaffolding is 100% compliant. |
 

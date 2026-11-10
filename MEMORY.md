@@ -48,7 +48,8 @@ Finding explanation:
 - Pre-build application foundation strictly frozen at reference commit `7b82eec`: All 7 workspaces, Story Graph canvas, shared Zustand state, and 100% test suites preserved.
 - Core Pipeline Prioritization:
   - Six-hour sprint prioritizes the core deterministic pipeline: M1 (Twee parse), M2 (Story IR), M3 (Route simulator), M4 (Audio decoder), M5 (BT-001 validation engine), M6 (JSON report generation), and M8 (E2E demonstration).
-  - Gemini AI integration (M7) is an **optional stretch goal**. BranchTone is 100% functional, self-contained, and useful as a narrative audio QA studio without Gemini or any API key.
+  - Gemini AI integration (M7) is an **optional stretch goal** scheduled for 45 minutes (16:45 – 17:30 IST).
+  - Current vs Intended Status: In the **intended product architecture**, BranchTone is designed to operate fully autonomously without Gemini or any API key. The **current application remains a fixture-backed UI** until the parser, simulator, and deterministic validation engine are implemented and tested during the live sprint.
 - Three-Way Asset Taxonomy & Strict Non-Representation Mandate (`MISSING_ASSETS_CHECKLIST.md`):
   1. *Original Assets:* Authentic creator text (P-003) and composer master stems. If missing (`traitor_theme.wav`), they remain honestly disclosed as missing.
   2. *Synthetic Demonstration Fixtures:* Clearly labelled mocks for prose/decoder tests (`synthetic_test_440hz.wav`). Mandatory rule: **Never represent generated or synthetic audio as the missing original `traitor_theme.wav`.**
@@ -56,8 +57,8 @@ Finding explanation:
 - Verified 4-Part Sprint Contingency Protocols (`LIVE_SPRINT_RUNBOOK.md`):
   1. *Unavailable Credentials:* Pure deterministic mode operates smoothly; manual UI annotation authoring and approval functional; M7 bypassed without errors.
   2. *Missing Audio Assets:* Honest missing status maintained; transport visibly disabled with reason; decoder tested strictly using designated synthetic test tones.
-  3. *Incomplete Organizer Approval:* Automatic fallback to Branch B (strict live-sprint execution of M1–M6 from frozen commit `7b82eec`).
-  4. *Schedule Compression:* Strict triage hierarchy dropping M7 (Gemini) first, dropping CSV export second, while protecting the core Twee $\to$ simulation $\to$ BT-001 $\to$ JSON report $\to$ E2E demo pipeline.
+  3. *Incomplete Organizer Approval:* An absent organizer response **does not constitute approval**. Restricted domain modules must remain outside pre-build; live sprint implementation may be undertaken only to the extent permitted by official event rules from frozen commit `7b82eec`.
+  4. *Schedule Compression:* Strict triage hierarchy dropping M7 (Gemini) first (reclaiming 45 minutes directly), dropping CSV export second (15m), while protecting the core Twee $\to$ simulation $\to$ BT-001 $\to$ JSON report $\to$ E2E demo pipeline.
 - Live servers running and verified:
   - Frontend Vite preview server running on `http://localhost:4173/` (host 0.0.0.0, port 4173).
   - Backend Uvicorn FastAPI server running on `http://127.0.0.1:8000/`.

@@ -10,7 +10,8 @@ Update a checkbox only when the task is actually complete and evidence/tests exi
 - [x] Author 6-hour Live Sprint Runbook (`LIVE_SPRINT_RUNBOOK.md`), Acceptance Checklist (`SPRINT_ACCEPTANCE_CHECKLIST.md`), and Missing Assets Checklist (`MISSING_ASSETS_CHECKLIST.md`).
 - [x] Freeze pre-build baseline at commit `7b82eec`; verify live servers (frontend :4173 with proxy, backend :8000).
 - [x] Finalize preparation refinements: prioritize core pipeline (M1-M6, M8) with Gemini as optional stretch goal; implement 3-way asset classification (original, synthetic fixture, licensed production) with strict non-representation mandate; verify 4-part sprint contingency plans.
-- [?] Confirm pre-build/live-sprint boundaries with organizer for every `CONFIRM` item (formal inquiry dispatched 10 Nov 12:03 IST; response pending).
+- [x] Correct sprint preparation inconsistencies: clarify intended architecture vs current fixture-backed UI status; resolve M7 duration to 45m (reclaiming 45m on cut); clarify that organizer silence does not constitute approval and restricted modules remain outside pre-build.
+- [?] Confirm pre-build/live-sprint boundaries with organizer for every `CONFIRM` item (formal inquiry dispatched 10 Nov 12:03 IST; response pending; silence is not approval).
 - [ ] Agree the team's 50% measurement method and record it.
 - [ ] Replace structural placeholders with the owner-approved full story source when available.
 

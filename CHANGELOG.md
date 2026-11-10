@@ -1,9 +1,17 @@
 # CHANGELOG.md — Pack and Implementation History
 
+## 2.9 — 10 November 2026 (Live Sprint Documentation Inconsistency Corrections)
+
+- Corrected three specific inconsistencies in the live sprint preparation documents:
+  1. **Intended Architecture vs Current Baseline:** Replaced statements implying the application is currently "100% useful, fully autonomous and operational" without Gemini. Clarified that standalone deterministic utility without AI is the **intended product architecture**, while the **current application remains a fixture-backed UI** until the parser, simulator, and deterministic validation engine are implemented and tested during the live sprint.
+  2. **Milestone M7 Duration & Schedule Alignment:** Resolved M7 scheduling discrepancy in `LIVE_SPRINT_RUNBOOK.md` and `SPRINT_ACCEPTANCE_CHECKLIST.md`. Set M7 duration to its intended **45 minutes** (16:45 – 17:30 IST), aligned M6 to 30 minutes (16:15 – 16:45 IST), and aligned M8 to 30 minutes (17:30 – 18:00 IST), summing cleanly to 360 minutes (6 hours). Verified that dropping M7 under triage reclaims exactly **45 minutes**.
+  3. **Organizer Response Clarification (Silence $\ne$ Approval):** Explicitly codified that an absent organizer response **does not constitute approval**. Restricted domain modules (parser, compiler, route simulator, rule engine, audio backend) remain strictly outside the pre-build baseline. Their substantive implementation may be undertaken during the live sprint only to the extent permitted by official event rules.
+- Pre-build baseline reference commit `7b82eec` strictly preserved.
+
 ## 2.8 — 10 November 2026 (Live Sprint Refinements, Asset Classification & Contingency Verification)
 
 - Finalized three critical preparation refinements based on architectural and product review:
-  1. **Core Pipeline Priority Established:** Formally prioritized the core deterministic narrative QA pipeline (M1: Twee parser, M2: Story IR compiler, M3: Route simulator, M4: Audio decoder, M5: Deterministic validation engine with BT-001 reproduction, M6: Canonical JSON report generation, M8: E2E demonstration). Formally classified Gemini 2.5 Flash AI integration (M7) as an **optional stretch goal**. Explicitly verified that BranchTone is 100% functional, self-contained, and useful without Gemini or any API key.
+  1. **Core Pipeline Priority Established:** Formally prioritized the core deterministic narrative QA pipeline (M1: Twee parser, M2: Story IR compiler, M3: Route simulator, M4: Audio decoder, M5: Deterministic validation engine with BT-001 reproduction, M6: Canonical JSON report generation, M8: E2E demonstration). Formally classified Gemini 2.5 Flash AI integration (M7) as an **optional stretch goal**. Explicitly verified that in the intended product architecture, BranchTone is fully autonomous and useful without Gemini or any API key, while current application remains a fixture-backed UI baseline.
   2. **Three-Way Asset Classification & Strict Non-Representation Mandate:**
      - Established a strict 3-way taxonomy in `MISSING_ASSETS_CHECKLIST.md`: *Original Assets* (canonical creator content like P-003 quote), *Synthetic Demonstration Fixtures* (clearly labelled test mocks for prose/decoder), and *Licensed Production Assets* (CC0/CC-BY verified media with entries in `LICENSES.md`).
      - Codified mandatory rule: **Never represent generated or synthetic audio as the missing original `traitor_theme.wav`.** Any generated test tones must be named `synthetic_test_fixture.wav` and visibly badged in the UI as `SYNTHETIC FIXTURE`.

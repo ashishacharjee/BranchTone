@@ -72,7 +72,7 @@
 - [ ] `POST /api/v1/projects/{project_id}/validation-runs` operational.
 - [ ] `pytest app/tests/test_validation_engine.py` passes 100%.
 
-### Gate M6: Report Generation & Export (Target: 16:50 IST)
+### Gate M6: Report Generation & Export (Target: 16:45 IST)
 - [ ] `GET /api/v1/projects/{project_id}/reports/{run_id}.json` returns canonical JSON envelope.
 - [ ] Report JSON strictly conforms to `schemas/report.schema.json`.
 - [ ] Provenance metadata correctly marked `backend_validation`.
@@ -80,8 +80,8 @@
 - [ ] Optional CSV export operational.
 - [ ] `pytest app/tests/test_reporting.py` passes 100%.
 
-### Gate M7: Live Gemini AI Integration [OPTIONAL STRETCH GATE] (Target: 17:25 IST)
-> *Note: If `GEMINI_API_KEY` is not provided or time is insufficient, this gate is skipped without blocking release readiness.*
+### Gate M7: Live Gemini AI Integration [OPTIONAL STRETCH GATE] (Target: 17:30 IST)
+> *Note: Scheduled duration is 45 minutes. If `GEMINI_API_KEY` is not provided or time is insufficient, this gate is skipped (reclaiming 45 minutes) without blocking release readiness.*
 - [ ] `google-genai` provider initialized on backend using `GEMINI_API_KEY`.
 - [ ] Structured candidate annotations proposed using Pydantic schema.
 - [ ] Model outputs validated before storage; candidates remain `pending`.
@@ -91,7 +91,7 @@
 
 ---
 
-## 3. End-to-End Demonstration Acceptance Checklist (Target: 17:45 IST)
+## 3. End-to-End Demonstration Acceptance Checklist (Target: 17:30 – 18:00 IST)
 
 - [ ] **Import Workflow:** Uploading `.twee` file updates Story Graph with compiled passages and edges.
 - [ ] **Route Traversal:** Route selector highlights Route A and Route B paths dynamically.
@@ -104,7 +104,7 @@
 
 ---
 
-## 4. Final Submission Packaging (17:45 – 18:00 IST)
+## 4. Final Submission Packaging (17:30 – 18:00 IST)
 
 - [ ] All code committed with descriptive, small git commits.
 - [ ] Git tag created: `git tag -a v1.0.0-live-sprint-final -m "Final live sprint submission"`.
@@ -119,5 +119,5 @@
 
 - [ ] **Unavailable Credentials Contingency:** Verified that backend operates in pure deterministic mode when `GEMINI_API_KEY` is omitted, returning clean disabled status without server crashes.
 - [ ] **Missing Audio Asset Contingency:** Verified that `traitor_theme.wav` remains clearly disclosed as missing; no synthetic audio is represented as the original asset. Any decoder test audio is explicitly labelled `synthetic_test_fixture.wav`.
-- [ ] **Organizer Approval Contingency:** If organizer response is pending at sprint start, Branch B (strict 50/50 live sprint execution) is automatically activated from commit `7b82eec`.
-- [ ] **Schedule Compression Contingency:** If sprint is delayed >30 mins, Gate M7 is dropped immediately and reporting simplified to guarantee on-time completion of the core deterministic pipeline.
+- [ ] **Organizer Approval Contingency:** An absent organizer response DOES NOT constitute approval. Restricted domain modules must remain strictly outside pre-build, and live sprint implementation may be undertaken only to the extent permitted by official event rules from frozen baseline commit `7b82eec`.
+- [ ] **Schedule Compression Contingency:** If sprint is delayed >30 mins, Gate M7 is dropped immediately (reclaiming 45 minutes) and reporting simplified to guarantee on-time completion of the core deterministic pipeline.

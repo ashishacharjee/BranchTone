@@ -9,7 +9,7 @@
 > [!IMPORTANT]
 > **Core Pipeline Priority:**  
 > Milestones M1 through M6 (Twee Ingestion $\to$ Canonical IR $\to$ Route Simulation $\to$ Audio Signal Decoder $\to$ Deterministic BT-001 Validation $\to$ Report Generation) constitute the **mandatory core pipeline**.  
-> **Milestone M7 (Gemini AI Integration) is an optional stretch goal.** The workbench is 100% useful, fully autonomous, and operable as a narrative audio QA suite without Gemini or any API key.
+> **Milestone M7 (Gemini AI Integration) is an optional stretch goal.** In the **intended product architecture**, the narrative audio QA workbench is designed to be fully useful, autonomous, and operational without Gemini or any API key. The **current application remains a fixture-backed UI** until the parser, simulator, and deterministic validation engine are implemented and tested during the live sprint.
 
 ---
 
@@ -23,9 +23,9 @@ flowchart TD
     M2 --> M4["Hour 2:30-3:15: Audio Asset Backend & Signal Decoder [CORE]"]
     M3 --> M5["Hour 3:15-4:15: Deterministic Validation Suite BT-001 [CORE]"]
     M4 --> M5
-    M5 --> M6["Hour 4:15-4:50: Report Generator & Evidence Serializer [CORE]"]
-    M2 -.-> M7["Hour 4:50-5:25: Gemini 2.5 Flash Provider [OPTIONAL STRETCH]"]
-    M6 --> M8["Hour 5:25-6:00: End-to-End Rehearsal & Submission [CORE]"]
+    M5 --> M6["Hour 4:15-4:45: Report Generator & Evidence Serializer [CORE]"]
+    M2 -.-> M7["Hour 4:45-5:30: Gemini 2.5 Flash Provider [OPTIONAL STRETCH - 45m]"]
+    M6 --> M8["Hour 5:30-6:00: End-to-End Rehearsal & Submission [CORE - 30m]"]
     M7 -.-> M8
 ```
 
@@ -40,9 +40,9 @@ flowchart TD
 | **M3: Graph & Simulation** | 13:30 – 14:30 | 60m | **CORE (Mandatory)** | Directed Graph Traversal & State Simulator | `backend/app/graph/` |
 | **M4: Audio Backend** | 14:30 – 15:15 | 45m | **CORE (Mandatory)** | Audio Upload, Storage & Waveform Decoder | `backend/app/audio/` |
 | **M5: Rule Engine (BT-001)** | 15:15 – 16:15 | 60m | **CORE (Mandatory)** | 4 Deterministic Rules & Evidence Verification | `backend/app/rules/` |
-| **M6: Report Service** | 16:15 – 16:50 | 35m | **CORE (Mandatory)** | Canonical JSON Report Serialization | `backend/app/reporting/` |
-| **M7: Live AI Integration** | 16:50 – 17:25 | 35m | *STRETCH (Optional)* | Gemini 2.5 Flash Structured Annotations | `backend/app/narrative/` |
-| **M8: E2E QA & Submission** | 17:25 – 18:00 | 35m | **CORE (Mandatory)** | End-to-End Walkthrough, Demo Video & Push | Live Demo & Portal Push |
+| **M6: Report Service** | 16:15 – 16:45 | 30m | **CORE (Mandatory)** | Canonical JSON Report Serialization | `backend/app/reporting/` |
+| **M7: Live AI Integration** | 16:45 – 17:30 | 45m | *STRETCH (Optional)* | Gemini 2.5 Flash Structured Annotations | `backend/app/narrative/` |
+| **M8: E2E QA & Submission** | 17:30 – 18:00 | 30m | **CORE (Mandatory)** | End-to-End Walkthrough, Demo Video & Push | Live Demo & Portal Push |
 
 ---
 
@@ -171,7 +171,7 @@ flowchart TD
 
 ---
 
-### Milestone 6: Report Generation & Evidence Serialization (16:15 – 16:50)
+### Milestone 6: Report Generation & Evidence Serialization (16:15 – 16:45)
 - **Target Files:**
   - `backend/app/reporting/report_generator.py`
   - `backend/app/api/routes/reports.py`
@@ -191,10 +191,10 @@ flowchart TD
 
 ---
 
-### Milestone 7: Live AI Integration (Gemini 2.5 Flash) [STRETCH GOAL — OPTIONAL] (16:50 – 17:25)
+### Milestone 7: Live AI Integration (Gemini 2.5 Flash) [STRETCH GOAL — OPTIONAL] (16:45 – 17:30)
 > [!NOTE]
 > **Optional Stretch Goal Status:**  
-> This milestone is strictly an optional value-add extension. The core narrative-audio QA workbench functions completely without Gemini or any API key. If time is constrained or credentials are not supplied, this milestone is skipped cleanly, and the workbench operates in pure deterministic mode using creator-authored or fixture-backed annotations.
+> This milestone is strictly an optional value-add extension with a scheduled duration of **45 minutes**. In the **intended product architecture**, the core narrative-audio QA workbench is designed to function completely without Gemini or any API key. The **current application remains a fixture-backed UI** until the parser, simulator, and deterministic validation engine are implemented and tested during the live sprint. If time is constrained or credentials are not supplied during the sprint, this milestone is skipped cleanly, and the workbench operates in pure deterministic mode using creator-authored or fixture-backed annotations.
 
 - **Target Files:**
   - `backend/app/narrative/gemini_provider.py`
@@ -217,7 +217,7 @@ flowchart TD
 
 ---
 
-### Milestone 8: End-to-End Integration, Demonstration & Submission (17:25 – 18:00)
+### Milestone 8: End-to-End Integration, Demonstration & Submission (17:30 – 18:00)
 - **Tasks:**
   - Connect frontend TanStack Query hooks to live backend endpoints.
   - Run full E2E walkthrough script.
@@ -270,17 +270,18 @@ To ensure zero risk during the 6-hour sprint, the team adheres to four explicit 
   4. Cue logic, trigger boundaries, and validation rules evaluate identically regardless of whether the binary asset is present on disk.
 
 ### Contingency 3: Incomplete or Pending Organizer Approval
-* **Trigger:** Organizers have not provided written clarification on the 5-point inquiry dispatched 10 November 2026 before the sprint starts at 12:00 IST on 21 November 2026.
-* **Impact:** Cannot safely execute any domain engine implementation before sprint kickoff.
+* **Explicit Compliance Rule:** An absent organizer response **DOES NOT constitute approval**. Restricted domain modules (parser, compiler, route simulator, deterministic validation rules, audio signal backend) **MUST remain strictly outside the pre-build baseline**.
+* **Trigger:** Organizers have not provided a written response to the formal clarification inquiry prior to the sprint start at 12:00 IST on 21 November 2026.
 * **Action:**
-  1. Default to **Branch B (Strict 50/50 Example Interpretation)**: Treat all substantive domain logic (parser, compiler, simulator, validation engine, audio backend) as live sprint work.
-  2. Maintain commit `7b82eec` as the official pre-build baseline reference.
-  3. Execute Milestones M1 through M6 strictly within the 6-hour live sprint window, preserving genuine Git commit timestamps and logging every milestone in `PHASE_LOG.md`.
+  1. Maintain commit `7b82eec` as the immutable pre-build reference (fixture-backed UI only).
+  2. Do not treat organizer silence or lack of response as tacit authorization to pre-build restricted features.
+  3. Substantive implementation of domain engines may be undertaken during the live sprint **ONLY to the extent permitted by the official GeNarrative Clash event rules**.
+  4. Strictly observe the live-sprint boundary: all live implementation must occur during the official sprint hours, tracked transparently with genuine Git commits and logged in `PHASE_LOG.md`.
 
 ### Contingency 4: Insufficient Remaining Time / Schedule Compression
 * **Trigger:** Unforeseen debugging, test failures, or integration hurdles cause cumulative sprint delay exceeding 30 minutes.
 * **Triage Protocol (Strict Priority Hierarchy):**
-  1. **Level 1 Cut (Drop Stretch Goals):** Immediately drop Milestone M7 (Gemini AI Integration). Reclaim 35 minutes directly.
+  1. **Level 1 Cut (Drop Stretch Goals):** Immediately drop Milestone M7 (Gemini AI Integration). Reclaim **45 minutes** directly (scheduled duration: 16:45 – 17:30).
   2. **Level 2 Cut (Simplify Report Formats):** Drop optional CSV export from Milestone M6; generate canonical JSON report only (`schemas/report.schema.json`). Reclaim 15 minutes.
   3. **Level 3 Cut (Audio Decoder Fallback):** If complex audio header parsing takes too long in Milestone M4, limit decoding to standard 16-bit PCM WAV via Python's built-in `wave` module, skipping MP3/OGG codecs. Reclaim 20 minutes.
   4. **Protected Core (Non-Negotiable):** Milestones M1 (Twee parse), M2 (Story IR), M3 (Route simulation), M5 (BT-001 validation), M6 (JSON export), and M8 (E2E demonstration) are strictly protected and will NOT be cut.
