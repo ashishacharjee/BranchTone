@@ -1,0 +1,76 @@
+/*
+ * BranchTone Design Tokens
+ * Source: DESIGN.md §2 Colour tokens — do not modify without updating DESIGN.md
+ * All custom properties are on :root to be globally available.
+ */
+
+:root {
+  /* ── Backgrounds ─────────────────────────────────────────────────────── */
+  --bt-bg: #0b1011;
+  --bt-bg-elevated: #101719;
+  --bt-surface: #141c1e;
+  --bt-surface-2: #1a2426;
+  --bt-surface-3: #202b2d;
+  --bt-glass: rgba(20, 31, 31, 0.78);
+
+  /* ── Borders ──────────────────────────────────────────────────────────── */
+  --bt-border: rgba(176, 198, 193, 0.16);
+  --bt-border-strong: rgba(176, 198, 193, 0.28);
+
+  /* ── Typography ───────────────────────────────────────────────────────── */
+  --bt-text: #edf3f0;
+  --bt-text-secondary: #aab8b3;
+  --bt-text-muted: #87958f;
+
+  /* ── Accent (emerald) ─────────────────────────────────────────────────── */
+  --bt-accent: #29c98a;
+  --bt-accent-soft: #74d9b0;
+  --bt-accent-deep: #145c43;
+
+  /* ── Status ───────────────────────────────────────────────────────────── */
+  --bt-error: #f04f75;
+  --bt-error-soft: #f58aa1;
+  --bt-warning: #d9a65d;
+  --bt-success: #35d69a;
+  --bt-magenta: #853c65;
+
+  /* ── Focus ────────────────────────────────────────────────────────────── */
+  --bt-focus: #a2eacb;
+
+  /* ── Radii ────────────────────────────────────────────────────────────── */
+  --bt-radius-sm: 4px;
+  --bt-radius: 8px;
+  --bt-radius-md: 10px;
+  --bt-radius-lg: 14px;
+
+  /* ── Sidebar ──────────────────────────────────────────────────────────── */
+  --bt-sidebar-width: 220px;
+
+  /* ── Topbar ───────────────────────────────────────────────────────────── */
+  --bt-topbar-height: 52px;
+
+  /* ── Font families ────────────────────────────────────────────────────── */
+  --bt-font-ui: 'Inter', system-ui, -apple-system, sans-serif;
+  --bt-font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  /* ── Font sizes ───────────────────────────────────────────────────────── */
+  --bt-text-xs: 11px;
+  --bt-text-sm: 12px;
+  --bt-text-base: 13px;
+  --bt-text-md: 14px;
+  --bt-text-lg: 15px;
+
+  /* ── Transitions ──────────────────────────────────────────────────────── */
+  --bt-transition: 150ms ease;
+}
+
+/* Reduced motion — honour user preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

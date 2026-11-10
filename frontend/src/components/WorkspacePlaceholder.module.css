@@ -1,0 +1,110 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: 40px 24px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 520px;
+  padding: 36px 32px;
+  background: var(--bt-surface);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-lg);
+  gap: 12px;
+}
+
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: rgba(41, 201, 138, 0.08);
+  border: 1px solid rgba(41, 201, 138, 0.2);
+  border-radius: 14px;
+  color: var(--bt-accent);
+  margin-bottom: 4px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--bt-text);
+  margin: 0;
+}
+
+.description {
+  font-size: var(--bt-text-sm);
+  color: var(--bt-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.pending {
+  width: 100%;
+  background: var(--bt-surface-2);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius);
+  padding: 12px 14px;
+  text-align: left;
+  margin-top: 4px;
+}
+
+.pendingLabel {
+  display: block;
+  font-size: var(--bt-text-xs);
+  font-family: var(--bt-font-mono);
+  color: var(--bt-warning);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.pendingList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pendingItem {
+  font-size: var(--bt-text-sm);
+  color: var(--bt-text-muted);
+  padding-left: 14px;
+  position: relative;
+}
+
+.pendingItem::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--bt-border-strong);
+}
+
+.complianceNote {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: var(--bt-text-xs);
+  color: var(--bt-warning);
+  background: rgba(217, 166, 93, 0.08);
+  border: 1px solid rgba(217, 166, 93, 0.2);
+  border-radius: var(--bt-radius);
+  padding: 8px 10px;
+  text-align: left;
+  line-height: 1.5;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.complianceIcon {
+  flex-shrink: 0;
+  margin-top: 1px;
+}

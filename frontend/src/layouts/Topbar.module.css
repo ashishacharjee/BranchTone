@@ -1,0 +1,172 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: var(--bt-topbar-height);
+  padding: 0 16px;
+  background: var(--bt-bg-elevated);
+  border-bottom: 1px solid var(--bt-border);
+  flex-shrink: 0;
+}
+
+/* ── Breadcrumb ─────────────────────────────────────────────────────────── */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.crumb {
+  font-size: var(--bt-text-sm);
+  color: var(--bt-text-muted);
+}
+
+.crumbSep {
+  color: var(--bt-text-muted);
+  opacity: 0.5;
+}
+
+.crumbCurrent {
+  font-size: var(--bt-text-sm);
+  font-weight: 500;
+  color: var(--bt-text);
+}
+
+/* ── Version / save ─────────────────────────────────────────────────────── */
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.versionChip {
+  font-size: var(--bt-text-xs);
+  font-family: var(--bt-font-mono);
+  color: var(--bt-text-secondary);
+  background: var(--bt-surface-2);
+  border: 1px solid var(--bt-border);
+  padding: 2px 7px;
+  border-radius: var(--bt-radius-sm);
+}
+
+.saveState {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--bt-text-xs);
+  color: var(--bt-success);
+}
+
+/* ── Spacer ─────────────────────────────────────────────────────────────── */
+.spacer {
+  flex: 1;
+}
+
+/* ── Search ─────────────────────────────────────────────────────────────── */
+.searchWrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  background: var(--bt-surface);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius);
+  height: 32px;
+  width: 240px;
+}
+
+.searchIcon {
+  color: var(--bt-text-muted);
+  flex-shrink: 0;
+}
+
+.searchInput {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: var(--bt-text-sm);
+  color: var(--bt-text);
+  font-family: var(--bt-font-ui);
+}
+
+.searchInput::placeholder {
+  color: var(--bt-text-muted);
+}
+
+.searchInput:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ── History buttons ────────────────────────────────────────────────────── */
+.historyBtns {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.iconBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  border-radius: var(--bt-radius);
+  color: var(--bt-text-muted);
+  cursor: pointer;
+  transition: background var(--bt-transition), color var(--bt-transition);
+}
+
+.iconBtn:hover:not(:disabled) {
+  background: var(--bt-surface-2);
+  color: var(--bt-text);
+}
+
+.iconBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.iconBtn:focus-visible {
+  outline: 2px solid var(--bt-focus);
+  outline-offset: 1px;
+}
+
+/* ── Run Validation ─────────────────────────────────────────────────────── */
+.runValidation {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+  height: 32px;
+  background: rgba(41, 201, 138, 0.15);
+  border: 1px solid rgba(41, 201, 138, 0.35);
+  border-radius: var(--bt-radius);
+  color: var(--bt-accent);
+  font-size: var(--bt-text-sm);
+  font-weight: 500;
+  font-family: var(--bt-font-ui);
+  cursor: pointer;
+  transition: background var(--bt-transition), border-color var(--bt-transition);
+  flex-shrink: 0;
+}
+
+.runValidation:hover:not(:disabled) {
+  background: rgba(41, 201, 138, 0.22);
+  border-color: rgba(41, 201, 138, 0.5);
+}
+
+.runValidation:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.runValidation:focus-visible {
+  outline: 2px solid var(--bt-focus);
+  outline-offset: 2px;
+}
