@@ -1,5 +1,25 @@
 # CHANGELOG.md — Pack and Implementation History
 
+## 2.5 — 10 November 2026 (Technical Readiness Report & Dependency Maintenance Analysis)
+
+- Created exhaustive Technical Readiness Report (`technical-readiness-report.md`) covering domain engine architecture before Slice 3:
+  1. **Twee Parser/Compiler:** Unicode code-point offset preservation (`source_start`, `source_end`), SHA-256 source hash, Harlowe subset AST, diagnostics envelope (`UNSUPPORTED_STORY_SYNTAX`, `DUPLICATE_PASSAGE_TITLE`, `MISSING_LINK_TARGET`), positive/negative test controls, `CONFIRM` compliance classification.
+  2. **Graph & Route Simulation Engine:** Directed graph construction, strict domain invariant passage-entry event order (steps 1–6), search budget (10k states / 500 depth), cycle detection, truthful exploration reporting (`exhaustive` vs `bounded` vs `incomplete`), `CONFIRM` classification.
+  3. **Deterministic Validation Engine:** Pure domain code, zero LLM dependencies, 4 canonical rules (`RULE_REVEAL_PROTECTION`, `RULE_REQUIRED_CUE_COVERAGE`, `RULE_TENSION_LIFECYCLE`, `RULE_EMOTIONAL_CONTINUITY`), exact reproduction of BT-001 with verified source evidence, negative controls (Route A, intentional silence, legitimate conflict renewal), composite deduplication key, `CONFIRM` classification.
+  4. **Audio Backend & Web Audio Scheduling:** File size limit (50MB), MIME/magic byte checks, path traversal hardening, PCM peak decoding (never fabricated), 3-lane Web Audio scheduler (Music, Ambience, SFX), honest disabled states for missing assets, `CONFIRM` classification.
+  5. **Report Generation Engine:** Canonical JSON envelope adhering to `schemas/report.schema.json`, truthful coverage accounting (`not_evaluated`), reproducibility hashes, `CONFIRM` classification.
+- Conducted Dependency-Maintenance Analysis on Starlette Deprecation Warning:
+  - Investigated root cause: Starlette 0.40+ deprecation in `starlette.testclient.TestClient` (`httpx` vs `httpx2`).
+  - Documented that pytest warning filter in `backend/pyproject.toml` is an interim test-runner noise suppression measure, NOT an upstream fix.
+  - Formulated upgrade roadmap to adopt official client when FastAPI updates its dependency specification.
+- Mapped Organizer Clarifications & Gating:
+  - Formulated 3 explicit questions for hackathon organizers regarding parser, route engine, validation, and audio scope.
+  - Maintained strict live-sprint boundary for Gemini AI provider, prompt tuning, and inference hooks (zero pre-build code).
+- Verification & Integrity:
+  - Frontend: 39 tests passing (Vitest), TypeScript strict compile clean (0 errors), ESLint clean (0 errors, 0 warnings), Vite production build clean.
+  - Backend: 5 tests passing (Pytest), Ruff clean, Mypy strict clean (13 source files).
+  - Zero domain engine code written; pre-build baseline strictly preserved.
+
 ## 2.4 — 10 November 2026 (Cross-Workspace Integration & Acceptance Audit)
 
 - Added comprehensive cross-workspace shared-state integration test suite (`CrossWorkspaceIntegration.test.tsx`):

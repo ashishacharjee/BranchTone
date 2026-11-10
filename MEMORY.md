@@ -43,6 +43,18 @@ Finding explanation:
 - Parser, route/state engine, deterministic validator, audio scheduling and reports are not individually classified by the public examples in this pack. Ask the organizer; do not guess.
 - AI prompt tuning, API orchestration and inference hooks are explicitly listed as live-sprint examples.
 
+## Verified Technical Readiness & Gating Audit State (Pre-Slice 3)
+
+- Technical Readiness Report completed (`technical-readiness-report.md`) covering all 5 domain modules:
+  1. Twee Parser/Compiler (`backend/app/ingestion/` & `backend/app/compiler/`): Unicode code-point offsets, source SHA-256 hash, Harlowe subset AST, diagnostics envelope, `CONFIRM`.
+  2. Route & State Simulator (`backend/app/graph/`): Directed graph, domain invariant passage-entry event order (steps 1–6), search budget (10k states / 500 depth), cycle detection, truthful exploration status (`exhaustive` vs `bounded` vs `incomplete`), `CONFIRM`.
+  3. Deterministic Validation Engine (`backend/app/rules/`): Pure domain code, zero LLM, 4 canonical rules (`RULE_REVEAL_PROTECTION`, `RULE_REQUIRED_CUE_COVERAGE`, `RULE_TENSION_LIFECYCLE`, `RULE_EMOTIONAL_CONTINUITY`), exact reproduction of BT-001 with verified source evidence, negative controls (Route A, intentional silence, legitimate conflict renewal), `CONFIRM`.
+  4. Audio Backend & Scheduling (`backend/app/audio/` & Web Audio): Upload validation, MIME/magic byte checks, path traversal hardening, PCM peak decoding (never fabricated), 3-lane Web Audio scheduler (Music, Ambience, SFX), honest disabled states for missing assets, `CONFIRM`.
+  5. Report Generation Engine (`backend/app/reporting/`): Canonical JSON envelope adhering to `schemas/report.schema.json`, truthful coverage accounting (`not_evaluated`), `CONFIRM`.
+- Organizer Clarifications & Gating: 3 formal questions defined for hackathon organizers. Gemini provider, prompt tuning, and inference hooks remain strictly reserved for the 6-hour live sprint on 21 November 2026.
+- Starlette Deprecation Warning Maintenance: Root cause investigated. Starlette 0.40+ deprecation in `TestClient` (`httpx` vs `httpx2`) is silenced in pytest via `filterwarnings` in `backend/pyproject.toml`. It is documented honestly as an interim test-runner filter, NOT an upstream resolution. Tracking upstream FastAPI/Starlette releases for official client migration.
+- Zero Slice 3 domain code written. All 39 Vitest frontend tests and 5 Pytest backend tests pass cleanly. Baseline preserved.
+
 ## Verified Cross-Workspace Integration & Acceptance Audit State
 
 - Cross-workspace shared-state workflows verified with automated integration tests (`CrossWorkspaceIntegration.test.tsx`):
