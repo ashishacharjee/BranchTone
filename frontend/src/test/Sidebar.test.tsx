@@ -9,7 +9,10 @@ import { Sidebar } from '../layouts/Sidebar';
 
 function renderSidebar(initialPath = '/story-graph') {
   return render(
-    <MemoryRouter initialEntries={[initialPath]}>
+    <MemoryRouter
+      initialEntries={[initialPath]}
+      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+    >
       <Sidebar />
     </MemoryRouter>,
   );

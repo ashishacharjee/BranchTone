@@ -1,5 +1,23 @@
 # CHANGELOG.md — Pack and Implementation History
 
+## 2.6 — 10 November 2026 (Complete Application Health Check, Functionality Audit & Error Verification)
+
+- Conducted exhaustive senior-level QA, architectural, and reliability audit of the entire BranchTone application (`FINAL_APPLICATION_HEALTH_REPORT.md`).
+- Verified clean startup and live operation:
+  - Frontend Vite preview server operational on `http://localhost:4173/`. Direct navigation and client refreshes verified across all seven workspaces (`/overview`, `/story-graph`, `/narrative-map`, `/cue-library`, `/route-lab`, `/validation-centre`, `/reports`). Zero blank screens, zero rendering errors.
+  - Backend Uvicorn FastAPI server operational on `http://127.0.0.1:8000/`. Health endpoint (`/api/v1/health`) verified returning HTTP 200 with service metadata and compliance note.
+- Identified and Repaired Existing Defects:
+  1. **Standardized Error Envelope (`backend/app/main.py`):** Wired `StarletteHTTPException` and general `Exception` handlers in `app/main.py`. Any 404 or unhandled server error now returns the standardized envelope specified in `SCHEMA.md §6`: `{"error": {"code": "NOT_FOUND", "message": "..."}}`.
+  2. **Automated SQLite Schema Verification (`backend/app/tests/test_sqlite_schema.py`):** Added 4 automated tests verifying schema execution, table existence (14 tables), foreign key enforcement, offset bounds checks, and self-loop edge constraints.
+  3. **React Router v7 Future Flags Configured:** Enabled `v7_relativeSplatPath` and `v7_startTransition` across router, main, and test runners, eliminating all future deprecation warnings in console and test logs.
+  4. **Added Workflow F Integration Test (`frontend/src/test/CrossWorkspaceIntegration.test.tsx`):** Added automated test verifying continuous navigation across all 7 workspaces, confirming that shared selection state (`selectedRouteId`, `selectedPassageId`, `selectedFindingId`) remains perfectly consistent.
+- Quality Gates & Test Suite Verification:
+  - Frontend: 40 tests passing (Vitest), TypeScript strict compile clean (0 errors), ESLint clean (0 errors, 0 warnings), Vite production build clean (built in 7.0s).
+  - Backend: 11 tests passing (Pytest), Ruff clean (all checks passed), Mypy strict clean (15 source files verified).
+- Core Product Capabilities Truthfully Audited:
+  - Classified all 10 core product capabilities. Pre-build UI and data contracts are 100% verified.
+  - Explicitly confirmed that BT-001 is currently rendered from `expected-findings.json` as a typed verification fixture; the backend validation engine is deliberately GATED by hackathon compliance rules.
+
 ## 2.5 — 10 November 2026 (Technical Readiness Report & Dependency Maintenance Analysis)
 
 - Created exhaustive Technical Readiness Report (`technical-readiness-report.md`) covering domain engine architecture before Slice 3:

@@ -11,6 +11,8 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
+import { OverviewPage } from '../features/overview/OverviewPage';
+import { CueLibraryPage } from '../features/cue-library/CueLibraryPage';
 import { StoryGraphPage } from '../features/story-graph/StoryGraphPage';
 import { ValidationCentrePage } from '../features/validation-centre/ValidationCentrePage';
 import { RouteLabPage } from '../features/route-lab/RouteLabPage';
@@ -21,12 +23,17 @@ import { getReportExportPayload } from '../services/fixtures';
 
 function renderAppWithRouter(initialRoute = '/story-graph') {
   return render(
-    <MemoryRouter initialEntries={[initialRoute]}>
+    <MemoryRouter
+      initialEntries={[initialRoute]}
+      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+    >
       <Routes>
+        <Route path="/overview" element={<OverviewPage />} />
         <Route path="/story-graph" element={<StoryGraphPage />} />
-        <Route path="/validation-centre" element={<ValidationCentrePage />} />
-        <Route path="/route-lab" element={<RouteLabPage />} />
         <Route path="/narrative-map" element={<NarrativeMapPage />} />
+        <Route path="/cue-library" element={<CueLibraryPage />} />
+        <Route path="/route-lab" element={<RouteLabPage />} />
+        <Route path="/validation-centre" element={<ValidationCentrePage />} />
         <Route path="/reports" element={<ReportsPage />} />
       </Routes>
     </MemoryRouter>,
@@ -167,5 +174,60 @@ describe('Cross-Workspace Integration & Shared-State', () => {
 
     expect(clickSpy).toHaveBeenCalled();
     clickSpy.mockRestore();
+  });
+
+  it('Workflow F: Navigate between all seven workspaces and verify shared state consistency', () => {
+    // Start on Route B with Air Vent selected
+    expect(useWorkspaceStore.getState().selectedRouteId).toBe('route_b');
+    expect(useWorkspaceStore.getState().selectedPassageId).toBe('P-003');
+    expect(useWorkspaceStore.getState().selectedFindingId).toBe('fnd_bt001_route_b_p003_demo');
+
+    // 1. Overview
+    const overview = renderAppWithRouter('/overview');
+    expect(screen.getByRole('region', { name: /Project Overview/i })).toBeInTheDocument();
+    expect(useWorkspaceStore.getState().selectedRouteId).toBe('route_b');
+    expect(useWorkspaceStore.getState().selectedPassageId).toBe('P-003');
+    overview.unmount();
+
+    // 2. Story Graph
+    const graph = renderAppWithRouter('/story-graph');
+    expect(screen.getByTestId('story-graph-workspace')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Air Vent/i })).toBeInTheDocument();
+    graph.unmount();
+
+    // 3. Narrative Map
+    const narrativeMap = renderAppWithRouter('/narrative-map');
+    expect(screen.getByRole('region', { name: /Narrative Map Workspace/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Select Route B/i })).toHaveAttribute('aria-pressed', 'true');
+    narrativeMap.unmount();
+
+    // 4. Cue Library
+    const cueLib = renderAppWithRouter('/cue-library');
+    expect(screen.getByRole('region', { name: /Audio Cue Library/i })).toBeInTheDocument();
+    expect(screen.getAllByText('traitor_theme.wav').length).toBeGreaterThanOrEqual(1);
+    cueLib.unmount();
+
+    // 5. Route Lab
+    const routeLab = renderAppWithRouter('/route-lab');
+    expect(screen.getByRole('region', { name: /Route Lab Workspace/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Select Route B/i })).toHaveAttribute('aria-pressed', 'true');
+    routeLab.unmount();
+
+    // 6. Validation Centre
+    const valCentre = renderAppWithRouter('/validation-centre');
+    expect(screen.getByRole('region', { name: /Validation Centre Workspace/i })).toBeInTheDocument();
+    expect(screen.getAllByText('BT-001').length).toBeGreaterThanOrEqual(1);
+    valCentre.unmount();
+
+    // 7. Reports
+    const reports = renderAppWithRouter('/reports');
+    expect(screen.getByRole('region', { name: /Validation Reports Workspace/i })).toBeInTheDocument();
+    expect(screen.getByText('Not evaluated')).toBeInTheDocument();
+    reports.unmount();
+
+    // State remains 100% stable and consistent across all 7 transitions
+    expect(useWorkspaceStore.getState().selectedRouteId).toBe('route_b');
+    expect(useWorkspaceStore.getState().selectedPassageId).toBe('P-003');
+    expect(useWorkspaceStore.getState().selectedFindingId).toBe('fnd_bt001_route_b_p003_demo');
   });
 });

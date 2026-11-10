@@ -8,7 +8,10 @@ import { Topbar } from '../layouts/Topbar';
 
 function renderTopbar(initialPath = '/story-graph') {
   return render(
-    <MemoryRouter initialEntries={[initialPath]}>
+    <MemoryRouter
+      initialEntries={[initialPath]}
+      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+    >
       <Topbar />
     </MemoryRouter>,
   );

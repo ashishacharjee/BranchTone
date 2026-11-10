@@ -23,7 +23,11 @@ import { ReportsPage } from '../features/reports/ReportsPage';
 import { useWorkspaceStore } from '../stores/workspace';
 
 function wrap(element: React.ReactElement) {
-  return render(<MemoryRouter>{element}</MemoryRouter>);
+  return render(
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      {element}
+    </MemoryRouter>,
+  );
 }
 
 beforeEach(() => {

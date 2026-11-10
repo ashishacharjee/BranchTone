@@ -13,43 +13,50 @@ import { RouteLabPage } from '../features/route-lab/RouteLabPage';
 import { ValidationCentrePage } from '../features/validation-centre/ValidationCentrePage';
 import { ReportsPage } from '../features/reports/ReportsPage';
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <AppShell />,
+      children: [
+        {
+          index: true,
+          element: <Navigate to="/story-graph" replace />,
+        },
+        {
+          path: 'overview',
+          element: <OverviewPage />,
+        },
+        {
+          path: 'story-graph',
+          element: <StoryGraphPage />,
+        },
+        {
+          path: 'narrative-map',
+          element: <NarrativeMapPage />,
+        },
+        {
+          path: 'cue-library',
+          element: <CueLibraryPage />,
+        },
+        {
+          path: 'route-lab',
+          element: <RouteLabPage />,
+        },
+        {
+          path: 'validation-centre',
+          element: <ValidationCentrePage />,
+        },
+        {
+          path: 'reports',
+          element: <ReportsPage />,
+        },
+      ],
+    },
+  ],
   {
-    path: '/',
-    element: <AppShell />,
-    children: [
-      {
-        index: true,
-        element: <Navigate to="/story-graph" replace />,
-      },
-      {
-        path: 'overview',
-        element: <OverviewPage />,
-      },
-      {
-        path: 'story-graph',
-        element: <StoryGraphPage />,
-      },
-      {
-        path: 'narrative-map',
-        element: <NarrativeMapPage />,
-      },
-      {
-        path: 'cue-library',
-        element: <CueLibraryPage />,
-      },
-      {
-        path: 'route-lab',
-        element: <RouteLabPage />,
-      },
-      {
-        path: 'validation-centre',
-        element: <ValidationCentrePage />,
-      },
-      {
-        path: 'reports',
-        element: <ReportsPage />,
-      },
-    ],
+    future: {
+      v7_relativeSplatPath: true,
+    },
   },
-]);
+);
