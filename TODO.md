@@ -65,19 +65,19 @@ Update a checkbox only when the task is actually complete and evidence/tests exi
 
 ## Gate 8 — Reports
 - [?] Confirm substantive report-generation classification if required.
-- [ ] JSON report export with run scope, warnings and evidence.
+- [x] JSON report export with run scope, warnings and evidence.
 - [ ] CSV optional.
-- [ ] Never show invented coverage or quality scores.
+- [x] Never show invented coverage or quality scores.
 
 ## Gate 9 — Release readiness
-- [ ] Backend test/lint/typecheck passes.
-- [ ] Frontend lint/typecheck/unit tests/build pass.
+- [x] Backend test/lint/typecheck passes.
+- [x] Frontend lint/typecheck/unit tests/build pass.
 - [ ] E2E flow passes where configured.
 - [ ] Route B → P-003 → BT-001 verified from a fresh run.
-- [ ] Route selection/passage/finding state is consistent across workspaces.
+- [x] Route selection/passage/finding state is consistent across workspaces.
 - [ ] Source quote exact; source line range only if parser-derived.
-- [ ] Missing audio produces no play claim and no fabricated waveform.
-- [ ] Verify demo works without AI credentials.
+- [x] Missing audio produces no play claim and no fabricated waveform.
+- [x] Verify demo works without AI credentials.
 - [ ] Check asset licences and secrets hygiene.
 - [ ] Update README, CHANGELOG, MEMORY and PHASE_LOG.
 - [ ] Confirm submission requirements/deadlines on official portal.

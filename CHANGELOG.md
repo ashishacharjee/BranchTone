@@ -1,5 +1,47 @@
 # CHANGELOG.md — Pack and Implementation History
 
+## 2.3 — 10 November 2026 (Pre-Build Remaining Six Workspaces Implementation)
+
+- Built dedicated, fully functional UI layouts for all six remaining workspaces while preserving the existing Story Graph:
+  1. **Overview (`OverviewPage.tsx`):**
+     - Project & version summary, import/compile status (`the_last_signal.twee`, `v0.4`, structural placeholder notice).
+     - Metric cards: Passages (5), Transitions (5), Active Issues (1), Validation Coverage (`Not evaluated`).
+     - Latest validation run card with deep-link navigation to Story Graph / Validation Centre.
+     - Audio asset health card with missing asset count (`traitor_theme.wav`).
+     - Quick workspace navigation cards.
+  2. **Narrative Map (`NarrativeMapPage.tsx`):**
+     - Interactive Route A / Route B selector synced with shared Zustand store.
+     - Chronological fact & emotional progression stepper (Lobby 3/5, Air Vent 4/5, Server Vault 4/5, Safe House 4/5).
+     - Narrative reveal/resolution badges (`traitor_identity_revealed: false/true`).
+     - Annotation review model distinguishing Authoritative Approved annotations (`P-003`) from Pending Candidate annotations (`P-004`).
+  3. **Cue Library (`CueLibraryPage.tsx`):**
+     - Layer filters (`All`, `Music`, `Ambience`, `SFX`, `Voice`).
+     - Audio assets & cues inventory table showing `traitor_theme.wav` with `Missing` status and `Unavailable` duration.
+     - Waveform area displaying honest missing state ("No Audio Waveform Available — media asset missing; no synthetic peaks displayed").
+     - Cue configuration inspector (trigger, required facts, stop policy, fades, loop, overlap).
+     - Playback transport visibly disabled with explanatory tooltip.
+  4. **Route Lab (`RouteLabPage.tsx`):**
+     - Route A / Route B sequence and traversal stepper.
+     - Step-by-step fact snapshots with cue defect highlight at Air Vent on Route B.
+     - Cue activation trace table with activation ID, required state, actual state, and finding code.
+     - Multitrack transport disabled with honest notice ("Simulation trace is demonstration fixture").
+  5. **Validation Centre (`ValidationCentrePage.tsx`):**
+     - Filter controls by Rule, Severity, and Status.
+     - Deterministic validation findings table displaying BT-001 (Reveal Protection, High, Open).
+     - Finding detail drawer with state comparison, verified source evidence quote, route trace, and suggested remediation.
+     - "Inspect in Story Graph Workspace" deep-link action button.
+     - Negative controls & expected absence documentation panel.
+  6. **Reports (`ReportsPage.tsx`):**
+     - Run identifiers: project ID, story version, run ID, and source SHA-256.
+     - Deterministic rule suite results summary (Reveal Protection, Required Cue Coverage, Tension Lifecycle, Emotional Continuity).
+     - Exploration scope metrics and honest Graph Coverage Score (`Not evaluated`).
+     - Client-side "Export JSON Report" action generating structured verification JSON.
+- Tests & Verification:
+  - Comprehensive workspace test suite in `WorkspacePages.test.tsx` (all 6 tests passing).
+  - Total 34 frontend tests passing (Vitest), ESLint clean (0 errors, 0 warnings), production Vite build clean.
+  - Backend tests (5 passed), Ruff clean, Mypy clean.
+  - Multi-resolution screenshots captured across all 7 workspaces at 1600×900.
+
 ## 2.2 — 10 November 2026 (Slice 2 Implementation)
 
 - Implemented typed fixture adapter (`frontend/src/services/fixtures.ts`) importing JSON fixtures (`content/demo-project.json`, `content/expected-findings.json`, `content/audio-cues.example.json`, `content/narrative_annotations.example.json`) into strongly typed frontend models.

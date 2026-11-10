@@ -43,6 +43,22 @@ Finding explanation:
 - Parser, route/state engine, deterministic validator, audio scheduling and reports are not individually classified by the public examples in this pack. Ask the organizer; do not guess.
 - AI prompt tuning, API orchestration and inference hooks are explicitly listed as live-sprint examples.
 
+## Verified Pre-Build All-Workspaces UI State
+
+- All seven workspaces are now fully implemented and active in the shared AppShell:
+  1. `StoryGraphPage` — Interactive React Flow directed graph, Route A/B selector, custom SVG nodes, Passage Inspector with exact P-003 heading and quote, 3-lane Audio Timeline with 01:24/04:32 demo badges and aligned red cue marker.
+  2. `OverviewPage` — Project summary, passage/transition/issue metrics, latest validation run card, missing audio asset health, and "Not evaluated" validation coverage score.
+  3. `NarrativeMapPage` — Route-synced chronological fact/intensity plot (1–5 scale), reveal markers, and annotation review distinguishing approved from pending annotations.
+  4. `CueLibraryPage` — Audio layer filters, inventory table with missing `traitor_theme.wav`, honest empty waveform state, cue parameter inspector, and disabled audition transport.
+  5. `RouteLabPage` — Step-by-step passage and fact snapshots along selected route, cue defect annotation at Air Vent entry on Route B, activation trace table, and disabled multitrack transport.
+  6. `ValidationCentrePage` — Rule/severity/status filters, findings table displaying BT-001, detail drawer with state comparison and exact evidence quotation, "Inspect in Story Graph" deep-link, and negative controls panel.
+  7. `ReportsPage` — Project/version/run identifiers, deterministic rule evaluation summary, honest coverage metric ("Not evaluated"), and client-side JSON export.
+- Shared Zustand state verified: Route selection, passage selection, and finding deep-linking synchronize seamlessly across all workspaces.
+- Strict compliance maintained: Zero Twee compiler, route simulator, rule engine, audio decoder backend, or Gemini AI provider code was introduced. All data is cleanly mapped from typed demo fixtures (`content/*.json`).
+- Test suites passing: 34 frontend tests (Vitest), ESLint (0 errors, 0 warnings), Vite production build clean, backend pytest (5 passed), Ruff clean, Mypy clean.
+- 1600×900 screenshots captured for all 7 workspaces.
+- Production preview server running live at `http://localhost:4173/`.
+
 ## Verified Slice 2 State
 
 - Typed fixture adapter operational: Loads `content/*.json` directly into typed frontend entities without hardcoded data duplication.
