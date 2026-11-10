@@ -14,14 +14,14 @@ Update a checkbox only when the task is actually complete and evidence/tests exi
 - [x] Implement design tokens and application shell.
 - [x] Implement separate workspace routing for all seven workspaces.
 - [x] Implement accessible nav, topbar, feedback and demo-state treatment.
-- [ ] Reproduce Story Graph using typed fixture display data, if permitted.
+- [x] Reproduce Story Graph using typed fixture display data, if permitted.
 - [x] Verify 1600×1000, 1600×900, 1440×900 and 1366×768.
 
 ## Gate 2 — Contracts and fixture integrity
 - [x] Align TypeScript types, Pydantic models and JSON Schema.
-- [ ] Validate fixture IDs/references/source quote/intensity.
-- [ ] Ensure fixture and production data are visually distinct.
-- [ ] Ensure no fake media, metrics, timestamps or evidence offsets.
+- [x] Validate fixture IDs/references/source quote/intensity.
+- [x] Ensure fixture and production data are visually distinct.
+- [x] Ensure no fake media, metrics, timestamps or evidence offsets.
 
 ## Gate 3 — Parser/compiler (`CONFIRM`)
 - [?] Obtain organizer classification.
