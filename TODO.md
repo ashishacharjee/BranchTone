@@ -73,9 +73,9 @@ Update a checkbox only when the task is actually complete and evidence/tests exi
 - [x] Backend test/lint/typecheck passes.
 - [x] Frontend lint/typecheck/unit tests/build pass.
 - [ ] E2E flow passes where configured.
-- [ ] Route B → P-003 → BT-001 verified from a fresh run.
+- [x] Route B → P-003 → BT-001 verified from a fresh run.
 - [x] Route selection/passage/finding state is consistent across workspaces.
-- [ ] Source quote exact; source line range only if parser-derived.
+- [x] Source quote exact; source line range only if parser-derived.
 - [x] Missing audio produces no play claim and no fabricated waveform.
 - [x] Verify demo works without AI credentials.
 - [ ] Check asset licences and secrets hygiene.

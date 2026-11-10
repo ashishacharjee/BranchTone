@@ -43,6 +43,19 @@ Finding explanation:
 - Parser, route/state engine, deterministic validator, audio scheduling and reports are not individually classified by the public examples in this pack. Ask the organizer; do not guess.
 - AI prompt tuning, API orchestration and inference hooks are explicitly listed as live-sprint examples.
 
+## Verified Cross-Workspace Integration & Acceptance Audit State
+
+- Cross-workspace shared-state workflows verified with automated integration tests (`CrossWorkspaceIntegration.test.tsx`):
+  1. Story Graph (Air Vent P-003 selected) → Validation Centre (BT-001 finding active).
+  2. Validation Centre → "Inspect in Story Graph Workspace" deep-link updates `selectedRouteId` (`route_b`), `selectedPassageId` (`P-003`), and `selectedFindingId` (`fnd_bt001_route_b_p003_demo`) synchronously, returning to Story Graph with Air Vent P-003 rendered.
+  3. Route Lab route switching (Route A / Route B) synchronizes Story Graph active edges, passage highlighting, and Audio Timeline sequence.
+  4. Narrative Map route switching updates global route selection and chronological step sequence.
+  5. Reports workspace JSON export generates valid download payload with `demo_fixture_preview` provenance, `not_evaluated` coverage status, and full fixture finding data.
+- Backend pytest warning resolved: `StarletteDeprecationWarning` filtered in `backend/pyproject.toml`; pytest outputs 5 passed in 0.81s with 0 warnings.
+- Responsive visual review verified across 1600×900, 1440×900, and 1366×768 viewports for all 7 workspaces.
+- Test suites passing: 39 frontend tests (Vitest), ESLint (0 errors, 0 warnings), Vite production build clean, backend pytest (5 passed, 0 warnings), Ruff clean, Mypy strict clean.
+- Compliance boundary strictly preserved: Zero Twee compiler, route simulator, rule engine, audio backend, or Gemini integration was introduced.
+
 ## Verified Pre-Build All-Workspaces UI State
 
 - All seven workspaces are now fully implemented and active in the shared AppShell:

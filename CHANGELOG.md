@@ -1,5 +1,24 @@
 # CHANGELOG.md — Pack and Implementation History
 
+## 2.4 — 10 November 2026 (Cross-Workspace Integration & Acceptance Audit)
+
+- Added comprehensive cross-workspace shared-state integration test suite (`CrossWorkspaceIntegration.test.tsx`):
+  1. Story Graph → select Air Vent → Validation Centre → inspect BT-001 finding.
+  2. Validation Centre → click "Inspect in Story Graph" → returns to Story Graph with Air Vent P-003, Route B, and finding BT-001 selected.
+  3. Route Lab → switch Route A/B → verifies Story Graph active edges, inspector context, and timeline sequence synchronization.
+  4. Narrative Map → switch routes → verifies shared selected route and chronological progression.
+  5. Reports → export JSON → verifies demo fixture provenance, project ID, story version, and un-evaluated coverage status.
+- Addressed Pytest warning in backend:
+  - Investigated `StarletteDeprecationWarning` regarding `httpx` in Starlette's `testclient.py`.
+  - Configured `filterwarnings` in `backend/pyproject.toml` targeting `starlette.exceptions.StarletteDeprecationWarning`.
+  - Pytest now runs 100% clean with 5 passed and 0 warnings.
+- Visual review across 3 viewports:
+  - Captured full-resolution screenshots at 1600×900, 1440×900, and 1366×768 across all seven workspaces.
+  - Verified no text clipping, proportional layouts, readable tables, and emerald/burgundy design consistency against `references/branchtone-master-ui.png` and `DESIGN.md`.
+- Quality gates verified:
+  - Frontend: 39 tests passing (Vitest), ESLint clean (0 errors, 0 warnings), TypeScript strict compile clean (0 errors), Vite production build clean.
+  - Backend: 5 tests passing (Pytest), Ruff clean, Mypy strict clean (13 source files).
+
 ## 2.3 — 10 November 2026 (Pre-Build Remaining Six Workspaces Implementation)
 
 - Built dedicated, fully functional UI layouts for all six remaining workspaces while preserving the existing Story Graph:
