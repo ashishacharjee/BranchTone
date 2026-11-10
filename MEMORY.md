@@ -43,6 +43,20 @@ Finding explanation:
 - Parser, route/state engine, deterministic validator, audio scheduling and reports are not individually classified by the public examples in this pack. Ask the organizer; do not guess.
 - AI prompt tuning, API orchestration and inference hooks are explicitly listed as live-sprint examples.
 
+## Verified Live Sprint Preparation & Baseline Freeze State
+
+- Pre-build application foundation strictly frozen: All 7 workspaces, Story Graph canvas, shared Zustand state, and 100% test suites preserved.
+- Live servers running and verified:
+  - Frontend Vite preview server running on `http://localhost:4173/` (host 0.0.0.0, port 4173).
+  - Backend Uvicorn FastAPI server running on `http://127.0.0.1:8000/`.
+  - Preview proxy configured in `frontend/vite.config.ts`: `/api` calls routed to backend; `/api/v1/health` verified returning HTTP 200 JSON.
+- Live Sprint Documentation Suite Authored:
+  1. `LIVE_SPRINT_RUNBOOK.md` — 6-hour implementation schedule (M1–M8), architecture specifications, unit tests, failure scenarios, E2E demo script, and organizer decision branching.
+  2. `SPRINT_ACCEPTANCE_CHECKLIST.md` — Verification gates for pre-sprint readiness, M1–M7 milestones, E2E demonstration, and submission packaging.
+  3. `MISSING_ASSETS_CHECKLIST.md` — Systematic inventory and acquisition protocol for narrative passages, audio assets, organizer confirmation, and Gemini credentials.
+- Strict Gating Maintained: Zero domain engine code (Twee parser, route simulator, validation engine, audio backend, Gemini integration) implemented.
+- Quality gates: 40 frontend tests passing, 11 backend tests passing, TypeScript strict clean, ESLint clean, Vite build clean, Ruff clean, Mypy strict clean.
+
 ## Verified Complete Health Check, Functionality Audit & Error Verification State
 
 - Complete application health check, functionality audit, and error verification performed (`FINAL_APPLICATION_HEALTH_REPORT.md`).

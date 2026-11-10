@@ -7,6 +7,8 @@ Update a checkbox only when the task is actually complete and evidence/tests exi
 - [x] Read all root documents and reference media.
 - [x] Author Technical Readiness Report for domain modules (parser, simulator, validation, audio, reporting) and dependency maintenance analysis (`technical-readiness-report.md`).
 - [x] Complete Full Application Health Check, Functionality Audit & Error Verification (`FINAL_APPLICATION_HEALTH_REPORT.md`).
+- [x] Author 6-hour Live Sprint Runbook (`LIVE_SPRINT_RUNBOOK.md`), Acceptance Checklist (`SPRINT_ACCEPTANCE_CHECKLIST.md`), and Missing Assets Checklist (`MISSING_ASSETS_CHECKLIST.md`).
+- [x] Freeze pre-build baseline; verify live servers (frontend :4173 with proxy, backend :8000).
 - [?] Confirm pre-build/live-sprint boundaries with organizer for every `CONFIRM` item (formal inquiry dispatched 10 Nov 12:03 IST; response pending).
 - [ ] Agree the team's 50% measurement method and record it.
 - [ ] Replace structural placeholders with the owner-approved full story source when available.
@@ -80,8 +82,8 @@ Update a checkbox only when the task is actually complete and evidence/tests exi
 - [x] Source quote exact; source line range only if parser-derived.
 - [x] Missing audio produces no play claim and no fabricated waveform.
 - [x] Verify demo works without AI credentials.
-- [ ] Check asset licences and secrets hygiene.
-- [ ] Update README, CHANGELOG, MEMORY and PHASE_LOG.
+- [x] Check asset licences and secrets hygiene.
+- [x] Update README, CHANGELOG, MEMORY and PHASE_LOG.
 - [ ] Confirm submission requirements/deadlines on official portal.
 
 ## Definition of done

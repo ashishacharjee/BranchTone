@@ -1,5 +1,19 @@
 # CHANGELOG.md — Pack and Implementation History
 
+## 2.7 — 10 November 2026 (Live Sprint Preparation, Runbook Authoring & Baseline Freeze)
+
+- Authored comprehensive preparation deliverables for the GeNarrative Clash live sprint on 21 November 2026:
+  1. **`LIVE_SPRINT_RUNBOOK.md`:** 6-hour implementation schedule (M1–M8) broken down by technical milestones: Twee story parser & compiler (M1), canonical Story IR (M2), directed graph & route/state simulation (M3), audio cue scheduling & narrative-state evaluation (M4), deterministic validation engine with BT-001 reproduction (M5), evidence-backed report generation (M6), live Gemini AI provider integration & prompt tuning (M7), and end-to-end rehearsal/buffer (M8). Documented module technical specs (files, interfaces, inputs/outputs, unit tests, failure scenarios), step-by-step E2E demo script, and organizer decision branching.
+  2. **`SPRINT_ACCEPTANCE_CHECKLIST.md`:** Operational acceptance gates covering pre-sprint setup (T-30m), live milestone gates (M1–M7), end-to-end demonstration verification, and final submission packaging checklist.
+  3. **`MISSING_ASSETS_CHECKLIST.md`:** Complete asset disclosure and acquisition protocol for missing narrative prose (P-001, P-002, P-004, P-005), licensed audio assets (`traitor_theme.wav`, ambience, SFX), organizer compliance written response, and live AI credentials (`GEMINI_API_KEY`).
+- Enhanced Vite Preview Server Configuration (`frontend/vite.config.ts`):
+  - Configured `preview.proxy` matching `server.proxy` for `/api` requests to proxy seamlessly to `http://127.0.0.1:8000`.
+  - Verified live preview: `http://localhost:4173/` serves frontend; `http://localhost:4173/api/v1/health` proxies to backend and returns HTTP 200 with service metadata.
+- Pre-Build Baseline Frozen:
+  - Preserved all 7 workspaces, Story Graph, and shared Zustand state.
+  - Zero domain engine code written (Twee parser, route simulator, rule engine, audio backend, Gemini provider remain untouched).
+  - All 40 Vitest frontend tests and 11 Pytest backend tests passing cleanly.
+
 ## 2.6 — 10 November 2026 (Complete Application Health Check, Functionality Audit & Error Verification)
 
 - Conducted exhaustive senior-level QA, architectural, and reliability audit of the entire BranchTone application (`FINAL_APPLICATION_HEALTH_REPORT.md`).
