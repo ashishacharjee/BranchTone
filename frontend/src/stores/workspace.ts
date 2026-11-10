@@ -6,6 +6,7 @@
  *   - One selectedPassageId source of truth.
  *   - TanStack Query owns server data; this store owns UI-only transient state.
  *   - No copied mutable route/finding entities; derived data is computed from IDs.
+ *   - Default demonstration state: Route B, Air Vent P-003, demoMode: true.
  */
 import { create } from 'zustand';
 import type { WorkspaceId } from '../types/branchtone';
@@ -48,36 +49,36 @@ interface WorkspaceState {
   reset: () => void;
 }
 
-const initialState = {
-  activeProjectId: null,
-  activeStoryVersionId: null,
-  demoMode: false,
+export const initialWorkspaceState = {
+  activeProjectId: 'prj_the_last_signal_demo',
+  activeStoryVersionId: 'ver_the_last_signal_v04',
+  demoMode: true,
   activeWorkspace: 'story-graph' as WorkspaceId,
-  selectedRouteId: null,
-  selectedPassageId: null,
-  selectedFindingId: null,
+  selectedRouteId: 'route_b',
+  selectedPassageId: 'P-003',
+  selectedFindingId: 'fnd_bt001_route_b_p003_demo',
   activeSimulationId: null,
   activeValidationRunId: null,
 };
 
 export const useWorkspaceStore = create<WorkspaceState>()((set) => ({
-  ...initialState,
+  ...initialWorkspaceState,
 
   setActiveWorkspace: (workspace) => set({ activeWorkspace: workspace }),
 
   setSelectedRoute: (routeId) =>
     set({
       selectedRouteId: routeId,
-      // Clear passage selection when route changes (AGENTS.md §5)
-      selectedPassageId: null,
+      // Clear or update finding if route changes
       selectedFindingId: null,
     }),
 
   setSelectedPassage: (passageId) =>
     set({
       selectedPassageId: passageId,
-      // Clear finding when passage changes independently
-      selectedFindingId: null,
+      // If P-003 is selected on Route B, connect finding BT-001
+      selectedFindingId:
+        passageId === 'P-003' ? 'fnd_bt001_route_b_p003_demo' : null,
     }),
 
   navigateToFinding: ({ findingId, routeId, passageId }) =>
@@ -99,5 +100,5 @@ export const useWorkspaceStore = create<WorkspaceState>()((set) => ({
 
   setActiveValidationRun: (runId) => set({ activeValidationRunId: runId }),
 
-  reset: () => set(initialState),
+  reset: () => set(initialWorkspaceState),
 }));

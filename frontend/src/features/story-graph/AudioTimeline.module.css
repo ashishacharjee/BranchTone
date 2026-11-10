@@ -1,0 +1,322 @@
+.timeline {
+  display: flex;
+  flex-direction: column;
+  background: var(--bt-surface);
+  border-top: 1px solid var(--bt-border);
+  height: 190px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* ── Transport Controls ─────────────────────────────────────────────────── */
+.transportBar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 42px;
+  padding: 0 16px;
+  background: var(--bt-bg-elevated);
+  border-bottom: 1px solid var(--bt-border);
+  font-size: 12px;
+}
+
+.playbackButtons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.transportBtn {
+  background: none;
+  border: 1px solid var(--bt-border);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bt-text-muted);
+  cursor: not-allowed;
+  opacity: 0.5;
+  transition: opacity var(--bt-transition);
+}
+
+.playBtn {
+  width: 32px;
+  height: 32px;
+  border-color: rgba(41, 201, 138, 0.35);
+  color: var(--bt-accent);
+}
+
+.timeDisplay {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--bt-font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--bt-text);
+  background: var(--bt-surface);
+  padding: 3px 10px;
+  border-radius: var(--bt-radius-sm);
+  border: 1px solid var(--bt-border);
+}
+
+.timeCurrent {
+  color: var(--bt-accent-soft);
+}
+
+.timeSep {
+  color: var(--bt-text-muted);
+}
+
+.timeTotal {
+  color: var(--bt-text-muted);
+}
+
+.routeSequence {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--bt-text-secondary);
+  font-size: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.routeBadge {
+  font-weight: 600;
+  font-family: var(--bt-font-mono);
+  color: var(--bt-accent);
+  background: rgba(41, 201, 138, 0.1);
+  padding: 2px 7px;
+  border-radius: var(--bt-radius-sm);
+  border: 1px solid rgba(41, 201, 138, 0.25);
+  flex-shrink: 0;
+}
+
+.sequenceFlow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--bt-text-muted);
+}
+
+.sequenceHighlight {
+  color: var(--bt-text);
+  font-weight: 500;
+}
+
+.sequenceAirVent {
+  color: var(--bt-error-soft);
+  font-weight: 600;
+}
+
+.volumeControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--bt-text-muted);
+  flex-shrink: 0;
+}
+
+.volumeSlider {
+  width: 70px;
+  height: 4px;
+  background: var(--bt-surface-3);
+  border-radius: 2px;
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.volumeSlider::-webkit-slider-thumb {
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--bt-accent);
+  cursor: pointer;
+}
+
+/* ── Track Area ─────────────────────────────────────────────────────────── */
+.trackArea {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.laneLabels {
+  width: 110px;
+  flex-shrink: 0;
+  background: var(--bt-surface-2);
+  border-right: 1px solid var(--bt-border);
+  display: flex;
+  flex-direction: column;
+}
+
+.laneLabelSpacer {
+  height: 24px;
+  border-bottom: 1px solid var(--bt-border);
+}
+
+.laneLabel {
+  height: 38px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--bt-text-muted);
+  border-bottom: 1px solid var(--bt-border);
+  text-transform: uppercase;
+}
+
+.trackContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Ruler ──────────────────────────────────────────────────────────────── */
+.timeRuler {
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  background: var(--bt-surface);
+  border-bottom: 1px solid var(--bt-border);
+  font-family: var(--bt-font-mono);
+  font-size: 10px;
+  color: var(--bt-text-muted);
+}
+
+/* ── Passage segments ───────────────────────────────────────────────────── */
+.passageSegments {
+  height: 22px;
+  display: flex;
+  border-bottom: 1px solid var(--bt-border);
+  position: relative;
+}
+
+.passageSegment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--bt-text-secondary);
+  border-right: 1px solid var(--bt-border-strong);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 0 4px;
+  transition: background var(--bt-transition);
+}
+
+.segmentNormal {
+  background: rgba(20, 92, 67, 0.12);
+}
+
+.segmentIssue {
+  background: rgba(240, 79, 117, 0.18);
+  color: var(--bt-error-soft);
+  font-weight: 600;
+}
+
+.segmentSelected {
+  outline: 1px solid var(--bt-focus);
+}
+
+/* ── Lanes ──────────────────────────────────────────────────────────────── */
+.laneRow {
+  height: 38px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-bottom: 1px solid var(--bt-border);
+  background: var(--bt-surface);
+  overflow: hidden;
+}
+
+.laneMusic {
+  background: rgba(41, 201, 138, 0.02);
+}
+
+.waveformSvg {
+  width: 100%;
+  height: 100%;
+}
+
+.demoWaveformBadge {
+  position: absolute;
+  right: 10px;
+  top: 9px;
+  font-size: 9px;
+  font-family: var(--bt-font-mono);
+  color: var(--bt-text-muted);
+  opacity: 0.5;
+  text-transform: uppercase;
+}
+
+/* ── Red Diamond Cue Marker ─────────────────────────────────────────────── */
+.cueMarkerWrap {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  cursor: pointer;
+}
+
+.cueMarkerDiamond {
+  width: 14px;
+  height: 14px;
+  transform: rotate(45deg);
+  background: var(--bt-error);
+  border: 1.5px solid #fff;
+  box-shadow: 0 0 10px var(--bt-error);
+  animation: pulse 2.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 6px var(--bt-error);
+  }
+  50% {
+    box-shadow: 0 0 14px var(--bt-error);
+  }
+  100% {
+    box-shadow: 0 0 6px var(--bt-error);
+  }
+}
+
+/* ── Playhead ───────────────────────────────────────────────────────────── */
+.playheadLine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background: var(--bt-accent);
+  box-shadow: 0 0 8px var(--bt-accent);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.playheadThumb {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  width: 9px;
+  height: 11px;
+  background: var(--bt-accent);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 50% 100%, 0% 70%);
+}

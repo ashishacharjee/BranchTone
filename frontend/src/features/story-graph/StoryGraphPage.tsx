@@ -1,23 +1,69 @@
-import { GitBranch } from 'lucide-react';
-import { WorkspacePlaceholder } from '../../components/WorkspacePlaceholder';
+import { useCallback } from 'react';
+import { useWorkspaceStore } from '../../stores/workspace';
+import { getPassage } from '../../services/fixtures';
+import { GraphCanvas } from './GraphCanvas';
+import { PassageInspector } from './PassageInspector';
+import { AudioTimeline } from './AudioTimeline';
+import styles from './StoryGraphPage.module.css';
 
 export function StoryGraphPage() {
+  const selectedRouteId = useWorkspaceStore((state) => state.selectedRouteId);
+  const selectedPassageId = useWorkspaceStore((state) => state.selectedPassageId);
+  const setSelectedRoute = useWorkspaceStore((state) => state.setSelectedRoute);
+  const setSelectedPassage = useWorkspaceStore((state) => state.setSelectedPassage);
+
+  // Look up selected passage data from the typed fixture adapter
+  const currentPassage = selectedPassageId ? getPassage(selectedPassageId) : undefined;
+
+  const handleSelectRoute = useCallback(
+    (routeId: string) => {
+      setSelectedRoute(routeId);
+    },
+    [setSelectedRoute],
+  );
+
+  const handleSelectPassage = useCallback(
+    (passageId: string) => {
+      setSelectedPassage(passageId);
+    },
+    [setSelectedPassage],
+  );
+
+  const handleCloseInspector = useCallback(() => {
+    setSelectedPassage(null);
+  }, [setSelectedPassage]);
+
+  const handleSelectCueMarker = useCallback(() => {
+    setSelectedPassage('P-003');
+  }, [setSelectedPassage]);
+
   return (
-    <WorkspacePlaceholder
-      workspace="Story Graph"
-      description="Interactive directed passage graph with route selection, passage selection, cue issue indicators, passage inspector and audio timeline. Default: Route B selected, Air Vent (P-003) selected, BT-001 visible."
-      pendingSlice={2}
-      pendingItems={[
-        '@xyflow/react graph canvas with 5 passage nodes',
-        'Route A / Route B selector — Route B default',
-        'Emerald route highlighting; red cue-issue indicator at Lobby→Air Vent',
-        'Passage Inspector: Suspense, 4/5, identity No, traitor_theme.wav, BT-001',
-        'SOURCE EVIDENCE: exact P-003 source quote (no invented line numbers)',
-        'Three-lane audio timeline: MUSIC / AMBIENCE / SFX (design fixture values labelled)',
-        'Shared Zustand state: selectedRouteId, selectedPassageId, selectedFindingId',
-      ]}
-      complianceNote="BT-001 must be derived from the backend rule evaluator, not hardcoded in React (PRD.md FR-028). Backend domain engine is classified CONFIRM in COMPLIANCE_MATRIX.md — pending organizer approval."
-      icon={GitBranch}
-    />
+    <div className={styles.container} data-testid="story-graph-workspace">
+      {/* ── Main Graph + Inspector Body ───────────────────────────── */}
+      <div className={styles.workspaceBody}>
+        <div className={styles.graphArea}>
+          <GraphCanvas
+            selectedRouteId={selectedRouteId}
+            selectedPassageId={selectedPassageId}
+            onSelectRoute={handleSelectRoute}
+            onSelectPassage={handleSelectPassage}
+          />
+        </div>
+
+        <PassageInspector
+          passage={currentPassage}
+          selectedRouteId={selectedRouteId}
+          onClose={handleCloseInspector}
+        />
+      </div>
+
+      {/* ── Bottom Audio Timeline ─────────────────────────────────── */}
+      <AudioTimeline
+        selectedRouteId={selectedRouteId}
+        selectedPassageId={selectedPassageId}
+        onSelectPassage={handleSelectPassage}
+        onSelectCueMarker={handleSelectCueMarker}
+      />
+    </div>
   );
 }

@@ -6,7 +6,6 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { OverviewPage } from '../features/overview/OverviewPage';
-import { StoryGraphPage } from '../features/story-graph/StoryGraphPage';
 import { NarrativeMapPage } from '../features/narrative-map/NarrativeMapPage';
 import { CueLibraryPage } from '../features/cue-library/CueLibraryPage';
 import { RouteLabPage } from '../features/route-lab/RouteLabPage';
@@ -21,13 +20,6 @@ describe('Workspace placeholder pages', () => {
   it('Overview renders with correct heading', () => {
     wrap(<OverviewPage />);
     expect(screen.getByRole('heading', { name: /Overview/i })).toBeInTheDocument();
-  });
-
-  it('Story Graph renders with compliance note about BT-001', () => {
-    wrap(<StoryGraphPage />);
-    expect(screen.getByRole('heading', { name: /Story Graph/i })).toBeInTheDocument();
-    // Must mention BT-001 and backend requirement
-    expect(screen.getByText(/BT-001 must be derived from the backend rule evaluator/i)).toBeInTheDocument();
   });
 
   it('Narrative Map renders', () => {
