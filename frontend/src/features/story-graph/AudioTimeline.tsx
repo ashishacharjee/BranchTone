@@ -216,7 +216,7 @@ export const AudioTimeline = memo(function AudioTimeline({
               />
             </svg>
 
-            {/* Red Diamond Cue Marker at Air Vent boundary on Route B */}
+            {/* Red Diamond Cue Marker at Air Vent boundary on Route B (aligned precisely at boundary, 28% / ~01:10 estimated demo position) */}
             {currentRouteId === 'route_b' && (
               <div
                 className={styles.cueMarkerWrap}
@@ -225,8 +225,8 @@ export const AudioTimeline = memo(function AudioTimeline({
                   e.stopPropagation();
                   onSelectCueMarker?.();
                 }}
-                title="Cue: traitor_theme.wav triggers at Air Vent entry (BT-001 Reveal Protection issue)"
-                aria-label="Cue trigger: traitor_theme.wav at Air Vent entry — finding BT-001"
+                title="Cue: traitor_theme.wav triggers at Air Vent entry (~01:10 estimated demo position · timing unavailable without measured media)"
+                aria-label="Cue trigger: traitor_theme.wav at Air Vent entry (~01:10 estimated demo position) — finding BT-001"
                 role="button"
                 tabIndex={0}
               >

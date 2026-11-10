@@ -16,7 +16,9 @@ export const PassageNode = memo(function PassageNode({
   data,
 }: NodeProps & { data: PassageNodeData }) {
   const { passage, isSelected, isOnActiveRoute, onSelect } = data;
-  const isIssue = passage.issueCount > 0;
+  // An issue is only flagged on this passage if it is on the active route
+  // (BT-001 affects Route B only; it must not appear as an issue on Route A)
+  const isIssue = isOnActiveRoute && passage.issueCount > 0;
 
   const nodeClass = [
     styles.node,

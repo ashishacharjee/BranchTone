@@ -67,18 +67,43 @@ export const useWorkspaceStore = create<WorkspaceState>()((set) => ({
   setActiveWorkspace: (workspace) => set({ activeWorkspace: workspace }),
 
   setSelectedRoute: (routeId) =>
-    set({
-      selectedRouteId: routeId,
-      // Clear or update finding if route changes
-      selectedFindingId: null,
+    set((state) => {
+      if (routeId === 'route_a') {
+        return {
+          selectedRouteId: 'route_a',
+          // On Route A, switch away from Air Vent (P-003) to Archives (P-002) which is on Route A
+          selectedPassageId: state.selectedPassageId === 'P-003' ? 'P-002' : state.selectedPassageId,
+          // BT-001 never applies to Route A
+          selectedFindingId: null,
+        };
+      }
+      if (routeId === 'route_b') {
+        return {
+          selectedRouteId: 'route_b',
+          // On Route B, default to Air Vent (P-003) if Archives was selected
+          selectedPassageId: state.selectedPassageId === 'P-002' ? 'P-003' : state.selectedPassageId,
+          // Re-attach BT-001 finding if Air Vent is selected on Route B
+          selectedFindingId:
+            state.selectedPassageId === 'P-002' || state.selectedPassageId === 'P-003'
+              ? 'fnd_bt001_route_b_p003_demo'
+              : null,
+        };
+      }
+      return {
+        selectedRouteId: routeId,
+        selectedFindingId: null,
+      };
     }),
 
   setSelectedPassage: (passageId) =>
-    set({
-      selectedPassageId: passageId,
-      // If P-003 is selected on Route B, connect finding BT-001
-      selectedFindingId:
-        passageId === 'P-003' ? 'fnd_bt001_route_b_p003_demo' : null,
+    set((state) => {
+      const isRouteB = (state.selectedRouteId ?? 'route_b') === 'route_b';
+      return {
+        selectedPassageId: passageId,
+        // BT-001 only applies to P-003 when on Route B; never on Route A
+        selectedFindingId:
+          passageId === 'P-003' && isRouteB ? 'fnd_bt001_route_b_p003_demo' : null,
+      };
     }),
 
   navigateToFinding: ({ findingId, routeId, passageId }) =>
