@@ -16,7 +16,11 @@
   - Backend: 11 tests passing (Pytest), Ruff clean (all checks passed), Mypy strict clean (15 source files verified).
 - Core Product Capabilities Truthfully Audited:
   - Classified all 10 core product capabilities. Pre-build UI and data contracts are 100% verified.
+  - Formally classified BranchTone as a fixture-backed UI with a functioning application shell, not a completed narrative-audio validation engine.
   - Explicitly confirmed that BT-001 is currently rendered from `expected-findings.json` as a typed verification fixture; the backend validation engine is deliberately GATED by hackathon compliance rules.
+  - Confirmed all missing story passages (P-001, P-002, P-004, P-005) and missing audio assets (`traitor_theme.wav`) remain explicitly disclosed.
+  - Security audit clarified: SQL injection prevention marked as not yet assessed (schema tests DDL only); path traversal and upload security marked as design requirements for future implementation.
+  - Git HEAD reference corrected to exact hash `a67e92a5f3580f24f4e4eb7bad898bb0cf3f83c9` (`a67e92a`).
 
 ## 2.5 — 10 November 2026 (Technical Readiness Report & Dependency Maintenance Analysis)
 
