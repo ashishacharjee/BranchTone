@@ -1,0 +1,230 @@
+.validationCentre {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  padding: var(--bt-space-6);
+  gap: var(--bt-space-6);
+  background: var(--bt-bg);
+}
+
+/* ── Topbar / Filter Row ────────────────────────────────────────────────── */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--bt-space-4);
+  border-bottom: 1px solid var(--bt-border);
+  gap: var(--bt-space-4);
+  flex-wrap: wrap;
+}
+
+.filterControls {
+  display: flex;
+  align-items: center;
+  gap: var(--bt-space-3);
+  flex-wrap: wrap;
+}
+
+.filterSelect {
+  background: var(--bt-surface-2);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-sm);
+  color: var(--bt-text);
+  font-size: 12px;
+  padding: 5px 10px;
+  outline: none;
+  cursor: pointer;
+}
+
+.filterSelect:focus {
+  border-color: var(--bt-accent);
+}
+
+/* ── Main Two-Column Layout ─────────────────────────────────────────────── */
+.layoutGrid {
+  display: grid;
+  grid-template-columns: 1.5fr 1.2fr;
+  gap: var(--bt-space-6);
+}
+
+.panel {
+  background: var(--bt-surface);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-md);
+  padding: var(--bt-space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--bt-space-4);
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panelTitle {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--bt-text);
+  display: flex;
+  align-items: center;
+  gap: var(--bt-space-2);
+}
+
+/* ── Findings Table ─────────────────────────────────────────────────────── */
+.tableWrap {
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-sm);
+  overflow: hidden;
+}
+
+.findingsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  text-align: left;
+}
+
+.findingsTable th {
+  background: var(--bt-surface-2);
+  padding: 10px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--bt-text-muted);
+  border-bottom: 1px solid var(--bt-border);
+}
+
+.findingsTable td {
+  padding: 12px;
+  border-bottom: 1px solid var(--bt-border);
+  color: var(--bt-text);
+}
+
+.findingRowSelected td {
+  background: rgba(240, 79, 117, 0.06);
+}
+
+.findingCode {
+  font-family: var(--bt-font-mono);
+  font-weight: 700;
+  color: var(--bt-error);
+}
+
+.severityBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  border-radius: var(--bt-radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(240, 79, 117, 0.15);
+  color: var(--bt-error);
+  border: 1px solid rgba(240, 79, 117, 0.3);
+}
+
+/* ── Detail Panel ───────────────────────────────────────────────────────── */
+.detailSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bt-space-3);
+  padding-bottom: var(--bt-space-3);
+  border-bottom: 1px solid var(--bt-border);
+}
+
+.detailSection:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.detailTitle {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--bt-text-muted);
+}
+
+.quoteBox {
+  background: var(--bt-surface-2);
+  border-left: 2px solid var(--bt-accent);
+  padding: var(--bt-space-3);
+  margin: 0;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--bt-text-secondary);
+  line-height: 1.5;
+}
+
+.stateComparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--bt-space-3);
+}
+
+.stateBox {
+  background: var(--bt-surface-2);
+  border-radius: var(--bt-radius-sm);
+  padding: var(--bt-space-3);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+}
+
+.stateBoxLabel {
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--bt-text-muted);
+}
+
+.stateBoxVal {
+  font-family: var(--bt-font-mono);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.actionBtn {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--bt-space-2);
+  padding: 8px 14px;
+  border-radius: var(--bt-radius-sm);
+  background: rgba(41, 201, 138, 0.15);
+  border: 1px solid var(--bt-accent);
+  color: var(--bt-accent);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--bt-transition);
+}
+
+.actionBtn:hover {
+  background: rgba(41, 201, 138, 0.25);
+}
+
+/* ── Negative Controls Section ──────────────────────────────────────────── */
+.absenceCard {
+  background: var(--bt-surface-2);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-sm);
+  padding: var(--bt-space-3) var(--bt-space-4);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: var(--bt-space-3);
+}
+
+@media (max-width: 1024px) {
+  .layoutGrid {
+    grid-template-columns: 1fr;
+  }
+}

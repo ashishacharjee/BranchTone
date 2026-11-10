@@ -1,0 +1,230 @@
+.routeLab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  padding: var(--bt-space-6);
+  gap: var(--bt-space-6);
+  background: var(--bt-bg);
+}
+
+/* ── Topbar / Route Selector ────────────────────────────────────────────── */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--bt-space-4);
+  border-bottom: 1px solid var(--bt-border);
+}
+
+.routeSelector {
+  display: flex;
+  align-items: center;
+  gap: var(--bt-space-2);
+}
+
+.routeLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--bt-text-muted);
+  margin-right: var(--bt-space-2);
+}
+
+.routePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--bt-radius-full);
+  background: var(--bt-surface-2);
+  border: 1px solid var(--bt-border);
+  color: var(--bt-text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--bt-transition);
+}
+
+.routePillActive {
+  background: rgba(41, 201, 138, 0.15);
+  border-color: var(--bt-accent);
+  color: var(--bt-accent);
+  box-shadow: 0 0 10px rgba(41, 201, 138, 0.2);
+}
+
+.pillBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--bt-radius-full);
+  background: var(--bt-surface-3);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.routePillActive .pillBadge {
+  background: var(--bt-accent);
+  color: #0E1110;
+}
+
+/* ── Sequence & State Stepper ───────────────────────────────────────────── */
+.stepperPanel {
+  background: var(--bt-surface);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-md);
+  padding: var(--bt-space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--bt-space-4);
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panelTitle {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--bt-text);
+  display: flex;
+  align-items: center;
+  gap: var(--bt-space-2);
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--bt-space-4);
+}
+
+.stepCard {
+  background: var(--bt-surface-2);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-sm);
+  padding: var(--bt-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--bt-space-3);
+  cursor: pointer;
+  transition: all var(--bt-transition);
+}
+
+.stepCard:hover {
+  border-color: var(--bt-border-strong);
+}
+
+.stepSelected {
+  border-color: var(--bt-focus);
+  box-shadow: 0 0 10px rgba(41, 201, 138, 0.2);
+}
+
+.stepIssue {
+  border-color: rgba(240, 79, 117, 0.5);
+  background: rgba(240, 79, 117, 0.04);
+}
+
+.stepHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stepNumber {
+  font-family: var(--bt-font-mono);
+  font-size: 11px;
+  color: var(--bt-text-muted);
+}
+
+.stepName {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--bt-text);
+}
+
+.factBox {
+  background: var(--bt-surface-3);
+  border-radius: var(--bt-radius-sm);
+  padding: var(--bt-space-2) var(--bt-space-3);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+  font-family: var(--bt-font-mono);
+}
+
+.factRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ── Cue Trace Table ────────────────────────────────────────────────────── */
+.tracePanel {
+  background: var(--bt-surface);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-md);
+  padding: var(--bt-space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--bt-space-4);
+}
+
+.tableWrap {
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-sm);
+  overflow: hidden;
+}
+
+.traceTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  text-align: left;
+}
+
+.traceTable th {
+  background: var(--bt-surface-2);
+  padding: 10px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--bt-text-muted);
+  border-bottom: 1px solid var(--bt-border);
+}
+
+.traceTable td {
+  padding: 12px;
+  border-bottom: 1px solid var(--bt-border);
+  color: var(--bt-text);
+}
+
+.traceTable tr:last-child td {
+  border-bottom: none;
+}
+
+/* ── Transport Disabled Notice ──────────────────────────────────────────── */
+.transportNotice {
+  background: var(--bt-surface-2);
+  border: 1px dashed var(--bt-border-strong);
+  border-radius: var(--bt-radius-sm);
+  padding: var(--bt-space-3) var(--bt-space-4);
+  font-size: 12px;
+  color: var(--bt-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 1024px) {
+  .stepsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

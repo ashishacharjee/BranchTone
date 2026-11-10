@@ -1,0 +1,282 @@
+.overview {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  padding: var(--bt-space-6);
+  gap: var(--bt-space-6);
+  background: var(--bt-bg);
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--bt-space-4);
+  padding-bottom: var(--bt-space-4);
+  border-bottom: 1px solid var(--bt-border);
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bt-space-2);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--bt-space-3);
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--bt-text);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.versionBadge {
+  font-family: var(--bt-font-mono);
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: var(--bt-radius-sm);
+  background: rgba(41, 201, 138, 0.12);
+  color: var(--bt-accent);
+  border: 1px solid rgba(41, 201, 138, 0.3);
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--bt-text-secondary);
+  margin: 0;
+}
+
+.headerMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--bt-space-3);
+  font-size: 12px;
+  color: var(--bt-text-muted);
+}
+
+/* ── Metric Cards ───────────────────────────────────────────────────────── */
+.metricGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--bt-space-4);
+}
+
+.metricCard {
+  background: var(--bt-surface);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-md);
+  padding: var(--bt-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--bt-space-2);
+  transition: border-color var(--bt-transition);
+}
+
+.metricCard:hover {
+  border-color: var(--bt-border-strong);
+}
+
+.metricHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--bt-text-muted);
+}
+
+.metricValue {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--bt-text);
+  font-family: var(--bt-font-sans);
+}
+
+.metricValueNotEvaluated {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--bt-text-muted);
+  font-style: italic;
+}
+
+.metricSubtext {
+  font-size: 11px;
+  color: var(--bt-text-muted);
+}
+
+/* ── Main Content Grid ──────────────────────────────────────────────────── */
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1.6fr 1.1fr;
+  gap: var(--bt-space-6);
+}
+
+.panel {
+  background: var(--bt-surface);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-md);
+  padding: var(--bt-space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--bt-space-4);
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panelTitle {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--bt-text);
+  display: flex;
+  align-items: center;
+  gap: var(--bt-space-2);
+}
+
+/* ── Finding Item ───────────────────────────────────────────────────────── */
+.findingCard {
+  background: var(--bt-surface-2);
+  border: 1px solid rgba(240, 79, 117, 0.4);
+  border-radius: var(--bt-radius-sm);
+  padding: var(--bt-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--bt-space-3);
+  position: relative;
+}
+
+.findingTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.findingIdGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--bt-space-2);
+}
+
+.findingCode {
+  font-family: var(--bt-font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--bt-error);
+}
+
+.findingBadge {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: var(--bt-radius-sm);
+  background: rgba(240, 79, 117, 0.15);
+  color: var(--bt-error);
+  border: 1px solid rgba(240, 79, 117, 0.3);
+}
+
+.findingDesc {
+  font-size: 12px;
+  color: var(--bt-text-secondary);
+  line-height: 1.5;
+}
+
+.findingMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--bt-space-3);
+  font-size: 11px;
+  color: var(--bt-text-muted);
+}
+
+.findingActionBtn {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--bt-space-2);
+  padding: 6px 12px;
+  border-radius: var(--bt-radius-sm);
+  background: rgba(41, 201, 138, 0.1);
+  border: 1px solid rgba(41, 201, 138, 0.3);
+  color: var(--bt-accent);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--bt-transition);
+}
+
+.findingActionBtn:hover {
+  background: rgba(41, 201, 138, 0.2);
+  border-color: var(--bt-accent);
+}
+
+/* ── Actions List ───────────────────────────────────────────────────────── */
+.actionList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bt-space-2);
+}
+
+.actionItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--bt-space-3) var(--bt-space-4);
+  background: var(--bt-surface-2);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-sm);
+  color: var(--bt-text);
+  font-size: 13px;
+  text-decoration: none;
+  transition: all var(--bt-transition);
+  cursor: pointer;
+}
+
+.actionItem:hover {
+  background: var(--bt-surface-3);
+  border-color: var(--bt-border-strong);
+  color: var(--bt-accent);
+}
+
+.actionLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--bt-space-3);
+}
+
+/* ── Warning Box ────────────────────────────────────────────────────────── */
+.warningBox {
+  background: rgba(240, 79, 117, 0.06);
+  border: 1px solid rgba(240, 79, 117, 0.25);
+  border-radius: var(--bt-radius-sm);
+  padding: var(--bt-space-3) var(--bt-space-4);
+  font-size: 12px;
+  color: var(--bt-text-secondary);
+  line-height: 1.5;
+  display: flex;
+  gap: var(--bt-space-3);
+}
+
+@media (max-width: 1200px) {
+  .metricGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,22 +1,246 @@
-import { FlaskConical } from 'lucide-react';
-import { WorkspacePlaceholder } from '../../components/WorkspacePlaceholder';
+import {
+  VolumeX,
+  ShieldAlert,
+  GitBranch,
+  CheckCircle2,
+  Clock,
+} from 'lucide-react';
+import {
+  getRoutes,
+  getRoute,
+  getPassage,
+  getExpectedCueEvents,
+} from '../../services/fixtures';
+import { useWorkspaceStore } from '../../stores/workspace';
+import styles from './RouteLabPage.module.css';
 
 export function RouteLabPage() {
+  const routes = getRoutes();
+  const selectedRouteId = useWorkspaceStore((s) => s.selectedRouteId) ?? 'route_b';
+  const selectedPassageId = useWorkspaceStore((s) => s.selectedPassageId);
+  const setSelectedRoute = useWorkspaceStore((s) => s.setSelectedRoute);
+  const setSelectedPassage = useWorkspaceStore((s) => s.setSelectedPassage);
+
+  const activeRoute = getRoute(selectedRouteId);
+  const passageIds = activeRoute ? activeRoute.passage_path : ['P-001', 'P-003', 'P-004', 'P-005'];
+  const allCueEvents = getExpectedCueEvents();
+  const activeRouteCueEvents = allCueEvents.filter((e) => e.route_id === selectedRouteId);
+
   return (
-    <WorkspacePlaceholder
-      workspace="Route Lab"
-      description="Route sequence, passage/fact state snapshots, cue activation trace, multitrack playback and seek when assets exist. Transport is disabled without loaded audio."
-      pendingSlice={4}
-      pendingItems={[
-        'Route sequence: Lobby → Air Vent → Server Vault → Safe House (Route B)',
-        'Passage state snapshots: facts before/after entry per RouteTraceStep',
-        'Cue activation trace: trigger_fired, asset_available, timing_provenance',
-        'Transport controls: disabled until audio assets are loaded',
-        'Volume, seek and layer controls synced to audio timeline',
-        'Before/after compare: stub — not yet scoped',
-      ]}
-      complianceNote="Route/state simulation is CONFIRM per COMPLIANCE_MATRIX.md. Fixture trace data can be shown in Slice 4; live simulation requires organizer approval."
-      icon={FlaskConical}
-    />
+    <div className={styles.routeLab} role="region" aria-label="Route Lab Workspace">
+      {/* ── Topbar / Route Selector ─────────────────────────────────── */}
+      <div className={styles.topbar}>
+        <div className={styles.routeSelector} role="group" aria-label="Route selector">
+          <span className={styles.routeLabel}>Route:</span>
+          {routes.map((r) => {
+            const isActive = r.route_id === selectedRouteId;
+            return (
+              <button
+                key={r.route_id}
+                type="button"
+                className={[styles.routePill, isActive ? styles.routePillActive : ''].join(' ')}
+                onClick={() => setSelectedRoute(r.route_id)}
+                aria-pressed={isActive}
+                aria-label={`Select ${r.name}`}
+              >
+                <span className={styles.pillBadge}>{r.route_code}</span>
+                <span>{r.name}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{ fontSize: '12px', color: 'var(--bt-text-muted)' }}>
+            Sequential Traversal: {passageIds.join(' → ')}
+          </span>
+          <span className="demo-badge">Verification Trace</span>
+        </div>
+      </div>
+
+      {/* ── Sequence & State Stepper ────────────────────────────────── */}
+      <div className={styles.stepperPanel}>
+        <div className={styles.panelHeader}>
+          <div className={styles.panelTitle}>
+            <GitBranch size={15} color="var(--bt-accent)" aria-hidden="true" />
+            <span>Passage Sequence & Narrative Fact Snapshots</span>
+          </div>
+          <span className="demo-badge">Demo Data</span>
+        </div>
+
+        <p style={{ fontSize: '12px', color: 'var(--bt-text-secondary)', margin: 0 }}>
+          Per PRD FR-023: Simulation carries supported variables, narrative facts, active cue IDs, path and event trace. Displaying supplied verification fixtures; route simulation engine is not executed.
+        </p>
+
+        <div className={styles.stepsGrid}>
+          {passageIds.map((pId, idx) => {
+            const p = getPassage(pId);
+            const isSelected = pId === selectedPassageId;
+            const isAirVent = pId === 'P-003';
+            const isRevealPoint = pId === 'P-004';
+            const isIdentityRevealed = pId === 'P-004' || pId === 'P-005';
+
+            return (
+              <div
+                key={pId}
+                className={[
+                  styles.stepCard,
+                  isSelected ? styles.stepSelected : '',
+                  isAirVent && selectedRouteId === 'route_b' ? styles.stepIssue : '',
+                ].join(' ')}
+                onClick={() => setSelectedPassage(pId)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setSelectedPassage(pId);
+                  }
+                }}
+                aria-label={`${p ? p.title : pId}, step ${(idx + 1).toString()}`}
+                aria-pressed={isSelected}
+              >
+                <div className={styles.stepHeader}>
+                  <span className={styles.stepNumber}>Step 0{(idx + 1).toString()}</span>
+                  <span style={{ fontFamily: 'var(--bt-font-mono)', fontSize: '11px', color: 'var(--bt-text-muted)' }}>
+                    {pId}
+                  </span>
+                </div>
+
+                <div className={styles.stepName}>{p ? p.title : pId}</div>
+
+                <div className={styles.factBox}>
+                  <div className={styles.factRow}>
+                    <span style={{ color: 'var(--bt-text-muted)' }}>identity_revealed:</span>
+                    <span style={{ color: isIdentityRevealed ? 'var(--bt-accent)' : 'var(--bt-text-muted)' }}>
+                      {isIdentityRevealed ? 'true' : 'false'}
+                    </span>
+                  </div>
+                  {isRevealPoint && (
+                    <div style={{ color: '#EAB308', fontSize: '10px', marginTop: '2px' }}>
+                      ⚡ State Event: Identity Revealed
+                    </div>
+                  )}
+                  {isAirVent && selectedRouteId === 'route_b' && (
+                    <div style={{ color: 'var(--bt-error)', fontSize: '10px', marginTop: '2px', fontWeight: 600 }}>
+                      ⚠️ Cue Defect: BT-001 Mismatch
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ── Cue Activation Trace ────────────────────────────────────── */}
+      <div className={styles.tracePanel}>
+        <div className={styles.panelHeader}>
+          <div className={styles.panelTitle}>
+            <Clock size={15} color="var(--bt-accent)" aria-hidden="true" />
+            <span>Cue Activation Trace for {activeRoute?.name ?? 'Route'}</span>
+          </div>
+          <span className="demo-badge">Verification Trace</span>
+        </div>
+
+        {activeRouteCueEvents.length > 0 ? (
+          <div className={styles.tableWrap}>
+            <table className={styles.traceTable}>
+              <thead>
+                <tr>
+                  <th>Activation ID</th>
+                  <th>Cue / Passage</th>
+                  <th>Trigger Type</th>
+                  <th>Required State</th>
+                  <th>Actual State</th>
+                  <th>Outcome</th>
+                </tr>
+              </thead>
+              <tbody>
+                {activeRouteCueEvents.map((evt) => (
+                  <tr key={evt.activation_id}>
+                    <td>
+                      <code style={{ fontSize: '11px' }}>{evt.activation_id}</code>
+                    </td>
+                    <td>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                        <span style={{ fontWeight: 600 }}>traitor_theme.wav</span>
+                        <span style={{ fontSize: '10px', color: 'var(--bt-text-muted)' }}>
+                          Passage: {evt.passage_id} (Air Vent)
+                        </span>
+                      </div>
+                    </td>
+                    <td>Passage Entry</td>
+                    <td>
+                      <code>traitor_identity_revealed: true</code>
+                    </td>
+                    <td>
+                      <code style={{ color: 'var(--bt-error)' }}>
+                        traitor_identity_revealed: false
+                      </code>
+                    </td>
+                    <td>
+                      <span style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        padding: '2px 7px',
+                        borderRadius: 'var(--bt-radius-sm)',
+                        fontSize: '11px',
+                        fontWeight: 600,
+                        background: 'rgba(240, 79, 117, 0.15)',
+                        color: 'var(--bt-error)',
+                        border: '1px solid rgba(240, 79, 117, 0.3)',
+                      }}>
+                        <ShieldAlert size={12} aria-hidden="true" />
+                        <span>Issue BT-001</span>
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div style={{
+            background: 'var(--bt-surface-2)',
+            padding: 'var(--bt-space-5)',
+            borderRadius: 'var(--bt-radius-sm)',
+            border: '1px solid var(--bt-border)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            color: 'var(--bt-text-secondary)',
+            fontSize: '13px',
+          }}>
+            <CheckCircle2 size={16} color="var(--bt-accent)" aria-hidden="true" />
+            <span>No cue activation violations on {activeRoute?.name ?? 'this route'}. Expected absence satisfied.</span>
+          </div>
+        )}
+
+        {/* Transport Disabled Notice */}
+        <div className={styles.transportNotice}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <VolumeX size={16} aria-hidden="true" />
+            <span>Multitrack route audition disabled — media assets are missing from local storage.</span>
+          </div>
+          <button
+            type="button"
+            disabled
+            style={{
+              padding: '4px 10px',
+              borderRadius: 'var(--bt-radius-sm)',
+              background: 'var(--bt-surface-3)',
+              border: '1px solid var(--bt-border)',
+              color: 'var(--bt-text-muted)',
+              fontSize: '11px',
+              cursor: 'not-allowed',
+            }}
+          >
+            Play Route (Disabled)
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

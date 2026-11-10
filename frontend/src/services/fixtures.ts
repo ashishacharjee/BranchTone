@@ -20,6 +20,7 @@ import type {
   Passage,
   StoryEdge,
   Intensity,
+  StoryVersion,
 } from '../types/branchtone';
 
 export interface DemoRoute {
@@ -44,6 +45,7 @@ export interface DemoProjectEnvelope {
     description: string;
     current_version_id: string;
   };
+  story_version: StoryVersion;
   routes: DemoRoute[];
   initial_ui_state: {
     selected_route_id: string;
@@ -242,5 +244,100 @@ export function getTimelineFixture(routeId: string) {
     ...demoData.timeline_design_fixture,
     route_id: routeId,
     passage_order: route ? route.passage_path : demoData.timeline_design_fixture.passage_order,
+  };
+}
+
+/**
+ * Returns the story version envelope.
+ */
+export function getStoryVersion(): StoryVersion {
+  return demoData.story_version;
+}
+
+/**
+ * Returns all audio assets.
+ */
+export function getAudioAssets(): AudioAsset[] {
+  return assetsData;
+}
+
+/**
+ * Returns all audio cues with resolved assets.
+ */
+export function getAllAudioCues(): Array<AudioCue & { asset: AudioAsset | undefined }> {
+  return cuesData.map((cue) => ({
+    ...cue,
+    asset: assetsData.find((a) => a.asset_id === cue.asset_id),
+  }));
+}
+
+/**
+ * Returns narrative annotations.
+ */
+export function getNarrativeAnnotations() {
+  return narrativeAnnotationsRaw.annotations;
+}
+
+/**
+ * Returns expected absence test cases (negative controls).
+ */
+export function getExpectedAbsenceCases(): Array<{ case: string; route_id?: string; finding_code?: string; edge_id?: string; structural_status?: string }> {
+  return (expectedFindingsRaw as unknown as { expected_absence: Array<{ case: string; route_id?: string; finding_code?: string; edge_id?: string; structural_status?: string }> }).expected_absence;
+}
+
+/**
+ * Returns expected cue activation events.
+ */
+export function getExpectedCueEvents() {
+  return (audioCuesRaw as unknown as { expected_cue_events: Array<{
+    activation_id: string;
+    route_id: string;
+    cue_id: string;
+    passage_id: string;
+    trigger_type: string;
+    trigger_fired: boolean;
+    asset_available: boolean;
+    route_time_seconds: number | null;
+    timing_provenance: string;
+    facts_at_trigger: Record<string, unknown>;
+    required_facts: Array<{ fact_key: string; expected_value: unknown }>;
+    note: string;
+  }> }).expected_cue_events;
+}
+
+/**
+ * Returns full verification report payload for JSON export.
+ */
+export function getReportExportPayload() {
+  return {
+    report_metadata: {
+      generated_at: new Date().toISOString(),
+      generator: 'BranchTone QA Workbench · Fixture Preview Exporter v2.2',
+      provenance: 'demo_fixture_preview',
+      note: 'This export represents the typed verification demo fixture. Real production reports require a backend deterministic validation engine run.',
+    },
+    project: demoData.project,
+    story_version: demoData.story_version,
+    exploration_scope: {
+      type: 'bounded_demonstration',
+      routes_evaluated: demoData.routes.length,
+      passages_total: getPassages().length,
+      edges_total: getStoryEdges().length,
+      coverage_status: 'not_evaluated',
+      coverage_explanation: 'Full graph traversal coverage is calculated by the route exploration engine in Phase 2.',
+    },
+    rules_evaluated: [
+      { rule_id: 'RULE_REVEAL_PROTECTION', name: 'Reveal Protection', status: 'issue_detected', findings_count: 1 },
+      { rule_id: 'RULE_REQUIRED_CUE_COVERAGE', name: 'Required Cue Coverage', status: 'pass', findings_count: 0 },
+      { rule_id: 'RULE_TENSION_LIFECYCLE', name: 'Tension Lifecycle', status: 'pass', findings_count: 0 },
+      { rule_id: 'RULE_EMOTIONAL_CONTINUITY', name: 'Emotional Continuity', status: 'pass', findings_count: 0 },
+    ],
+    findings: findingsData,
+    negative_controls: getExpectedAbsenceCases(),
+    audio_inventory: {
+      assets_total: assetsData.length,
+      assets_missing: assetsData.filter((a) => a.status === 'missing').length,
+      cues_configured: cuesData.length,
+    },
   };
 }
