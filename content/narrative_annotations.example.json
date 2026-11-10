@@ -1,0 +1,40 @@
+{
+  "provenance": "demo_fixture",
+  "approval_note": "P-003 mood/intensity reproduce the approved UI fixture. The identity reveal at P-004 is only a demo state transition because source evidence was not supplied; it must not become authoritative production annotation until reviewed and evidenced.",
+  "annotations": [
+    {
+      "annotation_id": "ann_p003_demo",
+      "passage_id": "P-003",
+      "mood": "Suspense",
+      "intensity": 4,
+      "events": [],
+      "provenance": "demo_fixture",
+      "approval_status": "approved",
+      "authority_scope": "demo_only"
+    },
+    {
+      "annotation_id": "ann_p004_reveal_demo",
+      "passage_id": "P-004",
+      "mood": null,
+      "intensity": null,
+      "events": [
+        {
+          "event_id": "evt_identity_reveal_demo",
+          "event_type": "identity_reveal",
+          "fact_key": "traitor_identity_revealed",
+          "description": "Demo-only identity reveal state transition for route simulation illustration.",
+          "evidence_quote": null,
+          "source_start": null,
+          "source_end": null,
+          "order_index": 0,
+          "approved": false,
+          "provenance": "demo_fixture",
+          "authority_scope": "non_authoritative"
+        }
+      ],
+      "provenance": "demo_fixture",
+      "approval_status": "pending",
+      "authority_scope": "demo_only"
+    }
+  ]
+}

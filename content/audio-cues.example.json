@@ -1,0 +1,70 @@
+{
+  "provenance": "demo_fixture",
+  "assets": [
+    {
+      "asset_id": "ast_traitor_theme_demo",
+      "filename": "traitor_theme.wav",
+      "media_type": "music",
+      "mime_type": null,
+      "duration_seconds": null,
+      "sample_rate_hz": null,
+      "channels": null,
+      "size_bytes": null,
+      "storage_key": null,
+      "sha256": null,
+      "status": "missing",
+      "provenance": "demo_fixture",
+      "note": "Metadata-only placeholder. No audio bytes are bundled; not playable."
+    }
+  ],
+  "cues": [
+    {
+      "cue_id": "cue_traitor_theme_demo",
+      "asset_id": "ast_traitor_theme_demo",
+      "layer": "music",
+      "trigger": {
+        "type": "passage_entry",
+        "passage_id": "P-003"
+      },
+      "required_facts": [
+        {
+          "fact_key": "traitor_identity_revealed",
+          "expected_value": true
+        }
+      ],
+      "stop_policy": "manual",
+      "stop_event_id": null,
+      "start_offset_ms": 0,
+      "fade_in_ms": 0,
+      "fade_out_ms": 0,
+      "loop": false,
+      "allow_overlap": false,
+      "intentional": false,
+      "provenance": "demo_fixture",
+      "note": "The configured trigger intent is evaluated for BT-001 even though the media asset is missing. Do not claim audible playback."
+    }
+  ],
+  "expected_cue_events": [
+    {
+      "activation_id": "activation_route_b_airvent_demo",
+      "route_id": "route_b",
+      "cue_id": "cue_traitor_theme_demo",
+      "passage_id": "P-003",
+      "trigger_type": "passage_entry",
+      "trigger_fired": true,
+      "asset_available": false,
+      "route_time_seconds": null,
+      "timing_provenance": "unavailable",
+      "facts_at_trigger": {
+        "traitor_identity_revealed": false
+      },
+      "required_facts": [
+        {
+          "fact_key": "traitor_identity_revealed",
+          "expected_value": true
+        }
+      ],
+      "note": "Boundary is Air Vent entry. Exact route time is unavailable without measured passage/audio timing."
+    }
+  ]
+}

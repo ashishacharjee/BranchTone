@@ -1,0 +1,179 @@
+{
+  "fixture_metadata": {
+    "fixture_id": "the_last_signal_demo_v1",
+    "provenance": "demo_fixture",
+    "is_production_source": false,
+    "warning": "Structural fixture only. The full original .twee source was not supplied. P-003 text is the exact user-provided source; other passage prose is placeholder.",
+    "source_filename": "the_last_signal.twee",
+    "version_label": "v0.4"
+  },
+  "project": {
+    "project_id": "prj_the_last_signal_demo",
+    "name": "The Last Signal",
+    "description": "Interactive detective story — deterministic structural demonstration fixture.",
+    "current_version_id": "ver_the_last_signal_v04",
+    "created_at": "2026-11-10T00:00:00Z",
+    "updated_at": "2026-11-10T00:00:00Z"
+  },
+  "story_version": {
+    "version_id": "ver_the_last_signal_v04",
+    "version_label": "v0.4",
+    "source_filename": "the_last_signal.twee",
+    "story_format": "twee_harlowe_subset",
+    "compilation_status": "warning",
+    "warnings": [
+      "Original narrative text missing for P-001, P-002, P-004 and P-005; structural placeholders are not production source."
+    ],
+    "project_id": "prj_the_last_signal_demo",
+    "source_sha256": "71142c7775a357ea45d341b42feaf57e9254475126b3741ccedac78cd64ee9bd",
+    "compiled_at": null
+  },
+  "passages": [
+    {
+      "passage_id": "P-001",
+      "source_name": "Lobby",
+      "title": "Lobby",
+      "tags": [
+        "start"
+      ],
+      "provenance": "demo_fixture",
+      "raw_text_status": "placeholder"
+    },
+    {
+      "passage_id": "P-002",
+      "source_name": "Archives",
+      "title": "Archives",
+      "tags": [],
+      "provenance": "demo_fixture",
+      "raw_text_status": "placeholder"
+    },
+    {
+      "passage_id": "P-003",
+      "source_name": "Air_Vent",
+      "title": "Air Vent",
+      "tags": [],
+      "provenance": "user_supplied_exact_text",
+      "raw_text_status": "exact_supplied_text",
+      "raw_text": "Sen squeezes through the dark metal duct to bypass the locked hallway, completely unaware of who is behind the conspiracy.",
+      "mood": "Suspense",
+      "intensity": 4,
+      "identity_revealed_at_entry": false
+    },
+    {
+      "passage_id": "P-004",
+      "source_name": "Server_Vault",
+      "title": "Server Vault",
+      "tags": [],
+      "provenance": "demo_fixture",
+      "raw_text_status": "placeholder",
+      "demo_state_event": {
+        "fact_key": "traitor_identity_revealed",
+        "value": true,
+        "event_type": "identity_reveal",
+        "evidence_status": "not_supplied",
+        "approval_status": "not_authoritative"
+      }
+    },
+    {
+      "passage_id": "P-005",
+      "source_name": "Safe_House",
+      "title": "Safe House",
+      "tags": [],
+      "provenance": "demo_fixture",
+      "raw_text_status": "placeholder"
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "edge_lobby_archives",
+      "source_passage_id": "P-001",
+      "target_passage_id": "P-002",
+      "route_ids": [
+        "route_a"
+      ]
+    },
+    {
+      "edge_id": "edge_archives_vault",
+      "source_passage_id": "P-002",
+      "target_passage_id": "P-004",
+      "route_ids": [
+        "route_a"
+      ]
+    },
+    {
+      "edge_id": "edge_lobby_airvent",
+      "source_passage_id": "P-001",
+      "target_passage_id": "P-003",
+      "route_ids": [
+        "route_b"
+      ],
+      "structural_status": "valid",
+      "cue_issue_code": "BT-001"
+    },
+    {
+      "edge_id": "edge_airvent_vault",
+      "source_passage_id": "P-003",
+      "target_passage_id": "P-004",
+      "route_ids": [
+        "route_b"
+      ]
+    },
+    {
+      "edge_id": "edge_vault_safehouse",
+      "source_passage_id": "P-004",
+      "target_passage_id": "P-005",
+      "route_ids": [
+        "route_a",
+        "route_b"
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "route_id": "route_a",
+      "route_code": "A",
+      "name": "Route A",
+      "passage_path": [
+        "P-001",
+        "P-002",
+        "P-004",
+        "P-005"
+      ]
+    },
+    {
+      "route_id": "route_b",
+      "route_code": "B",
+      "name": "Route B",
+      "passage_path": [
+        "P-001",
+        "P-003",
+        "P-004",
+        "P-005"
+      ]
+    }
+  ],
+  "initial_ui_state": {
+    "selected_route_id": "route_b",
+    "selected_passage_id": "P-003",
+    "selected_finding_code": "BT-001",
+    "selected_workspace": "story-graph",
+    "demo_mode": true
+  },
+  "timeline_design_fixture": {
+    "provenance": "design_fixture_only",
+    "total_duration_seconds": 272,
+    "display_duration": "04:32",
+    "playhead_seconds": 84,
+    "display_playhead": "01:24",
+    "route_id": "route_b",
+    "passage_order": [
+      "P-001",
+      "P-003",
+      "P-004",
+      "P-005"
+    ],
+    "is_media_duration": false,
+    "is_playable": false,
+    "note": "These values reproduce the approved screenshot only. Replace with actual media-derived timing after audio import."
+  }
+}

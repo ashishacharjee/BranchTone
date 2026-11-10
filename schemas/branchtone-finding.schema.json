@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://branchtone.local/schemas/branchtone-finding.schema.json",
+  "title": "BranchTone Finding",
+  "type": "object",
+  "required": [
+    "finding_id",
+    "finding_code",
+    "rule_id",
+    "severity",
+    "status",
+    "passage_id",
+    "affected_route_ids",
+    "explanation",
+    "evidence_verified",
+    "route_trace",
+    "provenance",
+    "created_at"
+  ],
+  "properties": {
+    "finding_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "finding_code": {
+      "type": "string",
+      "pattern": "^BT-[0-9]{3,}$"
+    },
+    "rule_id": {
+      "enum": [
+        "RULE_REVEAL_PROTECTION",
+        "RULE_REQUIRED_CUE_COVERAGE",
+        "RULE_TENSION_LIFECYCLE",
+        "RULE_EMOTIONAL_CONTINUITY"
+      ]
+    },
+    "severity": {
+      "enum": [
+        "critical",
+        "high",
+        "medium",
+        "low",
+        "info"
+      ]
+    },
+    "status": {
+      "enum": [
+        "open",
+        "resolved",
+        "accepted_risk",
+        "false_positive"
+      ]
+    },
+    "passage_id": {
+      "type": "string"
+    },
+    "cue_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "asset_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "affected_route_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "explanation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected_state": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "actual_state": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "evidence_quote": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "evidence_verified": {
+      "type": "boolean"
+    },
+    "source_start": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "source_end": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "route_trace": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "suggested_action": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "provenance": {
+      "enum": [
+        "backend_validation",
+        "demo_fixture"
+      ]
+    },
+    "evidence_provenance": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "user_supplied_exact_text",
+        "imported_source",
+        "creator_approved_annotation",
+        null
+      ]
+    }
+  },
+  "additionalProperties": false
+}

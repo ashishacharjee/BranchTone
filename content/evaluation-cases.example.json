@@ -1,0 +1,75 @@
+{
+  "provenance": "deterministic_test_case_definitions",
+  "cases": [
+    {
+      "case_id": "CASE-001",
+      "name": "Route B premature theme",
+      "input": "route_b with cue at P-003 passage_entry requiring traitor_identity_revealed=true and inherited value false",
+      "expected": "BT-001 high/open at P-003",
+      "purpose": "Primary negative case"
+    },
+    {
+      "case_id": "CASE-002",
+      "name": "Route A bypasses Air Vent",
+      "input": "route_a passage path P-001,P-002,P-004,P-005",
+      "expected": "No BT-001",
+      "purpose": "Route isolation control"
+    },
+    {
+      "case_id": "CASE-003",
+      "name": "Unknown required fact",
+      "input": "required fact status unknown at trigger",
+      "expected": "Reveal Protection violation; unknown is not true",
+      "purpose": "Unknown-state control"
+    },
+    {
+      "case_id": "CASE-004",
+      "name": "Fact true before cue trigger",
+      "input": "cue trigger reached only after creator-approved fact transition",
+      "expected": "No Reveal Protection finding",
+      "purpose": "Positive control"
+    },
+    {
+      "case_id": "CASE-005",
+      "name": "Structurally valid but cue-issue edge",
+      "input": "P-001 → P-003 graph edge exists and is included in Route B; cue issue occurs at P-003 entry",
+      "expected": "Edge remains structurally valid; finding attaches to cue event/passage",
+      "purpose": "Prevent false graph-integrity issue"
+    },
+    {
+      "case_id": "CASE-006",
+      "name": "Missing audio asset",
+      "input": "cue manifest references missing traitor_theme.wav",
+      "expected": "Validation may inspect cue intent; playback unavailable; no waveform generated",
+      "purpose": "Missing-asset handling"
+    },
+    {
+      "case_id": "CASE-007",
+      "name": "Out-of-range intensity",
+      "input": "intensity is 0, 6 or decimal 4.5",
+      "expected": "Schema rejects input",
+      "purpose": "1–5 contract boundary"
+    },
+    {
+      "case_id": "CASE-008",
+      "name": "Unverified reveal evidence",
+      "input": "P-004 event has no source quote/source range and is not creator-approved",
+      "expected": "Cannot update authoritative fact state; route result remains fixture/non-authoritative or incomplete per implementation policy",
+      "purpose": "Evidence and approval boundary"
+    },
+    {
+      "case_id": "CASE-009",
+      "name": "Unsupported conditional syntax",
+      "input": "story contains unsupported conditional macro that changes reachability",
+      "expected": "Diagnostic; affected exploration not marked exhaustive",
+      "purpose": "Coverage honesty"
+    },
+    {
+      "case_id": "CASE-010",
+      "name": "Intentional silence",
+      "input": "no explicit creator-authored cue requirement for a passage/layer",
+      "expected": "No missing-cue finding",
+      "purpose": "Avoid blanket audio assumptions"
+    }
+  ]
+}

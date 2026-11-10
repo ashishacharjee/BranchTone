@@ -1,0 +1,276 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://branchtone.local/schemas/branchtone-demo-project.schema.json",
+  "title": "BranchTone Demo Project Fixture Envelope",
+  "type": "object",
+  "required": [
+    "fixture_metadata",
+    "project",
+    "story_version",
+    "passages",
+    "edges",
+    "routes",
+    "initial_ui_state",
+    "timeline_design_fixture"
+  ],
+  "properties": {
+    "fixture_metadata": {
+      "type": "object",
+      "required": [
+        "fixture_id",
+        "provenance",
+        "is_production_source",
+        "warning"
+      ],
+      "properties": {
+        "fixture_id": {
+          "type": "string"
+        },
+        "provenance": {
+          "const": "demo_fixture"
+        },
+        "is_production_source": {
+          "const": false
+        },
+        "warning": {
+          "type": "string"
+        },
+        "source_filename": {
+          "type": "string"
+        },
+        "version_label": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "project": {
+      "type": "object",
+      "required": [
+        "project_id",
+        "name",
+        "current_version_id"
+      ],
+      "properties": {
+        "project_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "current_version_id": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": true
+    },
+    "story_version": {
+      "type": "object",
+      "required": [
+        "version_id",
+        "version_label",
+        "source_filename",
+        "story_format",
+        "compilation_status"
+      ],
+      "properties": {
+        "version_id": {
+          "type": "string"
+        },
+        "version_label": {
+          "type": "string"
+        },
+        "source_filename": {
+          "type": "string"
+        },
+        "story_format": {
+          "const": "twee_harlowe_subset"
+        },
+        "compilation_status": {
+          "enum": [
+            "success",
+            "warning",
+            "failed"
+          ]
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "passages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "passage_id",
+          "source_name",
+          "title",
+          "provenance"
+        ],
+        "properties": {
+          "passage_id": {
+            "type": "string"
+          },
+          "source_name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "provenance": {
+            "enum": [
+              "demo_fixture",
+              "user_supplied_exact_text",
+              "imported_source"
+            ]
+          },
+          "intensity": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "raw_text_status": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "edge_id",
+          "source_passage_id",
+          "target_passage_id"
+        ],
+        "properties": {
+          "edge_id": {
+            "type": "string"
+          },
+          "source_passage_id": {
+            "type": "string"
+          },
+          "target_passage_id": {
+            "type": "string"
+          },
+          "structural_status": {
+            "enum": [
+              "valid",
+              "invalid",
+              "unknown"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "routes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "route_id",
+          "route_code",
+          "passage_path"
+        ],
+        "properties": {
+          "route_id": {
+            "type": "string"
+          },
+          "route_code": {
+            "enum": [
+              "A",
+              "B"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "passage_path": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "initial_ui_state": {
+      "type": "object",
+      "required": [
+        "selected_route_id",
+        "selected_passage_id",
+        "demo_mode"
+      ],
+      "properties": {
+        "selected_route_id": {
+          "type": "string"
+        },
+        "selected_passage_id": {
+          "type": "string"
+        },
+        "selected_finding_code": {
+          "type": "string"
+        },
+        "selected_workspace": {
+          "type": "string"
+        },
+        "demo_mode": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "timeline_design_fixture": {
+      "type": "object",
+      "required": [
+        "provenance",
+        "total_duration_seconds",
+        "playhead_seconds",
+        "is_media_duration",
+        "is_playable"
+      ],
+      "properties": {
+        "provenance": {
+          "const": "design_fixture_only"
+        },
+        "total_duration_seconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "playhead_seconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "is_media_duration": {
+          "const": false
+        },
+        "is_playable": {
+          "const": false
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

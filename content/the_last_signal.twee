@@ -1,0 +1,23 @@
+:: Lobby [start]
+[DEMO PLACEHOLDER: Original Lobby passage prose was not supplied.]
+
+[[Take the archive corridor->Archives]]
+[[Enter the ventilation duct->Air_Vent]]
+
+:: Archives
+[DEMO PLACEHOLDER: Original Archives passage prose was not supplied.]
+
+[[Continue to the server vault->Server_Vault]]
+
+:: Air_Vent
+Sen squeezes through the dark metal duct to bypass the locked hallway, completely unaware of who is behind the conspiracy.
+
+[[Continue to the server vault->Server_Vault]]
+
+:: Server_Vault
+[DEMO PLACEHOLDER: Original Server Vault passage prose was not supplied. The identity reveal described in the project brief is represented only as demo fixture state, not as verified source evidence.]
+
+[[Proceed to the safe house->Safe_House]]
+
+:: Safe_House
+[DEMO PLACEHOLDER: Original Safe House passage prose was not supplied.]

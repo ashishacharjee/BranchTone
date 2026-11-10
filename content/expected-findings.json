@@ -1,0 +1,50 @@
+{
+  "fixture_id": "the_last_signal_demo_v1",
+  "provenance": "expected_test_output_not_a_completed_run",
+  "expected_findings": [
+    {
+      "finding_id": "fnd_bt001_route_b_p003_demo",
+      "finding_code": "BT-001",
+      "rule_id": "RULE_REVEAL_PROTECTION",
+      "severity": "high",
+      "status": "open",
+      "passage_id": "P-003",
+      "cue_id": "cue_traitor_theme_demo",
+      "asset_id": "ast_traitor_theme_demo",
+      "affected_route_ids": [
+        "route_b"
+      ],
+      "explanation": "The traitor theme starts when entering Air Vent, before the character's identity is revealed on this route.",
+      "expected_state": {
+        "traitor_identity_revealed": true
+      },
+      "actual_state": {
+        "traitor_identity_revealed": false
+      },
+      "evidence_quote": "Sen squeezes through the dark metal duct to bypass the locked hallway, completely unaware of who is behind the conspiracy.",
+      "evidence_verified": true,
+      "evidence_provenance": "user_supplied_exact_text",
+      "source_start": null,
+      "source_end": null,
+      "route_trace": [
+        "P-001",
+        "P-003"
+      ],
+      "suggested_action": "Move the cue trigger to a creator-approved identity-reveal event after verifying its source evidence.",
+      "provenance": "demo_fixture",
+      "created_at": "2026-11-10T00:00:00Z"
+    }
+  ],
+  "expected_absence": [
+    {
+      "case": "Route A must not receive the Route B Air Vent cue finding.",
+      "route_id": "route_a",
+      "finding_code": "BT-001"
+    },
+    {
+      "case": "The Lobby → Air Vent structural edge remains valid.",
+      "edge_id": "edge_lobby_airvent",
+      "structural_status": "valid"
+    }
+  ]
+}
