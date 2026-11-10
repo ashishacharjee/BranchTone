@@ -16,7 +16,7 @@ Do not fabricate entries, timestamps, commits, contributors or organizer approva
 
 | Date/time (IST) | Organizer/contact | Question | Exact response or link | Affected matrix item | Decision recorded by |
 |---|---|---|---|---|---|
-| — | — | No organizer clarification recorded yet. | — | — | — |
+| 2026-11-10 12:03 IST | Organizing Team (Soundscapes & Composition track) | 5-part clarification request dispatched: (1) Domain engineering eligibility (parser, simulator, validation engine); (2) Audio engineering eligibility (upload, decode, Web Audio scheduling); (3) Report generation eligibility; (4) 50% pre-build measurement rubric; (5) Permitted pre-build technical scaffolding vs inactive domain logic. | Pending organizer written response | COMPLIANCE_MATRIX items 34–40; Gates 3, 4, 5, 7, 8 | BranchTone Dev Team |
 
 ## Live-sprint record template
 
