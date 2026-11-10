@@ -3,20 +3,24 @@
 **Event:** GeNarrative Clash 2026 — Live Sprint  
 **Date:** 21 November 2026 (12:00 – 17:45 IST)  
 **Track:** Soundscapes & Composition  
-**Baseline Git Commit:** `d1eead3` (Pre-Build Baseline Freeze)  
+**Baseline Git Commit:** `7b82eec` (Pre-Build Baseline Freeze)  
+
+> [!IMPORTANT]
+> **Priority Policy:**  
+> The 6-hour live sprint prioritizes the **core deterministic pipeline** (Gates M1–M6 and M8). Gate M7 (Gemini AI Integration) is an **optional stretch gate**. If API keys are missing or sprint time is constrained, Gate M7 is safely bypassed without preventing sprint acceptance or end-to-end demonstration.
 
 ---
 
 ## 1. Pre-Sprint Readiness Gate (11:45 – 12:00 IST)
 
-- [ ] Target repository cloned on sprint machines; working tree clean.
+- [ ] Target repository cloned on sprint machines; working tree clean at baseline commit `7b82eec`.
 - [ ] Python virtual environment active (`.venv`); dependencies verified with `pytest; ruff check .; mypy app`.
 - [ ] Node.js environment active; frontend verified with `npm test -- --run; npm run build; npm run lint`.
 - [ ] Live preview server verified at `http://localhost:4173/`.
 - [ ] Uvicorn backend verified at `http://127.0.0.1:8000/api/v1/health`.
-- [ ] Gemini API key configured in `.env` (`GEMINI_API_KEY=...`) on backend only.
-- [ ] Licensed audio assets (`traitor_theme.wav`, ambience loop, sfx clips) copied to local staging directory.
+- [ ] Licensed production audio assets (or explicitly badged synthetic test fixtures) staged in local staging directory.
 - [ ] Full prose for passages P-001, P-002, P-004, P-005 staged in `content/the_last_signal_full.twee`.
+- [ ] *(Optional)* Gemini API key configured in `.env` (`GEMINI_API_KEY=...`) on backend only for optional stretch gate M7.
 - [ ] Screen recording software tested for 3-minute final demonstration video.
 
 ---
@@ -76,13 +80,14 @@
 - [ ] Optional CSV export operational.
 - [ ] `pytest app/tests/test_reporting.py` passes 100%.
 
-### Gate M7: Live Gemini AI Integration (Target: 17:25 IST)
+### Gate M7: Live Gemini AI Integration [OPTIONAL STRETCH GATE] (Target: 17:25 IST)
+> *Note: If `GEMINI_API_KEY` is not provided or time is insufficient, this gate is skipped without blocking release readiness.*
 - [ ] `google-genai` provider initialized on backend using `GEMINI_API_KEY`.
 - [ ] Structured candidate annotations proposed using Pydantic schema.
 - [ ] Model outputs validated before storage; candidates remain `pending`.
 - [ ] Narrative Map workspace displays proposed candidate annotations for creator approval.
 - [ ] Secrets hygiene verified: zero API keys in client bundles.
-- [ ] `pytest app/tests/test_gemini_provider.py` passes 100%.
+- [ ] `pytest app/tests/test_gemini_provider.py` passes 100% (or cleanly skips if key absent).
 
 ---
 
@@ -107,3 +112,12 @@
 - [ ] 3-minute walkthrough video uploaded (YouTube unlisted / Loom).
 - [ ] README.md updated with installation, live run instructions, and demo link.
 - [ ] Project submitted on Devfolio / GeNarrative Clash portal before 18:00 IST deadline.
+
+---
+
+## 5. Contingency Protocol Verification Checklist
+
+- [ ] **Unavailable Credentials Contingency:** Verified that backend operates in pure deterministic mode when `GEMINI_API_KEY` is omitted, returning clean disabled status without server crashes.
+- [ ] **Missing Audio Asset Contingency:** Verified that `traitor_theme.wav` remains clearly disclosed as missing; no synthetic audio is represented as the original asset. Any decoder test audio is explicitly labelled `synthetic_test_fixture.wav`.
+- [ ] **Organizer Approval Contingency:** If organizer response is pending at sprint start, Branch B (strict 50/50 live sprint execution) is automatically activated from commit `7b82eec`.
+- [ ] **Schedule Compression Contingency:** If sprint is delayed >30 mins, Gate M7 is dropped immediately and reporting simplified to guarantee on-time completion of the core deterministic pipeline.

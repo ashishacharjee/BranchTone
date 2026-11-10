@@ -45,16 +45,23 @@ Finding explanation:
 
 ## Verified Live Sprint Preparation & Baseline Freeze State
 
-- Pre-build application foundation strictly frozen: All 7 workspaces, Story Graph canvas, shared Zustand state, and 100% test suites preserved.
+- Pre-build application foundation strictly frozen at reference commit `7b82eec`: All 7 workspaces, Story Graph canvas, shared Zustand state, and 100% test suites preserved.
+- Core Pipeline Prioritization:
+  - Six-hour sprint prioritizes the core deterministic pipeline: M1 (Twee parse), M2 (Story IR), M3 (Route simulator), M4 (Audio decoder), M5 (BT-001 validation engine), M6 (JSON report generation), and M8 (E2E demonstration).
+  - Gemini AI integration (M7) is an **optional stretch goal**. BranchTone is 100% functional, self-contained, and useful as a narrative audio QA studio without Gemini or any API key.
+- Three-Way Asset Taxonomy & Strict Non-Representation Mandate (`MISSING_ASSETS_CHECKLIST.md`):
+  1. *Original Assets:* Authentic creator text (P-003) and composer master stems. If missing (`traitor_theme.wav`), they remain honestly disclosed as missing.
+  2. *Synthetic Demonstration Fixtures:* Clearly labelled mocks for prose/decoder tests (`synthetic_test_440hz.wav`). Mandatory rule: **Never represent generated or synthetic audio as the missing original `traitor_theme.wav`.**
+  3. *Licensed Production Assets:* External media with verified CC0/CC-BY attribution in `content/LICENSES.md`.
+- Verified 4-Part Sprint Contingency Protocols (`LIVE_SPRINT_RUNBOOK.md`):
+  1. *Unavailable Credentials:* Pure deterministic mode operates smoothly; manual UI annotation authoring and approval functional; M7 bypassed without errors.
+  2. *Missing Audio Assets:* Honest missing status maintained; transport visibly disabled with reason; decoder tested strictly using designated synthetic test tones.
+  3. *Incomplete Organizer Approval:* Automatic fallback to Branch B (strict live-sprint execution of M1–M6 from frozen commit `7b82eec`).
+  4. *Schedule Compression:* Strict triage hierarchy dropping M7 (Gemini) first, dropping CSV export second, while protecting the core Twee $\to$ simulation $\to$ BT-001 $\to$ JSON report $\to$ E2E demo pipeline.
 - Live servers running and verified:
   - Frontend Vite preview server running on `http://localhost:4173/` (host 0.0.0.0, port 4173).
   - Backend Uvicorn FastAPI server running on `http://127.0.0.1:8000/`.
   - Preview proxy configured in `frontend/vite.config.ts`: `/api` calls routed to backend; `/api/v1/health` verified returning HTTP 200 JSON.
-- Live Sprint Documentation Suite Authored:
-  1. `LIVE_SPRINT_RUNBOOK.md` — 6-hour implementation schedule (M1–M8), architecture specifications, unit tests, failure scenarios, E2E demo script, and organizer decision branching.
-  2. `SPRINT_ACCEPTANCE_CHECKLIST.md` — Verification gates for pre-sprint readiness, M1–M7 milestones, E2E demonstration, and submission packaging.
-  3. `MISSING_ASSETS_CHECKLIST.md` — Systematic inventory and acquisition protocol for narrative passages, audio assets, organizer confirmation, and Gemini credentials.
-- Strict Gating Maintained: Zero domain engine code (Twee parser, route simulator, validation engine, audio backend, Gemini integration) implemented.
 - Quality gates: 40 frontend tests passing, 11 backend tests passing, TypeScript strict clean, ESLint clean, Vite build clean, Ruff clean, Mypy strict clean.
 
 ## Verified Complete Health Check, Functionality Audit & Error Verification State

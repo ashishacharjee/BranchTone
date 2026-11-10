@@ -1,5 +1,19 @@
 # CHANGELOG.md — Pack and Implementation History
 
+## 2.8 — 10 November 2026 (Live Sprint Refinements, Asset Classification & Contingency Verification)
+
+- Finalized three critical preparation refinements based on architectural and product review:
+  1. **Core Pipeline Priority Established:** Formally prioritized the core deterministic narrative QA pipeline (M1: Twee parser, M2: Story IR compiler, M3: Route simulator, M4: Audio decoder, M5: Deterministic validation engine with BT-001 reproduction, M6: Canonical JSON report generation, M8: E2E demonstration). Formally classified Gemini 2.5 Flash AI integration (M7) as an **optional stretch goal**. Explicitly verified that BranchTone is 100% functional, self-contained, and useful without Gemini or any API key.
+  2. **Three-Way Asset Classification & Strict Non-Representation Mandate:**
+     - Established a strict 3-way taxonomy in `MISSING_ASSETS_CHECKLIST.md`: *Original Assets* (canonical creator content like P-003 quote), *Synthetic Demonstration Fixtures* (clearly labelled test mocks for prose/decoder), and *Licensed Production Assets* (CC0/CC-BY verified media with entries in `LICENSES.md`).
+     - Codified mandatory rule: **Never represent generated or synthetic audio as the missing original `traitor_theme.wav`.** Any generated test tones must be named `synthetic_test_fixture.wav` and visibly badged in the UI as `SYNTHETIC FIXTURE`.
+  3. **Verified Four-Part Sprint Contingency Protocols in `LIVE_SPRINT_RUNBOOK.md`:**
+     - *Unavailable Credentials:* Backend operates in pure deterministic mode; creator manual annotation and approval remains 100% operational; M7 bypassed cleanly without error cascades.
+     - *Missing Audio Assets:* Honest missing status maintained; transport visibly disabled with reason; decoder tested strictly using designated synthetic test tones.
+     - *Incomplete Organizer Approval:* Automatic fallback to Branch B (strict live-sprint execution of M1–M6 from frozen commit `7b82eec`).
+     - *Insufficient Remaining Time:* Strict triage hierarchy dropping M7 (Gemini) first, dropping CSV export second, while protecting the core Twee $\to$ simulation $\to$ BT-001 $\to$ JSON report $\to$ E2E demo pipeline.
+- Baseline Integrity Preserved: Commit `7b82eec` maintained as the immutable pre-build reference.
+
 ## 2.7 — 10 November 2026 (Live Sprint Preparation, Runbook Authoring & Baseline Freeze)
 
 - Authored comprehensive preparation deliverables for the GeNarrative Clash live sprint on 21 November 2026:

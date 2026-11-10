@@ -8,7 +8,8 @@ Update a checkbox only when the task is actually complete and evidence/tests exi
 - [x] Author Technical Readiness Report for domain modules (parser, simulator, validation, audio, reporting) and dependency maintenance analysis (`technical-readiness-report.md`).
 - [x] Complete Full Application Health Check, Functionality Audit & Error Verification (`FINAL_APPLICATION_HEALTH_REPORT.md`).
 - [x] Author 6-hour Live Sprint Runbook (`LIVE_SPRINT_RUNBOOK.md`), Acceptance Checklist (`SPRINT_ACCEPTANCE_CHECKLIST.md`), and Missing Assets Checklist (`MISSING_ASSETS_CHECKLIST.md`).
-- [x] Freeze pre-build baseline; verify live servers (frontend :4173 with proxy, backend :8000).
+- [x] Freeze pre-build baseline at commit `7b82eec`; verify live servers (frontend :4173 with proxy, backend :8000).
+- [x] Finalize preparation refinements: prioritize core pipeline (M1-M6, M8) with Gemini as optional stretch goal; implement 3-way asset classification (original, synthetic fixture, licensed production) with strict non-representation mandate; verify 4-part sprint contingency plans.
 - [?] Confirm pre-build/live-sprint boundaries with organizer for every `CONFIRM` item (formal inquiry dispatched 10 Nov 12:03 IST; response pending).
 - [ ] Agree the team's 50% measurement method and record it.
 - [ ] Replace structural placeholders with the owner-approved full story source when available.
