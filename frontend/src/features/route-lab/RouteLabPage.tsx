@@ -78,7 +78,8 @@ export function RouteLabPage() {
 
   return (
     <div className={styles.routeLab} role="region" aria-label="Route Lab Workspace">
-      {/* ── Topbar / Route Selector ─────────────────────────────────── */}
+      <div className={styles.container}>
+        {/* ── Topbar / Route Selector ─────────────────────────────────── */}
       <div className={styles.topbar}>
         <div className={styles.routeSelector} role="group" aria-label="Route selector">
           <span className={styles.routeLabel}>Route:</span>
@@ -349,6 +350,7 @@ export function RouteLabPage() {
             Play Route (Disabled)
           </button>
         </div>
+      </div>
       </div>
     </div>
   );

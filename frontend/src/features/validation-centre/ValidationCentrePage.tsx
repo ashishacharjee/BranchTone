@@ -61,7 +61,8 @@ export function ValidationCentrePage() {
 
   return (
     <div className={styles.validationCentre} role="region" aria-label="Validation Centre Workspace">
-      {/* ── Topbar / Filter Row ─────────────────────────────────────── */}
+      <div className={styles.container}>
+        {/* ── Topbar / Filter Row ─────────────────────────────────────── */}
       <div className={styles.topbar}>
         <div className={styles.filterControls}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: 'var(--bt-text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>
@@ -359,6 +360,7 @@ export function ValidationCentrePage() {
             </div>
           )}
         </div>
+      </div>
       </div>
     </div>
   );

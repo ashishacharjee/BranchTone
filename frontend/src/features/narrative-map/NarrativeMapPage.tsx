@@ -32,7 +32,8 @@ export function NarrativeMapPage() {
 
   return (
     <div className={styles.narrativeMap} role="region" aria-label="Narrative Map Workspace">
-      {/* ── Top Bar: Route Selector ─────────────────────────────────── */}
+      <div className={styles.container}>
+        {/* ── Top Bar: Route Selector ─────────────────────────────────── */}
       <div className={styles.topbar}>
         <div className={styles.routeSelector} role="group" aria-label="Route selector">
           <span className={styles.routeLabel}>Route:</span>
@@ -279,6 +280,7 @@ export function NarrativeMapPage() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

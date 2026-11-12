@@ -1,11 +1,23 @@
+/* ── Route Lab Workspace: Studio Aesthetic ─────────────────────────────── */
 .routeLab {
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow-y: auto;
-  padding: var(--bt-space-6);
+  padding: var(--bt-space-6) var(--bt-space-8);
+  background: radial-gradient(circle at 50% 0%, rgba(41, 201, 138, 0.04) 0%, transparent 60%),
+              radial-gradient(circle at 90% 20%, rgba(240, 79, 117, 0.03) 0%, transparent 40%),
+              var(--bt-bg);
+}
+
+.container {
+  max-width: 1360px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
   gap: var(--bt-space-6);
-  background: var(--bt-bg);
+  padding-bottom: var(--bt-space-8);
 }
 
 /* ── Topbar / Route Selector ────────────────────────────────────────────── */
@@ -13,73 +25,96 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: var(--bt-space-4);
-  border-bottom: 1px solid var(--bt-border);
+  padding: var(--bt-space-4) var(--bt-space-6);
+  background: var(--bt-surface);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-lg);
+  box-shadow: var(--bt-shadow-sm);
+  backdrop-filter: blur(12px);
 }
 
 .routeSelector {
   display: flex;
   align-items: center;
-  gap: var(--bt-space-2);
+  gap: var(--bt-space-3);
 }
 
 .routeLabel {
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   color: var(--bt-text-muted);
-  margin-right: var(--bt-space-2);
 }
 
 .routePill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 12px;
+  gap: 8px;
+  padding: 6px 14px;
   border-radius: var(--bt-radius-full);
   background: var(--bt-surface-2);
   border: 1px solid var(--bt-border);
   color: var(--bt-text-secondary);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all var(--bt-transition);
+}
+
+.routePill:hover {
+  background: var(--bt-surface-3);
+  color: var(--bt-text);
+  border-color: rgba(41, 201, 138, 0.4);
 }
 
 .routePillActive {
   background: rgba(41, 201, 138, 0.15);
   border-color: var(--bt-accent);
   color: var(--bt-accent);
-  box-shadow: 0 0 10px rgba(41, 201, 138, 0.2);
+  box-shadow: 0 0 14px rgba(41, 201, 138, 0.25);
 }
 
 .pillBadge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: var(--bt-radius-full);
   background: var(--bt-surface-3);
   font-size: 10px;
+  font-family: var(--bt-font-mono);
   font-weight: 700;
 }
 
 .routePillActive .pillBadge {
   background: var(--bt-accent);
-  color: #0E1110;
+  color: #070B0C;
 }
 
 /* ── Sequence & State Stepper ───────────────────────────────────────────── */
 .stepperPanel {
   background: var(--bt-surface);
   border: 1px solid var(--bt-border);
-  border-radius: var(--bt-radius-md);
-  padding: var(--bt-space-5);
+  border-radius: var(--bt-radius-lg);
+  padding: var(--bt-space-6);
   display: flex;
   flex-direction: column;
   gap: var(--bt-space-4);
+  box-shadow: var(--bt-shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.stepperPanel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(41, 201, 138, 0.3), transparent);
 }
 
 .panelHeader {
@@ -87,20 +122,22 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--bt-space-3);
+  padding-bottom: var(--bt-space-3);
+  border-bottom: 1px solid var(--bt-border);
 }
 
 .stepNavBtn {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 4px 10px;
+  gap: 6px;
+  padding: 6px 14px;
   border-radius: var(--bt-radius-sm);
   background: var(--bt-surface-2);
   border: 1px solid var(--bt-border);
   color: var(--bt-text);
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all var(--bt-transition);
 }
@@ -109,6 +146,7 @@
   border-color: var(--bt-accent);
   color: var(--bt-accent);
   background: var(--bt-surface-3);
+  box-shadow: 0 0 10px rgba(41, 201, 138, 0.2);
 }
 
 .stepNavBtn:disabled {
@@ -118,9 +156,9 @@
 }
 
 .panelTitle {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--bt-text);
   display: flex;
@@ -135,29 +173,35 @@
 }
 
 .stepCard {
-  background: var(--bt-surface-2);
+  background: linear-gradient(180deg, rgba(20, 31, 33, 0.7) 0%, rgba(13, 20, 22, 0.9) 100%);
   border: 1px solid var(--bt-border);
-  border-radius: var(--bt-radius-sm);
-  padding: var(--bt-space-4);
+  border-radius: var(--bt-radius-md);
+  padding: var(--bt-space-5);
   display: flex;
   flex-direction: column;
   gap: var(--bt-space-3);
   cursor: pointer;
+  position: relative;
   transition: all var(--bt-transition);
+  box-shadow: var(--bt-shadow-sm);
 }
 
 .stepCard:hover {
-  border-color: var(--bt-border-strong);
+  border-color: rgba(41, 201, 138, 0.4);
+  background: var(--bt-surface-2);
+  transform: translateY(-2px);
+  box-shadow: var(--bt-shadow-md);
 }
 
 .stepSelected {
-  border-color: var(--bt-focus);
-  box-shadow: 0 0 10px rgba(41, 201, 138, 0.2);
+  border-color: var(--bt-accent) !important;
+  box-shadow: 0 0 16px rgba(41, 201, 138, 0.25), inset 0 0 0 1px var(--bt-accent) !important;
+  background: rgba(41, 201, 138, 0.06) !important;
 }
 
 .stepIssue {
-  border-color: rgba(240, 79, 117, 0.5);
-  background: rgba(240, 79, 117, 0.04);
+  border-color: rgba(240, 79, 117, 0.5) !important;
+  box-shadow: 0 0 16px rgba(240, 79, 117, 0.15) !important;
 }
 
 .stepHeader {
@@ -169,24 +213,31 @@
 .stepNumber {
   font-family: var(--bt-font-mono);
   font-size: 11px;
-  color: var(--bt-text-muted);
+  font-weight: 700;
+  color: var(--bt-accent);
+  background: rgba(41, 201, 138, 0.1);
+  padding: 2px 6px;
+  border-radius: var(--bt-radius-sm);
+  border: 1px solid rgba(41, 201, 138, 0.25);
 }
 
 .stepName {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--bt-text);
+  letter-spacing: -0.01em;
 }
 
 .factBox {
   background: var(--bt-surface-3);
   border-radius: var(--bt-radius-sm);
-  padding: var(--bt-space-2) var(--bt-space-3);
+  padding: var(--bt-space-3);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   font-size: 11px;
   font-family: var(--bt-font-mono);
+  border: 1px solid var(--bt-border);
 }
 
 .factRow {
@@ -198,11 +249,12 @@
 .snapshotDrawer {
   background: var(--bt-surface-2);
   border: 1px solid var(--bt-border);
-  border-radius: var(--bt-radius-sm);
-  padding: var(--bt-space-4);
+  border-radius: var(--bt-radius-md);
+  padding: var(--bt-space-5);
   display: flex;
   flex-direction: column;
   gap: var(--bt-space-3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .snapshotHeader {
@@ -210,8 +262,10 @@
   align-items: center;
   justify-content: space-between;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--bt-text);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .snapshotGrid {
@@ -222,23 +276,25 @@
 
 .snapshotItem {
   background: var(--bt-surface-3);
-  padding: 8px 10px;
+  padding: 10px 12px;
   border-radius: var(--bt-radius-sm);
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
+  border: 1px solid var(--bt-border);
 }
 
 .snapshotLabel {
   font-size: 10px;
   color: var(--bt-text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
+  font-weight: 600;
 }
 
 .snapshotVal {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
   color: var(--bt-text);
   font-family: var(--bt-font-mono);
 }
@@ -247,17 +303,19 @@
 .tracePanel {
   background: var(--bt-surface);
   border: 1px solid var(--bt-border);
-  border-radius: var(--bt-radius-md);
-  padding: var(--bt-space-5);
+  border-radius: var(--bt-radius-lg);
+  padding: var(--bt-space-6);
   display: flex;
   flex-direction: column;
   gap: var(--bt-space-4);
+  box-shadow: var(--bt-shadow-sm);
 }
 
 .tableWrap {
   border: 1px solid var(--bt-border);
-  border-radius: var(--bt-radius-sm);
+  border-radius: var(--bt-radius-md);
   overflow: hidden;
+  background: var(--bt-surface-2);
 }
 
 .traceTable {
@@ -268,18 +326,18 @@
 }
 
 .traceTable th {
-  background: var(--bt-surface-2);
-  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 12px 14px;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   color: var(--bt-text-muted);
   border-bottom: 1px solid var(--bt-border);
 }
 
 .traceTable td {
-  padding: 12px;
+  padding: 14px;
   border-bottom: 1px solid var(--bt-border);
   color: var(--bt-text);
 }
@@ -291,28 +349,29 @@
 .clickableFindingBtn {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 3px 8px;
+  gap: 5px;
+  padding: 4px 10px;
   border-radius: var(--bt-radius-sm);
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   background: rgba(240, 79, 117, 0.15);
   color: var(--bt-error);
-  border: 1px solid rgba(240, 79, 117, 0.3);
+  border: 1px solid rgba(240, 79, 117, 0.35);
   cursor: pointer;
   transition: all var(--bt-transition);
 }
 
 .clickableFindingBtn:hover {
-  background: rgba(240, 79, 117, 0.25);
-  border-color: var(--bt-error);
+  background: var(--bt-error);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(240, 79, 117, 0.4);
 }
 
 /* ── Transport Disabled Notice ──────────────────────────────────────────── */
 .transportNotice {
   background: var(--bt-surface-2);
-  border: 1px dashed var(--bt-border-strong);
-  border-radius: var(--bt-radius-sm);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-md);
   padding: var(--bt-space-3) var(--bt-space-4);
   font-size: 12px;
   color: var(--bt-text-muted);
@@ -327,5 +386,8 @@
   }
   .snapshotGrid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .routeLab {
+    padding: var(--bt-space-4);
   }
 }

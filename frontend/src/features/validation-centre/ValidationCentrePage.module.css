@@ -1,11 +1,23 @@
+/* ── Validation Centre: Studio Aesthetic ───────────────────────────────── */
 .validationCentre {
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow-y: auto;
-  padding: var(--bt-space-6);
+  padding: var(--bt-space-6) var(--bt-space-8);
+  background: radial-gradient(circle at 50% 0%, rgba(41, 201, 138, 0.04) 0%, transparent 60%),
+              radial-gradient(circle at 90% 20%, rgba(240, 79, 117, 0.04) 0%, transparent 40%),
+              var(--bt-bg);
+}
+
+.container {
+  max-width: 1360px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
   gap: var(--bt-space-6);
-  background: var(--bt-bg);
+  padding-bottom: var(--bt-space-8);
 }
 
 /* ── Topbar / Filter Row ────────────────────────────────────────────────── */
@@ -13,8 +25,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: var(--bt-space-4);
-  border-bottom: 1px solid var(--bt-border);
+  padding: var(--bt-space-4) var(--bt-space-6);
+  background: var(--bt-surface);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-lg);
+  box-shadow: var(--bt-shadow-sm);
+  backdrop-filter: blur(12px);
   gap: var(--bt-space-4);
   flex-wrap: wrap;
 }
@@ -32,42 +48,61 @@
   border-radius: var(--bt-radius-sm);
   color: var(--bt-text);
   font-size: 12px;
-  padding: 5px 10px;
+  font-weight: 500;
+  padding: 6px 12px;
   outline: none;
   cursor: pointer;
+  transition: all var(--bt-transition);
 }
 
 .filterSelect:focus {
   border-color: var(--bt-accent);
+  box-shadow: 0 0 10px rgba(41, 201, 138, 0.2);
 }
 
 /* ── Main Two-Column Layout ─────────────────────────────────────────────── */
 .layoutGrid {
   display: grid;
-  grid-template-columns: 1.5fr 1.2fr;
+  grid-template-columns: 1.4fr 1.1fr;
   gap: var(--bt-space-6);
+  align-items: start;
 }
 
 .panel {
   background: var(--bt-surface);
   border: 1px solid var(--bt-border);
-  border-radius: var(--bt-radius-md);
-  padding: var(--bt-space-5);
+  border-radius: var(--bt-radius-lg);
+  padding: var(--bt-space-6);
   display: flex;
   flex-direction: column;
   gap: var(--bt-space-4);
+  box-shadow: var(--bt-shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(41, 201, 138, 0.3), transparent);
 }
 
 .panelHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: var(--bt-space-3);
+  border-bottom: 1px solid var(--bt-border);
 }
 
 .panelTitle {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--bt-text);
   display: flex;
@@ -78,8 +113,9 @@
 /* ── Findings Table ─────────────────────────────────────────────────────── */
 .tableWrap {
   border: 1px solid var(--bt-border);
-  border-radius: var(--bt-radius-sm);
+  border-radius: var(--bt-radius-md);
   overflow: hidden;
+  background: var(--bt-surface-2);
 }
 
 .findingsTable {
@@ -90,53 +126,56 @@
 }
 
 .findingsTable th {
-  background: var(--bt-surface-2);
-  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 12px 14px;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   color: var(--bt-text-muted);
   border-bottom: 1px solid var(--bt-border);
 }
 
 .findingsTable td {
-  padding: 12px;
+  padding: 14px;
   border-bottom: 1px solid var(--bt-border);
   color: var(--bt-text);
 }
 
 .clickableFindingRow {
   cursor: pointer;
-  transition: background var(--bt-transition);
+  transition: all var(--bt-transition);
 }
 
 .clickableFindingRow:hover td {
-  background: var(--bt-surface-2);
+  background: var(--bt-surface-3);
 }
 
 .findingRowSelected td {
-  background: rgba(240, 79, 117, 0.09) !important;
-  border-color: rgba(240, 79, 117, 0.25);
+  background: rgba(240, 79, 117, 0.08) !important;
+  border-color: rgba(240, 79, 117, 0.3);
 }
 
 .findingCode {
   font-family: var(--bt-font-mono);
   font-weight: 700;
   color: var(--bt-error);
+  letter-spacing: 0.02em;
 }
 
 .severityBadge {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 2px 7px;
-  border-radius: var(--bt-radius-sm);
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: var(--bt-radius-full);
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   background: rgba(240, 79, 117, 0.15);
   color: var(--bt-error);
-  border: 1px solid rgba(240, 79, 117, 0.3);
+  border: 1px solid rgba(240, 79, 117, 0.35);
 }
 
 /* ── Detail Panel ───────────────────────────────────────────────────────── */
@@ -144,7 +183,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--bt-space-3);
-  padding-bottom: var(--bt-space-3);
+  padding-bottom: var(--bt-space-4);
   border-bottom: 1px solid var(--bt-border);
 }
 
@@ -157,19 +196,20 @@
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   color: var(--bt-text-muted);
 }
 
 .quoteBox {
-  background: var(--bt-surface-2);
-  border-left: 2px solid var(--bt-accent);
-  padding: var(--bt-space-3);
+  background: rgba(0, 0, 0, 0.25);
+  border-left: 3px solid var(--bt-accent);
+  padding: var(--bt-space-3) var(--bt-space-4);
   margin: 0;
-  font-size: 12px;
+  font-size: 13px;
   font-style: italic;
-  color: var(--bt-text-secondary);
-  line-height: 1.5;
+  color: var(--bt-text);
+  line-height: 1.6;
+  border-radius: 0 var(--bt-radius-sm) var(--bt-radius-sm) 0;
 }
 
 .stateComparison {
@@ -180,8 +220,9 @@
 
 .stateBox {
   background: var(--bt-surface-2);
+  border: 1px solid var(--bt-border);
   border-radius: var(--bt-radius-sm);
-  padding: var(--bt-space-3);
+  padding: 10px 12px;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -191,14 +232,15 @@
 .stateBoxLabel {
   font-size: 10px;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
   font-weight: 600;
   color: var(--bt-text-muted);
 }
 
 .stateBoxVal {
   font-family: var(--bt-font-mono);
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .actionBtn {
@@ -206,7 +248,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--bt-space-2);
-  padding: 8px 14px;
+  padding: 8px 16px;
   border-radius: var(--bt-radius-sm);
   background: rgba(41, 201, 138, 0.15);
   border: 1px solid var(--bt-accent);
@@ -218,44 +260,47 @@
 }
 
 .actionBtn:hover {
-  background: rgba(41, 201, 138, 0.25);
+  background: var(--bt-accent);
+  color: #070B0C;
+  box-shadow: 0 0 12px rgba(41, 201, 138, 0.4);
 }
 
 .statusBtn {
-  padding: 3px 9px;
+  padding: 5px 12px;
   border-radius: var(--bt-radius-sm);
   background: var(--bt-surface-2);
   border: 1px solid var(--bt-border);
   color: var(--bt-text-secondary);
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all var(--bt-transition);
 }
 
 .statusBtn:hover {
-  border-color: var(--bt-border-strong);
+  border-color: rgba(41, 201, 138, 0.4);
   color: var(--bt-text);
 }
 
 .statusBtnActive {
-  padding: 3px 9px;
+  padding: 5px 12px;
   border-radius: var(--bt-radius-sm);
-  background: rgba(41, 201, 138, 0.15);
+  background: rgba(41, 201, 138, 0.18);
   border: 1px solid var(--bt-accent);
   color: var(--bt-accent);
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(41, 201, 138, 0.2);
 }
 
 .auditionBtn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 7px 12px;
+  padding: 8px 14px;
   border-radius: var(--bt-radius-sm);
-  background: rgba(240, 79, 117, 0.12);
-  border: 1px solid rgba(240, 79, 117, 0.35);
+  background: rgba(240, 79, 117, 0.15);
+  border: 1px solid rgba(240, 79, 117, 0.4);
   color: var(--bt-error);
   font-size: 12px;
   font-weight: 600;
@@ -264,19 +309,22 @@
 }
 
 .auditionBtn:hover {
-  background: rgba(240, 79, 117, 0.22);
+  background: var(--bt-error);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(240, 79, 117, 0.4);
 }
 
 /* ── Negative Controls Section ──────────────────────────────────────────── */
 .absenceCard {
   background: var(--bt-surface-2);
   border: 1px solid var(--bt-border);
-  border-radius: var(--bt-radius-sm);
-  padding: var(--bt-space-3) var(--bt-space-4);
+  border-radius: var(--bt-radius-md);
+  padding: var(--bt-space-4);
   font-size: 12px;
   display: flex;
   align-items: center;
   gap: var(--bt-space-3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .emptyFindingsBox {
@@ -291,13 +339,14 @@
 }
 
 .clearFilterBtn {
-  padding: 4px 12px;
+  padding: 6px 14px;
   border-radius: var(--bt-radius-sm);
   background: var(--bt-surface-3);
   border: 1px solid var(--bt-border);
   color: var(--bt-text);
   font-size: 12px;
   cursor: pointer;
+  font-weight: 500;
 }
 
 .clearFilterBtn:hover {
@@ -308,5 +357,8 @@
 @media (max-width: 1024px) {
   .layoutGrid {
     grid-template-columns: 1fr;
+  }
+  .validationCentre {
+    padding: var(--bt-space-4);
   }
 }

@@ -1,11 +1,23 @@
+/* ── Cue Library Workspace: Studio Aesthetic ───────────────────────────── */
 .cueLibrary {
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow-y: auto;
-  padding: var(--bt-space-6);
+  padding: var(--bt-space-6) var(--bt-space-8);
+  background: radial-gradient(circle at 50% 0%, rgba(41, 201, 138, 0.04) 0%, transparent 60%),
+              radial-gradient(circle at 90% 20%, rgba(240, 79, 117, 0.03) 0%, transparent 40%),
+              var(--bt-bg);
+}
+
+.container {
+  max-width: 1360px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
   gap: var(--bt-space-6);
-  background: var(--bt-bg);
+  padding-bottom: var(--bt-space-8);
 }
 
 /* ── Topbar / Filter ────────────────────────────────────────────────────── */
@@ -13,8 +25,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: var(--bt-space-4);
-  border-bottom: 1px solid var(--bt-border);
+  padding: var(--bt-space-4) var(--bt-space-6);
+  background: var(--bt-surface);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-lg);
+  box-shadow: var(--bt-shadow-sm);
+  backdrop-filter: blur(12px);
 }
 
 .filterGroup {
@@ -25,29 +41,36 @@
 
 .filterLabel {
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   color: var(--bt-text-muted);
   margin-right: var(--bt-space-2);
 }
 
 .filterBtn {
-  padding: 4px 12px;
+  padding: 6px 14px;
   border-radius: var(--bt-radius-full);
   background: var(--bt-surface-2);
   border: 1px solid var(--bt-border);
   color: var(--bt-text-secondary);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all var(--bt-transition);
+}
+
+.filterBtn:hover {
+  background: var(--bt-surface-3);
+  color: var(--bt-text);
+  border-color: rgba(41, 201, 138, 0.4);
 }
 
 .filterBtnActive {
   background: rgba(41, 201, 138, 0.15);
   border-color: var(--bt-accent);
   color: var(--bt-accent);
+  box-shadow: 0 0 12px rgba(41, 201, 138, 0.2);
 }
 
 /* ── Main Two-Column Layout ─────────────────────────────────────────────── */
@@ -55,28 +78,44 @@
   display: grid;
   grid-template-columns: 1.4fr 1fr;
   gap: var(--bt-space-6);
+  align-items: start;
 }
 
 .panel {
   background: var(--bt-surface);
   border: 1px solid var(--bt-border);
-  border-radius: var(--bt-radius-md);
-  padding: var(--bt-space-5);
+  border-radius: var(--bt-radius-lg);
+  padding: var(--bt-space-6);
   display: flex;
   flex-direction: column;
   gap: var(--bt-space-4);
+  box-shadow: var(--bt-shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(41, 201, 138, 0.3), transparent);
 }
 
 .panelHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: var(--bt-space-3);
+  border-bottom: 1px solid var(--bt-border);
 }
 
 .panelTitle {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--bt-text);
   display: flex;
@@ -87,8 +126,9 @@
 /* ── Table ──────────────────────────────────────────────────────────────── */
 .tableWrap {
   border: 1px solid var(--bt-border);
-  border-radius: var(--bt-radius-sm);
+  border-radius: var(--bt-radius-md);
   overflow: hidden;
+  background: var(--bt-surface-2);
 }
 
 .cueTable {
@@ -99,34 +139,34 @@
 }
 
 .cueTable th {
-  background: var(--bt-surface-2);
-  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 12px 14px;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   color: var(--bt-text-muted);
   border-bottom: 1px solid var(--bt-border);
 }
 
 .cueTable td {
-  padding: 12px;
+  padding: 14px;
   border-bottom: 1px solid var(--bt-border);
   color: var(--bt-text);
 }
 
 .clickableRow {
   cursor: pointer;
-  transition: background var(--bt-transition);
+  transition: all var(--bt-transition);
 }
 
 .clickableRow:hover td {
-  background: var(--bt-surface-2);
+  background: var(--bt-surface-3);
 }
 
 .cueRowSelected td {
   background: rgba(41, 201, 138, 0.08) !important;
-  border-color: rgba(41, 201, 138, 0.2);
+  border-color: rgba(41, 201, 138, 0.3);
 }
 
 .cueTable tr:last-child td {
@@ -136,29 +176,43 @@
 .statusMissing {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 2px 7px;
-  border-radius: var(--bt-radius-sm);
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: var(--bt-radius-full);
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   background: rgba(240, 79, 117, 0.15);
   color: var(--bt-error);
-  border: 1px solid rgba(240, 79, 117, 0.3);
+  border: 1px solid rgba(240, 79, 117, 0.35);
 }
 
 /* ── Waveform Preview Area ──────────────────────────────────────────────── */
 .waveformBox {
-  background: var(--bt-surface-2);
-  border: 1px dashed var(--bt-border-strong);
-  border-radius: var(--bt-radius-sm);
-  padding: var(--bt-space-5);
+  background: linear-gradient(180deg, rgba(16, 23, 25, 0.8) 0%, rgba(10, 15, 16, 0.95) 100%);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-md);
+  padding: var(--bt-space-6);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: var(--bt-space-3);
   text-align: center;
-  min-height: 140px;
+  min-height: 160px;
+  position: relative;
+  overflow: hidden;
+}
+
+.waveformBox::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
 }
 
 .waveformText {
@@ -166,6 +220,7 @@
   color: var(--bt-text-muted);
   max-width: 380px;
   line-height: 1.5;
+  z-index: 1;
 }
 
 /* ── Inspector Property Grid ────────────────────────────────────────────── */
@@ -179,8 +234,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: var(--bt-space-2);
-  border-bottom: 1px solid var(--bt-border);
+  padding: 8px 10px;
+  border-radius: var(--bt-radius-sm);
+  background: var(--bt-surface-2);
+  border: 1px solid var(--bt-border);
   font-size: 12px;
 }
 
@@ -214,7 +271,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 14px;
+  padding: 8px 16px;
   border-radius: var(--bt-radius-sm);
   background: var(--bt-surface-3);
   border: 1px solid var(--bt-border);
@@ -229,7 +286,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 14px;
+  padding: 8px 16px;
   border-radius: var(--bt-radius-sm);
   background: rgba(41, 201, 138, 0.15);
   border: 1px solid var(--bt-accent);
@@ -241,8 +298,9 @@
 }
 
 .auditionSynthBtn:hover {
-  background: rgba(41, 201, 138, 0.25);
-  box-shadow: 0 0 10px rgba(41, 201, 138, 0.3);
+  background: var(--bt-accent);
+  color: #070B0C;
+  box-shadow: 0 0 14px rgba(41, 201, 138, 0.4);
 }
 
 .actionBtnGroup {
@@ -256,7 +314,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 12px;
+  padding: 10px 14px;
   border-radius: var(--bt-radius-sm);
   background: var(--bt-surface-2);
   border: 1px solid var(--bt-border);
@@ -272,6 +330,7 @@
   background: var(--bt-surface-3);
   border-color: var(--bt-accent);
   color: var(--bt-accent);
+  transform: translateX(2px);
 }
 
 .emptyState {
@@ -286,7 +345,7 @@
 }
 
 .resetBtn {
-  padding: 4px 12px;
+  padding: 6px 14px;
   border-radius: var(--bt-radius-sm);
   background: var(--bt-surface-3);
   border: 1px solid var(--bt-border);
@@ -303,5 +362,8 @@
 @media (max-width: 1024px) {
   .layoutGrid {
     grid-template-columns: 1fr;
+  }
+  .cueLibrary {
+    padding: var(--bt-space-4);
   }
 }

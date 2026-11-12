@@ -1,70 +1,108 @@
 /*
  * BranchTone Design Tokens
- * Source: DESIGN.md §2 Colour tokens — do not modify without updating DESIGN.md
- * All custom properties are on :root to be globally available.
+ * Source: DESIGN.md §2 Colour tokens — enhanced for premium creative-engineering studio aesthetics.
  */
 
 :root {
   /* ── Backgrounds ─────────────────────────────────────────────────────── */
-  --bt-bg: #0b1011;
-  --bt-bg-elevated: #101719;
-  --bt-surface: #141c1e;
-  --bt-surface-2: #1a2426;
-  --bt-surface-3: #202b2d;
-  --bt-glass: rgba(20, 31, 31, 0.78);
+  --bt-bg: #070B0C;
+  --bt-bg-gradient: radial-gradient(circle at 50% 0%, #0E1819 0%, #06090A 100%);
+  --bt-bg-elevated: #0B1113;
+  --bt-surface: #0F1719;
+  --bt-surface-2: #141F21;
+  --bt-surface-3: #1B292C;
+  --bt-surface-hover: #19272A;
+  
+  /* ── Glassmorphism & Depth ───────────────────────────────────────────── */
+  --bt-glass: rgba(15, 23, 25, 0.72);
+  --bt-glass-elevated: rgba(20, 31, 33, 0.85);
+  --bt-glass-border: rgba(255, 255, 255, 0.07);
+  --bt-glass-highlight: rgba(255, 255, 255, 0.03);
 
   /* ── Borders ──────────────────────────────────────────────────────────── */
-  --bt-border: rgba(176, 198, 193, 0.16);
-  --bt-border-strong: rgba(176, 198, 193, 0.28);
+  --bt-border: rgba(176, 198, 193, 0.12);
+  --bt-border-subtle: rgba(176, 198, 193, 0.08);
+  --bt-border-strong: rgba(176, 198, 193, 0.22);
+  --bt-border-accent: rgba(41, 201, 138, 0.35);
 
-  /* ── Typography ───────────────────────────────────────────────────────── */
-  --bt-text: #edf3f0;
-  --bt-text-secondary: #aab8b3;
-  --bt-text-muted: #87958f;
+  /* ── Typography Colors ────────────────────────────────────────────────── */
+  --bt-text: #F3F7F5;
+  --bt-text-secondary: #9EAEA9;
+  --bt-text-muted: #697873;
+  --bt-text-inverse: #070B0C;
 
-  /* ── Accent (emerald) ─────────────────────────────────────────────────── */
-  --bt-accent: #29c98a;
-  --bt-accent-soft: #74d9b0;
-  --bt-accent-deep: #145c43;
+  /* ── Accent (Emerald) ─────────────────────────────────────────────────── */
+  --bt-accent: #29C98A;
+  --bt-accent-soft: #63E3AC;
+  --bt-accent-deep: #0E4E37;
+  --bt-accent-glow: rgba(41, 201, 138, 0.22);
+  --bt-accent-subtle: rgba(41, 201, 138, 0.08);
 
-  /* ── Status ───────────────────────────────────────────────────────────── */
-  --bt-error: #f04f75;
-  --bt-error-soft: #f58aa1;
-  --bt-warning: #d9a65d;
-  --bt-success: #35d69a;
-  --bt-magenta: #853c65;
+  /* ── Status Colors ────────────────────────────────────────────────────── */
+  --bt-error: #F04F75;
+  --bt-error-soft: #F77E9A;
+  --bt-error-glow: rgba(240, 79, 117, 0.25);
+  --bt-error-subtle: rgba(240, 79, 117, 0.08);
 
-  /* ── Focus ────────────────────────────────────────────────────────────── */
-  --bt-focus: #a2eacb;
+  --bt-warning: #E5A855;
+  --bt-warning-soft: #F0C48A;
+  --bt-warning-subtle: rgba(229, 168, 85, 0.1);
+
+  --bt-success: #35D69A;
+  --bt-magenta: #9E3F75;
+  --bt-focus: #52E2A8;
+
+  /* ── Card & Panel Shadows ─────────────────────────────────────────────── */
+  --bt-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --bt-shadow-md: 0 4px 16px -2px rgba(0, 0, 0, 0.5), 0 2px 6px -1px rgba(0, 0, 0, 0.4);
+  --bt-shadow-lg: 0 12px 32px -4px rgba(0, 0, 0, 0.6), 0 4px 12px -2px rgba(0, 0, 0, 0.5);
+  --bt-shadow-glow: 0 0 24px -4px var(--bt-accent-glow);
+  --bt-shadow-error: 0 0 24px -4px var(--bt-error-glow);
 
   /* ── Radii ────────────────────────────────────────────────────────────── */
-  --bt-radius-sm: 4px;
+  --bt-radius-xs: 4px;
+  --bt-radius-sm: 6px;
   --bt-radius: 8px;
-  --bt-radius-md: 10px;
-  --bt-radius-lg: 14px;
+  --bt-radius-md: 12px;
+  --bt-radius-lg: 16px;
+  --bt-radius-full: 9999px;
 
-  /* ── Sidebar ──────────────────────────────────────────────────────────── */
-  --bt-sidebar-width: 220px;
+  /* ── Dimensions ───────────────────────────────────────────────────────── */
+  --bt-sidebar-width: 230px;
+  --bt-topbar-height: 54px;
+  --bt-max-content-width: 1440px;
 
-  /* ── Topbar ───────────────────────────────────────────────────────────── */
-  --bt-topbar-height: 52px;
+  /* ── Spacing Scale ────────────────────────────────────────────────────── */
+  --bt-space-1: 4px;
+  --bt-space-2: 8px;
+  --bt-space-3: 12px;
+  --bt-space-4: 16px;
+  --bt-space-5: 20px;
+  --bt-space-6: 24px;
+  --bt-space-7: 32px;
+  --bt-space-8: 40px;
 
-  /* ── Font families ────────────────────────────────────────────────────── */
-  --bt-font-ui: 'Inter', system-ui, -apple-system, sans-serif;
-  --bt-font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+  /* ── Font Families ────────────────────────────────────────────────────── */
+  --bt-font-ui: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --bt-font-mono: 'IBM Plex Mono', 'Geist Mono', SFMono-Regular, Consolas, monospace;
 
-  /* ── Font sizes ───────────────────────────────────────────────────────── */
+  /* ── Font Sizes ───────────────────────────────────────────────────────── */
+  --bt-text-2xs: 10px;
   --bt-text-xs: 11px;
   --bt-text-sm: 12px;
   --bt-text-base: 13px;
   --bt-text-md: 14px;
-  --bt-text-lg: 15px;
+  --bt-text-lg: 16px;
+  --bt-text-xl: 18px;
+  --bt-text-2xl: 22px;
+  --bt-text-3xl: 28px;
 
   /* ── Transitions ──────────────────────────────────────────────────────── */
-  --bt-transition: 150ms ease;
+  --bt-transition-fast: 120ms cubic-bezier(0.16, 1, 0.3, 1);
+  --bt-transition: 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  --bt-transition-slow: 350ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Reduced motion — honour user preference */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

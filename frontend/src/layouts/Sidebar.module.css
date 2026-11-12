@@ -1,7 +1,8 @@
+/* ── Sidebar: Studio Aesthetic ────────────────────────────────────────── */
 .sidebar {
   width: var(--bt-sidebar-width);
   flex-shrink: 0;
-  background-color: var(--bt-surface);
+  background: linear-gradient(180deg, #10181A 0%, #0A0F10 100%);
   border-right: 1px solid var(--bt-border);
   display: flex;
   flex-direction: column;
@@ -9,6 +10,8 @@
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;
+  z-index: 30;
+  box-shadow: 2px 0 20px rgba(0, 0, 0, 0.4);
 }
 
 /* Skip navigation link — visible only on focus */
@@ -35,9 +38,10 @@
 .brand {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 14px 16px;
+  gap: 10px;
+  padding: 16px 18px;
   border-bottom: 1px solid var(--bt-border);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .brandIcon {
@@ -48,24 +52,24 @@
 
 .brandName {
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--bt-text);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
 /* ── Section headers ────────────────────────────────────────────────────── */
 .section {
-  padding: 10px 14px 8px;
+  padding: 12px 14px 8px;
 }
 
 .sectionLabel {
   display: block;
-  font-size: var(--bt-text-xs);
-  font-weight: 600;
+  font-size: 10px;
+  font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--bt-text-muted);
   text-transform: uppercase;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 /* ── Workspace selector ─────────────────────────────────────────────────── */
@@ -92,19 +96,21 @@
   display: flex;
   gap: 10px;
   align-items: flex-start;
-  padding: 8px;
+  padding: 10px 12px;
   background: var(--bt-surface-2);
   border: 1px solid var(--bt-border);
-  border-radius: var(--bt-radius);
+  border-radius: var(--bt-radius-md);
   cursor: pointer;
   text-align: left;
   width: 100%;
-  transition: border-color var(--bt-transition), background var(--bt-transition);
+  transition: all var(--bt-transition);
+  box-shadow: var(--bt-shadow-sm);
 }
 
 .projectCardBtn:hover {
   background: var(--bt-surface-3);
   border-color: rgba(41, 201, 138, 0.4);
+  transform: translateY(-1px);
 }
 
 .projectCardBtn:focus-visible {
@@ -130,8 +136,8 @@
 }
 
 .projectName {
-  font-size: var(--bt-text-sm);
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
   color: var(--bt-text);
   white-space: nowrap;
   overflow: hidden;
@@ -139,59 +145,61 @@
 }
 
 .projectMeta {
-  font-size: var(--bt-text-xs);
+  font-size: 11px;
   color: var(--bt-text-muted);
 }
 
 .projectTags {
   display: flex;
-  gap: 4px;
-  margin-top: 2px;
+  gap: 5px;
+  margin-top: 4px;
 }
 
 .tag {
-  font-size: var(--bt-text-xs);
+  font-size: 10px;
   color: var(--bt-text-muted);
   background: var(--bt-surface-3);
-  padding: 1px 5px;
+  padding: 2px 6px;
   border-radius: var(--bt-radius-sm);
   border: 1px solid var(--bt-border);
 }
 
 .tagVersion {
-  font-size: var(--bt-text-xs);
+  font-size: 10px;
   font-family: var(--bt-font-mono);
-  color: var(--bt-accent-soft);
-  background: rgba(41, 201, 138, 0.08);
-  padding: 1px 5px;
+  color: var(--bt-accent);
+  background: rgba(41, 201, 138, 0.1);
+  padding: 2px 6px;
   border-radius: var(--bt-radius-sm);
-  border: 1px solid rgba(41, 201, 138, 0.2);
+  border: 1px solid rgba(41, 201, 138, 0.3);
+  font-weight: 600;
 }
 
 /* ── Navigation list ────────────────────────────────────────────────────── */
 .nav {
   flex: 1;
-  padding: 4px 8px;
+  padding: 6px 10px;
 }
 
 .navList {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 3px;
 }
 
 .navLink {
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 8px 10px;
-  border-radius: var(--bt-radius);
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: var(--bt-radius-sm);
   text-decoration: none;
   color: var(--bt-text-secondary);
-  font-size: var(--bt-text-sm);
-  font-weight: 400;
-  transition: background var(--bt-transition), color var(--bt-transition);
+  font-size: 13px;
+  font-weight: 500;
+  position: relative;
+  transition: all var(--bt-transition);
 }
 
 .navLink:hover {
@@ -207,11 +215,13 @@
 .navLinkActive {
   background: rgba(41, 201, 138, 0.12);
   color: var(--bt-accent);
-  font-weight: 500;
+  font-weight: 600;
+  border-left: 3px solid var(--bt-accent);
+  box-shadow: inset 0 0 12px rgba(41, 201, 138, 0.08);
 }
 
 .navLinkActive:hover {
-  background: rgba(41, 201, 138, 0.16);
+  background: rgba(41, 201, 138, 0.18);
 }
 
 .navIcon {
@@ -234,10 +244,11 @@
 .statusBar {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 10px 16px;
+  gap: 8px;
+  padding: 12px 16px;
   border-top: 1px solid var(--bt-border);
   margin-top: auto;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .statusIcon {
@@ -246,7 +257,7 @@
 }
 
 .statusText {
-  font-size: var(--bt-text-xs);
+  font-size: 11px;
   color: var(--bt-success);
-  font-weight: 500;
+  font-weight: 600;
 }

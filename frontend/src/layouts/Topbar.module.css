@@ -1,12 +1,14 @@
 .topbar {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   height: var(--bt-topbar-height);
-  padding: 0 16px;
-  background: var(--bt-bg-elevated);
+  padding: 0 20px;
+  background: linear-gradient(180deg, rgba(16, 24, 26, 0.92) 0%, rgba(11, 17, 19, 0.96) 100%);
   border-bottom: 1px solid var(--bt-border);
+  backdrop-filter: blur(12px);
   flex-shrink: 0;
+  z-index: 25;
 }
 
 /* ── Breadcrumb ─────────────────────────────────────────────────────────── */

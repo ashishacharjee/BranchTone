@@ -59,7 +59,8 @@ export function CueLibraryPage() {
 
   return (
     <div className={styles.cueLibrary} role="region" aria-label="Audio Cue Library">
-      {/* ── Top Bar / Layer Filter ──────────────────────────────────── */}
+      <div className={styles.container}>
+        {/* ── Top Bar / Layer Filter ──────────────────────────────────── */}
       <div className={styles.topbar}>
         <div className={styles.filterGroup} role="group" aria-label="Audio layer filter">
           <span className={styles.filterLabel}>Layer:</span>
@@ -351,6 +352,7 @@ export function CueLibraryPage() {
             </div>
           )}
         </div>
+      </div>
       </div>
     </div>
   );
