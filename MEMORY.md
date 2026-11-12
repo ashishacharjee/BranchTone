@@ -2,6 +2,17 @@
 
 **Updated:** 12 November 2026. Keep this file factual and short. Update only after a decision or verification.
 
+## Apple Animated Aurora Mesh Background & Studio Spotlight (12 Nov 2026)
+
+- Created `AppleBackground.tsx` and `AppleBackground.module.css` mounted globally in `AppShell.tsx`:
+  * 3 floating, organic GPU-accelerated Apple Aurora gradient mesh blobs: Emerald (`720px`), Cyan/Teal (`640px`), and Velvet Burgundy (`680px`) floating and morphing via 22s–28s keyframes.
+  * Interactive spring-damped Cursor Spotlight (`radial-gradient(650px circle at var(--spotlight-x) var(--spotlight-y), rgba(3, 195, 123, 0.12), transparent)`) tracking mouse pointer at 60fps via `requestAnimationFrame`.
+  * Apple technical micro dot-grid with radial mask overlay (`mask-image: radial-gradient(ellipse 90% 75% at 50% 35%, black 40%, transparent 95%)`).
+  * Converted all 7 workspace page outer wrappers (`.overview`, `.canvasWrap`, `.narrativeMap`, `.cueLibrary`, `.routeLab`, `.validationCentre`, `.reports`) to `background: transparent;`, allowing the live breathing aurora and spotlight to shine seamlessly beneath the floating liquid glass Bento cards and React Flow nodes.
+  * Accessibility: Full `@media (prefers-reduced-motion: reduce)` fallback disabling animations.
+- Fixed Vercel project configuration: Enforced `"engines": { "node": "22.x" }` and `@types/node: ^22.7.0` to override the deprecated Node 26.x project setting.
+- Production deployment verified live: `https://branchtone.vercel.app` (Deployment `dpl_CGPWAgTDSnfUaEFuwE7HriMpwg1N`).
+
 ## Antigravity Design Expert Skill Installation & Spatial Polish (12 Nov 2026)
 
 - Installed `antigravity-design-expert` skill globally and in workspace at `.agents/skills/antigravity-design-expert/SKILL.md` via `npx agentic-awesome-skills`.
