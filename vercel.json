@@ -1,16 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "npm install",
-  "buildCommand": "npm run build",
-  "outputDirectory": "frontend/dist",
-  "rewrites": [
-    {
-      "source": "/api/v1/health",
-      "destination": "/api/health"
-    },
-    {
-      "source": "/((?!assets/|favicon\\.svg|api/).*)",
-      "destination": "/index.html"
+  "services": {
+    "frontend": {
+      "root": "frontend",
+      "routePrefix": "/",
+      "framework": "vite"
     }
-  ]
+  }
 }
