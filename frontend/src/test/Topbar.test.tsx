@@ -50,4 +50,30 @@ describe('Topbar', () => {
     fireEvent.change(input, { target: { value: 'Air Vent' } });
     expect(input).toHaveValue('Air Vent');
   });
+
+  it('Judge Tour (60s) button opens the judge walkthrough modal', () => {
+    renderTopbar();
+    const btn = screen.getByRole('button', { name: /Judge Tour/i });
+    expect(btn).toBeInTheDocument();
+    fireEvent.click(btn);
+    expect(screen.getByText(/60s Judge Walkthrough/i)).toBeInTheDocument();
+    expect(screen.getByText(/The Problem in Branching Game Audio/i)).toBeInTheDocument();
+  });
+
+  it('Hotkeys button opens the keyboard shortcuts modal', () => {
+    renderTopbar();
+    const btn = screen.getByRole('button', { name: /Hotkeys/i });
+    expect(btn).toBeInTheDocument();
+    fireEvent.click(btn);
+    expect(screen.getByText(/Studio Keyboard Shortcuts/i)).toBeInTheDocument();
+    expect(screen.getByText(/Toggle Route A \/ Route B/i)).toBeInTheDocument();
+  });
+
+  it('Audition Sound button triggers sound audition safely', () => {
+    renderTopbar();
+    const btn = screen.getByRole('button', { name: /Audition Sound/i });
+    expect(btn).toBeInTheDocument();
+    fireEvent.click(btn);
+    expect(screen.getByText(/Auditioning.../i)).toBeInTheDocument();
+  });
 });
