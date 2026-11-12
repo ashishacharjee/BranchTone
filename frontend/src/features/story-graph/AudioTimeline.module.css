@@ -1,11 +1,16 @@
 .timeline {
   display: flex;
   flex-direction: column;
-  background: var(--bt-surface);
-  border-top: 1px solid var(--bt-border);
-  height: 190px;
+  background: linear-gradient(180deg, rgba(16, 22, 24, 0.94) 0%, rgba(9, 13, 14, 0.98) 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  height: 195px;
   flex-shrink: 0;
   user-select: none;
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 15;
 }
 
 /* ── Transport Controls ─────────────────────────────────────────────────── */
@@ -13,10 +18,10 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  height: 42px;
-  padding: 0 16px;
-  background: var(--bt-bg-elevated);
-  border-bottom: 1px solid var(--bt-border);
+  height: 44px;
+  padding: 0 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   font-size: 12px;
 }
 
@@ -27,43 +32,50 @@
 }
 
 .transportBtn {
-  background: none;
-  border: 1px solid var(--bt-border);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 50%;
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--bt-text);
+  color: var(--bt-text-secondary);
   cursor: pointer;
-  transition: all var(--bt-transition);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .transportBtn:hover:not(:disabled) {
-  border-color: var(--bt-accent);
+  border-color: rgba(3, 195, 123, 0.45);
   color: var(--bt-accent);
-  background: rgba(41, 201, 138, 0.1);
+  background: rgba(3, 195, 123, 0.12);
+  transform: scale(1.05);
 }
 
 .transportBtn:disabled {
   color: var(--bt-text-muted);
   cursor: not-allowed;
-  opacity: 0.4;
+  opacity: 0.35;
 }
 
 .playBtn {
-  width: 32px;
-  height: 32px;
-  border-color: rgba(41, 201, 138, 0.45);
+  width: 34px;
+  height: 34px;
+  border-color: rgba(3, 195, 123, 0.45);
   color: var(--bt-accent);
-  background: rgba(41, 201, 138, 0.08);
+  background: linear-gradient(135deg, rgba(3, 195, 123, 0.2) 0%, rgba(3, 195, 123, 0.06) 100%);
+  box-shadow: 0 0 12px rgba(3, 195, 123, 0.2), inset 0 1px 0 0 rgba(3, 195, 123, 0.3);
+}
+
+.playBtn:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(3, 195, 123, 0.3) 0%, rgba(3, 195, 123, 0.12) 100%);
+  box-shadow: 0 0 18px rgba(3, 195, 123, 0.35);
 }
 
 .playBtnActive {
-  background: rgba(41, 201, 138, 0.25) !important;
+  background: rgba(3, 195, 123, 0.3) !important;
   border-color: var(--bt-accent) !important;
-  box-shadow: 0 0 10px rgba(41, 201, 138, 0.4);
+  box-shadow: 0 0 16px rgba(3, 195, 123, 0.5) !important;
 }
 
 .timeDisplay {
@@ -73,15 +85,16 @@
   font-family: var(--bt-font-mono);
   font-size: 13px;
   font-weight: 500;
-  color: var(--bt-text);
-  background: var(--bt-surface);
-  padding: 3px 10px;
-  border-radius: var(--bt-radius-sm);
-  border: 1px solid var(--bt-border);
+  color: #fff;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
 }
 
 .timeCurrent {
-  color: var(--bt-accent-soft);
+  color: var(--bt-accent);
 }
 
 .timeSep {
@@ -103,14 +116,15 @@
 }
 
 .routeBadge {
-  font-weight: 600;
+  font-weight: 700;
   font-family: var(--bt-font-mono);
   color: var(--bt-accent);
-  background: rgba(41, 201, 138, 0.1);
-  padding: 2px 7px;
-  border-radius: var(--bt-radius-sm);
-  border: 1px solid rgba(41, 201, 138, 0.25);
+  background: rgba(3, 195, 123, 0.12);
+  padding: 3px 8px;
+  border-radius: 9999px;
+  border: 1px solid rgba(3, 195, 123, 0.3);
   flex-shrink: 0;
+  font-size: 11px;
 }
 
 .sequenceFlow {
@@ -121,13 +135,13 @@
 }
 
 .sequenceHighlight {
-  color: var(--bt-text);
-  font-weight: 500;
+  color: #fff;
+  font-weight: 600;
 }
 
 .sequenceAirVent {
-  color: var(--bt-error-soft);
-  font-weight: 600;
+  color: var(--bt-error);
+  font-weight: 700;
 }
 
 .volumeControls {
@@ -141,7 +155,7 @@
 .volumeSlider {
   width: 70px;
   height: 4px;
-  background: var(--bt-surface-3);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 2px;
   appearance: none;
   cursor: pointer;
@@ -150,10 +164,11 @@
 
 .volumeSlider::-webkit-slider-thumb {
   appearance: none;
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: var(--bt-accent);
+  box-shadow: 0 0 6px var(--bt-accent);
   cursor: pointer;
 }
 
@@ -168,28 +183,28 @@
 .laneLabels {
   width: 110px;
   flex-shrink: 0;
-  background: var(--bt-surface-2);
-  border-right: 1px solid var(--bt-border);
+  background: rgba(0, 0, 0, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
 }
 
 .laneLabelSpacer {
   height: 24px;
-  border-bottom: 1px solid var(--bt-border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .laneLabel {
   height: 38px;
   display: flex;
   align-items: center;
-  padding: 0 10px;
+  padding: 0 12px;
   gap: 6px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   color: var(--bt-text-muted);
-  border-bottom: 1px solid var(--bt-border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   text-transform: uppercase;
 }
 
@@ -209,8 +224,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 12px;
-  background: var(--bt-surface);
-  border-bottom: 1px solid var(--bt-border);
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   font-family: var(--bt-font-mono);
   font-size: 10px;
   color: var(--bt-text-muted);
@@ -218,9 +233,9 @@
 
 /* ── Passage segments ───────────────────────────────────────────────────── */
 .passageSegments {
-  height: 22px;
+  height: 24px;
   display: flex;
-  border-bottom: 1px solid var(--bt-border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   position: relative;
 }
 
@@ -229,29 +244,30 @@
   align-items: center;
   justify-content: center;
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--bt-text-secondary);
-  border-right: 1px solid var(--bt-border-strong);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  padding: 0 4px;
+  padding: 0 6px;
   cursor: pointer;
-  transition: background var(--bt-transition);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .segmentNormal {
-  background: rgba(20, 92, 67, 0.12);
+  background: rgba(3, 195, 123, 0.08);
 }
 
 .segmentNormal:hover {
-  background: rgba(20, 92, 67, 0.25);
+  background: rgba(3, 195, 123, 0.2);
+  color: #fff;
 }
 
 .segmentIssue {
   background: rgba(240, 79, 117, 0.18);
-  color: var(--bt-error-soft);
-  font-weight: 600;
+  color: var(--bt-error);
+  font-weight: 700;
 }
 
 .segmentIssue:hover {
@@ -259,7 +275,8 @@
 }
 
 .segmentSelected {
-  outline: 1.5px solid var(--bt-focus);
+  outline: 1.5px solid var(--bt-accent);
+  box-shadow: inset 0 0 12px rgba(3, 195, 123, 0.3);
 }
 
 /* ── Lanes ──────────────────────────────────────────────────────────────── */
@@ -268,8 +285,8 @@
   display: flex;
   align-items: center;
   position: relative;
-  border-bottom: 1px solid var(--bt-border);
-  background: var(--bt-surface);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.15);
   overflow: hidden;
 }
 

@@ -4,20 +4,23 @@
   flex-direction: column;
   height: 100%;
   overflow-y: auto;
-  padding: var(--bt-space-6) var(--bt-space-8);
-  background: radial-gradient(circle at 50% 0%, rgba(41, 201, 138, 0.04) 0%, transparent 60%),
-              radial-gradient(circle at 90% 20%, rgba(240, 79, 117, 0.03) 0%, transparent 40%),
-              var(--bt-bg);
+  padding: 32px 36px;
+  background-color: var(--bt-bg);
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.075) 1px, transparent 1px),
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(3, 195, 123, 0.05) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 85% 25%, rgba(240, 79, 117, 0.035) 0%, transparent 55%);
+  background-size: 24px 24px, 100% 100%, 100% 100%;
 }
 
 .container {
-  max-width: 1360px;
+  max-width: 1400px;
   width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: var(--bt-space-6);
-  padding-bottom: var(--bt-space-8);
+  gap: 24px;
+  padding-bottom: 40px;
 }
 
 /* ── Topbar / Filter ────────────────────────────────────────────────────── */
@@ -25,71 +28,75 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--bt-space-4) var(--bt-space-6);
-  background: var(--bt-surface);
-  border: 1px solid var(--bt-border);
-  border-radius: var(--bt-radius-lg);
-  box-shadow: var(--bt-shadow-sm);
-  backdrop-filter: blur(12px);
+  padding: 14px 24px;
+  background: linear-gradient(180deg, rgba(22, 28, 31, 0.75) 0%, rgba(12, 16, 18, 0.88) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
 }
 
 .filterGroup {
   display: flex;
   align-items: center;
-  gap: var(--bt-space-2);
+  gap: 10px;
 }
 
 .filterLabel {
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--bt-text-muted);
-  margin-right: var(--bt-space-2);
+  letter-spacing: 0.08em;
+  color: var(--bt-text-secondary);
+  margin-right: 4px;
 }
 
 .filterBtn {
-  padding: 6px 14px;
-  border-radius: var(--bt-radius-full);
-  background: var(--bt-surface-2);
-  border: 1px solid var(--bt-border);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--bt-text-secondary);
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: all var(--bt-transition);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .filterBtn:hover {
-  background: var(--bt-surface-3);
-  color: var(--bt-text);
-  border-color: rgba(41, 201, 138, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateY(-1px);
 }
 
 .filterBtnActive {
-  background: rgba(41, 201, 138, 0.15);
-  border-color: var(--bt-accent);
-  color: var(--bt-accent);
-  box-shadow: 0 0 12px rgba(41, 201, 138, 0.2);
+  background: linear-gradient(135deg, rgba(3, 195, 123, 0.2) 0%, rgba(3, 195, 123, 0.08) 100%);
+  border-color: rgba(3, 195, 123, 0.55);
+  color: #fff;
+  box-shadow: 0 0 16px rgba(3, 195, 123, 0.28), inset 0 1px 0 0 rgba(3, 195, 123, 0.4);
 }
 
 /* ── Main Two-Column Layout ─────────────────────────────────────────────── */
 .layoutGrid {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
-  gap: var(--bt-space-6);
+  gap: 24px;
   align-items: start;
 }
 
 .panel {
-  background: var(--bt-surface);
-  border: 1px solid var(--bt-border);
-  border-radius: var(--bt-radius-lg);
-  padding: var(--bt-space-6);
+  background: linear-gradient(180deg, rgba(22, 28, 31, 0.75) 0%, rgba(12, 16, 18, 0.88) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 24px 28px;
   display: flex;
   flex-direction: column;
-  gap: var(--bt-space-4);
-  box-shadow: var(--bt-shadow-sm);
+  gap: 16px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
   position: relative;
   overflow: hidden;
 }
@@ -101,34 +108,34 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(41, 201, 138, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(3, 195, 123, 0.4), transparent);
 }
 
 .panelHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: var(--bt-space-3);
-  border-bottom: 1px solid var(--bt-border);
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .panelTitle {
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--bt-text);
+  color: #fff;
   display: flex;
   align-items: center;
-  gap: var(--bt-space-2);
+  gap: 8px;
 }
 
 /* ── Table ──────────────────────────────────────────────────────────────── */
 .tableWrap {
-  border: 1px solid var(--bt-border);
-  border-radius: var(--bt-radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
   overflow: hidden;
-  background: var(--bt-surface-2);
+  background: rgba(0, 0, 0, 0.25);
 }
 
 .cueTable {
@@ -139,34 +146,34 @@
 }
 
 .cueTable th {
-  background: rgba(0, 0, 0, 0.25);
-  padding: 12px 14px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 12px 16px;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   color: var(--bt-text-muted);
-  border-bottom: 1px solid var(--bt-border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .cueTable td {
-  padding: 14px;
-  border-bottom: 1px solid var(--bt-border);
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   color: var(--bt-text);
 }
 
 .clickableRow {
   cursor: pointer;
-  transition: all var(--bt-transition);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .clickableRow:hover td {
-  background: var(--bt-surface-3);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .cueRowSelected td {
-  background: rgba(41, 201, 138, 0.08) !important;
-  border-color: rgba(41, 201, 138, 0.3);
+  background: rgba(3, 195, 123, 0.08) !important;
+  border-color: rgba(3, 195, 123, 0.3);
 }
 
 .cueTable tr:last-child td {
@@ -176,42 +183,43 @@
 .statusMissing {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 3px 8px;
-  border-radius: var(--bt-radius-full);
-  font-size: 11px;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   background: rgba(240, 79, 117, 0.15);
   color: var(--bt-error);
-  border: 1px solid rgba(240, 79, 117, 0.35);
+  border: 1px solid rgba(240, 79, 117, 0.4);
+  box-shadow: 0 0 10px rgba(240, 79, 117, 0.2);
 }
 
 /* ── Waveform Preview Area ──────────────────────────────────────────────── */
 .waveformBox {
   background: linear-gradient(180deg, rgba(16, 23, 25, 0.8) 0%, rgba(10, 15, 16, 0.95) 100%);
-  border: 1px solid var(--bt-border);
-  border-radius: var(--bt-radius-md);
-  padding: var(--bt-space-6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--bt-space-3);
+  gap: 12px;
   text-align: center;
   min-height: 160px;
   position: relative;
   overflow: hidden;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
 }
 
 .waveformBox::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 20px 20px;
   pointer-events: none;
 }
 
@@ -219,7 +227,7 @@
   font-size: 12px;
   color: var(--bt-text-muted);
   max-width: 380px;
-  line-height: 1.5;
+  line-height: 1.55;
   z-index: 1;
 }
 
@@ -227,18 +235,24 @@
 .propList {
   display: flex;
   flex-direction: column;
-  gap: var(--bt-space-3);
+  gap: 8px;
 }
 
 .propRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 10px;
-  border-radius: var(--bt-radius-sm);
-  background: var(--bt-surface-2);
-  border: 1px solid var(--bt-border);
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   font-size: 12px;
+  transition: border-color 0.2s ease;
+}
+
+.propRow:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .propLabel {
@@ -247,7 +261,7 @@
 
 .propValue {
   font-weight: 600;
-  color: var(--bt-text);
+  color: #fff;
   font-family: var(--bt-font-mono);
   font-size: 11px;
 }
@@ -256,25 +270,25 @@
 .transportRow {
   display: flex;
   flex-direction: column;
-  gap: var(--bt-space-3);
-  padding-top: var(--bt-space-3);
+  gap: 12px;
+  padding-top: 8px;
 }
 
 .transportBtnRow {
   display: flex;
   align-items: center;
-  gap: var(--bt-space-3);
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .disabledPlayBtn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  border-radius: var(--bt-radius-sm);
-  background: var(--bt-surface-3);
-  border: 1px solid var(--bt-border);
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--bt-text-muted);
   font-size: 12px;
   font-weight: 600;
@@ -285,73 +299,76 @@
 .auditionSynthBtn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  border-radius: var(--bt-radius-sm);
-  background: rgba(41, 201, 138, 0.15);
-  border: 1px solid var(--bt-accent);
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(3, 195, 123, 0.2) 0%, rgba(3, 195, 123, 0.08) 100%);
+  border: 1px solid rgba(3, 195, 123, 0.45);
   color: var(--bt-accent);
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: all var(--bt-transition);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 14px rgba(3, 195, 123, 0.2);
 }
 
 .auditionSynthBtn:hover {
   background: var(--bt-accent);
   color: #070B0C;
-  box-shadow: 0 0 14px rgba(41, 201, 138, 0.4);
+  box-shadow: 0 0 20px rgba(3, 195, 123, 0.45);
+  transform: translateY(-1px);
 }
 
 .actionBtnGroup {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding-top: var(--bt-space-3);
+  padding-top: 8px;
 }
 
 .deepLinkBtn {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 14px;
-  border-radius: var(--bt-radius-sm);
-  background: var(--bt-surface-2);
-  border: 1px solid var(--bt-border);
-  color: var(--bt-text);
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
   text-align: left;
-  transition: all var(--bt-transition);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .deepLinkBtn:hover {
-  background: var(--bt-surface-3);
-  border-color: var(--bt-accent);
+  background: rgba(3, 195, 123, 0.08);
+  border-color: rgba(3, 195, 123, 0.4);
   color: var(--bt-accent);
-  transform: translateX(2px);
+  transform: translateX(3px);
 }
 
 .emptyState {
-  padding: var(--bt-space-6);
+  padding: 24px;
   text-align: center;
   color: var(--bt-text-secondary);
   font-size: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--bt-space-3);
+  gap: 12px;
 }
 
 .resetBtn {
-  padding: 6px 14px;
-  border-radius: var(--bt-radius-sm);
-  background: var(--bt-surface-3);
-  border: 1px solid var(--bt-border);
-  color: var(--bt-text);
+  padding: 6px 16px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
   font-size: 12px;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .resetBtn:hover {
@@ -364,6 +381,6 @@
     grid-template-columns: 1fr;
   }
   .cueLibrary {
-    padding: var(--bt-space-4);
+    padding: 20px;
   }
 }

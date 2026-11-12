@@ -1,16 +1,17 @@
 /* ── Passage Inspector: Studio Aesthetic ──────────────────────────────── */
 .inspector {
-  width: 340px;
-  background: linear-gradient(180deg, rgba(16, 24, 26, 0.95) 0%, rgba(10, 16, 17, 0.98) 100%);
-  border-left: 1px solid var(--bt-border);
+  width: 350px;
+  background: linear-gradient(180deg, rgba(16, 22, 25, 0.94) 0%, rgba(9, 13, 15, 0.98) 100%);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   flex-shrink: 0;
-  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(12px);
+  box-shadow: -10px 0 36px rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
   position: relative;
   z-index: 20;
 }
@@ -20,35 +21,36 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 20px;
-  border-bottom: 1px solid var(--bt-border);
-  background: rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .headerTitle {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--bt-text-secondary);
   margin: 0;
 }
 
 .closeBtn {
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--bt-text-muted);
   cursor: pointer;
   padding: 6px;
-  border-radius: var(--bt-radius-sm);
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all var(--bt-transition);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .closeBtn:hover {
-  color: var(--bt-text);
-  background: var(--bt-surface-2);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
 .passageSummary {
@@ -56,18 +58,18 @@
   align-items: center;
   gap: 14px;
   padding: 16px 20px;
-  border-bottom: 1px solid var(--bt-border);
-  background: var(--bt-surface-2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .summaryThumb {
-  width: 48px;
-  height: 48px;
-  border-radius: 8px;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
   overflow: hidden;
-  border: 1px solid var(--bt-border);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .summaryInfo {
@@ -80,7 +82,7 @@
 .summaryTitle {
   font-size: 15px;
   font-weight: 700;
-  color: var(--bt-text);
+  color: #fff;
   letter-spacing: -0.01em;
   margin: 0;
 }
@@ -109,7 +111,7 @@
 
 .section {
   padding: 16px 20px;
-  border-bottom: 1px solid var(--bt-border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -122,9 +124,9 @@
 }
 
 .sectionTitle {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--bt-text-muted);
 }
@@ -140,10 +142,16 @@
   align-items: center;
   justify-content: space-between;
   font-size: 12px;
-  padding: 6px 10px;
-  border-radius: var(--bt-radius-sm);
-  background: var(--bt-surface-2);
-  border: 1px solid var(--bt-border);
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: border-color 0.2s ease;
+}
+
+.propRow:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .propLabel {
@@ -154,7 +162,7 @@
 }
 
 .propValue {
-  color: var(--bt-text);
+  color: #fff;
   font-weight: 600;
 }
 
@@ -167,25 +175,27 @@
 .intensityBarBg {
   width: 56px;
   height: 5px;
-  background: var(--bt-surface-3);
-  border-radius: var(--bt-radius-full);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
   overflow: hidden;
 }
 
 .intensityBarFill {
   height: 100%;
   background: var(--bt-accent);
-  border-radius: var(--bt-radius-full);
+  border-radius: 9999px;
+  box-shadow: 0 0 8px rgba(3, 195, 123, 0.6);
 }
 
 .cueCard {
-  background: var(--bt-surface-2);
-  border: 1px solid var(--bt-border);
-  border-radius: var(--bt-radius-md);
+  background: linear-gradient(180deg, rgba(22, 28, 31, 0.6) 0%, rgba(12, 16, 18, 0.8) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
   padding: 12px 14px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
 }
 
 .cueHeader {
@@ -211,14 +221,14 @@
 }
 
 .findingCard {
-  background: linear-gradient(180deg, rgba(240, 79, 117, 0.12) 0%, rgba(32, 18, 24, 0.85) 100%);
-  border: 1px solid rgba(240, 79, 117, 0.4);
-  border-radius: var(--bt-radius-md);
+  background: linear-gradient(180deg, rgba(240, 79, 117, 0.14) 0%, rgba(28, 14, 18, 0.92) 100%);
+  border: 1px solid rgba(240, 79, 117, 0.45);
+  border-radius: 14px;
   padding: 14px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 18px rgba(240, 79, 117, 0.18), inset 0 1px 0 0 rgba(240, 79, 117, 0.35);
 }
 
 .findingHeader {
@@ -256,9 +266,10 @@
   flex-direction: column;
   gap: 6px;
   font-size: 11px;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 8px 10px;
-  border-radius: var(--bt-radius-sm);
+  background: rgba(0, 0, 0, 0.35);
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(240, 79, 117, 0.2);
 }
 
 .findingRow {
@@ -271,7 +282,7 @@
 }
 
 .findingValue {
-  color: var(--bt-text);
+  color: #fff;
   font-weight: 600;
 }
 
@@ -284,8 +295,8 @@
 }
 
 .severityDot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--bt-error);
   box-shadow: 0 0 8px var(--bt-error);
@@ -295,19 +306,19 @@
   font-size: 12px;
   line-height: 1.55;
   color: var(--bt-text);
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4);
   padding: 10px 12px;
-  border-radius: var(--bt-radius-sm);
+  border-radius: 8px;
   border-left: 3px solid var(--bt-error);
 }
 
 .noFindings {
   font-size: 12px;
   color: var(--bt-text-muted);
-  background: var(--bt-surface-2);
-  border: 1px dashed var(--bt-border);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
   padding: 14px;
-  border-radius: var(--bt-radius-sm);
+  border-radius: 10px;
   text-align: center;
   line-height: 1.5;
 }
@@ -327,13 +338,14 @@
 }
 
 .quoteCard {
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid var(--bt-border);
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-left: 3px solid var(--bt-accent);
-  border-radius: var(--bt-radius-sm);
+  border-radius: 10px;
   padding: 12px 14px;
   position: relative;
   margin: 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .quoteText {
@@ -350,8 +362,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid var(--bt-border);
-  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .demoFooterText {
@@ -365,20 +377,21 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 8px 12px;
-  background: var(--bt-surface);
-  border: 1px solid var(--bt-border);
-  border-radius: var(--bt-radius-sm);
-  color: var(--bt-text);
+  padding: 10px 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #fff;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: all var(--bt-transition);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .actionLinkBtn:hover {
-  background: var(--bt-surface-3);
-  border-color: var(--bt-accent);
+  background: rgba(3, 195, 123, 0.1);
+  border-color: rgba(3, 195, 123, 0.4);
   color: var(--bt-accent);
-  box-shadow: 0 0 10px rgba(41, 201, 138, 0.2);
+  box-shadow: 0 0 16px rgba(3, 195, 123, 0.2);
+  transform: translateY(-1px);
 }

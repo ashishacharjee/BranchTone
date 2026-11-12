@@ -4,20 +4,23 @@
   flex-direction: column;
   height: 100%;
   overflow-y: auto;
-  padding: var(--bt-space-6) var(--bt-space-8);
-  background: radial-gradient(circle at 50% 0%, rgba(41, 201, 138, 0.04) 0%, transparent 60%),
-              radial-gradient(circle at 90% 20%, rgba(240, 79, 117, 0.04) 0%, transparent 40%),
-              var(--bt-bg);
+  padding: 32px 36px;
+  background-color: var(--bt-bg);
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.075) 1px, transparent 1px),
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(3, 195, 123, 0.05) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 85% 25%, rgba(240, 79, 117, 0.04) 0%, transparent 55%);
+  background-size: 24px 24px, 100% 100%, 100% 100%;
 }
 
 .container {
-  max-width: 1360px;
+  max-width: 1400px;
   width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: var(--bt-space-6);
-  padding-bottom: var(--bt-space-8);
+  gap: 24px;
+  padding-bottom: 40px;
 }
 
 /* ── Topbar / Filter Row ────────────────────────────────────────────────── */
@@ -25,58 +28,62 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--bt-space-4) var(--bt-space-6);
-  background: var(--bt-surface);
-  border: 1px solid var(--bt-border);
-  border-radius: var(--bt-radius-lg);
-  box-shadow: var(--bt-shadow-sm);
-  backdrop-filter: blur(12px);
-  gap: var(--bt-space-4);
+  padding: 14px 24px;
+  background: linear-gradient(180deg, rgba(22, 28, 31, 0.75) 0%, rgba(12, 16, 18, 0.88) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  gap: 16px;
   flex-wrap: wrap;
 }
 
 .filterControls {
   display: flex;
   align-items: center;
-  gap: var(--bt-space-3);
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .filterSelect {
-  background: var(--bt-surface-2);
-  border: 1px solid var(--bt-border);
-  border-radius: var(--bt-radius-sm);
-  color: var(--bt-text);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  color: #fff;
   font-size: 12px;
   font-weight: 500;
-  padding: 6px 12px;
+  padding: 8px 14px;
   outline: none;
   cursor: pointer;
-  transition: all var(--bt-transition);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .filterSelect:focus {
-  border-color: var(--bt-accent);
-  box-shadow: 0 0 10px rgba(41, 201, 138, 0.2);
+  border-color: rgba(3, 195, 123, 0.55);
+  box-shadow: 0 0 14px rgba(3, 195, 123, 0.25);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 /* ── Main Two-Column Layout ─────────────────────────────────────────────── */
 .layoutGrid {
   display: grid;
   grid-template-columns: 1.4fr 1.1fr;
-  gap: var(--bt-space-6);
+  gap: 24px;
   align-items: start;
 }
 
 .panel {
-  background: var(--bt-surface);
-  border: 1px solid var(--bt-border);
-  border-radius: var(--bt-radius-lg);
-  padding: var(--bt-space-6);
+  background: linear-gradient(180deg, rgba(22, 28, 31, 0.75) 0%, rgba(12, 16, 18, 0.88) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 24px 28px;
   display: flex;
   flex-direction: column;
-  gap: var(--bt-space-4);
-  box-shadow: var(--bt-shadow-sm);
+  gap: 16px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
   position: relative;
   overflow: hidden;
 }
@@ -88,15 +95,287 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(41, 201, 138, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(3, 195, 123, 0.4), transparent);
 }
 
 .panelHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: var(--bt-space-3);
-  border-bottom: 1px solid var(--bt-border);
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.panelTitle {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Findings Table ─────────────────────────────────────────────────────── */
+.tableWrap {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.findingsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  text-align: left;
+}
+
+.findingsTable th {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 12px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--bt-text-muted);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.findingsTable td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--bt-text);
+}
+
+.clickableFindingRow {
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.clickableFindingRow:hover td {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.findingRowSelected td {
+  background: rgba(240, 79, 117, 0.1) !important;
+  border-color: rgba(240, 79, 117, 0.35);
+}
+
+.findingCode {
+  font-family: var(--bt-font-mono);
+  font-weight: 700;
+  color: var(--bt-error);
+  letter-spacing: 0.02em;
+}
+
+.severityBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: rgba(240, 79, 117, 0.15);
+  color: var(--bt-error);
+  border: 1px solid rgba(240, 79, 117, 0.4);
+  box-shadow: 0 0 10px rgba(240, 79, 117, 0.2);
+}
+
+/* ── Detail Panel ───────────────────────────────────────────────────────── */
+.detailSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.detailSection:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.detailTitle {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--bt-text-secondary);
+}
+
+.quoteBox {
+  background: rgba(0, 0, 0, 0.35);
+  border-left: 3px solid var(--bt-accent);
+  padding: 12px 16px;
+  margin: 0;
+  font-size: 13px;
+  font-style: italic;
+  color: #fff;
+  line-height: 1.6;
+  border-radius: 0 10px 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stateComparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.stateBox {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+}
+
+.stateBoxLabel {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--bt-text-muted);
+}
+
+.stateBoxVal {
+  font-family: var(--bt-font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.actionBtn {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(3, 195, 123, 0.2) 0%, rgba(3, 195, 123, 0.08) 100%);
+  border: 1px solid rgba(3, 195, 123, 0.45);
+  color: var(--bt-accent);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 14px rgba(3, 195, 123, 0.2);
+}
+
+.actionBtn:hover {
+  background: var(--bt-accent);
+  color: #070B0C;
+  box-shadow: 0 0 20px rgba(3, 195, 123, 0.45);
+  transform: translateY(-1px);
+}
+
+.statusBtn {
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--bt-text-secondary);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.statusBtn:hover {
+  border-color: rgba(3, 195, 123, 0.4);
+  color: #fff;
+}
+
+.statusBtnActive {
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: rgba(3, 195, 123, 0.18);
+  border: 1px solid var(--bt-accent);
+  color: var(--bt-accent);
+  font-size: 11px;
+  font-weight: 700;
+  box-shadow: 0 0 12px rgba(3, 195, 123, 0.25);
+}
+
+.auditionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  background: rgba(240, 79, 117, 0.15);
+  border: 1px solid rgba(240, 79, 117, 0.4);
+  color: var(--bt-error);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.auditionBtn:hover {
+  background: var(--bt-error);
+  color: #fff;
+  box-shadow: 0 0 14px rgba(240, 79, 117, 0.45);
+}
+
+/* ── Negative Controls Section ──────────────────────────────────────────── */
+.absenceCard {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.emptyFindingsBox {
+  padding: 24px;
+  text-align: center;
+  color: var(--bt-text-secondary);
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.clearFilterBtn {
+  padding: 6px 16px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.clearFilterBtn:hover {
+  border-color: var(--bt-accent);
+  color: var(--bt-accent);
+}
+
+@media (max-width: 1024px) {
+  .layoutGrid {
+    grid-template-columns: 1fr;
+  }
+  .validationCentre {
+    padding: 20px;
+  }
 }
 
 .panelTitle {

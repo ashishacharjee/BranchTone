@@ -1,51 +1,52 @@
 /*
  * BranchTone Design Tokens
- * Inspired by high-end design systems (micheledu.com, Linear, Ableton)
+ * Authentically crafted after micheledu.com (luxury dark portfolio / studio aesthetic)
  * Charcoal / Emerald / Burgundy palette conforming to AGENTS.md §8 and DESIGN.md §2.
  */
 
 :root {
   /* ── Canvas & Surface Inks ────────────────────────────────────────────── */
-  --bt-bg: #080C0D;
-  --bt-bg-gradient: radial-gradient(ellipse 80% 50% at 50% -20%, #111A1C 0%, #080C0D 100%);
-  --bt-bg-elevated: #0D1315;
-  --bt-surface: #12181A;
-  --bt-surface-2: #162022;
-  --bt-surface-3: #1C282B;
-  --bt-surface-hover: #1F2D30;
+  --bt-bg: #07090A;
+  --bt-bg-gradient: radial-gradient(ellipse 80% 50% at 50% -20%, #101618 0%, #07090A 100%);
+  --bt-bg-elevated: #0C1113;
+  --bt-surface: #101517;
+  --bt-surface-2: #141C1E;
+  --bt-surface-3: #1A2427;
+  --bt-surface-hover: #1E2B2E;
 
-  /* ── Glassmorphism & Depth (micheledu.com style) ──────────────────────── */
-  --bt-card-bg: rgba(18, 24, 26, 0.78);
-  --bt-card-raise: rgba(26, 36, 38, 0.6);
+  /* ── Liquid Glass & Bento Tokens (micheledu.com signature) ─────────────── */
+  --bt-card-bg: rgba(18, 24, 27, 0.72);
+  --bt-card-liquid-bg: linear-gradient(180deg, rgba(22, 28, 31, 0.75) 0%, rgba(12, 16, 18, 0.88) 100%);
+  --bt-card-raise: rgba(28, 38, 41, 0.65);
   --bt-card-line: rgba(255, 255, 255, 0.08);
-  --bt-card-highlight: rgba(255, 255, 255, 0.04);
-  --bt-glass: rgba(16, 23, 25, 0.75);
-  --bt-glass-elevated: rgba(22, 31, 34, 0.85);
-  --bt-glass-border: rgba(255, 255, 255, 0.09);
+  --bt-card-highlight: rgba(255, 255, 255, 0.16);
+  --bt-glass: rgba(14, 20, 22, 0.75);
+  --bt-glass-elevated: rgba(20, 28, 31, 0.85);
+  --bt-glass-border: rgba(255, 255, 255, 0.08);
 
   /* ── Borders ──────────────────────────────────────────────────────────── */
   --bt-border: rgba(255, 255, 255, 0.08);
-  --bt-border-subtle: rgba(255, 255, 255, 0.05);
-  --bt-border-strong: rgba(255, 255, 255, 0.16);
+  --bt-border-subtle: rgba(255, 255, 255, 0.04);
+  --bt-border-strong: rgba(255, 255, 255, 0.15);
   --bt-border-accent: rgba(3, 195, 123, 0.35);
 
   /* ── Typography Colors ────────────────────────────────────────────────── */
   --bt-text: #FFFFFF;
-  --bt-text-secondary: rgba(255, 255, 255, 0.7);
-  --bt-text-muted: rgba(255, 255, 255, 0.42);
-  --bt-text-inverse: #080C0D;
+  --bt-text-secondary: rgba(255, 255, 255, 0.72);
+  --bt-text-muted: rgba(255, 255, 255, 0.44);
+  --bt-text-inverse: #07090A;
 
   /* ── Accent (Vibrant Studio Emerald / Mint) ────────────────────────────── */
   --bt-accent: #03C37B;
   --bt-accent-soft: #42E09F;
   --bt-accent-deep: #095C3C;
-  --bt-accent-glow: rgba(3, 195, 123, 0.25);
+  --bt-accent-glow: rgba(3, 195, 123, 0.28);
   --bt-accent-subtle: rgba(3, 195, 123, 0.1);
 
   /* ── Status Colors (Controlled Severity Crimson / Gold) ───────────────── */
   --bt-error: #F04F75;
   --bt-error-soft: #F77E9A;
-  --bt-error-glow: rgba(240, 79, 117, 0.28);
+  --bt-error-glow: rgba(240, 79, 117, 0.32);
   --bt-error-subtle: rgba(240, 79, 117, 0.1);
 
   --bt-warning: #E5A855;
@@ -56,24 +57,27 @@
   --bt-magenta: #9E3F75;
   --bt-focus: #42E09F;
 
-  /* ── Card & Panel Shadows ─────────────────────────────────────────────── */
-  --bt-shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
-  --bt-shadow-md: 0 16px 40px -8px rgba(0, 0, 0, 0.65), 0 2px 8px rgba(0, 0, 0, 0.45);
-  --bt-shadow-lg: 0 32px 80px -12px rgba(0, 0, 0, 0.85), 0 8px 24px -4px rgba(0, 0, 0, 0.6);
-  --bt-shadow-glow: 0 0 24px -2px var(--bt-accent-glow);
-  --bt-shadow-error: 0 0 24px -2px var(--bt-error-glow);
+  /* ── Bento Shadows & Bevel Effects (micheledu.com signature) ──────────── */
+  --bt-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --bt-shadow-md: 0 16px 40px -10px rgba(0, 0, 0, 0.7), 0 2px 8px rgba(0, 0, 0, 0.45);
+  --bt-shadow-lg: 0 32px 80px -15px rgba(0, 0, 0, 0.9), 0 8px 24px -4px rgba(0, 0, 0, 0.6);
+  --bt-shadow-liquid: inset 0 1px 0 0 rgba(255, 255, 255, 0.18), inset 0 0 0 1px rgba(255, 255, 255, 0.02), 0 20px 45px -15px rgba(0, 0, 0, 0.75);
+  --bt-shadow-liquid-hover: inset 0 1px 0 0 rgba(255, 255, 255, 0.28), inset 0 0 0 1px rgba(3, 195, 123, 0.15), 0 24px 55px -12px rgba(0, 0, 0, 0.85), 0 0 28px -4px rgba(3, 195, 123, 0.2);
+  --bt-shadow-glow: 0 0 28px -2px var(--bt-accent-glow);
+  --bt-shadow-error: 0 0 28px -2px var(--bt-error-glow);
 
   /* ── Radii ────────────────────────────────────────────────────────────── */
   --bt-radius-xs: 4px;
-  --bt-radius-sm: 6px;
-  --bt-radius: 10px;
-  --bt-radius-md: 14px;
-  --bt-radius-lg: 18px;
+  --bt-radius-sm: 8px;
+  --bt-radius: 12px;
+  --bt-radius-md: 16px;
+  --bt-radius-lg: 20px;
+  --bt-radius-xl: 24px;
   --bt-radius-full: 999px;
 
   /* ── Dimensions ───────────────────────────────────────────────────────── */
-  --bt-sidebar-width: 240px;
-  --bt-topbar-height: 56px;
+  --bt-sidebar-width: 248px;
+  --bt-topbar-height: 60px;
   --bt-max-content-width: 1360px;
 
   /* ── Spacing Scale ────────────────────────────────────────────────────── */
@@ -102,7 +106,7 @@
   --bt-text-3xl: 28px;
 
   /* ── Transitions ──────────────────────────────────────────────────────── */
-  --bt-transition-fast: 0.12s cubic-bezier(0.2, 0.8, 0.2, 1);
-  --bt-transition: 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-  --bt-transition-slow: 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --bt-transition-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  --bt-transition: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --bt-transition-slow: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
