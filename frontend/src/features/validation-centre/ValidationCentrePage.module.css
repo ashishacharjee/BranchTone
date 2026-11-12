@@ -106,8 +106,18 @@
   color: var(--bt-text);
 }
 
+.clickableFindingRow {
+  cursor: pointer;
+  transition: background var(--bt-transition);
+}
+
+.clickableFindingRow:hover td {
+  background: var(--bt-surface-2);
+}
+
 .findingRowSelected td {
-  background: rgba(240, 79, 117, 0.06);
+  background: rgba(240, 79, 117, 0.09) !important;
+  border-color: rgba(240, 79, 117, 0.25);
 }
 
 .findingCode {
@@ -221,6 +231,32 @@
   display: flex;
   align-items: center;
   gap: var(--bt-space-3);
+}
+
+.emptyFindingsBox {
+  padding: var(--bt-space-6);
+  text-align: center;
+  color: var(--bt-text-secondary);
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--bt-space-3);
+}
+
+.clearFilterBtn {
+  padding: 4px 12px;
+  border-radius: var(--bt-radius-sm);
+  background: var(--bt-surface-3);
+  border: 1px solid var(--bt-border);
+  color: var(--bt-text);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.clearFilterBtn:hover {
+  border-color: var(--bt-accent);
+  color: var(--bt-accent);
 }
 
 @media (max-width: 1024px) {

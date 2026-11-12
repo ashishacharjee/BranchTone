@@ -3,7 +3,7 @@
  * Implements: BranchTone mark, workspace label, project card, 7 nav links, status.
  * Visual source: DESIGN.md §3 and references/branchtone-master-ui.png.
  */
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
   GitBranch,
@@ -70,6 +70,7 @@ const NAV_ITEMS: NavItem[] = [
 
 export function Sidebar() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   return (
     <aside
@@ -101,7 +102,12 @@ export function Sidebar() {
       {/* ── Current project card ─────────────────────────────────────── */}
       <div className={styles.section}>
         <span className={styles.sectionLabel}>CURRENT PROJECT</span>
-        <div className={styles.projectCard} aria-label="Project: The Last Signal">
+        <button
+          type="button"
+          className={styles.projectCardBtn}
+          onClick={() => navigate('/overview')}
+          aria-label="Project: The Last Signal — click to view project overview"
+        >
           <div className={styles.projectThumb} aria-hidden="true" />
           <div className={styles.projectInfo}>
             <span className={styles.projectName}>The Last Signal</span>
@@ -111,7 +117,7 @@ export function Sidebar() {
               <span className={styles.tagVersion}>v0.4</span>
             </div>
           </div>
-        </div>
+        </button>
       </div>
 
       {/* ── Navigation links ─────────────────────────────────────────── */}

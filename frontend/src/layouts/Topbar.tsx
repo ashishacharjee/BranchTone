@@ -5,8 +5,22 @@
  * Slice 1: Controls are rendered; most are visibly disabled with reason text.
  * Run Validation is disabled until a validation engine is available.
  */
-import { useLocation } from 'react-router-dom';
-import { Search, RotateCcw, RotateCw, PlayCircle, ChevronRight, CheckCircle } from 'lucide-react';
+import { useState, useMemo, useRef, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import {
+  Search,
+  RotateCcw,
+  RotateCw,
+  PlayCircle,
+  ChevronRight,
+  CheckCircle,
+  X,
+  ShieldAlert,
+  ArrowRight,
+  Info,
+} from 'lucide-react';
+import { getPassages, getAllFindings } from '../services/fixtures';
+import { useWorkspaceStore } from '../stores/workspace';
 import styles from './Topbar.module.css';
 
 const WORKSPACE_LABELS: Record<string, string> = {
@@ -21,18 +35,94 @@ const WORKSPACE_LABELS: Record<string, string> = {
 
 export function Topbar() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isValidationModalOpen, setIsValidationModalOpen] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
+
+  const setSelectedPassage = useWorkspaceStore((state) => state.setSelectedPassage);
+  const navigateToFinding = useWorkspaceStore((state) => state.navigateToFinding);
+
+  const passages = getPassages();
+  const findings = getAllFindings();
+
   const workspaceLabel =
     Object.entries(WORKSPACE_LABELS).find(([path]) =>
       location.pathname.startsWith(path),
     )?.[1] ?? 'Overview';
 
+  // Close search dropdown on click outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setIsSearchOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Filtered search results
+  const searchResults = useMemo(() => {
+    if (!searchQuery.trim()) return { passages: [], findings: [] };
+    const q = searchQuery.toLowerCase().trim();
+
+    const matchedPassages = passages.filter(
+      (p) =>
+        p.title.toLowerCase().includes(q) ||
+        p.passage_id.toLowerCase().includes(q) ||
+        (p.raw_text && p.raw_text.toLowerCase().includes(q)),
+    );
+
+    const matchedFindings = findings.filter(
+      (f) =>
+        f.finding_code.toLowerCase().includes(q) ||
+        f.rule_id.toLowerCase().includes(q) ||
+        f.explanation.toLowerCase().includes(q),
+    );
+
+    return { passages: matchedPassages, findings: matchedFindings };
+  }, [searchQuery, passages, findings]);
+
+  const hasResults =
+    searchResults.passages.length > 0 || searchResults.findings.length > 0;
+
+  const handleSelectPassage = (passageId: string) => {
+    setSelectedPassage(passageId);
+    setIsSearchOpen(false);
+    setSearchQuery('');
+    navigate('/story-graph');
+  };
+
+  const handleSelectFinding = (findingId: string, passageId: string, routeId: string) => {
+    navigateToFinding({ findingId, passageId, routeId });
+    setIsSearchOpen(false);
+    setSearchQuery('');
+    navigate('/story-graph');
+  };
+
   return (
     <header className={styles.topbar} aria-label="Application toolbar">
       {/* ── Breadcrumb ───────────────────────────────────────────────── */}
       <nav aria-label="Breadcrumb" className={styles.breadcrumb}>
-        <span className={styles.crumb}>Projects</span>
+        <button
+          type="button"
+          className={styles.crumbLink}
+          onClick={() => navigate('/overview')}
+          title="Go to Projects Overview"
+        >
+          Projects
+        </button>
         <ChevronRight size={12} aria-hidden="true" className={styles.crumbSep} />
-        <span className={styles.crumb}>The Last Signal</span>
+        <button
+          type="button"
+          className={styles.crumbLink}
+          onClick={() => navigate('/overview')}
+          title="Go to The Last Signal Overview"
+        >
+          The Last Signal
+        </button>
         <ChevronRight size={12} aria-hidden="true" className={styles.crumbSep} />
         <span className={styles.crumbCurrent} aria-current="page">
           {workspaceLabel}
@@ -54,16 +144,80 @@ export function Topbar() {
       <div className={styles.spacer} />
 
       {/* ── Search ───────────────────────────────────────────────────── */}
-      <div className={styles.searchWrap} role="search">
+      <div className={styles.searchWrap} role="search" ref={searchRef}>
         <Search size={13} aria-hidden="true" className={styles.searchIcon} />
         <input
           type="search"
           className={styles.searchInput}
-          placeholder="Search passages or commands…"
-          aria-label="Search passages or commands"
-          disabled
-          title="Search is not yet available — requires a loaded story."
+          placeholder="Search passages or findings…"
+          aria-label="Search passages or findings"
+          value={searchQuery}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+            setIsSearchOpen(true);
+          }}
+          onFocus={() => {
+            if (searchQuery.trim()) setIsSearchOpen(true);
+          }}
         />
+
+        {isSearchOpen && searchQuery.trim() && (
+          <div className={styles.searchDropdown} role="listbox" aria-label="Search results">
+            {hasResults ? (
+              <>
+                {searchResults.passages.length > 0 && (
+                  <div>
+                    <div className={styles.searchGroupTitle}>Passages</div>
+                    {searchResults.passages.map((p) => (
+                      <button
+                        key={p.passage_id}
+                        type="button"
+                        className={styles.searchItem}
+                        onClick={() => handleSelectPassage(p.passage_id)}
+                        role="option"
+                        aria-selected={false}
+                      >
+                        <span className={styles.searchItemTitle}>{p.title}</span>
+                        <span className={styles.searchItemMeta}>{p.passage_id}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {searchResults.findings.length > 0 && (
+                  <div>
+                    <div className={styles.searchGroupTitle}>Findings</div>
+                    {searchResults.findings.map((f) => (
+                      <button
+                        key={f.finding_id}
+                        type="button"
+                        className={styles.searchItem}
+                        onClick={() =>
+                          handleSelectFinding(
+                            f.finding_id,
+                            f.passage_id,
+                            f.affected_route_ids[0] ?? 'route_b',
+                          )
+                        }
+                        role="option"
+                        aria-selected={false}
+                      >
+                        <span className={styles.searchItemTitle} style={{ color: 'var(--bt-error)' }}>
+                          {f.finding_code}: {f.rule_id === 'RULE_REVEAL_PROTECTION' ? 'Reveal Protection' : f.rule_id}
+                        </span>
+                        <span className={styles.searchItemMeta}>Passage {f.passage_id}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className={styles.searchNoResults}>
+                No passages or findings match "{searchQuery}"
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* ── Undo / Redo ──────────────────────────────────────────────── */}
@@ -73,7 +227,7 @@ export function Topbar() {
           className={styles.iconBtn}
           aria-label="Undo"
           disabled
-          title="Undo is not yet available."
+          title="Undo is available during interactive story editing (Phase 2)."
         >
           <RotateCcw size={15} aria-hidden="true" />
         </button>
@@ -82,7 +236,7 @@ export function Topbar() {
           className={styles.iconBtn}
           aria-label="Redo"
           disabled
-          title="Redo is not yet available."
+          title="Redo is available during interactive story editing (Phase 2)."
         >
           <RotateCw size={15} aria-hidden="true" />
         </button>
@@ -92,13 +246,95 @@ export function Topbar() {
       <button
         type="button"
         className={styles.runValidation}
-        aria-label="Run Validation — requires domain engine (not yet implemented)"
-        disabled
-        title="Run Validation requires the domain engine. See COMPLIANCE_MATRIX.md — pending organizer classification."
+        aria-label="Run Validation — view status and compliance details"
+        onClick={() => setIsValidationModalOpen(true)}
+        title="View validation engine gating and execution status"
       >
         <PlayCircle size={15} aria-hidden="true" />
         Run Validation
       </button>
+
+      {/* ── Run Validation Status Modal ──────────────────────────────── */}
+      {isValidationModalOpen && (
+        <div
+          className={styles.modalOverlay}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="validation-modal-title"
+          onClick={() => setIsValidationModalOpen(false)}
+        >
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles.modalHeader}>
+              <h2 id="validation-modal-title" className={styles.modalTitle}>
+                <ShieldAlert size={18} color="var(--bt-accent)" aria-hidden="true" />
+                <span>Deterministic Validation Engine Status</span>
+              </h2>
+              <button
+                type="button"
+                className={styles.modalCloseBtn}
+                onClick={() => setIsValidationModalOpen(false)}
+                aria-label="Close dialog"
+              >
+                <X size={16} aria-hidden="true" />
+              </button>
+            </div>
+
+            <div className={styles.modalBody}>
+              <p>
+                BranchTone's live validation engine executes four deterministic rules across compiled route simulation traces:
+              </p>
+
+              <div className={styles.modalStatusBox}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 600 }}>
+                  <span>Engine Classification:</span>
+                  <span style={{ color: 'var(--bt-accent)' }}>Gated per COMPLIANCE_MATRIX.md</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span>Current Baseline:</span>
+                  <span>Typed Verification Fixtures (Active)</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span>Verified Issue in Fixtures:</span>
+                  <span style={{ color: 'var(--bt-error)', fontWeight: 600 }}>
+                    BT-001 (Route B · Air Vent Entry)
+                  </span>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: 'var(--bt-text-muted)' }}>
+                <Info size={14} color="var(--bt-accent)" style={{ flexShrink: 0 }} aria-hidden="true" />
+                <span>
+                  Dynamic execution is scheduled for Milestone M5 during the 6-hour live sprint on 21 November 2026.
+                </span>
+              </div>
+            </div>
+
+            <div className={styles.modalFooter}>
+              <button
+                type="button"
+                className={styles.modalSecondaryBtn}
+                onClick={() => setIsValidationModalOpen(false)}
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                className={styles.modalPrimaryBtn}
+                onClick={() => {
+                  setIsValidationModalOpen(false);
+                  navigate('/validation-centre');
+                }}
+              >
+                <span>View Findings in Validation Centre</span>
+                <ArrowRight size={13} style={{ display: 'inline', marginLeft: '6px' }} aria-hidden="true" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

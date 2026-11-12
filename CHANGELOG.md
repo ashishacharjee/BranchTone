@@ -1,5 +1,45 @@
 # CHANGELOG.md — Pack and Implementation History
 
+## 2.10 — 12 November 2026 (Critical Functionality Repair & Product Usability Implementation)
+
+- Executed complete functionality audit and repair across Shell and all seven workspaces (`FUNCTIONALITY_AUDIT_AND_REPAIR.md`):
+  1. **Topbar & Shell Usability:**
+     - Enabled breadcrumbs as clickable navigation back to `/overview`.
+     - Activated global search input with live search dropdown filtering passages (P-001..P-005) and findings (BT-001), selecting the item and deep-linking to Story Graph.
+     - Converted static "Run Validation" button into an accessible action opening a compliance gating status modal detailing live-sprint roadmap and linking to Validation Centre.
+     - Converted sidebar project card into an accessible navigation button returning to `/overview`.
+  2. **Story Graph Workspace:**
+     - Connected React Flow "Zoom to Fit" button to `rfInstance.fitView()`.
+     - Connected "Toggle Fullscreen" button to canvas container with fullscreen change listeners.
+     - Connected "Share Deep-Link" button to write URL to clipboard with a toast notification.
+     - Added direct action links in Passage Inspector to view findings in Validation Centre and inspect cues in Cue Library.
+     - Made Audio Timeline skip backward / forward buttons navigate to previous/next passage along the active route.
+     - Made timeline volume slider interactive with local state.
+  3. **Overview Workspace:**
+     - Converted all 4 metric cards (Passages, Story Transitions, Active Issues, Graph Coverage) into interactive navigation buttons.
+     - Added direct "Inspect in Cue Library" action button in the Audio Asset Inventory panel.
+  4. **Narrative Map Workspace:**
+     - Corrected Route A vs Route B factual reveal logic: reveal occurs at Archives (`P-002`) on Route A, and Server Vault (`P-004`) on Route B.
+     - Made annotation cards clickable to synchronize selected passage with shared store.
+     - Added interactive demo action buttons on candidate card ("Approve (Demo)" / "Reject" / "Reset") with clear UI demo action badge.
+  5. **Cue Library Workspace:**
+     - Added row selection state with active styling (`cueRowSelected`).
+     - Added graceful empty table state when layer filters (ambience, sfx, voice) have 0 configured demo cues.
+     - Added deep-link buttons: "Inspect Trigger Passage in Story Graph" and "Inspect BT-001 in Validation Centre".
+  6. **Route Lab Workspace:**
+     - Corrected Route A reveal point (Archives P-002) in narrative fact badges.
+     - Added interactive "Selected Step Snapshot" drawer displaying emotional intensity, mood, fact state, and active cues for the currently selected step.
+     - Converted "Issue BT-001" trace table badge into a clickable button deep-linking directly to Validation Centre.
+  7. **Validation Centre Workspace:**
+     - Added `selectedFindingId` state and row click selection with active highlight styling.
+     - Fixed 0-match filter fallback bug; added empty states with "Reset Filters" button in both table and detail panel.
+  8. **Reports Workspace:**
+     - Added collapsible "Preview JSON" drawer displaying the formatted report export payload with a "Copy JSON" button and copied toast.
+- All 40 frontend tests passing (`npm test -- --run`).
+- Frontend typecheck and production build verified cleanly (`npm run typecheck`, `npm run build`).
+- All 11 backend tests passing (`pytest -v`), Ruff check 100% clean.
+- All pre-build restrictions preserved: no restricted engines executed; fixtures clearly labelled `DEMO DATA`.
+
 ## 2.9 — 10 November 2026 (Live Sprint Documentation Inconsistency Corrections)
 
 - Corrected three specific inconsistencies in the live sprint preparation documents:

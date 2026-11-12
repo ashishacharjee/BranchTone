@@ -115,12 +115,22 @@
   color: var(--bt-text);
 }
 
-.cueTable tr:last-child td {
-  border-bottom: none;
+.clickableRow {
+  cursor: pointer;
+  transition: background var(--bt-transition);
 }
 
-.cueTable tr:hover td {
+.clickableRow:hover td {
   background: var(--bt-surface-2);
+}
+
+.cueRowSelected td {
+  background: rgba(41, 201, 138, 0.08) !important;
+  border-color: rgba(41, 201, 138, 0.2);
+}
+
+.cueTable tr:last-child td {
+  border-bottom: none;
 }
 
 .statusMissing {
@@ -206,6 +216,61 @@
   font-weight: 600;
   cursor: not-allowed;
   opacity: 0.6;
+}
+
+.actionBtnGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: var(--bt-space-3);
+}
+
+.deepLinkBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: var(--bt-radius-sm);
+  background: var(--bt-surface-2);
+  border: 1px solid var(--bt-border);
+  color: var(--bt-text);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--bt-transition);
+}
+
+.deepLinkBtn:hover {
+  background: var(--bt-surface-3);
+  border-color: var(--bt-accent);
+  color: var(--bt-accent);
+}
+
+.emptyState {
+  padding: var(--bt-space-6);
+  text-align: center;
+  color: var(--bt-text-secondary);
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--bt-space-3);
+}
+
+.resetBtn {
+  padding: 4px 12px;
+  border-radius: var(--bt-radius-sm);
+  background: var(--bt-surface-3);
+  border: 1px solid var(--bt-border);
+  color: var(--bt-text);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.resetBtn:hover {
+  border-color: var(--bt-accent);
+  color: var(--bt-accent);
 }
 
 @media (max-width: 1024px) {

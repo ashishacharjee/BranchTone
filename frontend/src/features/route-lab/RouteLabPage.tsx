@@ -1,9 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import {
   VolumeX,
   ShieldAlert,
   GitBranch,
   CheckCircle2,
   Clock,
+  ArrowRight,
+  Info,
 } from 'lucide-react';
 import {
   getRoutes,
@@ -15,16 +18,36 @@ import { useWorkspaceStore } from '../../stores/workspace';
 import styles from './RouteLabPage.module.css';
 
 export function RouteLabPage() {
+  const navigate = useNavigate();
   const routes = getRoutes();
   const selectedRouteId = useWorkspaceStore((s) => s.selectedRouteId) ?? 'route_b';
-  const selectedPassageId = useWorkspaceStore((s) => s.selectedPassageId);
+  const selectedPassageId = useWorkspaceStore((s) => s.selectedPassageId) ?? 'P-003';
   const setSelectedRoute = useWorkspaceStore((s) => s.setSelectedRoute);
   const setSelectedPassage = useWorkspaceStore((s) => s.setSelectedPassage);
+  const navigateToFinding = useWorkspaceStore((s) => s.navigateToFinding);
 
   const activeRoute = getRoute(selectedRouteId);
   const passageIds = activeRoute ? activeRoute.passage_path : ['P-001', 'P-003', 'P-004', 'P-005'];
   const allCueEvents = getExpectedCueEvents();
   const activeRouteCueEvents = allCueEvents.filter((e) => e.route_id === selectedRouteId);
+
+  const selectedPassage = getPassage(selectedPassageId);
+
+  // Identity reveal evaluation per route:
+  // Route A: reveal occurs at Archives (P-002)
+  // Route B: reveal occurs at Server Vault (P-004)
+  const isSelectedPassageRevealed = selectedRouteId === 'route_a'
+    ? (selectedPassageId === 'P-002' || selectedPassageId === 'P-004' || selectedPassageId === 'P-005')
+    : (selectedPassageId === 'P-004' || selectedPassageId === 'P-005');
+
+  const handleInspectFinding = () => {
+    navigateToFinding({
+      findingId: 'BT-001',
+      routeId: 'route_b',
+      passageId: 'P-003',
+    });
+    navigate('/validation-centre');
+  };
 
   return (
     <div className={styles.routeLab} role="region" aria-label="Route Lab Workspace">
@@ -77,8 +100,11 @@ export function RouteLabPage() {
             const p = getPassage(pId);
             const isSelected = pId === selectedPassageId;
             const isAirVent = pId === 'P-003';
-            const isRevealPoint = pId === 'P-004';
-            const isIdentityRevealed = pId === 'P-004' || pId === 'P-005';
+            // Reveal point per route: Route A is P-002; Route B is P-004
+            const isRevealPoint = selectedRouteId === 'route_a' ? pId === 'P-002' : pId === 'P-004';
+            const isIdentityRevealed = selectedRouteId === 'route_a'
+              ? (pId === 'P-002' || pId === 'P-004' || pId === 'P-005')
+              : (pId === 'P-004' || pId === 'P-005');
 
             return (
               <div
@@ -131,6 +157,44 @@ export function RouteLabPage() {
             );
           })}
         </div>
+
+        {/* Selected Step Snapshot Drawer */}
+        <div className={styles.snapshotDrawer}>
+          <div className={styles.snapshotHeader}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Info size={14} color="var(--bt-accent)" aria-hidden="true" />
+              <span>Selected Step Snapshot: {selectedPassage?.title ?? selectedPassageId} ({selectedPassageId})</span>
+            </div>
+            <span style={{ fontSize: '11px', color: 'var(--bt-text-muted)' }}>
+              Click any step above to inspect narrative state
+            </span>
+          </div>
+
+          <div className={styles.snapshotGrid}>
+            <div className={styles.snapshotItem}>
+              <span className={styles.snapshotLabel}>Emotional Intensity</span>
+              <span className={styles.snapshotVal}>
+                {(selectedPassage?.intensity ?? (selectedPassageId === 'P-001' ? 3 : 4)).toString()}/5
+              </span>
+            </div>
+            <div className={styles.snapshotItem}>
+              <span className={styles.snapshotLabel}>Mood Quality</span>
+              <span className={styles.snapshotVal}>{selectedPassage?.mood ?? 'Neutral'}</span>
+            </div>
+            <div className={styles.snapshotItem}>
+              <span className={styles.snapshotLabel}>Identity Revealed Fact</span>
+              <span className={styles.snapshotVal} style={{ color: isSelectedPassageRevealed ? 'var(--bt-accent)' : 'var(--bt-text-muted)' }}>
+                {isSelectedPassageRevealed ? 'true' : 'false'}
+              </span>
+            </div>
+            <div className={styles.snapshotItem}>
+              <span className={styles.snapshotLabel}>Active Audio Cues</span>
+              <span className={styles.snapshotVal}>
+                {selectedPassageId === 'P-003' && selectedRouteId === 'route_b' ? 'traitor_theme.wav (Violation)' : 'None'}
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* ── Cue Activation Trace ────────────────────────────────────── */}
@@ -180,21 +244,17 @@ export function RouteLabPage() {
                       </code>
                     </td>
                     <td>
-                      <span style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '4px',
-                        padding: '2px 7px',
-                        borderRadius: 'var(--bt-radius-sm)',
-                        fontSize: '11px',
-                        fontWeight: 600,
-                        background: 'rgba(240, 79, 117, 0.15)',
-                        color: 'var(--bt-error)',
-                        border: '1px solid rgba(240, 79, 117, 0.3)',
-                      }}>
+                      <button
+                        type="button"
+                        className={styles.clickableFindingBtn}
+                        onClick={handleInspectFinding}
+                        title="Click to deep-link to Finding BT-001 in Validation Centre"
+                        aria-label="Inspect Issue BT-001 in Validation Centre"
+                      >
                         <ShieldAlert size={12} aria-hidden="true" />
                         <span>Issue BT-001</span>
-                      </span>
+                        <ArrowRight size={11} aria-hidden="true" />
+                      </button>
                     </td>
                   </tr>
                 ))}

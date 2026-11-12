@@ -1,8 +1,8 @@
 /**
- * Topbar tests — Slice 1.
+ * Topbar tests — Shell Navigation & Interaction.
  */
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { Topbar } from '../layouts/Topbar';
 
@@ -33,16 +33,21 @@ describe('Topbar', () => {
     expect(screen.getByLabelText(/Story version 0.4/i)).toBeInTheDocument();
   });
 
-  it('Run Validation button is disabled with reason', () => {
+  it('Run Validation button opens compliance gating modal', () => {
     renderTopbar();
     const btn = screen.getByRole('button', { name: /Run Validation/i });
-    expect(btn).toBeDisabled();
+    expect(btn).toBeInTheDocument();
     expect(btn).toHaveAttribute('title');
+    fireEvent.click(btn);
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    expect(screen.getByText(/Deterministic Validation Engine Status/i)).toBeInTheDocument();
   });
 
-  it('search input is disabled in Slice 1', () => {
+  it('search input is enabled and interactive', () => {
     renderTopbar();
     const input = screen.getByRole('searchbox');
-    expect(input).toBeDisabled();
+    expect(input).toBeEnabled();
+    fireEvent.change(input, { target: { value: 'Air Vent' } });
+    expect(input).toHaveValue('Air Vent');
   });
 });

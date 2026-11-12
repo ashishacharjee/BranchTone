@@ -1,6 +1,20 @@
 # MEMORY.md — Project Decisions and Verified Context
 
-**Updated:** 10 November 2026. Keep this file factual and short. Update only after a decision or verification.
+**Updated:** 12 November 2026. Keep this file factual and short. Update only after a decision or verification.
+
+## Usability & Functionality Repairs (12 Nov 2026)
+
+- Completed thorough repair of dead and static UI elements across Shell and all 7 workspaces per `FUNCTIONALITY_AUDIT_AND_REPAIR.md`.
+- Clickable breadcrumbs and active live search dropdown in Topbar (filtering passages & BT-001).
+- Interactive "Run Validation" button opening accessible compliance gating modal.
+- Active navigation cards in Overview workspace.
+- Fixed Route A (Archives P-002) vs Route B (Server Vault P-004) factual reveal discrepancy in Narrative Map and Route Lab.
+- Interactive candidate review buttons with local UI state in Narrative Map.
+- Clickable rows and layer filtering empty state handling in Cue Library.
+- Route Lab step snapshot drawer and clickable BT-001 finding link in trace table.
+- Validation Centre interactive row selection and 0-match filter empty state handling with reset button.
+- Reports workspace JSON report preview drawer with copy-to-clipboard functionality.
+- 100% test integrity: 40 Vitest frontend tests pass, 11 Pytest backend tests pass, production build verified.
 
 ## Product facts
 

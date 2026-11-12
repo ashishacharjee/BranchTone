@@ -8,6 +8,7 @@ import {
   ArrowRight,
   CheckCircle2,
   Filter,
+  RotateCcw,
 } from 'lucide-react';
 import {
   getAllFindings,
@@ -24,6 +25,7 @@ export function ValidationCentrePage() {
   const [ruleFilter, setRuleFilter] = useState<string>('all');
   const [severityFilter, setSeverityFilter] = useState<string>('all');
   const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [selectedFindingId, setSelectedFindingId] = useState<string>(findings[0]?.finding_id ?? '');
 
   const navigateToFinding = useWorkspaceStore((s) => s.navigateToFinding);
 
@@ -34,9 +36,16 @@ export function ValidationCentrePage() {
     return true;
   });
 
-  const selectedFinding = filteredFindings[0] ?? findings[0];
+  const selectedFinding = filteredFindings.find((f) => f.finding_id === selectedFindingId) ?? filteredFindings[0];
+
+  const handleResetFilters = () => {
+    setRuleFilter('all');
+    setSeverityFilter('all');
+    setStatusFilter('all');
+  };
 
   const handleInspectInGraph = () => {
+    if (!selectedFinding) return;
     navigateToFinding({
       findingId: selectedFinding.finding_id,
       routeId: selectedFinding.affected_route_ids[0] ?? 'route_b',
@@ -91,6 +100,17 @@ export function ValidationCentrePage() {
             <option value="in_review">In Review</option>
             <option value="resolved">Resolved</option>
           </select>
+
+          {(ruleFilter !== 'all' || severityFilter !== 'all' || statusFilter !== 'all') && (
+            <button
+              type="button"
+              className={styles.clearFilterBtn}
+              onClick={handleResetFilters}
+              aria-label="Reset all filters"
+            >
+              Reset Filters
+            </button>
+          )}
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -128,37 +148,61 @@ export function ValidationCentrePage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredFindings.map((f) => (
-                    <tr key={f.finding_id} className={styles.findingRowSelected}>
-                      <td>
-                        <span className={styles.findingCode}>{f.finding_code}</span>
-                      </td>
-                      <td>
-                        <span>
-                          {f.rule_id === 'RULE_REVEAL_PROTECTION'
-                            ? 'Reveal Protection'
-                            : f.rule_id}
-                        </span>
-                      </td>
-                      <td>
-                        <span>P-003 (Air Vent)</span>
-                      </td>
-                      <td>
-                        <span style={{ fontFamily: 'var(--bt-font-mono)' }}>Route B</span>
-                      </td>
-                      <td>
-                        <span className={styles.severityBadge}>
-                          <AlertCircle size={11} aria-hidden="true" />
-                          <span>High</span>
-                        </span>
-                      </td>
-                      <td>
-                        <span style={{ textTransform: 'capitalize', color: 'var(--bt-accent)' }}>
-                          {f.status}
-                        </span>
+                  {filteredFindings.length > 0 ? (
+                    filteredFindings.map((f) => {
+                      const isSelected = selectedFinding?.finding_id === f.finding_id;
+                      return (
+                        <tr
+                          key={f.finding_id}
+                          className={[styles.clickableFindingRow, isSelected ? styles.findingRowSelected : ''].join(' ')}
+                          onClick={() => setSelectedFindingId(f.finding_id)}
+                          role="button"
+                          tabIndex={0}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              setSelectedFindingId(f.finding_id);
+                            }
+                          }}
+                          aria-label={`Select finding ${f.finding_code}`}
+                        >
+                          <td>
+                            <span className={styles.findingCode}>{f.finding_code}</span>
+                          </td>
+                          <td>
+                            <span>
+                              {f.rule_id === 'RULE_REVEAL_PROTECTION'
+                                ? 'Reveal Protection'
+                                : f.rule_id}
+                            </span>
+                          </td>
+                          <td>
+                            <span>P-003 (Air Vent)</span>
+                          </td>
+                          <td>
+                            <span style={{ fontFamily: 'var(--bt-font-mono)' }}>Route B</span>
+                          </td>
+                          <td>
+                            <span className={styles.severityBadge}>
+                              <AlertCircle size={11} aria-hidden="true" />
+                              <span>High</span>
+                            </span>
+                          </td>
+                          <td>
+                            <span style={{ textTransform: 'capitalize', color: 'var(--bt-accent)' }}>
+                              {f.status}
+                            </span>
+                          </td>
+                        </tr>
+                      );
+                    })
+                  ) : (
+                    <tr>
+                      <td colSpan={6} style={{ textAlign: 'center', padding: '24px', color: 'var(--bt-text-muted)' }}>
+                        No findings match the current filter criteria.
                       </td>
                     </tr>
-                  ))}
+                  )}
                 </tbody>
               </table>
             </div>
@@ -194,74 +238,90 @@ export function ValidationCentrePage() {
           <div className={styles.panelHeader}>
             <div className={styles.panelTitle}>
               <ShieldAlert size={15} color="var(--bt-error)" aria-hidden="true" />
-              <span>Finding Detail · {selectedFinding.finding_code}</span>
+              <span>Finding Detail · {selectedFinding ? selectedFinding.finding_code : 'No Finding'}</span>
             </div>
-            <span className="demo-badge">High Severity</span>
+            <span className="demo-badge">{selectedFinding ? 'High Severity' : 'Empty Filter'}</span>
           </div>
 
-          {/* Violation Description */}
-          <div className={styles.detailSection}>
-            <div className={styles.detailTitle}>Violation Explanation</div>
-            <div style={{ fontSize: '13px', color: 'var(--bt-text)', lineHeight: 1.5 }}>
-              {selectedFinding.explanation}
-            </div>
-          </div>
-
-          {/* State Comparison */}
-          <div className={styles.detailSection}>
-            <div className={styles.detailTitle}>Narrative State Snapshot at Trigger</div>
-            <div className={styles.stateComparison}>
-              <div className={styles.stateBox}>
-                <span className={styles.stateBoxLabel}>Expected Fact State</span>
-                <span className={styles.stateBoxVal} style={{ color: 'var(--bt-accent)' }}>
-                  traitor_identity_revealed: true
-                </span>
+          {selectedFinding ? (
+            <>
+              {/* Violation Description */}
+              <div className={styles.detailSection}>
+                <div className={styles.detailTitle}>Violation Explanation</div>
+                <div style={{ fontSize: '13px', color: 'var(--bt-text)', lineHeight: 1.5 }}>
+                  {selectedFinding.explanation}
+                </div>
               </div>
-              <div className={styles.stateBox}>
-                <span className={styles.stateBoxLabel}>Actual Fact State</span>
-                <span className={styles.stateBoxVal} style={{ color: 'var(--bt-error)' }}>
-                  traitor_identity_revealed: false
-                </span>
+
+              {/* State Comparison */}
+              <div className={styles.detailSection}>
+                <div className={styles.detailTitle}>Narrative State Snapshot at Trigger</div>
+                <div className={styles.stateComparison}>
+                  <div className={styles.stateBox}>
+                    <span className={styles.stateBoxLabel}>Expected Fact State</span>
+                    <span className={styles.stateBoxVal} style={{ color: 'var(--bt-accent)' }}>
+                      traitor_identity_revealed: true
+                    </span>
+                  </div>
+                  <div className={styles.stateBox}>
+                    <span className={styles.stateBoxLabel}>Actual Fact State</span>
+                    <span className={styles.stateBoxVal} style={{ color: 'var(--bt-error)' }}>
+                      traitor_identity_revealed: false
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
 
-          {/* Source Evidence */}
-          <div className={styles.detailSection}>
-            <div className={styles.detailTitle}>Verified Source Evidence</div>
-            <div style={{ fontSize: '11px', color: 'var(--bt-text-muted)', display: 'flex', gap: '8px' }}>
-              <FileText size={12} aria-hidden="true" />
-              <span>Passage P-003 · Verbatim Sentence</span>
-            </div>
-            <blockquote className={styles.quoteBox}>
-              "{selectedFinding.evidence_quote}"
-            </blockquote>
-          </div>
+              {/* Source Evidence */}
+              <div className={styles.detailSection}>
+                <div className={styles.detailTitle}>Verified Source Evidence</div>
+                <div style={{ fontSize: '11px', color: 'var(--bt-text-muted)', display: 'flex', gap: '8px' }}>
+                  <FileText size={12} aria-hidden="true" />
+                  <span>Passage P-003 · Verbatim Sentence</span>
+                </div>
+                <blockquote className={styles.quoteBox}>
+                  "{selectedFinding.evidence_quote}"
+                </blockquote>
+              </div>
 
-          {/* Route Trace & Suggested Action */}
-          <div className={styles.detailSection}>
-            <div className={styles.detailTitle}>Route Trace & Suggested Remediation</div>
-            <div style={{ fontSize: '12px', color: 'var(--bt-text-secondary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <GitBranch size={13} aria-hidden="true" />
-              <span>Trace: {selectedFinding.route_trace.join(' → ')}</span>
-            </div>
-            <div style={{ fontSize: '12px', color: 'var(--bt-text-muted)', lineHeight: 1.5, marginTop: '4px' }}>
-              Action: {selectedFinding.suggested_action}
-            </div>
-          </div>
+              {/* Route Trace & Suggested Action */}
+              <div className={styles.detailSection}>
+                <div className={styles.detailTitle}>Route Trace & Suggested Remediation</div>
+                <div style={{ fontSize: '12px', color: 'var(--bt-text-secondary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <GitBranch size={13} aria-hidden="true" />
+                  <span>Trace: {selectedFinding.route_trace.join(' → ')}</span>
+                </div>
+                <div style={{ fontSize: '12px', color: 'var(--bt-text-muted)', lineHeight: 1.5, marginTop: '4px' }}>
+                  Action: {selectedFinding.suggested_action}
+                </div>
+              </div>
 
-            {/* Deep-link Action Button */}
-            <div style={{ paddingTop: '8px' }}>
+              {/* Deep-link Action Button */}
+              <div style={{ paddingTop: '8px' }}>
+                <button
+                  type="button"
+                  className={styles.actionBtn}
+                  onClick={handleInspectInGraph}
+                >
+                  <span>Inspect in Story Graph Workspace</span>
+                  <ArrowRight size={14} aria-hidden="true" />
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className={styles.emptyFindingsBox}>
+              <span>No findings match the current filter selection.</span>
               <button
                 type="button"
-                className={styles.actionBtn}
-                onClick={handleInspectInGraph}
+                className={styles.clearFilterBtn}
+                onClick={handleResetFilters}
               >
-                <span>Inspect in Story Graph Workspace</span>
-                <ArrowRight size={14} aria-hidden="true" />
+                <RotateCcw size={12} style={{ marginRight: '6px' }} />
+                <span>Reset Filters</span>
               </button>
             </div>
-          </div>
+          )}
+        </div>
       </div>
     </div>
   );

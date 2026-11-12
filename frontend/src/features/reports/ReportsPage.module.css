@@ -15,6 +15,35 @@
   justify-content: space-between;
   padding-bottom: var(--bt-space-4);
   border-bottom: 1px solid var(--bt-border);
+  gap: var(--bt-space-4);
+  flex-wrap: wrap;
+}
+
+.topbarActions {
+  display: flex;
+  align-items: center;
+  gap: var(--bt-space-3);
+}
+
+.secondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--bt-space-2);
+  padding: 6px 14px;
+  border-radius: var(--bt-radius-sm);
+  background: var(--bt-surface-2);
+  border: 1px solid var(--bt-border);
+  color: var(--bt-text);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--bt-transition);
+}
+
+.secondaryBtn:hover {
+  background: var(--bt-surface-3);
+  border-color: var(--bt-accent);
+  color: var(--bt-accent);
 }
 
 .exportBtn {
@@ -34,6 +63,37 @@
 
 .exportBtn:hover {
   background: rgba(41, 201, 138, 0.25);
+}
+
+/* ── JSON Preview Drawer ────────────────────────────────────────────────── */
+.jsonViewer {
+  background: var(--bt-surface);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-md);
+  padding: var(--bt-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--bt-space-3);
+}
+
+.jsonViewerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.jsonPre {
+  background: var(--bt-surface-2);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-sm);
+  padding: var(--bt-space-4);
+  font-family: var(--bt-font-mono);
+  font-size: 11px;
+  color: var(--bt-text);
+  overflow-x: auto;
+  max-height: 280px;
+  margin: 0;
+  line-height: 1.4;
 }
 
 /* ── Run Identifier Card ────────────────────────────────────────────────── */

@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import {
   FileText,
   Download,
   ShieldAlert,
   Info,
+  Code,
+  Copy,
+  Check,
 } from 'lucide-react';
 import {
   getDemoProject,
@@ -16,14 +20,29 @@ export function ReportsPage() {
   const storyVersion = getStoryVersion();
   const reportPayload = getReportExportPayload();
 
+  const [showJsonPreview, setShowJsonPreview] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const formattedJson = JSON.stringify(reportPayload, null, 2);
+
   const handleExportJson = () => {
-    const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(reportPayload, null, 2));
+    const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(formattedJson);
     const downloadAnchor = document.createElement('a');
     downloadAnchor.setAttribute('href', dataStr);
     downloadAnchor.setAttribute('download', `branchtone_report_${demoEnvelope.project.project_id}_v04.json`);
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();
+  };
+
+  const handleCopyJson = async () => {
+    try {
+      await navigator.clipboard.writeText(formattedJson);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Fallback
+    }
   };
 
   return (
@@ -42,16 +61,52 @@ export function ReportsPage() {
           </p>
         </div>
 
-        <button
-          type="button"
-          className={styles.exportBtn}
-          onClick={handleExportJson}
-          aria-label="Export JSON report"
-        >
-          <Download size={14} aria-hidden="true" />
-          <span>Export JSON Report</span>
-        </button>
+        <div className={styles.topbarActions}>
+          <button
+            type="button"
+            className={styles.secondaryBtn}
+            onClick={() => setShowJsonPreview(!showJsonPreview)}
+            aria-expanded={showJsonPreview}
+            aria-label="Toggle JSON report preview"
+          >
+            <Code size={14} aria-hidden="true" />
+            <span>{showJsonPreview ? 'Hide JSON' : 'Preview JSON'}</span>
+          </button>
+
+          <button
+            type="button"
+            className={styles.exportBtn}
+            onClick={handleExportJson}
+            aria-label="Export JSON report"
+          >
+            <Download size={14} aria-hidden="true" />
+            <span>Export JSON Report</span>
+          </button>
+        </div>
       </div>
+
+      {/* ── JSON Preview Drawer (Collapsible) ───────────────────────── */}
+      {showJsonPreview && (
+        <div className={styles.jsonViewer}>
+          <div className={styles.jsonViewerHeader}>
+            <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--bt-text)' }}>
+              Report Export JSON Payload (SCHEMA.md §6 Envelope)
+            </span>
+            <button
+              type="button"
+              className={styles.secondaryBtn}
+              onClick={handleCopyJson}
+              aria-label="Copy JSON to clipboard"
+            >
+              {copied ? <Check size={13} color="var(--bt-accent)" /> : <Copy size={13} />}
+              <span>{copied ? 'Copied!' : 'Copy JSON'}</span>
+            </button>
+          </div>
+          <pre className={styles.jsonPre}>
+            <code>{formattedJson}</code>
+          </pre>
+        </div>
+      )}
 
       {/* ── Run Identifiers ─────────────────────────────────────────── */}
       <div className={styles.idCard}>

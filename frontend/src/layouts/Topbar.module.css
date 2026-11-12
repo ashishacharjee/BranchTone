@@ -22,6 +22,21 @@
   color: var(--bt-text-muted);
 }
 
+.crumbLink {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: var(--bt-text-sm);
+  color: var(--bt-text-muted);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.crumbLink:hover {
+  color: var(--bt-text);
+  text-decoration: underline;
+}
+
 .crumbSep {
   color: var(--bt-text-muted);
   opacity: 0.5;
@@ -169,4 +184,174 @@
 .runValidation:focus-visible {
   outline: 2px solid var(--bt-focus);
   outline-offset: 2px;
+}
+
+/* ── Search Dropdown ────────────────────────────────────────────────────── */
+.searchWrap {
+  position: relative;
+}
+
+.searchDropdown {
+  position: absolute;
+  top: 38px;
+  left: 0;
+  width: 320px;
+  background: var(--bt-surface);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-sm);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  max-height: 280px;
+  overflow-y: auto;
+  z-index: 1000;
+  padding: 4px;
+}
+
+.searchGroupTitle {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--bt-text-muted);
+  padding: 6px 8px 2px;
+}
+
+.searchItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 6px 8px;
+  background: none;
+  border: none;
+  border-radius: var(--bt-radius-xs, 4px);
+  color: var(--bt-text);
+  font-size: var(--bt-text-xs);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease;
+}
+
+.searchItem:hover,
+.searchItem:focus-visible {
+  background: var(--bt-surface-2);
+  outline: none;
+}
+
+.searchItemTitle {
+  font-weight: 600;
+}
+
+.searchItemMeta {
+  font-size: 10px;
+  color: var(--bt-text-muted);
+  font-family: var(--bt-font-mono);
+}
+
+.searchNoResults {
+  padding: 10px;
+  font-size: var(--bt-text-xs);
+  color: var(--bt-text-muted);
+  text-align: center;
+}
+
+/* ── Validation Engine Status Modal ────────────────────────────────────── */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 15, 14, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+}
+
+.modalContent {
+  background: var(--bt-surface);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-md, 8px);
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modalTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--bt-text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modalCloseBtn {
+  background: none;
+  border: none;
+  color: var(--bt-text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.modalCloseBtn:hover {
+  color: var(--bt-text);
+  background: var(--bt-surface-2);
+}
+
+.modalBody {
+  font-size: 13px;
+  color: var(--bt-text-secondary);
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modalStatusBox {
+  background: var(--bt-surface-2);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-sm);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.modalPrimaryBtn {
+  padding: 8px 16px;
+  background: var(--bt-accent);
+  color: #0b1413;
+  font-weight: 600;
+  font-size: 13px;
+  border: none;
+  border-radius: var(--bt-radius-sm);
+  cursor: pointer;
+}
+
+.modalSecondaryBtn {
+  padding: 8px 16px;
+  background: var(--bt-surface-2);
+  color: var(--bt-text);
+  font-size: 13px;
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-sm);
+  cursor: pointer;
 }

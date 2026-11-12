@@ -1,4 +1,5 @@
-import { X, Heart, HelpCircle, Music, FileText, AlertCircle, ShieldAlert, GitBranch } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { X, Heart, HelpCircle, Music, FileText, AlertCircle, ShieldAlert, GitBranch, ArrowRight } from 'lucide-react';
 import type { PassageDisplayData } from '../../services/fixtures';
 import { getFindingsForPassage, getAudioCuesForPassage, getRoute } from '../../services/fixtures';
 import styles from './PassageInspector.module.css';
@@ -14,6 +15,8 @@ export function PassageInspector({
   selectedRouteId,
   onClose,
 }: PassageInspectorProps) {
+  const navigate = useNavigate();
+
   if (!passage) {
     return (
       <aside className={styles.inspector} aria-label="Passage inspector">
@@ -143,6 +146,16 @@ export function PassageInspector({
                   {cue.trigger.type === 'passage_entry' ? 'Passage entry' : 'Narrative event'}
                 </span>
               </div>
+
+              <button
+                type="button"
+                className={styles.actionLinkBtn}
+                onClick={() => navigate('/cue-library')}
+                title="Inspect in Cue Library"
+              >
+                <span>Inspect in Cue Library</span>
+                <ArrowRight size={12} aria-hidden="true" />
+              </button>
             </div>
           ))
         ) : (
@@ -191,6 +204,16 @@ export function PassageInspector({
               <div className={styles.findingExplanation}>
                 {f.explanation}
               </div>
+
+              <button
+                type="button"
+                className={styles.actionLinkBtn}
+                onClick={() => navigate('/validation-centre')}
+                title="View in Validation Centre"
+              >
+                <span>View in Validation Centre</span>
+                <ArrowRight size={12} aria-hidden="true" />
+              </button>
             </div>
           ))
         ) : (

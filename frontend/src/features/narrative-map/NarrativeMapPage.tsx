@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Heart,
   Activity,
@@ -5,6 +6,9 @@ import {
   HelpCircle,
   FileCheck,
   Sparkles,
+  Check,
+  X,
+  RotateCcw,
 } from 'lucide-react';
 import {
   getRoutes,
@@ -20,6 +24,8 @@ export function NarrativeMapPage() {
   const selectedPassageId = useWorkspaceStore((s) => s.selectedPassageId);
   const setSelectedRoute = useWorkspaceStore((s) => s.setSelectedRoute);
   const setSelectedPassage = useWorkspaceStore((s) => s.setSelectedPassage);
+
+  const [pendingStatus, setPendingStatus] = useState<'pending' | 'approved' | 'rejected'>('pending');
 
   const activeRoute = getRoute(selectedRouteId);
   const passageIds = activeRoute ? activeRoute.passage_path : ['P-001', 'P-003', 'P-004', 'P-005'];
@@ -75,7 +81,10 @@ export function NarrativeMapPage() {
             const isAirVent = pId === 'P-003';
             const intensity = p?.intensity ?? (pId === 'P-001' ? 3 : 4);
             const intensityPercent = (intensity / 5) * 100;
-            const isIdentityRevealed = pId === 'P-004' || pId === 'P-005';
+            // Reveal occurs at Archives (P-002) on Route A, and Server Vault (P-004) on Route B
+            const isIdentityRevealed = selectedRouteId === 'route_a'
+              ? (pId === 'P-002' || pId === 'P-004' || pId === 'P-005')
+              : (pId === 'P-004' || pId === 'P-005');
 
             return (
               <div
@@ -160,7 +169,19 @@ export function NarrativeMapPage() {
 
         <div className={styles.annotationGrid}>
           {/* Card 1: Approved Annotation */}
-          <div className={[styles.annotationCard, styles.annotationApproved].join(' ')}>
+          <div
+            className={[styles.annotationCard, styles.annotationApproved].join(' ')}
+            onClick={() => setSelectedPassage('P-003')}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                setSelectedPassage('P-003');
+              }
+            }}
+            aria-label="Inspect authoritative annotation for Air Vent"
+          >
             <div className={styles.annotationTop}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Layers size={14} color="var(--bt-accent)" aria-hidden="true" />
@@ -170,7 +191,7 @@ export function NarrativeMapPage() {
             </div>
 
             <div className={styles.annotationText}>
-              <strong>Authoritative State:</strong> Mood <code>Suspense</code>, Emotional Intensity <code>4/5</code>, Identity Revealed <code>false</code>. Verified against original source text.
+              <strong>Authoritative State:</strong> Mood <code>Suspense</code>, Emotional Intensity <code>4/5</code>, Identity Revealed <code>false</code>. Verified against original source text. Click to select in graph.
             </div>
 
             <div style={{ fontSize: '11px', color: 'var(--bt-text-muted)', display: 'flex', gap: '12px' }}>
@@ -186,16 +207,75 @@ export function NarrativeMapPage() {
                 <Sparkles size={14} color="#EAB308" aria-hidden="true" />
                 <span style={{ fontWeight: 600, fontSize: '13px' }}>P-004 · Server Vault (Identity Reveal Event)</span>
               </div>
-              <span className={styles.badgePending}>Pending Candidate</span>
+              <span className={
+                pendingStatus === 'approved'
+                  ? styles.badgeApproved
+                  : pendingStatus === 'rejected'
+                    ? styles.stepIssue
+                    : styles.badgePending
+              }>
+                {pendingStatus === 'approved' ? 'Approved (Demo)' : pendingStatus === 'rejected' ? 'Rejected (Demo)' : 'Pending Candidate'}
+              </span>
             </div>
 
             <div className={styles.annotationText}>
               <strong>Candidate Mutation:</strong> <code>traitor_identity_revealed = true</code>. Unverified demonstration event; awaiting source evidence verification before promotion.
             </div>
 
+            {/* Interactive Demo Review Action Buttons */}
+            <div className={styles.actionRow}>
+              {pendingStatus === 'pending' ? (
+                <>
+                  <button
+                    type="button"
+                    className={styles.approveBtn}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setPendingStatus('approved');
+                    }}
+                    aria-label="Approve candidate annotation"
+                  >
+                    <Check size={12} aria-hidden="true" />
+                    <span>Approve (Demo)</span>
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.rejectBtn}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setPendingStatus('rejected');
+                    }}
+                    aria-label="Reject candidate annotation"
+                  >
+                    <X size={12} aria-hidden="true" />
+                    <span>Reject</span>
+                  </button>
+                </>
+              ) : (
+                <button
+                  type="button"
+                  className={styles.rejectBtn}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setPendingStatus('pending');
+                  }}
+                  aria-label="Reset candidate annotation to pending"
+                >
+                  <RotateCcw size={12} aria-hidden="true" />
+                  <span>Reset Review State</span>
+                </button>
+              )}
+            </div>
+
+            {pendingStatus !== 'pending' && (
+              <div className={styles.demoActionNotice}>
+                Notice: Candidate status updated in local UI state. Live-sprint database persistence is gated per compliance rules.
+              </div>
+            )}
+
             <div style={{ fontSize: '11px', color: 'var(--bt-text-muted)', display: 'flex', gap: '12px' }}>
               <span>ID: <code>ann_p004_reveal_demo</code></span>
-              <span>Approval Status: <code>pending</code></span>
+              <span>Status: <code>{pendingStatus}</code></span>
             </div>
           </div>
         </div>

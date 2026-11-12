@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useState, useCallback } from 'react';
 import { Play, SkipBack, SkipForward, Volume2, Activity } from 'lucide-react';
 import { getRoute, getPassage } from '../../services/fixtures';
 import styles from './AudioTimeline.module.css';
@@ -19,6 +19,26 @@ export const AudioTimeline = memo(function AudioTimeline({
   const currentRouteId = selectedRouteId ?? 'route_b';
   const route = getRoute(currentRouteId);
   const passageIds = route ? route.passage_path : ['P-001', 'P-003', 'P-004', 'P-005'];
+
+  const [volume, setVolume] = useState(70);
+
+  const currentPassageIndex = passageIds.indexOf(selectedPassageId ?? '');
+  const canSkipBackward = currentPassageIndex > 0;
+  const canSkipForward = currentPassageIndex < passageIds.length - 1;
+
+  const handleSkipBackward = useCallback(() => {
+    if (canSkipBackward) {
+      onSelectPassage?.(passageIds[currentPassageIndex - 1]);
+    }
+  }, [canSkipBackward, currentPassageIndex, passageIds, onSelectPassage]);
+
+  const handleSkipForward = useCallback(() => {
+    if (canSkipForward) {
+      onSelectPassage?.(passageIds[currentPassageIndex + 1]);
+    } else if (currentPassageIndex === -1 && passageIds.length > 0) {
+      onSelectPassage?.(passageIds[0]);
+    }
+  }, [canSkipForward, currentPassageIndex, passageIds, onSelectPassage]);
 
   // Calculate passage segment widths (in percentage) along the timeline
   // Total design fixture duration = 272s (04:32). Air Vent entry boundary is at ~84s (01:24 / ~30.8%).
@@ -50,8 +70,13 @@ export const AudioTimeline = memo(function AudioTimeline({
           <button
             type="button"
             className={styles.transportBtn}
-            disabled
-            title="Skip backward — disabled: no audio loaded"
+            onClick={handleSkipBackward}
+            disabled={!canSkipBackward}
+            title={
+              canSkipBackward
+                ? `Skip backward to ${passageIds[currentPassageIndex - 1]}`
+                : 'At start of route sequence'
+            }
             aria-label="Skip backward"
           >
             <SkipBack size={13} aria-hidden="true" />
@@ -68,8 +93,13 @@ export const AudioTimeline = memo(function AudioTimeline({
           <button
             type="button"
             className={styles.transportBtn}
-            disabled
-            title="Skip forward — disabled: no audio loaded"
+            onClick={handleSkipForward}
+            disabled={!canSkipForward}
+            title={
+              canSkipForward
+                ? `Skip forward to ${passageIds[currentPassageIndex + 1]}`
+                : 'At end of route sequence'
+            }
             aria-label="Skip forward"
           >
             <SkipForward size={13} aria-hidden="true" />
@@ -124,11 +154,11 @@ export const AudioTimeline = memo(function AudioTimeline({
             type="range"
             min="0"
             max="100"
-            defaultValue="70"
+            value={volume}
+            onChange={(e) => setVolume(Number(e.target.value))}
             className={styles.volumeSlider}
-            disabled
             aria-label="Master volume"
-            title="Volume slider (disabled in demo mode)"
+            title={`Audition Volume: ${volume}%`}
           />
           <span title="Waveform monitor">
             <Activity size={14} aria-hidden="true" />

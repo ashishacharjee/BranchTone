@@ -66,25 +66,40 @@ export function OverviewPage() {
 
       {/* ── Metrics Row ─────────────────────────────────────────────── */}
       <div className={styles.metricGrid}>
-        <div className={styles.metricCard}>
+        <button
+          type="button"
+          className={styles.metricCard}
+          onClick={() => navigate('/story-graph')}
+          title="Open Story Graph workspace"
+        >
           <div className={styles.metricHeader}>
             <span>Passages</span>
             <Layers size={14} aria-hidden="true" />
           </div>
           <div className={styles.metricValue}>{passages.length}</div>
           <div className={styles.metricSubtext}>5 nodes mapped across 2 routes</div>
-        </div>
+        </button>
 
-        <div className={styles.metricCard}>
+        <button
+          type="button"
+          className={styles.metricCard}
+          onClick={() => navigate('/route-lab')}
+          title="Open Route Lab workspace"
+        >
           <div className={styles.metricHeader}>
             <span>Story Transitions</span>
             <GitBranch size={14} aria-hidden="true" />
           </div>
           <div className={styles.metricValue}>{edges.length}</div>
           <div className={styles.metricSubtext}>All structural edges valid</div>
-        </div>
+        </button>
 
-        <div className={styles.metricCard}>
+        <button
+          type="button"
+          className={styles.metricCard}
+          onClick={() => navigate('/validation-centre')}
+          title="Open Validation Centre workspace"
+        >
           <div className={styles.metricHeader}>
             <span>Active Issues</span>
             <ShieldAlert size={14} color="var(--bt-error)" aria-hidden="true" />
@@ -93,16 +108,21 @@ export function OverviewPage() {
             {findings.length}
           </div>
           <div className={styles.metricSubtext}>BT-001 Reveal Protection (High)</div>
-        </div>
+        </button>
 
-        <div className={styles.metricCard}>
+        <button
+          type="button"
+          className={styles.metricCard}
+          onClick={() => navigate('/reports')}
+          title="Open Reports & Export workspace"
+        >
           <div className={styles.metricHeader}>
             <span>Validation Coverage</span>
             <CheckCircle2 size={14} aria-hidden="true" />
           </div>
           <div className={styles.metricValueNotEvaluated}>Not evaluated</div>
           <div className={styles.metricSubtext}>Requires route exploration engine</div>
-        </div>
+        </button>
       </div>
 
       {/* ── Main Content Grid ────────────────────────────────────────── */}
@@ -189,6 +209,16 @@ export function OverviewPage() {
                 <span style={{ color: 'var(--bt-text-secondary)' }}>Decoded Audio Duration:</span>
                 <span style={{ color: 'var(--bt-text-muted)' }}>Unavailable (no audio bytes)</span>
               </div>
+
+              <button
+                type="button"
+                className={styles.findingActionBtn}
+                style={{ marginTop: '6px' }}
+                onClick={() => navigate('/cue-library')}
+              >
+                <span>Inspect in Cue Library</span>
+                <ArrowRight size={13} aria-hidden="true" />
+              </button>
             </div>
           </div>
 
