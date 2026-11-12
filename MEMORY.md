@@ -2,6 +2,16 @@
 
 **Updated:** 12 November 2026. Keep this file factual and short. Update only after a decision or verification.
 
+## Antigravity Design Expert Skill Installation & Spatial Polish (12 Nov 2026)
+
+- Installed `antigravity-design-expert` skill globally and in workspace at `.agents/skills/antigravity-design-expert/SKILL.md` via `npx agentic-awesome-skills`.
+- Integrated 3D perspective layers (`--bt-perspective: 1200px;`) and weightless spatial floating drop-shadows (`--bt-shadow-antigravity`) with hairline top highlights.
+- Implemented staggered entrance physics (`@keyframes antigravityFloatIn`) and accessibility motion fallbacks (`prefers-reduced-motion: reduce`).
+- Enhanced `JudgeTourModal` and `KeyboardShortcutsModal` to mount via `createPortal(..., document.body)`, breaking out of the Topbar containing block and ensuring centered presentation on all viewport heights.
+- Verified by autonomous Browser QA Subagent (`79b3b05b-79d8-48c8-9ad9-fcef922d04e0`): 0 console errors, verified 24px micro-dot grid, liquid glass cards, and smooth modal flows.
+- 100% test integrity: 43 Vitest frontend tests pass, 11 Pytest backend tests pass, production build verified.
+- Live Vercel production deployment: `https://branchtone.vercel.app` (alias `https://branchtone-k99c.vercel.app`).
+
 ## Michele Du Framer Liquid-Glass Design Elevation & Vercel Production (12 Nov 2026)
 
 - Comprehensive visual elevation inspired by the Framer portfolio benchmark (`https://micheledu.com/`).
