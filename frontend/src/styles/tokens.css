@@ -95,9 +95,9 @@
   --bt-space-7: 32px;
   --bt-space-8: 40px;
 
-  /* ── Font Families ────────────────────────────────────────────────────── */
-  --bt-font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --bt-font-mono: 'IBM Plex Mono', 'Geist Mono', SFMono-Regular, Consolas, monospace;
+  /* ── Font Families (Apple SF Pro & SF Mono priority) ─────────────────── */
+  --bt-font-ui: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', system-ui, sans-serif;
+  --bt-font-mono: 'SF Mono', 'IBM Plex Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* ── Font Sizes ───────────────────────────────────────────────────────── */
   --bt-text-2xs: 10px;
@@ -109,9 +109,13 @@
   --bt-text-xl: 18px;
   --bt-text-2xl: 22px;
   --bt-text-3xl: 28px;
+  --bt-text-4xl: 36px;
+  --bt-text-hero: 44px;
 
-  /* ── Transitions ──────────────────────────────────────────────────────── */
-  --bt-transition-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
-  --bt-transition: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  --bt-transition-slow: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  /* ── Apple Spring Transitions ─────────────────────────────────────────── */
+  --bt-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --bt-spring-snappy: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --bt-transition-fast: 0.15s var(--bt-spring);
+  --bt-transition: 0.25s var(--bt-spring);
+  --bt-transition-slow: 0.4s var(--bt-spring);
 }

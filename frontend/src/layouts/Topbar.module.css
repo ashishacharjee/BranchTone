@@ -141,6 +141,10 @@
   transform: translateY(-1px);
 }
 
+.judgeTourBtn:active {
+  transform: scale(0.97);
+}
+
 .shortcutBtn {
   display: inline-flex;
   align-items: center;
@@ -153,13 +157,17 @@
   font-family: var(--bt-font-mono);
   font-size: 11px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .shortcutBtn:hover {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.16);
   color: #FFFFFF;
+}
+
+.shortcutBtn:active {
+  transform: scale(0.97);
 }
 
 /* ── Spacer ─────────────────────────────────────────────────────────────── */
