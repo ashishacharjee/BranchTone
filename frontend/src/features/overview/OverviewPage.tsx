@@ -26,6 +26,7 @@ import {
 } from '../../services/fixtures';
 import { playAuditionTone, playCueTriggerSound } from '../../services/synth';
 import { useWorkspaceStore } from '../../stores/workspace';
+import { JudgeTourModal } from '../../components/JudgeTourModal';
 import styles from './OverviewPage.module.css';
 
 export function OverviewPage() {
@@ -38,6 +39,7 @@ export function OverviewPage() {
   const audioAssets = getAudioAssets();
 
   const [isPlayingAudition, setIsPlayingAudition] = useState(false);
+  const [isJudgeTourOpen, setIsJudgeTourOpen] = useState(false);
   const navigateToFinding = useWorkspaceStore((s) => s.navigateToFinding);
   const setSelectedRoute = useWorkspaceStore((s) => s.setSelectedRoute);
   const setSelectedPassage = useWorkspaceStore((s) => s.setSelectedPassage);
@@ -110,6 +112,35 @@ export function OverviewPage() {
               <span>Format: <code>{storyVersion.story_format}</code></span>
               <span>•</span>
               <span>Engine: <code>Deterministic Rule Suite (BT-001)</code></span>
+            </div>
+
+            <div style={{ display: 'flex', gap: '10px', marginTop: '14px', alignItems: 'center', flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                className={styles.findingActionBtn}
+                onClick={() => setIsJudgeTourOpen(true)}
+                style={{
+                  padding: '8px 16px',
+                  fontSize: '12px',
+                  fontWeight: 700,
+                  background: 'linear-gradient(135deg, rgba(3, 195, 123, 0.25) 0%, rgba(3, 195, 123, 0.08) 100%)',
+                  borderColor: 'var(--bt-accent)',
+                  color: '#fff',
+                  boxShadow: '0 0 16px rgba(3, 195, 123, 0.25)',
+                }}
+              >
+                <Sparkles size={14} color="var(--bt-accent)" aria-hidden="true" />
+                <span>Start 60s Judge Walkthrough</span>
+              </button>
+              <button
+                type="button"
+                className={styles.findingActionBtn}
+                onClick={handleInspectFinding}
+                style={{ padding: '8px 14px', fontSize: '12px' }}
+              >
+                <span>Explore Story Graph</span>
+                <ArrowRight size={13} aria-hidden="true" />
+              </button>
             </div>
           </div>
 
@@ -517,6 +548,12 @@ export function OverviewPage() {
           </div>
         </div>
       </div>
+
+      {/* ── Judge 60s Walkthrough Modal ────────────────────────────────── */}
+      <JudgeTourModal
+        isOpen={isJudgeTourOpen}
+        onClose={() => setIsJudgeTourOpen(false)}
+      />
     </div>
   );
 }

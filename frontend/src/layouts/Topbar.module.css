@@ -117,6 +117,51 @@
   gap: 2px;
 }
 
+/* ── Judge Tour CTA Pill ── */
+.judgeTourBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(3, 195, 123, 0.22) 0%, rgba(3, 195, 123, 0.08) 100%);
+  border: 1px solid rgba(3, 195, 123, 0.5);
+  box-shadow: 0 0 16px rgba(3, 195, 123, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.judgeTourBtn:hover {
+  background: var(--bt-accent);
+  color: #070B0C;
+  box-shadow: 0 0 24px rgba(3, 195, 123, 0.5);
+  transform: translateY(-1px);
+}
+
+.shortcutBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--bt-text-secondary);
+  font-family: var(--bt-font-mono);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.shortcutBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: #FFFFFF;
+}
+
 /* ── Spacer ─────────────────────────────────────────────────────────────── */
 .spacer {
   flex: 1;

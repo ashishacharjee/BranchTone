@@ -136,7 +136,12 @@ export function GraphCanvas({
           stroke: strokeColor,
           strokeWidth,
           strokeDasharray,
-          transition: 'stroke 0.2s ease, stroke-width 0.2s ease',
+          filter: isOnActiveRoute
+            ? isAirVentIssueEdge
+              ? 'drop-shadow(0 0 8px rgba(240, 79, 117, 0.65))'
+              : 'drop-shadow(0 0 8px rgba(3, 195, 123, 0.5))'
+            : undefined,
+          transition: 'stroke 0.2s ease, stroke-width 0.2s ease, filter 0.2s ease',
         },
       };
     });

@@ -18,9 +18,15 @@ import {
   ShieldAlert,
   ArrowRight,
   Info,
+  Sparkles,
+  Keyboard,
 } from 'lucide-react';
 import { getPassages, getAllFindings } from '../services/fixtures';
 import { useWorkspaceStore } from '../stores/workspace';
+import { playAuditionTone, playCueTriggerSound } from '../services/synth';
+import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
+import { JudgeTourModal } from '../components/JudgeTourModal';
+import { KeyboardShortcutsModal } from '../components/KeyboardShortcutsModal';
 import styles from './Topbar.module.css';
 
 const WORKSPACE_LABELS: Record<string, string> = {
@@ -39,10 +45,37 @@ export function Topbar() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isValidationModalOpen, setIsValidationModalOpen] = useState(false);
+  const [isJudgeTourOpen, setIsJudgeTourOpen] = useState(false);
+  const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
+  const [isPlayingAudition, setIsPlayingAudition] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
 
+  const selectedRouteId = useWorkspaceStore((state) => state.selectedRouteId);
   const setSelectedPassage = useWorkspaceStore((state) => state.setSelectedPassage);
   const navigateToFinding = useWorkspaceStore((state) => state.navigateToFinding);
+
+  // Global hotkeys hook
+  useKeyboardShortcuts({
+    onOpenTour: () => setIsJudgeTourOpen(true),
+    onOpenShortcuts: () => setIsShortcutsOpen(true),
+    onCloseModals: () => {
+      setIsValidationModalOpen(false);
+      setIsJudgeTourOpen(false);
+      setIsShortcutsOpen(false);
+    },
+  });
+
+  const handleAuditionToggle = () => {
+    setIsPlayingAudition(true);
+    playAuditionTone(440, 0.18);
+    setTimeout(() => {
+      playAuditionTone(selectedRouteId === 'route_b' ? 493.88 : 523.25, 0.18);
+    }, 200);
+    setTimeout(() => {
+      playCueTriggerSound(selectedRouteId === 'route_b');
+      setIsPlayingAudition(false);
+    }, 420);
+  };
 
   const passages = getPassages();
   const findings = getAllFindings();
@@ -220,6 +253,48 @@ export function Topbar() {
         )}
       </div>
 
+      {/* ── Judge Tour 60s CTA ───────────────────────────────────────── */}
+      <button
+        type="button"
+        className={styles.judgeTourBtn}
+        onClick={() => setIsJudgeTourOpen(true)}
+        title="Open interactive 60-second walkthrough for hackathon judges (Hot key: T)"
+      >
+        <Sparkles size={14} aria-hidden="true" />
+        <span>Judge Tour (60s)</span>
+      </button>
+
+      {/* ── Music Glass Audition Pill ─────────────────────────────────── */}
+      <button
+        type="button"
+        className={[styles.musicGlassBtn, isPlayingAudition ? styles.musicGlassBtnActive : ''].join(' ')}
+        onClick={handleAuditionToggle}
+        disabled={isPlayingAudition}
+        title="Audition synthesized route traversal & defect alert (Hotkey: Space)"
+      >
+        <div
+          className={[styles.equalizer, isPlayingAudition ? 'equalizer-playing' : ''].join(' ')}
+          aria-hidden="true"
+        >
+          <span className="equalizer-bar" style={{ height: isPlayingAudition ? undefined : '4px' }} />
+          <span className="equalizer-bar" style={{ height: isPlayingAudition ? undefined : '9px' }} />
+          <span className="equalizer-bar" style={{ height: isPlayingAudition ? undefined : '6px' }} />
+          <span className="equalizer-bar" style={{ height: isPlayingAudition ? undefined : '11px' }} />
+        </div>
+        <span>{isPlayingAudition ? 'Auditioning...' : 'Audition Sound'}</span>
+      </button>
+
+      {/* ── Keyboard Shortcuts Button ─────────────────────────────────── */}
+      <button
+        type="button"
+        className={styles.shortcutBtn}
+        onClick={() => setIsShortcutsOpen(true)}
+        title="View studio keyboard shortcuts (Hotkey: ?)"
+      >
+        <Keyboard size={13} aria-hidden="true" />
+        <span>Hotkeys</span>
+      </button>
+
       {/* ── Undo / Redo ──────────────────────────────────────────────── */}
       <div className={styles.historyBtns} role="group" aria-label="Edit history">
         <button
@@ -335,6 +410,18 @@ export function Topbar() {
           </div>
         </div>
       )}
+
+      {/* ── Judge 60s Walkthrough Modal ──────────────────────────────── */}
+      <JudgeTourModal
+        isOpen={isJudgeTourOpen}
+        onClose={() => setIsJudgeTourOpen(false)}
+      />
+
+      {/* ── Studio Keyboard Shortcuts Modal ───────────────────────────── */}
+      <KeyboardShortcutsModal
+        isOpen={isShortcutsOpen}
+        onClose={() => setIsShortcutsOpen(false)}
+      />
     </header>
   );
 }
