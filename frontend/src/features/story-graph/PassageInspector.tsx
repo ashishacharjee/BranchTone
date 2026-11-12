@@ -269,7 +269,7 @@ export function PassageInspector({
 function InspectorThumbnail({ passageId }: { passageId: string }) {
   if (passageId === 'P-003') {
     return (
-      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
         <rect width="48" height="48" fill="#15080C" />
         <rect x="4" y="4" width="40" height="40" stroke="#F04F75" strokeWidth="1.5" strokeOpacity="0.8" fill="#1C0D13" />
         <rect x="12" y="12" width="24" height="24" stroke="#853C65" strokeWidth="1" fill="#0C0407" />
@@ -279,7 +279,7 @@ function InspectorThumbnail({ passageId }: { passageId: string }) {
     );
   }
   return (
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
       <rect width="48" height="48" fill="#0E1817" />
       <rect x="6" y="6" width="36" height="36" stroke="#29C98A" strokeWidth="1.5" strokeOpacity="0.6" fill="#132321" />
       <line x1="6" y1="6" x2="16" y2="16" stroke="#29C98A" strokeWidth="1" strokeOpacity="0.4" />

@@ -1,3 +1,4 @@
+/* Hallmark · checked: 2026-11-12 · genre: atmospheric · built: the project · redesign: polish · v2.0.0 */
 /* ── Apple-grade Cinematic Ambient Aurora Background ──────────────────────── */
 .backgroundContainer {
   position: fixed;
@@ -5,14 +6,14 @@
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
-  background-color: #07090A;
+  background-color: var(--bt-bg);
 }
 
 /* ── Deep Field Base ─────────────────────────────────────────────────────── */
 .deepField {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 100% 70% at 50% -10%, #0D1416 0%, #07090A 60%, #040506 100%);
+  background: radial-gradient(ellipse 100% 70% at 50% -10%, var(--bt-aurora-deep-1) 0%, var(--bt-aurora-deep-2) 60%, var(--bt-aurora-deep-3) 100%);
 }
 
 /* ── Aurora Mesh Layer ───────────────────────────────────────────────────── */
@@ -38,7 +39,7 @@
   height: 720px;
   top: -160px;
   left: 28%;
-  background: radial-gradient(circle, rgba(3, 195, 123, 0.28) 0%, rgba(3, 195, 123, 0.08) 50%, transparent 70%);
+  background: radial-gradient(circle, var(--bt-aurora-emerald-1) 0%, var(--bt-aurora-emerald-2) 50%, transparent 70%);
   animation: auroraDriftEmerald 22s ease-in-out infinite alternate;
 }
 
@@ -48,7 +49,7 @@
   height: 640px;
   top: 25%;
   left: -120px;
-  background: radial-gradient(circle, rgba(14, 165, 233, 0.2) 0%, rgba(20, 184, 166, 0.06) 50%, transparent 70%);
+  background: radial-gradient(circle, var(--bt-aurora-cyan-1) 0%, var(--bt-aurora-cyan-2) 50%, transparent 70%);
   animation: auroraDriftCyan 26s ease-in-out infinite alternate;
 }
 
@@ -58,7 +59,7 @@
   height: 680px;
   bottom: -140px;
   right: -80px;
-  background: radial-gradient(circle, rgba(240, 79, 117, 0.18) 0%, rgba(158, 63, 117, 0.05) 50%, transparent 70%);
+  background: radial-gradient(circle, var(--bt-aurora-burgundy-1) 0%, var(--bt-aurora-burgundy-2) 50%, transparent 70%);
   animation: auroraDriftBurgundy 28s ease-in-out infinite alternate;
 }
 
@@ -70,8 +71,8 @@
   --spotlight-y: 35vh;
   background: radial-gradient(
     650px circle at var(--spotlight-x) var(--spotlight-y),
-    rgba(3, 195, 123, 0.12) 0%,
-    rgba(3, 195, 123, 0.04) 35%,
+    var(--bt-aurora-spotlight-1) 0%,
+    var(--bt-aurora-spotlight-2) 35%,
     transparent 65%
   );
   mix-blend-mode: screen;
@@ -82,7 +83,7 @@
 .dotGrid {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+  background-image: radial-gradient(var(--bt-aurora-dot) 1px, transparent 1px);
   background-size: 24px 24px;
   mask-image: radial-gradient(ellipse 90% 75% at 50% 35%, black 40%, transparent 95%);
   -webkit-mask-image: radial-gradient(ellipse 90% 75% at 50% 35%, black 40%, transparent 95%);
@@ -93,7 +94,7 @@
 .vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 0%, transparent 50%, rgba(4, 6, 7, 0.6) 100%);
+  background: radial-gradient(circle at 50% 0%, transparent 50%, var(--bt-aurora-vignette) 100%);
 }
 
 /* ── Fluid Aurora Keyframes (Hardware Accelerated) ───────────────────────── */
@@ -120,7 +121,7 @@
     transform: translate3d(90px, -60px, 0) scale(0.92) rotate(20deg);
   }
   100% {
-    transform: translate3d(-30px, 50px, 0) scale(1.15) rotate(-15deg);
+    transform: translate3d(-40px, 80px, 0) scale(1.1) rotate(-15deg);
   }
 }
 
@@ -128,20 +129,24 @@
   0% {
     transform: translate3d(0, 0, 0) scale(0.95) rotate(0deg);
   }
-  50% {
-    transform: translate3d(-70px, -50px, 0) scale(1.18) rotate(-20deg);
+  40% {
+    transform: translate3d(-70px, -50px, 0) scale(1.15) rotate(-12deg);
+  }
+  80% {
+    transform: translate3d(60px, 40px, 0) scale(1.02) rotate(18deg);
   }
   100% {
-    transform: translate3d(60px, 30px, 0) scale(1.02) rotate(15deg);
+    transform: translate3d(-20px, 20px, 0) scale(1) rotate(-5deg);
   }
 }
 
-/* ── Accessibility: Reduced Motion Fallback ──────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .auroraBlob {
+  .blobEmerald,
+  .blobCyan,
+  .blobBurgundy {
     animation: none !important;
   }
   .spotlight {
-    display: none;
+    transition: none !important;
   }
 }

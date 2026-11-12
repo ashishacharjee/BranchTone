@@ -106,12 +106,10 @@ export function OverviewPage() {
               </p>
             </div>
 
-            <div className={styles.headerMeta}>
-              <span>Source: <code>{storyVersion.source_filename}</code></span>
-              <span>•</span>
-              <span>Format: <code>{storyVersion.story_format}</code></span>
-              <span>•</span>
-              <span>Engine: <code>Deterministic Rule Suite (BT-001)</code></span>
+            <div className={styles.headerMetaPills}>
+              <span className={styles.headerMetaPill}>Source: <code>{storyVersion.source_filename}</code></span>
+              <span className={styles.headerMetaPill}>Format: <code>{storyVersion.story_format}</code></span>
+              <span className={styles.headerMetaPill}>Engine: <code>Deterministic Rule Suite (BT-001)</code></span>
             </div>
 
             <div style={{ display: 'flex', gap: '10px', marginTop: '14px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -125,7 +123,7 @@ export function OverviewPage() {
                   fontWeight: 700,
                   background: 'linear-gradient(135deg, rgba(3, 195, 123, 0.25) 0%, rgba(3, 195, 123, 0.08) 100%)',
                   borderColor: 'var(--bt-accent)',
-                  color: '#fff',
+                  color: 'var(--bt-text)',
                   boxShadow: '0 0 16px rgba(3, 195, 123, 0.25)',
                 }}
               >
@@ -160,7 +158,7 @@ export function OverviewPage() {
             </div>
 
             <div>
-              <div style={{ fontSize: '15px', fontWeight: 700, color: '#fff', marginBottom: '4px' }}>
+              <div style={{ fontSize: '15px', fontWeight: 700, color: 'var(--bt-text)', marginBottom: '4px' }}>
                 Route B Dissonance Synthesizer
               </div>
               <p className={styles.musicGlassNote}>
@@ -259,14 +257,14 @@ export function OverviewPage() {
               <span>Side-by-Side Traversal Comparison Matrix</span>
             </div>
             <p className={styles.conceptExplanation}>
-              In branching narratives, players reach scenes through different decision paths. If an ominous "Traitor Revealed" theme plays before the player discovers the conspiracy, the dramatic twist is ruined.
+              In branching narratives, players reach scenes through different decision paths. If an ominous “Traitor Revealed” theme plays before the player discovers the conspiracy, the dramatic twist is ruined.
             </p>
 
             <div className={styles.routeComparisonGrid}>
               <div className={[styles.routeComparisonCard, styles.routeClean].join(' ')}>
                 <div className={styles.routeCardHeader}>
                   <span className={styles.routeName}>
-                    <Check size={14} color="var(--bt-accent)" />
+                    <Check size={14} color="var(--bt-accent)" aria-hidden="true" />
                     Route A: Archives Investigation
                   </span>
                   <span className={styles.routeStatusBadgeClean}>✓ Verified Clean</span>
@@ -291,7 +289,7 @@ export function OverviewPage() {
               <div className={[styles.routeComparisonCard, styles.routeDefect].join(' ')}>
                 <div className={styles.routeCardHeader}>
                   <span className={styles.routeName}>
-                    <AlertTriangle size={14} color="var(--bt-error)" />
+                    <AlertTriangle size={14} color="var(--bt-error)" aria-hidden="true" />
                     Route B: Stealth Ductwork
                   </span>
                   <span className={styles.routeStatusBadgeDefect}>⚠ BT-001 Premature Cue</span>
@@ -325,7 +323,7 @@ export function OverviewPage() {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <div style={{ fontSize: '14px', fontWeight: 600, color: '#fff' }}>
+              <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--bt-text)' }}>
                 Passage: Air Vent (P-003)
               </div>
               <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
@@ -344,7 +342,7 @@ export function OverviewPage() {
                 color: 'rgba(255, 255, 255, 0.75)',
                 lineHeight: 1.5,
               }}>
-                "The air here smells of copper and burnt insulation. Through the slatted grille, the server vault hums below. One false move and the entire garrison will hear."
+                “The air here smells of copper and burnt insulation. Through the slatted grille, the server vault hums below. One false move and the entire garrison will hear.”
               </blockquote>
             </div>
 
@@ -437,7 +435,7 @@ export function OverviewPage() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 <div className={styles.inventoryRow}>
                   <span style={{ color: 'var(--bt-text-secondary)' }}>Configured Cues:</span>
-                  <span style={{ fontWeight: 600, color: '#fff', fontFamily: 'var(--bt-font-mono)' }}>1 (traitor_theme.wav)</span>
+                  <span style={{ fontWeight: 600, color: 'var(--bt-text)', fontFamily: 'var(--bt-font-mono)' }}>1 (traitor_theme.wav)</span>
                 </div>
                 <div className={styles.inventoryRow}>
                   <span style={{ color: 'var(--bt-text-secondary)' }}>Missing Media File:</span>

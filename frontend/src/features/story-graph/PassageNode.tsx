@@ -103,7 +103,7 @@ function NodeThumbnail({ passageId }: { passageId: string }) {
   if (passageId === 'P-001') {
     // Lobby: perspective hallway with ceiling lights
     return (
-      <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+      <svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">
         <rect width="52" height="52" fill="#0A1315" />
         <path d="M0 0L20 18H32L52 0V52L32 34H20L0 52V0Z" fill="#122022" />
         <rect x="22" y="20" width="8" height="12" fill="#1A332C" />
@@ -116,7 +116,7 @@ function NodeThumbnail({ passageId }: { passageId: string }) {
   if (passageId === 'P-002') {
     // Archives: tall bookshelves perspective with warm glow
     return (
-      <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+      <svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">
         <rect width="52" height="52" fill="#0E1210" />
         <rect x="4" y="6" width="12" height="40" fill="#1F2820" />
         <rect x="36" y="6" width="12" height="40" fill="#1F2820" />
@@ -131,7 +131,7 @@ function NodeThumbnail({ passageId }: { passageId: string }) {
   if (passageId === 'P-003') {
     // Air Vent: dark metal ventilation duct, square tunnel receding into dark with subtle red threat
     return (
-      <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+      <svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">
         <rect width="52" height="52" fill="#11080B" />
         <rect x="4" y="4" width="44" height="44" stroke="#421A26" strokeWidth="2" fill="#190F14" />
         <rect x="12" y="12" width="28" height="28" stroke="#68243A" strokeWidth="1.5" fill="#10080B" />
@@ -146,7 +146,7 @@ function NodeThumbnail({ passageId }: { passageId: string }) {
   if (passageId === 'P-004') {
     // Server Vault: blue/emerald server racks with blinking activity lights
     return (
-      <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+      <svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">
         <rect width="52" height="52" fill="#091216" />
         <rect x="6" y="8" width="14" height="36" fill="#101F26" />
         <rect x="32" y="8" width="14" height="36" fill="#101F26" />
@@ -161,7 +161,7 @@ function NodeThumbnail({ passageId }: { passageId: string }) {
   }
   // Safe House: interior room with warm light
   return (
-    <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+    <svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">
       <rect width="52" height="52" fill="#121510" />
       <path d="M8 44L14 18L38 18L44 44H8Z" fill="#24281E" />
       <rect x="22" y="22" width="8" height="12" fill="#D9A65D" fillOpacity="0.4" />

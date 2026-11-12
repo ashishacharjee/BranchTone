@@ -23,6 +23,26 @@
   --bt-glass: rgba(14, 20, 22, 0.75);
   --bt-glass-elevated: rgba(20, 28, 31, 0.85);
   --bt-glass-border: rgba(255, 255, 255, 0.08);
+  --bt-overlay-bg: rgba(0, 0, 0, 0.75);
+  --bt-hover-surface: rgba(255, 255, 255, 0.1);
+  --bt-hover-surface-subtle: rgba(255, 255, 255, 0.08);
+  --bt-dark-well: rgba(0, 0, 0, 0.4);
+  --bt-dark-tray: rgba(0, 0, 0, 0.2);
+
+  /* ── Ambient Background & Aurora Tokens ────────────────────────────────── */
+  --bt-aurora-deep-1: #0D1416;
+  --bt-aurora-deep-2: #07090A;
+  --bt-aurora-deep-3: #040506;
+  --bt-aurora-emerald-1: rgba(3, 195, 123, 0.28);
+  --bt-aurora-emerald-2: rgba(3, 195, 123, 0.08);
+  --bt-aurora-cyan-1: rgba(14, 165, 233, 0.2);
+  --bt-aurora-cyan-2: rgba(20, 184, 166, 0.06);
+  --bt-aurora-burgundy-1: rgba(240, 79, 117, 0.18);
+  --bt-aurora-burgundy-2: rgba(158, 63, 117, 0.05);
+  --bt-aurora-spotlight-1: rgba(3, 195, 123, 0.12);
+  --bt-aurora-spotlight-2: rgba(3, 195, 123, 0.04);
+  --bt-aurora-dot: rgba(255, 255, 255, 0.09);
+  --bt-aurora-vignette: rgba(4, 6, 7, 0.6);
 
   /* ── Borders ──────────────────────────────────────────────────────────── */
   --bt-border: rgba(255, 255, 255, 0.08);

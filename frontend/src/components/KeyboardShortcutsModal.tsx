@@ -46,7 +46,7 @@ export function KeyboardShortcutsModal({ isOpen, onClose }: KeyboardShortcutsMod
             </h2>
           </div>
           <button type="button" className={styles.closeBtn} onClick={onClose} aria-label="Close shortcuts">
-            <X size={15} />
+            <X size={15} aria-hidden="true" />
           </button>
         </div>
 

@@ -57,8 +57,8 @@ export function JudgeTourModal({ isOpen, onClose }: JudgeTourModalProps) {
         'In non-linear interactive fiction and narrative games, players take distinct routes through scenes. Naive audio triggers attached to passages often trigger premature cues — playing an ominous traitor theme before the player has uncovered the conspiracy!',
       content: (
         <div className={styles.interactiveCard}>
-          <div style={{ display: 'flex', gap: '8px', alignItems: 'center', color: '#fff', fontSize: '13px', fontWeight: 600 }}>
-            <AlertTriangle size={16} color="var(--bt-error)" />
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center', color: 'var(--bt-text)', fontSize: '13px', fontWeight: 600 }}>
+            <AlertTriangle size={16} color="var(--bt-error)" aria-hidden="true" />
             <span>Story Fact vs Cue Synchronization</span>
           </div>
           <div className={styles.codeSnippet}>
@@ -77,11 +77,11 @@ export function JudgeTourModal({ isOpen, onClose }: JudgeTourModalProps) {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '12px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 10px', background: 'rgba(3, 195, 123, 0.1)', border: '1px solid rgba(3, 195, 123, 0.3)', borderRadius: '8px' }}>
               <span style={{ color: 'var(--bt-accent)', fontWeight: 600 }}>Route A (Archives):</span>
-              <span style={{ color: '#fff' }}>Sen reads dossier → Learns traitor identity → Valid Cue</span>
+              <span style={{ color: 'var(--bt-text)' }}>Sen reads dossier → Learns traitor identity → Valid Cue</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 10px', background: 'rgba(240, 79, 117, 0.12)', border: '1px solid rgba(240, 79, 117, 0.4)', borderRadius: '8px' }}>
               <span style={{ color: 'var(--bt-error)', fontWeight: 600 }}>Route B (Air Vent):</span>
-              <span style={{ color: '#fff' }}>Sen bypasses hallway in ductwork → Unaware → Premature Cue!</span>
+              <span style={{ color: 'var(--bt-text)' }}>Sen bypasses hallway in ductwork → Unaware → Premature Cue!</span>
             </div>
           </div>
         </div>
@@ -103,7 +103,7 @@ export function JudgeTourModal({ isOpen, onClose }: JudgeTourModalProps) {
               borderRadius: '12px',
               background: 'linear-gradient(135deg, rgba(3, 195, 123, 0.25) 0%, rgba(3, 195, 123, 0.08) 100%)',
               border: '1px solid var(--bt-accent)',
-              color: '#fff',
+              color: 'var(--bt-text)',
               fontSize: '13px',
               fontWeight: 700,
               cursor: 'pointer',
@@ -114,7 +114,7 @@ export function JudgeTourModal({ isOpen, onClose }: JudgeTourModalProps) {
               boxShadow: '0 0 16px rgba(3, 195, 123, 0.3)',
             }}
           >
-            <Volume2 size={18} color="var(--bt-accent)" />
+            <Volume2 size={18} color="var(--bt-accent)" aria-hidden="true" />
             <span>{isPlayingAudition ? 'Synthesizing Traversal...' : 'Click to Play Route B Defect Chord 🔊'}</span>
           </button>
         </div>
@@ -127,11 +127,11 @@ export function JudgeTourModal({ isOpen, onClose }: JudgeTourModalProps) {
         'Ready to inspect the defect in the visual workbench? Jump directly into the Story Graph with Route B active, Air Vent P-003 selected, and the BT-001 inspector open.',
       content: (
         <div className={styles.interactiveCard}>
-          <div style={{ fontSize: '13px', color: '#fff', lineHeight: 1.5 }}>
-            • Passage: <strong>Air Vent (P-003)</strong><br />
-            • Emotional Intensity: <strong>4/5 (Suspense)</strong><br />
-            • Finding: <strong>BT-001 Reveal Protection (High Severity)</strong><br />
-            • Rule Engine: <strong>Deterministic Verification</strong>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '13px', color: 'var(--bt-text)', lineHeight: 1.5 }}>
+            <div><span style={{ color: 'var(--bt-text-secondary)' }}>Passage:</span> <strong>Air Vent (P-003)</strong></div>
+            <div><span style={{ color: 'var(--bt-text-secondary)' }}>Emotional Intensity:</span> <strong>4/5 (Suspense)</strong></div>
+            <div><span style={{ color: 'var(--bt-text-secondary)' }}>Finding:</span> <strong>BT-001 Reveal Protection (High Severity)</strong></div>
+            <div><span style={{ color: 'var(--bt-text-secondary)' }}>Rule Engine:</span> <strong>Deterministic Verification</strong></div>
           </div>
         </div>
       ),
@@ -147,12 +147,12 @@ export function JudgeTourModal({ isOpen, onClose }: JudgeTourModalProps) {
           <div className={styles.headerLeft}>
             <Sparkles size={18} color="var(--bt-accent)" aria-hidden="true" />
             <h2 id="judge-tour-title" className={styles.title}>
-              GeNarrative Clash — 60s Judge Walkthrough
+              GeNarrative Clash: 60s Judge Walkthrough
             </h2>
             <span className={styles.badge}>{current.badge}</span>
           </div>
           <button type="button" className={styles.closeBtn} onClick={onClose} aria-label="Close tour">
-            <X size={16} />
+            <X size={16} aria-hidden="true" />
           </button>
         </div>
 
@@ -178,7 +178,7 @@ export function JudgeTourModal({ isOpen, onClose }: JudgeTourModalProps) {
             onClick={() => setCurrentStep((s) => Math.max(0, s - 1))}
             disabled={currentStep === 0}
           >
-            <ArrowLeft size={14} />
+            <ArrowLeft size={14} aria-hidden="true" />
             <span>Previous</span>
           </button>
 
@@ -189,7 +189,7 @@ export function JudgeTourModal({ isOpen, onClose }: JudgeTourModalProps) {
               onClick={() => setCurrentStep((s) => s + 1)}
             >
               <span>Next</span>
-              <ArrowRight size={14} />
+              <ArrowRight size={14} aria-hidden="true" />
             </button>
           ) : (
             <button
@@ -198,7 +198,7 @@ export function JudgeTourModal({ isOpen, onClose }: JudgeTourModalProps) {
               onClick={handleFinishAndInspect}
             >
               <span>Open in Story Graph</span>
-              <GitBranch size={14} />
+              <GitBranch size={14} aria-hidden="true" />
             </button>
           )}
         </div>
