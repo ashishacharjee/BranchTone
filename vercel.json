@@ -3,15 +3,13 @@
   "installCommand": "npm install",
   "buildCommand": "npm run build",
   "outputDirectory": "frontend/dist",
-  "framework": "vite",
-  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/api/v1/health",
       "destination": "/api/health"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!assets/|favicon\\.svg|api/).*)",
       "destination": "/index.html"
     }
   ]
