@@ -1,17 +1,15 @@
-/* ── Overview Workspace: Studio Aesthetic ─────────────────────────────── */
+/* ── Overview Workspace: micheledu.com-inspired Studio Aesthetic ───────── */
 .overview {
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow-y: auto;
   padding: var(--bt-space-6) var(--bt-space-8);
-  background: radial-gradient(circle at 50% 0%, rgba(41, 201, 138, 0.04) 0%, transparent 60%),
-              radial-gradient(circle at 90% 20%, rgba(240, 79, 117, 0.03) 0%, transparent 40%),
-              var(--bt-bg);
+  background: var(--bt-bg-gradient);
 }
 
 .container {
-  max-width: 1360px;
+  max-width: var(--bt-max-content-width);
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -20,18 +18,18 @@
   padding-bottom: var(--bt-space-8);
 }
 
-/* ── Header ─────────────────────────────────────────────────────────────── */
+/* ── Top Header ─────────────────────────────────────────────────────────── */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--bt-space-6);
-  padding: var(--bt-space-5) var(--bt-space-6);
-  background: var(--bt-surface);
+  padding: 24px 28px;
+  background: var(--bt-card-bg);
   border: 1px solid var(--bt-border);
   border-radius: var(--bt-radius-lg);
-  box-shadow: var(--bt-shadow-sm);
-  backdrop-filter: blur(12px);
+  box-shadow: var(--bt-shadow-md);
+  backdrop-filter: blur(16px);
   position: relative;
   overflow: hidden;
 }
@@ -43,42 +41,42 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(41, 201, 138, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(3, 195, 123, 0.4), transparent);
 }
 
 .headerLeft {
   display: flex;
   flex-direction: column;
-  gap: var(--bt-space-2);
+  gap: 6px;
 }
 
 .titleRow {
   display: flex;
   align-items: center;
-  gap: var(--bt-space-3);
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .title {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
-  color: var(--bt-text);
-  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  letter-spacing: -0.025em;
   margin: 0;
   display: flex;
   align-items: center;
-  gap: var(--bt-space-3);
+  gap: 10px;
 }
 
 .versionBadge {
   font-family: var(--bt-font-mono);
   font-size: 11px;
   font-weight: 600;
-  padding: 3px 8px;
+  padding: 3px 9px;
   border-radius: var(--bt-radius-full);
-  background: rgba(41, 201, 138, 0.12);
+  background: rgba(3, 195, 123, 0.12);
   color: var(--bt-accent);
-  border: 1px solid rgba(41, 201, 138, 0.28);
+  border: 1px solid rgba(3, 195, 123, 0.3);
   letter-spacing: 0.02em;
 }
 
@@ -86,8 +84,8 @@
   font-size: 13px;
   color: var(--bt-text-secondary);
   margin: 0;
-  max-width: 720px;
-  line-height: 1.5;
+  max-width: 780px;
+  line-height: 1.55;
 }
 
 .headerMeta {
@@ -110,6 +108,163 @@
   padding: 0;
 }
 
+/* ── Concept & Hackathon Walkthrough Card ───────────────────────────────── */
+.conceptCard {
+  background: linear-gradient(180deg, rgba(20, 28, 30, 0.85) 0%, rgba(13, 19, 21, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: var(--bt-radius-lg);
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: var(--bt-shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.conceptCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--bt-accent), transparent 60%, var(--bt-error));
+}
+
+.conceptTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.conceptTitle {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bt-text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.conceptExplanation {
+  font-size: 13px;
+  color: var(--bt-text-secondary);
+  line-height: 1.6;
+  max-width: 860px;
+  margin: 0;
+}
+
+/* Route Comparison Matrix */
+.routeComparisonGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.routeComparisonCard {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-md);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all var(--bt-transition);
+}
+
+.routeComparisonCard:hover {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.routeClean {
+  border-left: 3px solid var(--bt-accent);
+}
+
+.routeDefect {
+  border-left: 3px solid var(--bt-error);
+}
+
+.routeCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.routeName {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.routeStatusBadgeClean {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 7px;
+  border-radius: var(--bt-radius-full);
+  background: rgba(3, 195, 123, 0.15);
+  color: var(--bt-accent);
+  border: 1px solid rgba(3, 195, 123, 0.35);
+}
+
+.routeStatusBadgeDefect {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 7px;
+  border-radius: var(--bt-radius-full);
+  background: rgba(240, 79, 117, 0.15);
+  color: var(--bt-error);
+  border: 1px solid rgba(240, 79, 117, 0.35);
+}
+
+.routePathSteps {
+  font-family: var(--bt-font-mono);
+  font-size: 11px;
+  color: var(--bt-text-secondary);
+  line-height: 1.5;
+}
+
+.routeSummaryText {
+  font-size: 12px;
+  color: var(--bt-text-muted);
+  line-height: 1.5;
+}
+
+.auditionActionBtn {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: var(--bt-radius-full);
+  background: rgba(3, 195, 123, 0.15);
+  border: 1px solid var(--bt-accent);
+  color: var(--bt-accent);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--bt-transition);
+}
+
+.auditionActionBtn:hover {
+  background: var(--bt-accent);
+  color: #080C0D;
+  box-shadow: 0 0 16px rgba(3, 195, 123, 0.4);
+  transform: translateY(-1px);
+}
+
 /* ── Metric Cards ───────────────────────────────────────────────────────── */
 .metricGrid {
   display: grid;
@@ -118,19 +273,20 @@
 }
 
 .metricCard {
-  background: var(--bt-surface);
+  background: var(--bt-card-bg);
   border: 1px solid var(--bt-border);
   border-radius: var(--bt-radius-lg);
-  padding: var(--bt-space-5);
+  padding: 20px 22px;
   display: flex;
   flex-direction: column;
-  gap: var(--bt-space-2);
+  gap: 6px;
   cursor: pointer;
   text-align: left;
   position: relative;
   overflow: hidden;
   transition: all var(--bt-transition);
   box-shadow: var(--bt-shadow-sm);
+  backdrop-filter: blur(12px);
 }
 
 .metricCard::before {
@@ -146,9 +302,9 @@
 
 .metricCard:hover {
   background: var(--bt-surface-2);
-  border-color: rgba(41, 201, 138, 0.4);
+  border-color: rgba(3, 195, 123, 0.4);
   transform: translateY(-2px);
-  box-shadow: var(--bt-shadow-md), 0 0 20px rgba(41, 201, 138, 0.06);
+  box-shadow: var(--bt-shadow-md), 0 0 20px rgba(3, 195, 123, 0.08);
 }
 
 .metricCard:hover::before {
@@ -165,8 +321,8 @@
   align-items: center;
   justify-content: space-between;
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-weight: 700;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--bt-text-muted);
 }
@@ -174,7 +330,7 @@
 .metricIconWrap {
   width: 28px;
   height: 28px;
-  border-radius: var(--bt-radius-md);
+  border-radius: var(--bt-radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -185,17 +341,16 @@
 }
 
 .metricCard:hover .metricIconWrap {
-  background: rgba(41, 201, 138, 0.15);
-  border-color: rgba(41, 201, 138, 0.3);
+  background: rgba(3, 195, 123, 0.15);
+  border-color: rgba(3, 195, 123, 0.35);
   color: var(--bt-accent);
 }
 
 .metricValue {
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 700;
-  color: var(--bt-text);
-  font-family: var(--bt-font-sans);
-  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  letter-spacing: -0.025em;
   line-height: 1.1;
   margin-top: 2px;
 }
@@ -224,22 +379,33 @@
 }
 
 .panel {
-  background: var(--bt-surface);
+  background: var(--bt-card-bg);
   border: 1px solid var(--bt-border);
   border-radius: var(--bt-radius-lg);
-  padding: var(--bt-space-6);
+  padding: 24px;
   display: flex;
   flex-direction: column;
   gap: var(--bt-space-4);
   box-shadow: var(--bt-shadow-sm);
+  backdrop-filter: blur(14px);
   position: relative;
+}
+
+.panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
 }
 
 .panelHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: var(--bt-space-3);
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--bt-border);
 }
 
@@ -251,7 +417,7 @@
   color: var(--bt-text);
   display: flex;
   align-items: center;
-  gap: var(--bt-space-2);
+  gap: 8px;
 }
 
 .panelDesc {
@@ -263,15 +429,15 @@
 
 /* ── Finding Item ───────────────────────────────────────────────────────── */
 .findingCard {
-  background: linear-gradient(180deg, rgba(240, 79, 117, 0.05) 0%, rgba(13, 20, 22, 0.8) 100%);
+  background: linear-gradient(180deg, rgba(240, 79, 117, 0.08) 0%, rgba(18, 22, 24, 0.9) 100%);
   border: 1px solid rgba(240, 79, 117, 0.35);
   border-radius: var(--bt-radius-md);
-  padding: var(--bt-space-5);
+  padding: 18px 20px;
   display: flex;
   flex-direction: column;
-  gap: var(--bt-space-3);
+  gap: 12px;
   position: relative;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
 .findingTop {
@@ -283,12 +449,12 @@
 .findingIdGroup {
   display: flex;
   align-items: center;
-  gap: var(--bt-space-2);
+  gap: 8px;
 }
 
 .findingCode {
   font-family: var(--bt-font-mono);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--bt-error);
   letter-spacing: 0.02em;
@@ -308,10 +474,10 @@
 
 .findingDesc {
   font-size: 13px;
-  color: var(--bt-text);
-  line-height: 1.55;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 10px 14px;
+  color: #FFFFFF;
+  line-height: 1.6;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 12px 14px;
   border-radius: var(--bt-radius-sm);
   border-left: 3px solid var(--bt-error);
 }
@@ -319,7 +485,7 @@
 .findingMeta {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--bt-space-4);
+  gap: 16px;
   font-size: 11px;
   color: var(--bt-text-secondary);
 }
@@ -327,22 +493,22 @@
 .findingMeta span {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
 }
 
 .findingMeta strong {
-  color: var(--bt-text);
+  color: #FFFFFF;
 }
 
 .findingActionBtn {
   align-self: flex-start;
   display: inline-flex;
   align-items: center;
-  gap: var(--bt-space-2);
+  gap: 8px;
   padding: 8px 16px;
-  border-radius: var(--bt-radius-md);
-  background: rgba(41, 201, 138, 0.12);
-  border: 1px solid rgba(41, 201, 138, 0.35);
+  border-radius: var(--bt-radius-sm);
+  background: rgba(3, 195, 123, 0.15);
+  border: 1px solid var(--bt-accent);
   color: var(--bt-accent);
   font-size: 12px;
   font-weight: 600;
@@ -352,9 +518,8 @@
 
 .findingActionBtn:hover {
   background: var(--bt-accent);
-  color: #070B0C;
-  border-color: var(--bt-accent);
-  box-shadow: 0 0 12px rgba(41, 201, 138, 0.4);
+  color: #080C0D;
+  box-shadow: 0 0 12px rgba(3, 195, 123, 0.4);
   transform: translateY(-1px);
 }
 
@@ -362,14 +527,14 @@
 .actionList {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--bt-space-2);
+  gap: 8px;
 }
 
 .actionItem {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 14px;
+  padding: 12px 14px;
   background: var(--bt-surface-2);
   border: 1px solid var(--bt-border);
   border-radius: var(--bt-radius-md);
@@ -382,7 +547,7 @@
 
 .actionItem:hover {
   background: var(--bt-surface-3);
-  border-color: rgba(41, 201, 138, 0.4);
+  border-color: rgba(3, 195, 123, 0.4);
   color: var(--bt-accent);
   transform: translateX(3px);
 }
@@ -390,7 +555,7 @@
 .actionLeft {
   display: flex;
   align-items: center;
-  gap: var(--bt-space-3);
+  gap: 12px;
   font-weight: 500;
 }
 
@@ -399,13 +564,13 @@
   background: rgba(240, 79, 117, 0.05);
   border: 1px solid rgba(240, 79, 117, 0.2);
   border-radius: var(--bt-radius-md);
-  padding: var(--bt-space-3) var(--bt-space-4);
+  padding: 12px 14px;
   font-size: 12px;
   color: var(--bt-text-secondary);
   line-height: 1.5;
   display: flex;
   align-items: flex-start;
-  gap: var(--bt-space-3);
+  gap: 10px;
 }
 
 /* ── Audio Inventory Rows ───────────────────────────────────────────────── */
@@ -413,18 +578,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 12px;
+  padding: 10px 14px;
   border-radius: var(--bt-radius-sm);
   background: var(--bt-surface-2);
   border: 1px solid var(--bt-border);
   font-size: 12px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1100px) {
   .metricGrid {
     grid-template-columns: repeat(2, 1fr);
   }
   .contentGrid {
+    grid-template-columns: 1fr;
+  }
+  .routeComparisonGrid {
     grid-template-columns: 1fr;
   }
   .overview {

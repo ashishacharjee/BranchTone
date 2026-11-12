@@ -1,76 +1,80 @@
 /*
  * BranchTone Design Tokens
- * Source: DESIGN.md §2 Colour tokens — enhanced for premium creative-engineering studio aesthetics.
+ * Inspired by high-end design systems (micheledu.com, Linear, Ableton)
+ * Charcoal / Emerald / Burgundy palette conforming to AGENTS.md §8 and DESIGN.md §2.
  */
 
 :root {
-  /* ── Backgrounds ─────────────────────────────────────────────────────── */
-  --bt-bg: #070B0C;
-  --bt-bg-gradient: radial-gradient(circle at 50% 0%, #0E1819 0%, #06090A 100%);
-  --bt-bg-elevated: #0B1113;
-  --bt-surface: #0F1719;
-  --bt-surface-2: #141F21;
-  --bt-surface-3: #1B292C;
-  --bt-surface-hover: #19272A;
-  
-  /* ── Glassmorphism & Depth ───────────────────────────────────────────── */
-  --bt-glass: rgba(15, 23, 25, 0.72);
-  --bt-glass-elevated: rgba(20, 31, 33, 0.85);
-  --bt-glass-border: rgba(255, 255, 255, 0.07);
-  --bt-glass-highlight: rgba(255, 255, 255, 0.03);
+  /* ── Canvas & Surface Inks ────────────────────────────────────────────── */
+  --bt-bg: #080C0D;
+  --bt-bg-gradient: radial-gradient(ellipse 80% 50% at 50% -20%, #111A1C 0%, #080C0D 100%);
+  --bt-bg-elevated: #0D1315;
+  --bt-surface: #12181A;
+  --bt-surface-2: #162022;
+  --bt-surface-3: #1C282B;
+  --bt-surface-hover: #1F2D30;
+
+  /* ── Glassmorphism & Depth (micheledu.com style) ──────────────────────── */
+  --bt-card-bg: rgba(18, 24, 26, 0.78);
+  --bt-card-raise: rgba(26, 36, 38, 0.6);
+  --bt-card-line: rgba(255, 255, 255, 0.08);
+  --bt-card-highlight: rgba(255, 255, 255, 0.04);
+  --bt-glass: rgba(16, 23, 25, 0.75);
+  --bt-glass-elevated: rgba(22, 31, 34, 0.85);
+  --bt-glass-border: rgba(255, 255, 255, 0.09);
 
   /* ── Borders ──────────────────────────────────────────────────────────── */
-  --bt-border: rgba(176, 198, 193, 0.12);
-  --bt-border-subtle: rgba(176, 198, 193, 0.08);
-  --bt-border-strong: rgba(176, 198, 193, 0.22);
-  --bt-border-accent: rgba(41, 201, 138, 0.35);
+  --bt-border: rgba(255, 255, 255, 0.08);
+  --bt-border-subtle: rgba(255, 255, 255, 0.05);
+  --bt-border-strong: rgba(255, 255, 255, 0.16);
+  --bt-border-accent: rgba(3, 195, 123, 0.35);
 
   /* ── Typography Colors ────────────────────────────────────────────────── */
-  --bt-text: #F3F7F5;
-  --bt-text-secondary: #9EAEA9;
-  --bt-text-muted: #697873;
-  --bt-text-inverse: #070B0C;
+  --bt-text: #FFFFFF;
+  --bt-text-secondary: rgba(255, 255, 255, 0.7);
+  --bt-text-muted: rgba(255, 255, 255, 0.42);
+  --bt-text-inverse: #080C0D;
 
-  /* ── Accent (Emerald) ─────────────────────────────────────────────────── */
-  --bt-accent: #29C98A;
-  --bt-accent-soft: #63E3AC;
-  --bt-accent-deep: #0E4E37;
-  --bt-accent-glow: rgba(41, 201, 138, 0.22);
-  --bt-accent-subtle: rgba(41, 201, 138, 0.08);
+  /* ── Accent (Vibrant Studio Emerald / Mint) ────────────────────────────── */
+  --bt-accent: #03C37B;
+  --bt-accent-soft: #42E09F;
+  --bt-accent-deep: #095C3C;
+  --bt-accent-glow: rgba(3, 195, 123, 0.25);
+  --bt-accent-subtle: rgba(3, 195, 123, 0.1);
 
-  /* ── Status Colors ────────────────────────────────────────────────────── */
+  /* ── Status Colors (Controlled Severity Crimson / Gold) ───────────────── */
   --bt-error: #F04F75;
   --bt-error-soft: #F77E9A;
-  --bt-error-glow: rgba(240, 79, 117, 0.25);
-  --bt-error-subtle: rgba(240, 79, 117, 0.08);
+  --bt-error-glow: rgba(240, 79, 117, 0.28);
+  --bt-error-subtle: rgba(240, 79, 117, 0.1);
 
   --bt-warning: #E5A855;
   --bt-warning-soft: #F0C48A;
-  --bt-warning-subtle: rgba(229, 168, 85, 0.1);
+  --bt-warning-subtle: rgba(229, 168, 85, 0.12);
 
-  --bt-success: #35D69A;
+  --bt-success: #03C37B;
   --bt-magenta: #9E3F75;
-  --bt-focus: #52E2A8;
+  --bt-focus: #42E09F;
 
   /* ── Card & Panel Shadows ─────────────────────────────────────────────── */
-  --bt-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
-  --bt-shadow-md: 0 4px 16px -2px rgba(0, 0, 0, 0.5), 0 2px 6px -1px rgba(0, 0, 0, 0.4);
-  --bt-shadow-lg: 0 12px 32px -4px rgba(0, 0, 0, 0.6), 0 4px 12px -2px rgba(0, 0, 0, 0.5);
-  --bt-shadow-glow: 0 0 24px -4px var(--bt-accent-glow);
-  --bt-shadow-error: 0 0 24px -4px var(--bt-error-glow);
+  --bt-shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --bt-shadow-md: 0 16px 40px -8px rgba(0, 0, 0, 0.65), 0 2px 8px rgba(0, 0, 0, 0.45);
+  --bt-shadow-lg: 0 32px 80px -12px rgba(0, 0, 0, 0.85), 0 8px 24px -4px rgba(0, 0, 0, 0.6);
+  --bt-shadow-glow: 0 0 24px -2px var(--bt-accent-glow);
+  --bt-shadow-error: 0 0 24px -2px var(--bt-error-glow);
 
   /* ── Radii ────────────────────────────────────────────────────────────── */
   --bt-radius-xs: 4px;
   --bt-radius-sm: 6px;
-  --bt-radius: 8px;
-  --bt-radius-md: 12px;
-  --bt-radius-lg: 16px;
-  --bt-radius-full: 9999px;
+  --bt-radius: 10px;
+  --bt-radius-md: 14px;
+  --bt-radius-lg: 18px;
+  --bt-radius-full: 999px;
 
   /* ── Dimensions ───────────────────────────────────────────────────────── */
-  --bt-sidebar-width: 230px;
-  --bt-topbar-height: 54px;
-  --bt-max-content-width: 1440px;
+  --bt-sidebar-width: 240px;
+  --bt-topbar-height: 56px;
+  --bt-max-content-width: 1360px;
 
   /* ── Spacing Scale ────────────────────────────────────────────────────── */
   --bt-space-1: 4px;
@@ -83,7 +87,7 @@
   --bt-space-8: 40px;
 
   /* ── Font Families ────────────────────────────────────────────────────── */
-  --bt-font-ui: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --bt-font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --bt-font-mono: 'IBM Plex Mono', 'Geist Mono', SFMono-Regular, Consolas, monospace;
 
   /* ── Font Sizes ───────────────────────────────────────────────────────── */
@@ -98,17 +102,7 @@
   --bt-text-3xl: 28px;
 
   /* ── Transitions ──────────────────────────────────────────────────────── */
-  --bt-transition-fast: 120ms cubic-bezier(0.16, 1, 0.3, 1);
-  --bt-transition: 200ms cubic-bezier(0.16, 1, 0.3, 1);
-  --bt-transition-slow: 350ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+  --bt-transition-fast: 0.12s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --bt-transition: 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --bt-transition-slow: 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }

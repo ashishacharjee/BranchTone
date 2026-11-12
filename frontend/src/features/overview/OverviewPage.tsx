@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   GitBranch,
@@ -10,6 +11,9 @@ import {
   Music,
   CheckCircle2,
   FolderGit2,
+  Volume2,
+  Sparkles,
+  Check,
 } from 'lucide-react';
 import {
   getDemoProject,
@@ -19,6 +23,7 @@ import {
   getAllFindings,
   getAudioAssets,
 } from '../../services/fixtures';
+import { playAuditionTone, playCueTriggerSound } from '../../services/synth';
 import { useWorkspaceStore } from '../../stores/workspace';
 import styles from './OverviewPage.module.css';
 
@@ -31,18 +36,40 @@ export function OverviewPage() {
   const findings = getAllFindings();
   const audioAssets = getAudioAssets();
 
+  const [isPlayingAudition, setIsPlayingAudition] = useState(false);
   const navigateToFinding = useWorkspaceStore((s) => s.navigateToFinding);
+  const setSelectedRoute = useWorkspaceStore((s) => s.setSelectedRoute);
+  const setSelectedPassage = useWorkspaceStore((s) => s.setSelectedPassage);
 
   const missingAssetsCount = audioAssets.filter((a) => a.status === 'missing').length;
 
   const handleInspectFinding = () => {
-    // Navigate deeply to BT-001 in Story Graph
     navigateToFinding({
       findingId: 'fnd_bt001_route_b_p003_demo',
       routeId: 'route_b',
       passageId: 'P-003',
     });
     navigate('/story-graph');
+  };
+
+  const handleAuditionRouteB = () => {
+    setIsPlayingAudition(true);
+    // Play sequential route simulation: P-001 (Lobby tone) -> P-003 (Air Vent + BT-001 violation chord)
+    playAuditionTone(440, 0.18);
+    setTimeout(() => {
+      playAuditionTone(493.88, 0.18);
+    }, 220);
+    setTimeout(() => {
+      // Air Vent entry: BT-001 violation alert
+      playCueTriggerSound(true);
+      setIsPlayingAudition(false);
+    }, 460);
+  };
+
+  const handleJumpToRoute = (routeId: string, passageId: string) => {
+    setSelectedRoute(routeId);
+    setSelectedPassage(passageId);
+    navigate('/route-lab');
   };
 
   return (
@@ -53,19 +80,103 @@ export function OverviewPage() {
           <div className={styles.headerLeft}>
             <div className={styles.titleRow}>
               <h1 className={styles.title}>
-                <FolderGit2 size={22} color="var(--bt-accent)" aria-hidden="true" />
+                <FolderGit2 size={24} color="var(--bt-accent)" aria-hidden="true" />
                 {demoEnvelope.project.name}
               </h1>
               <span className={styles.versionBadge}>{storyVersion.version_label}</span>
               <span className="demo-badge">Demo Fixture</span>
+              <span className="demo-badge" style={{ borderColor: 'rgba(3, 195, 123, 0.35)' }}>
+                GeNarrative Clash 2026 Showcase
+              </span>
             </div>
-            <p className={styles.subtitle}>{demoEnvelope.project.description}</p>
+            <p className={styles.subtitle}>
+              Automated narrative-audio QA & regression-testing workbench. Audits branching interactive fiction to ensure music and cues never spoil narrative twists before key story choices.
+            </p>
           </div>
 
           <div className={styles.headerMeta}>
             <span>Source: <code>{storyVersion.source_filename}</code></span>
             <span>•</span>
             <span>Format: <code>{storyVersion.story_format}</code></span>
+          </div>
+        </div>
+
+        {/* ── Executive Concept & Walkthrough Card (micheledu.com style) ─ */}
+        <div className={styles.conceptCard}>
+          <div className={styles.conceptTop}>
+            <div>
+              <div className={styles.conceptTitle}>
+                <Sparkles size={15} color="var(--bt-accent)" aria-hidden="true" />
+                <span>Executive Narrative Audio QA Walkthrough · 60-Second Evaluation</span>
+              </div>
+              <p className={styles.conceptExplanation}>
+                In branching narratives, players reach scenes through different decision paths. If an ominous "Traitor Revealed" theme plays before the player discovers the conspiracy, the dramatic twist is ruined. BranchTone deterministically detects these mismatches across all possible paths.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              className={styles.auditionActionBtn}
+              onClick={handleAuditionRouteB}
+              disabled={isPlayingAudition}
+              title="Audition Route B traversal and defect alert via browser Web Audio synth"
+            >
+              <Volume2 size={15} aria-hidden="true" />
+              <span>{isPlayingAudition ? 'Auditioning Traversal...' : 'Audition Route B Defect Tone 🔊'}</span>
+            </button>
+          </div>
+
+          {/* Route Comparison Matrix */}
+          <div className={styles.routeComparisonGrid}>
+            <div className={[styles.routeComparisonCard, styles.routeClean].join(' ')}>
+              <div className={styles.routeCardHeader}>
+                <span className={styles.routeName}>
+                  <Check size={14} color="var(--bt-accent)" />
+                  Route A: Archives Investigation
+                </span>
+                <span className={styles.routeStatusBadgeClean}>✓ Verified Clean</span>
+              </div>
+              <div className={styles.routePathSteps}>
+                Lobby (P-001) → Archives (P-002) → Server Vault (P-004) → Safe House (P-005)
+              </div>
+              <div className={styles.routeSummaryText}>
+                Detective Sen investigates the archives, reads the conspirator dossier, and learns the traitor's identity before reaching Server Vault. Traitor theme fires legitimately.
+              </div>
+              <button
+                type="button"
+                className={styles.findingActionBtn}
+                style={{ marginTop: 'auto', padding: '6px 12px', fontSize: '11px' }}
+                onClick={() => handleJumpToRoute('route_a', 'P-002')}
+              >
+                <span>Simulate Route A in Route Lab</span>
+                <ArrowRight size={12} aria-hidden="true" />
+              </button>
+            </div>
+
+            <div className={[styles.routeComparisonCard, styles.routeDefect].join(' ')}>
+              <div className={styles.routeCardHeader}>
+                <span className={styles.routeName}>
+                  <AlertTriangle size={14} color="var(--bt-error)" />
+                  Route B: Stealth Ductwork
+                </span>
+                <span className={styles.routeStatusBadgeDefect}>⚠ BT-001 Premature Cue</span>
+              </div>
+              <div className={styles.routePathSteps}>
+                Lobby (P-001) → Air Vent (P-003) → Server Vault (P-004) → Safe House (P-005)
+              </div>
+              <div className={styles.routeSummaryText}>
+                Sen crawls through the metal air duct to bypass guards, completely unaware of the traitor. But <code>traitor_theme.wav</code> triggers at Air Vent, spoiling the reveal 1 scene too early!
+              </div>
+              <button
+                type="button"
+                className={styles.findingActionBtn}
+                style={{ marginTop: 'auto', padding: '6px 12px', fontSize: '11px', background: 'rgba(240, 79, 117, 0.15)', borderColor: 'var(--bt-error)', color: 'var(--bt-error)' }}
+                onClick={handleInspectFinding}
+              >
+                <span>Inspect BT-001 in Story Graph</span>
+                <ArrowRight size={12} aria-hidden="true" />
+              </button>
+            </div>
           </div>
         </div>
 
@@ -111,7 +222,7 @@ export function OverviewPage() {
           >
             <div className={styles.metricHeader}>
               <span>Active Issues</span>
-              <div className={styles.metricIconWrap} style={{ background: 'rgba(240, 79, 117, 0.1)', borderColor: 'rgba(240, 79, 117, 0.3)' }}>
+              <div className={styles.metricIconWrap} style={{ background: 'rgba(240, 79, 117, 0.12)', borderColor: 'rgba(240, 79, 117, 0.35)' }}>
                 <ShieldAlert size={14} color="var(--bt-error)" aria-hidden="true" />
               </div>
             </div>
@@ -162,7 +273,7 @@ export function OverviewPage() {
                     <span className={styles.findingCode}>{f.finding_code}</span>
                     <span className={styles.findingBadge}>High Severity</span>
                   </div>
-                  <span style={{ fontSize: '11px', color: 'var(--bt-text-muted)' }}>Status: Open</span>
+                  <span style={{ fontSize: '11px', color: 'var(--bt-text-muted)', fontFamily: 'var(--bt-font-mono)' }}>Status: Open</span>
                 </div>
 
                 <div className={styles.findingDesc}>
@@ -207,15 +318,15 @@ export function OverviewPage() {
                 <span className="demo-badge">Demo Data</span>
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 <div className={styles.inventoryRow}>
                   <span style={{ color: 'var(--bt-text-secondary)' }}>Configured Cues:</span>
-                  <span style={{ fontWeight: 600, color: 'var(--bt-text)' }}>1 (traitor_theme.wav)</span>
+                  <span style={{ fontWeight: 600, color: '#fff', fontFamily: 'var(--bt-font-mono)' }}>1 (traitor_theme.wav)</span>
                 </div>
                 <div className={styles.inventoryRow}>
-                  <span style={{ color: 'var(--bt-text-secondary)' }}>Missing / Unuploaded Assets:</span>
-                  <span style={{ color: 'var(--bt-error)', fontWeight: 600 }}>
-                    {missingAssetsCount} file missing
+                  <span style={{ color: 'var(--bt-text-secondary)' }}>Missing Media File:</span>
+                  <span style={{ color: 'var(--bt-error)', fontWeight: 600, fontFamily: 'var(--bt-font-mono)' }}>
+                    {missingAssetsCount} file unuploaded
                   </span>
                 </div>
                 <div className={styles.inventoryRow}>
@@ -226,7 +337,7 @@ export function OverviewPage() {
                 <button
                   type="button"
                   className={styles.findingActionBtn}
-                  style={{ marginTop: '8px' }}
+                  style={{ marginTop: '6px' }}
                   onClick={() => navigate('/cue-library')}
                 >
                   <span>Inspect in Cue Library</span>
@@ -240,7 +351,7 @@ export function OverviewPage() {
               <div className={styles.panelHeader}>
                 <div className={styles.panelTitle}>
                   <Play size={14} color="var(--bt-accent)" aria-hidden="true" />
-                  <span>Workspace Navigation</span>
+                  <span>Workbench Workspaces</span>
                 </div>
               </div>
 

@@ -1,7 +1,8 @@
 /**
- * Sidebar — left navigation panel (~220px).
+ * Sidebar — left navigation panel (~240px).
  * Implements: BranchTone mark, workspace label, project card, 7 nav links, status.
  * Visual source: DESIGN.md §3 and references/branchtone-master-ui.png.
+ * Upgraded with micheledu.com-inspired workflow grouping and subtle glowing indicators.
  */
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import {
@@ -23,48 +24,73 @@ interface NavItem {
   workspaceId: string;
 }
 
-const NAV_ITEMS: NavItem[] = [
+interface NavSection {
+  category: string;
+  items: NavItem[];
+}
+
+const NAV_SECTIONS: NavSection[] = [
   {
-    path: '/overview',
-    label: 'Overview',
-    icon: <LayoutDashboard size={16} aria-hidden="true" />,
-    workspaceId: 'overview',
+    category: 'COCKPIT',
+    items: [
+      {
+        path: '/overview',
+        label: 'Overview',
+        icon: <LayoutDashboard size={16} aria-hidden="true" />,
+        workspaceId: 'overview',
+      },
+    ],
   },
   {
-    path: '/story-graph',
-    label: 'Story Graph',
-    icon: <GitBranch size={16} aria-hidden="true" />,
-    workspaceId: 'story-graph',
+    category: 'STORY & GRAPH',
+    items: [
+      {
+        path: '/story-graph',
+        label: 'Story Graph',
+        icon: <GitBranch size={16} aria-hidden="true" />,
+        workspaceId: 'story-graph',
+      },
+      {
+        path: '/narrative-map',
+        label: 'Narrative Map',
+        icon: <Map size={16} aria-hidden="true" />,
+        workspaceId: 'narrative-map',
+      },
+    ],
   },
   {
-    path: '/narrative-map',
-    label: 'Narrative Map',
-    icon: <Map size={16} aria-hidden="true" />,
-    workspaceId: 'narrative-map',
+    category: 'AUDIO & SIMULATION',
+    items: [
+      {
+        path: '/cue-library',
+        label: 'Cue Library',
+        icon: <Music2 size={16} aria-hidden="true" />,
+        workspaceId: 'cue-library',
+      },
+      {
+        path: '/route-lab',
+        label: 'Route Lab',
+        icon: <FlaskConical size={16} aria-hidden="true" />,
+        workspaceId: 'route-lab',
+      },
+    ],
   },
   {
-    path: '/cue-library',
-    label: 'Cue Library',
-    icon: <Music2 size={16} aria-hidden="true" />,
-    workspaceId: 'cue-library',
-  },
-  {
-    path: '/route-lab',
-    label: 'Route Lab',
-    icon: <FlaskConical size={16} aria-hidden="true" />,
-    workspaceId: 'route-lab',
-  },
-  {
-    path: '/validation-centre',
-    label: 'Validation Centre',
-    icon: <ShieldCheck size={16} aria-hidden="true" />,
-    workspaceId: 'validation-centre',
-  },
-  {
-    path: '/reports',
-    label: 'Reports',
-    icon: <FileBarChart size={16} aria-hidden="true" />,
-    workspaceId: 'reports',
+    category: 'QA & COMPLIANCE',
+    items: [
+      {
+        path: '/validation-centre',
+        label: 'Validation Centre',
+        icon: <ShieldCheck size={16} aria-hidden="true" />,
+        workspaceId: 'validation-centre',
+      },
+      {
+        path: '/reports',
+        label: 'Reports',
+        icon: <FileBarChart size={16} aria-hidden="true" />,
+        workspaceId: 'reports',
+      },
+    ],
   },
 ];
 
@@ -120,27 +146,44 @@ export function Sidebar() {
         </button>
       </div>
 
-      {/* ── Navigation links ─────────────────────────────────────────── */}
+      {/* ── Navigation links grouped by workflow ────────────────────── */}
       <nav aria-label="Workspaces" className={styles.nav}>
-        <ul role="list" className={styles.navList}>
-          {NAV_ITEMS.map((item) => {
-            const isActive = location.pathname.startsWith(item.path);
-            return (
-              <li key={item.path}>
-                <NavLink
-                  to={item.path}
-                  className={({ isActive: active }) =>
-                    [styles.navLink, active ? styles.navLinkActive : ''].join(' ')
-                  }
-                  aria-current={isActive ? 'page' : undefined}
-                >
-                  <span className={styles.navIcon}>{item.icon}</span>
-                  <span className={styles.navLabel}>{item.label}</span>
-                </NavLink>
-              </li>
-            );
-          })}
-        </ul>
+        {NAV_SECTIONS.map((section) => (
+          <div key={section.category} style={{ marginBottom: '10px' }}>
+            <span
+              style={{
+                display: 'block',
+                fontSize: '9px',
+                fontWeight: 700,
+                letterSpacing: '0.08em',
+                color: 'var(--bt-text-muted)',
+                padding: '4px 10px',
+                textTransform: 'uppercase',
+              }}
+            >
+              {section.category}
+            </span>
+            <ul role="list" className={styles.navList}>
+              {section.items.map((item) => {
+                const isActive = location.pathname.startsWith(item.path);
+                return (
+                  <li key={item.path}>
+                    <NavLink
+                      to={item.path}
+                      className={({ isActive: active }) =>
+                        [styles.navLink, active ? styles.navLinkActive : ''].join(' ')
+                      }
+                      aria-current={isActive ? 'page' : undefined}
+                    >
+                      <span className={styles.navIcon}>{item.icon}</span>
+                      <span className={styles.navLabel}>{item.label}</span>
+                    </NavLink>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
       </nav>
 
       {/* ── Status bar ───────────────────────────────────────────────── */}
@@ -164,11 +207,11 @@ function BranchToneMark() {
       aria-hidden="true"
     >
       {/* Stylised waveform bars — emerald */}
-      <rect x="1" y="8" width="2.5" height="6" rx="1.25" fill="#29c98a" />
-      <rect x="5" y="4" width="2.5" height="14" rx="1.25" fill="#29c98a" />
-      <rect x="9" y="1" width="2.5" height="20" rx="1.25" fill="#29c98a" />
-      <rect x="13" y="5" width="2.5" height="12" rx="1.25" fill="#29c98a" />
-      <rect x="17" y="9" width="2.5" height="4" rx="1.25" fill="#29c98a" opacity="0.7" />
+      <rect x="1" y="8" width="2.5" height="6" rx="1.25" fill="#03c37b" />
+      <rect x="5" y="4" width="2.5" height="14" rx="1.25" fill="#03c37b" />
+      <rect x="9" y="1" width="2.5" height="20" rx="1.25" fill="#03c37b" />
+      <rect x="13" y="5" width="2.5" height="12" rx="1.25" fill="#03c37b" />
+      <rect x="17" y="9" width="2.5" height="4" rx="1.25" fill="#03c37b" opacity="0.7" />
     </svg>
   );
 }
