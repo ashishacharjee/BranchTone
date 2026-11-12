@@ -3,6 +3,9 @@
   "version": "0.4.0",
   "description": "BranchTone — Narrative-aware audio QA & regression-testing workbench",
   "private": true,
+  "engines": {
+    "node": "22.x"
+  },
   "workspaces": [
     "frontend"
   ],
