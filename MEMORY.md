@@ -2,6 +2,20 @@
 
 **Updated:** 12 November 2026. Keep this file factual and short. Update only after a decision or verification.
 
+## Hallmark Design Polish & Sloplint Anti-AI Purification (12 Nov 2026)
+
+- Cloned and integrated Hallmark design skill (`https://github.com/Nutlope/hallmark.git`) in `.agents/skills/hallmark/` and global config per Unnati Tripathi / Nutlope specification.
+- Ran Hallmark linter (`node .agents/skills/hallmark/scripts/sloplint.mjs frontend/src --scope app --genre atmospheric`) to eliminate AI generation tropes:
+  * Removed middle-dot joined metadata strings (`<span>•</span>`) on `OverviewPage.tsx`, converting them to structured key-value capsule pills (`.headerMetaPill`).
+  * Eliminated `transition: all` across `OverviewPage.module.css`, `JudgeTourModal.module.css`, and `KeyboardShortcutsModal.module.css`, replacing them with explicit hardware-accelerated properties (`transform`, `opacity`, `border-color`, `box-shadow`, `background-color`).
+  * Replaced inline `#fff` / `#FFFFFF` literals with semantic theme tokens (`var(--bt-text)`, `var(--bt-accent-glow)`, etc.).
+  * Added `aria-hidden="true"` to all procedural SVGs in `PassageNode.tsx`, `PassageInspector.tsx`, `JudgeTourModal.tsx`, and `KeyboardShortcutsModal.tsx`.
+  * Added `@media (prefers-reduced-motion: reduce)` fallbacks and `:focus-visible` / `:active` states on all interactive controls.
+  * Stamped CSS files with Hallmark provenance header.
+- Verified: `sloplint` passes cleanly (0 FAIL) across `JudgeTourModal`, `KeyboardShortcutsModal`, `AppleBackground.module.css`, `OverviewPage.module.css`, and `tokens.css`.
+- 100% test integrity verified: 43 Vitest frontend tests passing, 11 Pytest backend tests passing.
+- Production deployment verified live: `https://branchtone.vercel.app` (Deployment `dpl_Abk9H434uyck4Dwbkdk5b1s1zuDz`).
+
 ## Apple Animated Aurora Mesh Background & Studio Spotlight (12 Nov 2026)
 
 - Created `AppleBackground.tsx` and `AppleBackground.module.css` mounted globally in `AppShell.tsx`:

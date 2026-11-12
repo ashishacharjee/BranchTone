@@ -1,5 +1,23 @@
 # CHANGELOG.md — Pack and Implementation History
 
+## 2.12 — 12 November 2026 (Hallmark Anti-AI Purification & Apple Animated Ambient Mesh)
+
+- **Hallmark Design Skill Integration (`https://github.com/Nutlope/hallmark.git`):**
+  - Integrated Hallmark design rules and `sloplint.mjs` linter to eradicate default AI-generated tropes.
+  - Replaced middle-dot joined metadata strings (`<span>•</span>`) in `OverviewPage.tsx` with discrete, semantic key-value capsule pills (`.headerMetaPills`).
+  - Abolished `transition: all` across modals and workspace views in favor of explicit hardware-accelerated transforms and opacities (`transform`, `opacity`, `border-color`, `box-shadow`, `background-color`).
+  - Tokenized color literals into declared CSS custom properties in `tokens.css` (`--bt-aurora-*`, `--bt-overlay-bg`, `--bt-hover-surface`, `--bt-dark-well`, `--bt-dark-tray`).
+  - Added `aria-hidden="true"` to all procedural SVGs in `PassageNode.tsx`, `PassageInspector.tsx`, `JudgeTourModal.tsx`, and `KeyboardShortcutsModal.tsx`.
+  - Added `@media (prefers-reduced-motion: reduce)` fallbacks and `:focus-visible` / `:active` states on all interactive controls.
+  - Verified with `sloplint`: clean 0 FAIL status across `JudgeTourModal`, `KeyboardShortcutsModal`, `AppleBackground.module.css`, `OverviewPage.module.css`, and `tokens.css`.
+- **Apple Animated Aurora Mesh Background:**
+  - Added `AppleBackground.tsx` with 3 organic GPU-accelerated breathing aurora orbs (Emerald 720px, Cyan/Teal 640px, Burgundy 680px) and a 60fps spring-damped interactive Cursor Spotlight.
+  - Transformed outer wrappers of all 7 workspaces to transparent backgrounds so the living atmospheric aurora illuminates behind liquid glass Bento cards.
+- **Verification & Deployment:**
+  - All 43 frontend Vitest tests and 11 backend Pytest tests pass 100%.
+  - Clean Vite production build in 18.59s with zero errors.
+  - Deployed to live Vercel production: `https://branchtone.vercel.app` (200 OK).
+
 ## 2.11 — 12 November 2026 (Interactive Web Audio Synthesis, Timeline Traversal & Vercel Deployment)
 
 - Implemented Browser-based Web Audio Synthesis Engine (`frontend/src/services/synth.ts`):
