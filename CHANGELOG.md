@@ -1,5 +1,29 @@
 # CHANGELOG.md — Pack and Implementation History
 
+## 2.11 — 12 November 2026 (Interactive Web Audio Synthesis, Timeline Traversal & Vercel Deployment)
+
+- Implemented Browser-based Web Audio Synthesis Engine (`frontend/src/services/synth.ts`):
+  - Pure Web Audio API (`AudioContext`, `GainNode`, `BiquadFilter`, oscillators) generating real synthesized tones.
+  - `playAuditionTone()`: Clean harmonic tone for testing master volume and audition output.
+  - `playCueTriggerSound(isViolation)`: Generates dual-oscillator suspense tritone chord with lowpass filter for narrative violations (BT-001) or harmonic chime for valid transitions.
+  - Master volume scaling connected to timeline slider.
+- Enhanced Timeline Traversal & Scrubbing (`AudioTimeline.tsx`):
+  - Added "Audition Route" traversal button that animates the playhead in real-time across the timeline, automatically crossing passage boundaries and triggering the BT-001 cue alert sound at Air Vent entry on Route B.
+  - Interactive track scrubbing: clicking anywhere on tracks jumps the playhead and synchronizes the active passage in the store.
+  - Real-time time display calculation based on playhead position while preserving default 01:24 baseline.
+- Enhanced Inspector & Workspaces:
+  - `PassageInspector.tsx`: Dynamic route-aware identity reveal calculation; added "Audition Cue Tone" button.
+  - `CueLibraryPage.tsx`: Added "Audition Synth Preview" button to audition the cue sound via Web Audio synth.
+  - `RouteLabPage.tsx`: Added "Prev Step" and "Next Step" buttons to step through narrative transitions with audio feedback.
+  - `ValidationCentrePage.tsx`: Added finding triage controls (`Open`, `In Review`, `Mark Resolved`) and "Audition Trigger Defect Tone" button.
+  - `ReportsPage.tsx`: Added "Export Markdown" report export alongside JSON export and preview drawer.
+- Configured Vercel Deployment & Serverless Integration:
+  - Added root `package.json` with build/test/dev scripts forwarding to `frontend`.
+  - Added root `vercel.json` with clean URLs, SPA routing rewrites, and API forwarding.
+  - Added `frontend/vercel.json` for frontend-root deployment compatibility.
+  - Added `api/health.js` serverless function returning standardized `HealthResponse` envelope on Vercel.
+- Verification: 100% test pass rate (40 Vitest frontend tests, 11 Pytest backend tests, 0 lint/typecheck errors, clean Vite production build in 13.5s).
+
 ## 2.10 — 12 November 2026 (Critical Functionality Repair & Product Usability Implementation)
 
 - Executed complete functionality audit and repair across Shell and all seven workspaces (`FUNCTIONALITY_AUDIT_AND_REPAIR.md`):

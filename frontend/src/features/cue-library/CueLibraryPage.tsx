@@ -6,6 +6,7 @@ import {
   AlertTriangle,
   Play,
   VolumeX,
+  Volume2,
   ShieldAlert,
   ArrowRight,
   GitBranch,
@@ -14,6 +15,7 @@ import {
   getAllAudioCues,
   getAudioAssets,
 } from '../../services/fixtures';
+import { playCueTriggerSound } from '../../services/synth';
 import { useWorkspaceStore } from '../../stores/workspace';
 import styles from './CueLibraryPage.module.css';
 
@@ -25,6 +27,7 @@ export function CueLibraryPage() {
   const cues = getAllAudioCues();
   const assets = getAudioAssets();
   const [selectedCueId, setSelectedCueId] = useState<string>(cues[0]?.cue_id ?? '');
+  const [isPlayingAudition, setIsPlayingAudition] = useState(false);
 
   const setSelectedPassage = useWorkspaceStore((s) => s.setSelectedPassage);
   const setSelectedRoute = useWorkspaceStore((s) => s.setSelectedRoute);
@@ -300,20 +303,38 @@ export function CueLibraryPage() {
                 </button>
               </div>
 
-              {/* Disabled Audio Playback Transport */}
+              {/* Audio Playback Transport */}
               <div className={styles.transportRow}>
-                <button
-                  type="button"
-                  className={styles.disabledPlayBtn}
-                  disabled
-                  title="Playback disabled: audio file traitor_theme.wav is not present in storage."
-                  aria-label="Play audio cue — disabled: asset missing"
-                >
-                  <Play size={14} aria-hidden="true" />
-                  <span>Playback Disabled (No Audio)</span>
-                </button>
+                <div className={styles.transportBtnRow}>
+                  <button
+                    type="button"
+                    className={styles.disabledPlayBtn}
+                    disabled
+                    title="Playback disabled: audio file traitor_theme.wav is not present in storage."
+                    aria-label="Play audio cue — disabled: asset missing"
+                  >
+                    <Play size={14} aria-hidden="true" />
+                    <span>Playback Disabled (No Audio)</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    className={styles.auditionSynthBtn}
+                    onClick={() => {
+                      setIsPlayingAudition(true);
+                      playCueTriggerSound(true);
+                      setTimeout(() => setIsPlayingAudition(false), 900);
+                    }}
+                    title="Audition synthesized cue tone via browser Web Audio API"
+                    aria-label="Audition synthesized cue tone"
+                  >
+                    <Volume2 size={13} aria-hidden="true" />
+                    <span>{isPlayingAudition ? 'Auditioning Cue…' : 'Audition Synth Preview'}</span>
+                  </button>
+                </div>
+
                 <span style={{ fontSize: '11px', color: 'var(--bt-text-muted)' }}>
-                  Upload audio asset to enable audition
+                  Media bytes missing from local storage · Synthesized preview active via Web Audio
                 </span>
               </div>
             </>

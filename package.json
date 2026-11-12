@@ -1,0 +1,13 @@
+{
+  "name": "branchtone",
+  "version": "0.4.0",
+  "description": "BranchTone — Narrative-aware audio QA & regression-testing workbench",
+  "private": true,
+  "scripts": {
+    "build": "npm run build --prefix frontend",
+    "dev": "npm run dev --prefix frontend",
+    "test": "npm run test --prefix frontend",
+    "typecheck": "npm run typecheck --prefix frontend",
+    "preview": "npm run preview --prefix frontend"
+  }
+}

@@ -35,6 +35,35 @@ export function ReportsPage() {
     downloadAnchor.remove();
   };
 
+  const handleExportMarkdown = () => {
+    const mdContent = `# BranchTone QA Run Report: ${demoEnvelope.project.name} (v0.4)
+
+**Run ID:** run_the_last_signal_demo_v1
+**Source File:** ${storyVersion.source_filename}
+**Source SHA-256:** ${storyVersion.source_sha256}
+**Graph Coverage:** Not evaluated (Bounded 2-route exploration)
+
+## Summary of Findings
+- **BT-001 (High):** Reveal Protection violation at passage P-003 (Air Vent) on Route B.
+  - Explanation: The traitor theme starts when entering Air Vent, before the character's identity is revealed on this route.
+  - Evidence: "Sen squeezes through the dark metal duct to bypass the locked hallway, completely unaware of who is behind the conspiracy."
+  - Suggested Action: Change cue trigger to Server Vault (P-004) or gate behind traitor_identity_revealed == true.
+
+## Deterministic Rule Suite
+- RULE_REVEAL_PROTECTION: 1 Issue (BT-001)
+- RULE_REQUIRED_CUE_COVERAGE: Pass (0 Issues)
+- RULE_TENSION_LIFECYCLE: Pass (0 Issues)
+- RULE_EMOTIONAL_CONTINUITY: Pass (0 Issues)
+`;
+    const dataStr = 'data:text/markdown;charset=utf-8,' + encodeURIComponent(mdContent);
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute('href', dataStr);
+    downloadAnchor.setAttribute('download', `branchtone_report_${demoEnvelope.project.project_id}_v04.md`);
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+  };
+
   const handleCopyJson = async () => {
     try {
       await navigator.clipboard.writeText(formattedJson);
@@ -71,6 +100,16 @@ export function ReportsPage() {
           >
             <Code size={14} aria-hidden="true" />
             <span>{showJsonPreview ? 'Hide JSON' : 'Preview JSON'}</span>
+          </button>
+
+          <button
+            type="button"
+            className={styles.secondaryBtn}
+            onClick={handleExportMarkdown}
+            aria-label="Export Markdown report"
+          >
+            <FileText size={14} aria-hidden="true" />
+            <span>Export Markdown</span>
           </button>
 
           <button

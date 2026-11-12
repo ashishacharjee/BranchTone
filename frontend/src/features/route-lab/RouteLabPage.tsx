@@ -6,6 +6,7 @@ import {
   CheckCircle2,
   Clock,
   ArrowRight,
+  ArrowLeft,
   Info,
 } from 'lucide-react';
 import {
@@ -14,6 +15,7 @@ import {
   getPassage,
   getExpectedCueEvents,
 } from '../../services/fixtures';
+import { playAuditionTone, playCueTriggerSound } from '../../services/synth';
 import { useWorkspaceStore } from '../../stores/workspace';
 import styles from './RouteLabPage.module.css';
 
@@ -32,6 +34,31 @@ export function RouteLabPage() {
   const activeRouteCueEvents = allCueEvents.filter((e) => e.route_id === selectedRouteId);
 
   const selectedPassage = getPassage(selectedPassageId);
+
+  const currentIndex = passageIds.indexOf(selectedPassageId);
+  const canGoPrev = currentIndex > 0;
+  const canGoNext = currentIndex < passageIds.length - 1;
+
+  const handleStepTo = (targetId: string) => {
+    setSelectedPassage(targetId);
+    if (targetId === 'P-003' && selectedRouteId === 'route_b') {
+      playCueTriggerSound(true);
+    } else {
+      playAuditionTone(523.25, 0.12);
+    }
+  };
+
+  const handlePrevStep = () => {
+    if (canGoPrev) {
+      handleStepTo(passageIds[currentIndex - 1]);
+    }
+  };
+
+  const handleNextStep = () => {
+    if (canGoNext) {
+      handleStepTo(passageIds[currentIndex + 1]);
+    }
+  };
 
   // Identity reveal evaluation per route:
   // Route A: reveal occurs at Archives (P-002)
@@ -88,7 +115,29 @@ export function RouteLabPage() {
             <GitBranch size={15} color="var(--bt-accent)" aria-hidden="true" />
             <span>Passage Sequence & Narrative Fact Snapshots</span>
           </div>
-          <span className="demo-badge">Demo Data</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <button
+              type="button"
+              className={styles.stepNavBtn}
+              onClick={handlePrevStep}
+              disabled={!canGoPrev}
+              aria-label="Previous step"
+            >
+              <ArrowLeft size={12} aria-hidden="true" />
+              <span>Prev Step</span>
+            </button>
+            <button
+              type="button"
+              className={styles.stepNavBtn}
+              onClick={handleNextStep}
+              disabled={!canGoNext}
+              aria-label="Next step"
+            >
+              <span>Next Step</span>
+              <ArrowRight size={12} aria-hidden="true" />
+            </button>
+            <span className="demo-badge">Demo Data</span>
+          </div>
         </div>
 
         <p style={{ fontSize: '12px', color: 'var(--bt-text-secondary)', margin: 0 }}>

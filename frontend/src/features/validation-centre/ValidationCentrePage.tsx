@@ -9,11 +9,13 @@ import {
   CheckCircle2,
   Filter,
   RotateCcw,
+  Volume2,
 } from 'lucide-react';
 import {
   getAllFindings,
   getExpectedAbsenceCases,
 } from '../../services/fixtures';
+import { playCueTriggerSound } from '../../services/synth';
 import { useWorkspaceStore } from '../../stores/workspace';
 import styles from './ValidationCentrePage.module.css';
 
@@ -26,17 +28,20 @@ export function ValidationCentrePage() {
   const [severityFilter, setSeverityFilter] = useState<string>('all');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [selectedFindingId, setSelectedFindingId] = useState<string>(findings[0]?.finding_id ?? '');
+  const [statusOverrides, setStatusOverrides] = useState<Record<string, string>>({});
 
   const navigateToFinding = useWorkspaceStore((s) => s.navigateToFinding);
 
   const filteredFindings = findings.filter((f) => {
+    const effectiveStatus = statusOverrides[f.finding_id] ?? f.status;
     if (ruleFilter !== 'all' && f.rule_id !== ruleFilter) return false;
     if (severityFilter !== 'all' && f.severity !== severityFilter) return false;
-    if (statusFilter !== 'all' && f.status !== statusFilter) return false;
+    if (statusFilter !== 'all' && effectiveStatus !== statusFilter) return false;
     return true;
   });
 
   const selectedFinding = filteredFindings.find((f) => f.finding_id === selectedFindingId) ?? filteredFindings[0];
+  const effectiveSelectedStatus = selectedFinding ? (statusOverrides[selectedFinding.finding_id] ?? selectedFinding.status) : 'open';
 
   const handleResetFilters = () => {
     setRuleFilter('all');
@@ -189,8 +194,12 @@ export function ValidationCentrePage() {
                             </span>
                           </td>
                           <td>
-                            <span style={{ textTransform: 'capitalize', color: 'var(--bt-accent)' }}>
-                              {f.status}
+                            <span style={{
+                              textTransform: 'capitalize',
+                              color: (statusOverrides[f.finding_id] ?? f.status) === 'resolved' ? 'var(--bt-accent)' : 'var(--bt-text-secondary)',
+                              fontWeight: 600,
+                            }}>
+                              {statusOverrides[f.finding_id] ?? f.status}
                             </span>
                           </td>
                         </tr>
@@ -296,8 +305,36 @@ export function ValidationCentrePage() {
                 </div>
               </div>
 
-              {/* Deep-link Action Button */}
-              <div style={{ paddingTop: '8px' }}>
+              {/* Finding Triage Controls */}
+              <div className={styles.detailSection}>
+                <div className={styles.detailTitle}>Finding Triage (Local Workflow State)</div>
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+                  {(['open', 'in_review', 'resolved'] as const).map((s) => (
+                    <button
+                      key={s}
+                      type="button"
+                      className={effectiveSelectedStatus === s ? styles.statusBtnActive : styles.statusBtn}
+                      onClick={() => setStatusOverrides((prev) => ({ ...prev, [selectedFinding.finding_id]: s }))}
+                      aria-pressed={effectiveSelectedStatus === s}
+                    >
+                      {s === 'open' ? 'Open' : s === 'in_review' ? 'In Review' : 'Mark Resolved'}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div style={{ paddingTop: '8px', display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                <button
+                  type="button"
+                  className={styles.auditionBtn}
+                  onClick={() => playCueTriggerSound(true)}
+                  title="Audition synthesized cue trigger violation"
+                >
+                  <Volume2 size={13} aria-hidden="true" />
+                  <span>Audition Trigger Defect Tone</span>
+                </button>
+
                 <button
                   type="button"
                   className={styles.actionBtn}

@@ -221,6 +221,52 @@
   background: rgba(41, 201, 138, 0.25);
 }
 
+.statusBtn {
+  padding: 3px 9px;
+  border-radius: var(--bt-radius-sm);
+  background: var(--bt-surface-2);
+  border: 1px solid var(--bt-border);
+  color: var(--bt-text-secondary);
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--bt-transition);
+}
+
+.statusBtn:hover {
+  border-color: var(--bt-border-strong);
+  color: var(--bt-text);
+}
+
+.statusBtnActive {
+  padding: 3px 9px;
+  border-radius: var(--bt-radius-sm);
+  background: rgba(41, 201, 138, 0.15);
+  border: 1px solid var(--bt-accent);
+  color: var(--bt-accent);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.auditionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: var(--bt-radius-sm);
+  background: rgba(240, 79, 117, 0.12);
+  border: 1px solid rgba(240, 79, 117, 0.35);
+  color: var(--bt-error);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--bt-transition);
+}
+
+.auditionBtn:hover {
+  background: rgba(240, 79, 117, 0.22);
+}
+
 /* ── Negative Controls Section ──────────────────────────────────────────── */
 .absenceCard {
   background: var(--bt-surface-2);

@@ -2,6 +2,18 @@
 
 **Updated:** 12 November 2026. Keep this file factual and short. Update only after a decision or verification.
 
+## Interactive Web Audio & Deployment State (12 Nov 2026)
+
+- Added browser Web Audio API synthesis engine (`frontend/src/services/synth.ts`) for real audible feedback without falsifying missing audio media assets.
+- Interactive route traversal simulation in `AudioTimeline.tsx`: animates playhead across route passages, triggers audio chime at passage boundaries, triggers violation chord at Route B Air Vent entry.
+- Added track click-to-scrub in `AudioTimeline.tsx`.
+- Added cue audition buttons in `CueLibraryPage.tsx` and `PassageInspector.tsx`.
+- Added sequential step controls in `RouteLabPage.tsx`.
+- Added finding triage controls (`open`, `in_review`, `resolved`) in `ValidationCentrePage.tsx`.
+- Added Markdown report export in `ReportsPage.tsx`.
+- Configured Vercel deployment: root `package.json`, `vercel.json`, `frontend/vercel.json`, and `api/health.js`.
+- All 40 Vitest frontend tests and 11 Pytest backend tests pass 100%.
+
 ## Usability & Functionality Repairs (12 Nov 2026)
 
 - Completed thorough repair of dead and static UI elements across Shell and all 7 workspaces per `FUNCTIONALITY_AUDIT_AND_REPAIR.md`.

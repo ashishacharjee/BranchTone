@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import { X, Heart, HelpCircle, Music, FileText, AlertCircle, ShieldAlert, GitBranch, ArrowRight } from 'lucide-react';
+import { X, Heart, HelpCircle, Music, FileText, AlertCircle, ShieldAlert, GitBranch, ArrowRight, Volume2 } from 'lucide-react';
 import type { PassageDisplayData } from '../../services/fixtures';
 import { getFindingsForPassage, getAudioCuesForPassage, getRoute } from '../../services/fixtures';
+import { playCueTriggerSound } from '../../services/synth';
 import styles from './PassageInspector.module.css';
 
 interface PassageInspectorProps {
@@ -35,7 +36,11 @@ export function PassageInspector({
   const cues = getAudioCuesForPassage(passage.passage_id);
 
   const intensityPercent = passage.intensity ? (passage.intensity / 5) * 100 : 0;
-  const identityRevealedText = passage.identity_revealed_at_entry ? 'Yes' : 'No';
+  // Route-aware identity reveal: on Route A reveal happens at Archives (P-002); on Route B at Server Vault (P-004)
+  const isRevealed = selectedRouteId === 'route_a'
+    ? (passage.passage_id === 'P-002' || passage.passage_id === 'P-004' || passage.passage_id === 'P-005')
+    : (passage.passage_id === 'P-004' || passage.passage_id === 'P-005');
+  const identityRevealedText = isRevealed ? 'Yes' : 'No';
 
   return (
     <aside className={styles.inspector} aria-label={`Passage inspector for ${passage.title}`}>
@@ -147,15 +152,30 @@ export function PassageInspector({
                 </span>
               </div>
 
-              <button
-                type="button"
-                className={styles.actionLinkBtn}
-                onClick={() => navigate('/cue-library')}
-                title="Inspect in Cue Library"
-              >
-                <span>Inspect in Cue Library</span>
-                <ArrowRight size={12} aria-hidden="true" />
-              </button>
+              <div style={{ display: 'flex', gap: '8px', marginTop: '6px' }}>
+                <button
+                  type="button"
+                  className={styles.actionLinkBtn}
+                  onClick={() => playCueTriggerSound(findings.length > 0)}
+                  title="Audition cue trigger sound via browser Web Audio synth"
+                  aria-label="Audition cue trigger sound"
+                  style={{ flex: 1 }}
+                >
+                  <Volume2 size={12} aria-hidden="true" />
+                  <span>Audition Cue Tone</span>
+                </button>
+
+                <button
+                  type="button"
+                  className={styles.actionLinkBtn}
+                  onClick={() => navigate('/cue-library')}
+                  title="Inspect in Cue Library"
+                  style={{ flex: 1 }}
+                >
+                  <span>Inspect Cue</span>
+                  <ArrowRight size={12} aria-hidden="true" />
+                </button>
+              </div>
             </div>
           ))
         ) : (

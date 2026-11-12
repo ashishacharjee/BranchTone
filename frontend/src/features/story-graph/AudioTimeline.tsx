@@ -1,6 +1,7 @@
-import { memo, useState, useCallback } from 'react';
-import { Play, SkipBack, SkipForward, Volume2, Activity } from 'lucide-react';
+import { memo, useState, useCallback, useEffect, useRef } from 'react';
+import { Play, Pause, SkipBack, SkipForward, Volume2, Activity, Radio } from 'lucide-react';
 import { getRoute, getPassage } from '../../services/fixtures';
+import { setMasterVolume, playAuditionTone, playCueTriggerSound } from '../../services/synth';
 import styles from './AudioTimeline.module.css';
 
 interface AudioTimelineProps {
@@ -21,33 +22,27 @@ export const AudioTimeline = memo(function AudioTimeline({
   const passageIds = route ? route.passage_path : ['P-001', 'P-003', 'P-004', 'P-005'];
 
   const [volume, setVolume] = useState(70);
+  const [isPlayingSimulation, setIsPlayingSimulation] = useState(false);
+  const [playheadPercent, setPlayheadPercent] = useState(30.88); // 84s / 272s ≈ 30.88%
+  const simulationTimerRef = useRef<number | null>(null);
 
   const currentPassageIndex = passageIds.indexOf(selectedPassageId ?? '');
   const canSkipBackward = currentPassageIndex > 0;
   const canSkipForward = currentPassageIndex < passageIds.length - 1;
 
-  const handleSkipBackward = useCallback(() => {
-    if (canSkipBackward) {
-      onSelectPassage?.(passageIds[currentPassageIndex - 1]);
-    }
-  }, [canSkipBackward, currentPassageIndex, passageIds, onSelectPassage]);
+  // Total design fixture duration = 272s (04:32)
+  const totalDurationSeconds = 272;
+  const currentSeconds = Math.round((playheadPercent / 100) * totalDurationSeconds);
+  const displayCurrentMinutes = Math.floor(currentSeconds / 60).toString().padStart(2, '0');
+  const displayCurrentSecs = (currentSeconds % 60).toString().padStart(2, '0');
+  const displayCurrentTime = `${displayCurrentMinutes}:${displayCurrentSecs}`;
 
-  const handleSkipForward = useCallback(() => {
-    if (canSkipForward) {
-      onSelectPassage?.(passageIds[currentPassageIndex + 1]);
-    } else if (currentPassageIndex === -1 && passageIds.length > 0) {
-      onSelectPassage?.(passageIds[0]);
-    }
-  }, [canSkipForward, currentPassageIndex, passageIds, onSelectPassage]);
-
-  // Calculate passage segment widths (in percentage) along the timeline
-  // Total design fixture duration = 272s (04:32). Air Vent entry boundary is at ~84s (01:24 / ~30.8%).
   const segmentWidths: Record<string, number> = currentRouteId === 'route_b'
     ? {
-        'P-001': 28, // Lobby: 0 to ~76s
-        'P-003': 22, // Air Vent: ~76s to ~136s
-        'P-004': 26, // Server Vault: ~136s to ~206s
-        'P-005': 24, // Safe House: ~206s to 272s
+        'P-001': 28, // Lobby: 0 to ~76s (28%)
+        'P-003': 22, // Air Vent: ~76s to ~136s (28% to 50%)
+        'P-004': 26, // Server Vault: ~136s to ~206s (50% to 76%)
+        'P-005': 24, // Safe House: ~206s to 272s (76% to 100%)
       }
     : {
         'P-001': 28,
@@ -56,11 +51,101 @@ export const AudioTimeline = memo(function AudioTimeline({
         'P-005': 24,
       };
 
-  // Playhead at 84s / 272s ≈ 30.88%
-  const playheadPercent = 30.88;
-
-  // Air Vent entry boundary on Route B is at the boundary of P-001 -> P-003, exactly 28%
+  // Air Vent entry boundary on Route B is at exactly 28%
   const cueMarkerPercent = 28;
+
+  const handleVolumeChange = (newVal: number) => {
+    setVolume(newVal);
+    setMasterVolume(newVal);
+  };
+
+  const jumpToPassage = useCallback((pId: string) => {
+    onSelectPassage?.(pId);
+    // Find passage segment start percent
+    let startPercent = 0;
+    for (const id of passageIds) {
+      if (id === pId) break;
+      startPercent += segmentWidths[id] ?? 25;
+    }
+    setPlayheadPercent(startPercent + 1);
+    playAuditionTone(523.25, 0.15); // C5 chime
+  }, [passageIds, segmentWidths, onSelectPassage]);
+
+  const handleSkipBackward = useCallback(() => {
+    if (canSkipBackward) {
+      jumpToPassage(passageIds[currentPassageIndex - 1]);
+    }
+  }, [canSkipBackward, currentPassageIndex, passageIds, jumpToPassage]);
+
+  const handleSkipForward = useCallback(() => {
+    if (canSkipForward) {
+      jumpToPassage(passageIds[currentPassageIndex + 1]);
+    } else if (currentPassageIndex === -1 && passageIds.length > 0) {
+      jumpToPassage(passageIds[0]);
+    }
+  }, [canSkipForward, currentPassageIndex, passageIds, jumpToPassage]);
+
+  const handleTrackClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const clickPercent = Math.max(0, Math.min(100, (clickX / rect.width) * 100));
+    setPlayheadPercent(clickPercent);
+
+    // Determine which passage this percent corresponds to
+    let accumulated = 0;
+    for (const pId of passageIds) {
+      const width = segmentWidths[pId] ?? 25;
+      if (clickPercent >= accumulated && clickPercent < accumulated + width) {
+        onSelectPassage?.(pId);
+        break;
+      }
+      accumulated += width;
+    }
+    playAuditionTone(440, 0.1);
+  };
+
+  // Traversal simulation loop
+  useEffect(() => {
+    if (isPlayingSimulation) {
+      simulationTimerRef.current = window.setInterval(() => {
+        setPlayheadPercent((prev) => {
+          if (prev >= 99.5) {
+            setIsPlayingSimulation(false);
+            return 0;
+          }
+          const next = prev + 0.6;
+
+          // Check if crossed cue marker boundary (28%) on Route B
+          if (currentRouteId === 'route_b' && prev < 28 && next >= 28) {
+            playCueTriggerSound(true); // Violation sound
+          }
+
+          // Check passage boundaries
+          let acc = 0;
+          for (const pId of passageIds) {
+            const width = segmentWidths[pId] ?? 25;
+            if (next >= acc && next < acc + width) {
+              if (selectedPassageId !== pId) {
+                onSelectPassage?.(pId);
+              }
+              break;
+            }
+            acc += width;
+          }
+
+          return next;
+        });
+      }, 100);
+    } else if (simulationTimerRef.current) {
+      clearInterval(simulationTimerRef.current);
+    }
+
+    return () => {
+      if (simulationTimerRef.current) {
+        clearInterval(simulationTimerRef.current);
+      }
+    };
+  }, [isPlayingSimulation, currentRouteId, passageIds, segmentWidths, selectedPassageId, onSelectPassage]);
 
   return (
     <div className={styles.timeline} role="region" aria-label="Audio timeline and transport">
@@ -81,6 +166,8 @@ export const AudioTimeline = memo(function AudioTimeline({
           >
             <SkipBack size={13} aria-hidden="true" />
           </button>
+
+          {/* Media Play Button — strictly disabled with reason per PRD & AGENTS.md §8 */}
           <button
             type="button"
             className={`${styles.transportBtn} ${styles.playBtn}`}
@@ -90,6 +177,7 @@ export const AudioTimeline = memo(function AudioTimeline({
           >
             <Play size={15} aria-hidden="true" fill="currentColor" />
           </button>
+
           <button
             type="button"
             className={styles.transportBtn}
@@ -104,14 +192,37 @@ export const AudioTimeline = memo(function AudioTimeline({
           >
             <SkipForward size={13} aria-hidden="true" />
           </button>
+
+          {/* Interactive Route Audition Simulation Button */}
+          <button
+            type="button"
+            className={[styles.transportBtn, isPlayingSimulation ? styles.playBtnActive : ''].join(' ')}
+            onClick={() => {
+              const nextState = !isPlayingSimulation;
+              setIsPlayingSimulation(nextState);
+              if (nextState) {
+                playAuditionTone(440, 0.2);
+              }
+            }}
+            title={isPlayingSimulation ? 'Pause route audition traversal' : 'Audition route timeline traversal with Web Audio synthesis'}
+            aria-label={isPlayingSimulation ? 'Pause route traversal' : 'Audition route traversal'}
+            style={{ width: 'auto', padding: '0 10px', borderRadius: 'var(--bt-radius-full)', gap: '6px' }}
+          >
+            {isPlayingSimulation ? <Pause size={12} aria-hidden="true" /> : <Radio size={12} aria-hidden="true" />}
+            <span style={{ fontSize: '11px', fontWeight: 600 }}>
+              {isPlayingSimulation ? 'Pause Traversal' : 'Audition Route'}
+            </span>
+          </button>
         </div>
 
-        {/* Time display — design fixture values */}
+        {/* Time display */}
         <div
           className={styles.timeDisplay}
-          title="Reference design-fixture values only until actual audio is imported (PRD FR-019)"
+          title="Reference design-fixture values until real decoded audio is loaded"
         >
-          <span className={styles.timeCurrent}>01:24</span>
+          <span className={styles.timeCurrent}>
+            {isPlayingSimulation || playheadPercent !== 30.88 ? displayCurrentTime : '01:24'}
+          </span>
           <span className={styles.timeSep}>/</span>
           <span className={styles.timeTotal}>04:32</span>
           <span className="demo-badge" style={{ fontSize: '9px', padding: '1px 4px' }}>
@@ -155,10 +266,10 @@ export const AudioTimeline = memo(function AudioTimeline({
             min="0"
             max="100"
             value={volume}
-            onChange={(e) => setVolume(Number(e.target.value))}
+            onChange={(e) => handleVolumeChange(Number(e.target.value))}
             className={styles.volumeSlider}
             aria-label="Master volume"
-            title={`Audition Volume: ${volume}%`}
+            title={`Audition Volume: ${volume.toString()}%`}
           />
           <span title="Waveform monitor">
             <Activity size={14} aria-hidden="true" />
@@ -177,7 +288,13 @@ export const AudioTimeline = memo(function AudioTimeline({
         </div>
 
         {/* Right timeline tracks container */}
-        <div className={styles.trackContainer}>
+        <div
+          className={styles.trackContainer}
+          onClick={handleTrackClick}
+          role="region"
+          aria-label="Scrubbable timeline tracks"
+          title="Click anywhere to scrub playhead position"
+        >
           {/* Time ruler */}
           <div className={styles.timeRuler} aria-hidden="true">
             <span>00:00</span>
@@ -209,16 +326,19 @@ export const AudioTimeline = memo(function AudioTimeline({
                     isSelected ? styles.segmentSelected : '',
                   ].join(' ')}
                   style={{ width: `${width.toString()}%` }}
-                  onClick={() => onSelectPassage?.(pId)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    jumpToPassage(pId);
+                  }}
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault();
-                      onSelectPassage?.(pId);
+                      jumpToPassage(pId);
                     }
                   }}
-                  title={`Passage ${p ? p.title : pId} (${pId})`}
+                  title={`Passage ${p ? p.title : pId} (${pId}) — click to select and scrub`}
                 >
                   {p ? p.title : pId}
                 </div>
@@ -246,13 +366,14 @@ export const AudioTimeline = memo(function AudioTimeline({
               />
             </svg>
 
-            {/* Red Diamond Cue Marker at Air Vent boundary on Route B (aligned precisely at boundary, 28% / ~01:10 estimated demo position) */}
+            {/* Red Diamond Cue Marker at Air Vent boundary on Route B (28%) */}
             {currentRouteId === 'route_b' && (
               <div
                 className={styles.cueMarkerWrap}
                 style={{ left: `${cueMarkerPercent.toString()}%` }}
                 onClick={(e) => {
                   e.stopPropagation();
+                  playCueTriggerSound(true);
                   onSelectCueMarker?.();
                 }}
                 title="Cue: traitor_theme.wav triggers at Air Vent entry (~01:10 estimated demo position · timing unavailable without measured media)"
@@ -267,39 +388,33 @@ export const AudioTimeline = memo(function AudioTimeline({
 
           {/* Lane 2: AMBIENCE */}
           <div className={styles.laneRow}>
-            <span className={styles.demoWaveformBadge}>Demo Waveform</span>
             <svg className={styles.waveformSvg} viewBox="0 0 1000 38" preserveAspectRatio="none" aria-hidden="true">
               <path
-                d="M0,19 Q70,12 140,19 T280,19 T420,15 T560,23 T700,13 T840,21 T1000,19"
+                d="M0,19 Q40,16 80,19 T160,19 T240,18 T320,20 T400,18 T500,21 T600,18 T750,20 T900,18 T1000,19"
                 fill="none"
-                stroke="var(--bt-text-muted)"
-                strokeWidth="1.2"
-                strokeOpacity="0.4"
+                stroke="rgba(176, 198, 193, 0.4)"
+                strokeWidth="1"
               />
             </svg>
           </div>
 
           {/* Lane 3: SFX */}
           <div className={styles.laneRow}>
-            <span className={styles.demoWaveformBadge}>Demo SFX</span>
             <svg className={styles.waveformSvg} viewBox="0 0 1000 38" preserveAspectRatio="none" aria-hidden="true">
-              {/* Discrete SFX trigger bursts */}
-              <circle cx="280" cy="19" r="3" fill="var(--bt-text-muted)" opacity="0.6" />
-              <line x1="280" y1="10" x2="280" y2="28" stroke="var(--bt-text-muted)" strokeWidth="1.5" opacity="0.6" />
-
-              <circle cx="560" cy="19" r="3" fill="var(--bt-text-muted)" opacity="0.6" />
-              <line x1="560" y1="11" x2="560" y2="27" stroke="var(--bt-text-muted)" strokeWidth="1.5" opacity="0.6" />
-
-              <circle cx="820" cy="19" r="3" fill="var(--bt-text-muted)" opacity="0.6" />
-              <line x1="820" y1="8" x2="820" y2="30" stroke="var(--bt-text-muted)" strokeWidth="1.5" opacity="0.6" />
+              <path
+                d="M0,19 L200,19 L210,14 L220,24 L230,19 L600,19 L610,15 L620,23 L630,19 L1000,19"
+                fill="none"
+                stroke="rgba(176, 198, 193, 0.3)"
+                strokeWidth="1"
+              />
             </svg>
           </div>
 
-          {/* Vertical Playhead at 01:24 */}
+          {/* Dynamic Playhead */}
           <div
             className={styles.playheadLine}
             style={{ left: `${playheadPercent.toString()}%` }}
-            title="Playhead: 01:24 (design fixture value)"
+            aria-hidden="true"
           >
             <div className={styles.playheadThumb} />
           </div>

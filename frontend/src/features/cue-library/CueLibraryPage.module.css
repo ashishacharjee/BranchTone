@@ -198,9 +198,16 @@
 /* ── Transport / Disabled Preview ───────────────────────────────────────── */
 .transportRow {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: var(--bt-space-3);
   padding-top: var(--bt-space-3);
+}
+
+.transportBtnRow {
+  display: flex;
+  align-items: center;
+  gap: var(--bt-space-3);
+  flex-wrap: wrap;
 }
 
 .disabledPlayBtn {
@@ -216,6 +223,26 @@
   font-weight: 600;
   cursor: not-allowed;
   opacity: 0.6;
+}
+
+.auditionSynthBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--bt-radius-sm);
+  background: rgba(41, 201, 138, 0.15);
+  border: 1px solid var(--bt-accent);
+  color: var(--bt-accent);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--bt-transition);
+}
+
+.auditionSynthBtn:hover {
+  background: rgba(41, 201, 138, 0.25);
+  box-shadow: 0 0 10px rgba(41, 201, 138, 0.3);
 }
 
 .actionBtnGroup {

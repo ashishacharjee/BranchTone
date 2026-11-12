@@ -35,17 +35,35 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--bt-text);
+  cursor: pointer;
+  transition: all var(--bt-transition);
+}
+
+.transportBtn:hover:not(:disabled) {
+  border-color: var(--bt-accent);
+  color: var(--bt-accent);
+  background: rgba(41, 201, 138, 0.1);
+}
+
+.transportBtn:disabled {
   color: var(--bt-text-muted);
   cursor: not-allowed;
-  opacity: 0.5;
-  transition: opacity var(--bt-transition);
+  opacity: 0.4;
 }
 
 .playBtn {
   width: 32px;
   height: 32px;
-  border-color: rgba(41, 201, 138, 0.35);
+  border-color: rgba(41, 201, 138, 0.45);
   color: var(--bt-accent);
+  background: rgba(41, 201, 138, 0.08);
+}
+
+.playBtnActive {
+  background: rgba(41, 201, 138, 0.25) !important;
+  border-color: var(--bt-accent) !important;
+  box-shadow: 0 0 10px rgba(41, 201, 138, 0.4);
 }
 
 .timeDisplay {
@@ -181,6 +199,7 @@
   flex-direction: column;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
 /* ── Ruler ──────────────────────────────────────────────────────────────── */
@@ -217,11 +236,16 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   padding: 0 4px;
+  cursor: pointer;
   transition: background var(--bt-transition);
 }
 
 .segmentNormal {
   background: rgba(20, 92, 67, 0.12);
+}
+
+.segmentNormal:hover {
+  background: rgba(20, 92, 67, 0.25);
 }
 
 .segmentIssue {
@@ -230,8 +254,12 @@
   font-weight: 600;
 }
 
+.segmentIssue:hover {
+  background: rgba(240, 79, 117, 0.3);
+}
+
 .segmentSelected {
-  outline: 1px solid var(--bt-focus);
+  outline: 1.5px solid var(--bt-focus);
 }
 
 /* ── Lanes ──────────────────────────────────────────────────────────────── */
@@ -309,6 +337,7 @@
   box-shadow: 0 0 8px var(--bt-accent);
   z-index: 10;
   pointer-events: none;
+  transition: left 0.08s linear;
 }
 
 .playheadThumb {
