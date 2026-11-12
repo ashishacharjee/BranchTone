@@ -1,9 +1,14 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "services": {
-    "frontend": {
-      "root": "frontend",
-      "framework": "vite"
+  "cleanUrls": false,
+  "rewrites": [
+    {
+      "source": "/api/v1/health",
+      "destination": "/api/health"
+    },
+    {
+      "source": "/((?!assets/|favicon\\.svg|api/).*)",
+      "destination": "/index.html"
     }
-  }
+  ]
 }
