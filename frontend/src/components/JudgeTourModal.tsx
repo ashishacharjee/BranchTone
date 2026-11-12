@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import {
   Sparkles,
@@ -139,7 +140,7 @@ export function JudgeTourModal({ isOpen, onClose }: JudgeTourModalProps) {
 
   const current = steps[currentStep];
 
-  return (
+  return createPortal(
     <div className={styles.overlay} onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="judge-tour-title">
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.header}>
@@ -202,6 +203,7 @@ export function JudgeTourModal({ isOpen, onClose }: JudgeTourModalProps) {
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

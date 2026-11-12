@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom';
 import { Keyboard, X } from 'lucide-react';
 import styles from './KeyboardShortcutsModal.module.css';
 
@@ -34,7 +35,7 @@ export function KeyboardShortcutsModal({ isOpen, onClose }: KeyboardShortcutsMod
     },
   ];
 
-  return (
+  return createPortal(
     <div className={styles.overlay} onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="shortcuts-title">
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.header}>
@@ -67,6 +68,7 @@ export function KeyboardShortcutsModal({ isOpen, onClose }: KeyboardShortcutsMod
           ))}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
