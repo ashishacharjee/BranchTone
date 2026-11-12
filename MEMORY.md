@@ -2,6 +2,17 @@
 
 **Updated:** 12 November 2026. Keep this file factual and short. Update only after a decision or verification.
 
+## Michele Du Framer Liquid-Glass Design Elevation & Vercel Production (12 Nov 2026)
+
+- Comprehensive visual elevation inspired by the Framer portfolio benchmark (`https://micheledu.com/`).
+- Aesthetic foundation: Pitch-black obsidian canvas (`#07090A` / `#0C1012`) with 24px micro-dot grid and ambient radial emerald/rose glows.
+- Liquid Glass Bento Cards: `linear-gradient(180deg, rgba(22, 28, 31, 0.75) 0%, rgba(12, 16, 18, 0.88) 100%)`, `backdrop-filter: blur(24px) saturate(190%)`, hairline borders (`1px solid rgba(255, 255, 255, 0.08)`), and top highlight reflections (`inset 0 1px 0 0 rgba(255, 255, 255, 0.16)`).
+- Sound equalizer widget (`Music Glass`) on Topbar and Overview hero with live animated equalizer bars and procedural Web Audio dissonance synthesizer (`Audition Route B Defect Tone`).
+- All 7 workspaces upgraded: Overview (Bento Grid), Story Graph (Node capsules, Inspector, Audio Timeline), Narrative Map (Step cards), Cue Library (Liquid glass table & waveform preview), Route Lab (Pill dock & trace table), Validation Centre (Severity badges & state telemetry), Reports (Syntax-styled JSON drawer).
+- Strict compliance preserved: charcoal/emerald/burgundy color identity, exact P-003 quote, 4/5 intensity, and no fabricated metrics.
+- Production deployment on Vercel at `https://branchtone.vercel.app` and `https://branchtone-k99c.vercel.app` with full SPA route rewrites, disabled SSO protection, and 200 OK across all routes.
+- 100% tests passing: 40/40 Vitest frontend tests, 11/11 Pytest backend tests.
+
 ## Interactive Web Audio & Deployment State (12 Nov 2026)
 
 - Added browser Web Audio API synthesis engine (`frontend/src/services/synth.ts`) for real audible feedback without falsifying missing audio media assets.

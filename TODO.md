@@ -78,13 +78,17 @@ Update a checkbox only when the task is actually complete and evidence/tests exi
 ## Gate 9 — Release readiness
 - [x] Backend test/lint/typecheck passes.
 - [x] Frontend lint/typecheck/unit tests/build pass.
-- [ ] E2E flow passes where configured.
+- [x] E2E flow passes where configured.
 - [x] Route B → P-003 → BT-001 verified from a fresh run.
 - [x] Route selection/passage/finding state is consistent across workspaces.
 - [x] Source quote exact; source line range only if parser-derived.
 - [x] Missing audio produces no play claim and no fabricated waveform.
 - [x] Verify demo works without AI credentials.
 - [x] Check asset licences and secrets hygiene.
+- [x] Elevate design system to Framer liquid-glass dark-mode aesthetic (Michele Du portfolio benchmark `https://micheledu.com/`).
+- [x] Implement asymmetric Bento Grid layouts across all 7 workspaces with technical micro dot-grid canvas.
+- [x] Implement live interactive Web Audio procedural dissonance synthesizer audition controls.
+- [x] Deploy live production to Vercel at `https://branchtone.vercel.app` with full SPA route rewrites and public access.
 - [x] Update README, CHANGELOG, MEMORY and PHASE_LOG.
 - [ ] Confirm submission requirements/deadlines on official portal.
 
