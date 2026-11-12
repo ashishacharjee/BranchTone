@@ -1,19 +1,19 @@
-/* Hallmark · checked: 2026-11-12 · genre: atmospheric · built: the project · redesign: polish · v2.0.0 */
-/* ── Apple-grade Cinematic Ambient Aurora Background ──────────────────────── */
+/* Hallmark · checked: 2026-11-13 · genre: atmospheric · built: the project · redesign: polish · v2.0.0 */
+/* ── Video-Matched Daylight Studio Ambient Canvas ────────────────────────── */
 .backgroundContainer {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
-  background-color: var(--bt-bg);
+  background-color: var(--bt-canvas-outer);
 }
 
 /* ── Deep Field Base ─────────────────────────────────────────────────────── */
 .deepField {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 100% 70% at 50% -10%, var(--bt-aurora-deep-1) 0%, var(--bt-aurora-deep-2) 60%, var(--bt-aurora-deep-3) 100%);
+  background: radial-gradient(ellipse 100% 70% at 50% -10%, #E9ECF0 0%, #DFE3E8 60%, #D5DAE0 100%);
 }
 
 /* ── Aurora Mesh Layer ───────────────────────────────────────────────────── */
@@ -22,8 +22,8 @@
   inset: 0;
   filter: blur(85px);
   -webkit-filter: blur(85px);
-  opacity: 0.85;
-  mix-blend-mode: screen;
+  opacity: 0.45;
+  mix-blend-mode: multiply;
 }
 
 .auroraBlob {
@@ -33,37 +33,37 @@
   transform: translate3d(0, 0, 0);
 }
 
-/* Emerald Primary Aurora (Top Center / Audio Ambient) */
+/* Emerald Primary Aurora */
 .blobEmerald {
-  width: 720px;
-  height: 720px;
-  top: -160px;
-  left: 28%;
+  width: 680px;
+  height: 680px;
+  top: -140px;
+  left: 25%;
   background: radial-gradient(circle, var(--bt-aurora-emerald-1) 0%, var(--bt-aurora-emerald-2) 50%, transparent 70%);
   animation: auroraDriftEmerald 22s ease-in-out infinite alternate;
 }
 
-/* Cyan / Teal Secondary Aurora (Left Midfield) */
+/* Cyan / Teal Secondary Aurora */
 .blobCyan {
-  width: 640px;
-  height: 640px;
+  width: 600px;
+  height: 600px;
   top: 25%;
-  left: -120px;
+  left: -100px;
   background: radial-gradient(circle, var(--bt-aurora-cyan-1) 0%, var(--bt-aurora-cyan-2) 50%, transparent 70%);
   animation: auroraDriftCyan 26s ease-in-out infinite alternate;
 }
 
-/* Burgundy / Rose Accent Aurora (Bottom Right / Defect Tone Field) */
+/* Burgundy / Rose Accent Aurora */
 .blobBurgundy {
-  width: 680px;
-  height: 680px;
-  bottom: -140px;
-  right: -80px;
+  width: 620px;
+  height: 620px;
+  bottom: -120px;
+  right: -60px;
   background: radial-gradient(circle, var(--bt-aurora-burgundy-1) 0%, var(--bt-aurora-burgundy-2) 50%, transparent 70%);
   animation: auroraDriftBurgundy 28s ease-in-out infinite alternate;
 }
 
-/* ── Apple Cursor Spotlight (Follows mouse smoothly) ─────────────────────── */
+/* ── Cursor Spotlight ────────────────────────────────────────────────────── */
 .spotlight {
   position: absolute;
   inset: 0;
@@ -75,69 +75,44 @@
     var(--bt-aurora-spotlight-2) 35%,
     transparent 65%
   );
-  mix-blend-mode: screen;
+  mix-blend-mode: multiply;
   transition: opacity 0.3s ease;
 }
 
-/* ── Technical Micro Dot-Grid with Radial Mask ───────────────────────────── */
+/* ── Technical Micro Dot-Grid ────────────────────────────────────────────── */
 .dotGrid {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(var(--bt-aurora-dot) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
   background-size: 24px 24px;
   mask-image: radial-gradient(ellipse 90% 75% at 50% 35%, black 40%, transparent 95%);
   -webkit-mask-image: radial-gradient(ellipse 90% 75% at 50% 35%, black 40%, transparent 95%);
-  opacity: 0.75;
+  opacity: 0.85;
 }
 
 /* ── Subtle Top Lighting Vignette ────────────────────────────────────────── */
 .vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 0%, transparent 50%, var(--bt-aurora-vignette) 100%);
+  background: radial-gradient(circle at 50% 0%, transparent 60%, rgba(0, 0, 0, 0.04) 100%);
 }
 
-/* ── Fluid Aurora Keyframes (Hardware Accelerated) ───────────────────────── */
 @keyframes auroraDriftEmerald {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-  }
-  33% {
-    transform: translate3d(80px, 45px, 0) scale(1.12) rotate(15deg);
-  }
-  66% {
-    transform: translate3d(-50px, 70px, 0) scale(0.95) rotate(-10deg);
-  }
-  100% {
-    transform: translate3d(40px, -30px, 0) scale(1.08) rotate(5deg);
-  }
+  0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate3d(60px, 40px, 0) scale(1.1) rotate(10deg); }
+  100% { transform: translate3d(-30px, 50px, 0) scale(0.95) rotate(-8deg); }
 }
 
 @keyframes auroraDriftCyan {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1.05) rotate(0deg);
-  }
-  50% {
-    transform: translate3d(90px, -60px, 0) scale(0.92) rotate(20deg);
-  }
-  100% {
-    transform: translate3d(-40px, 80px, 0) scale(1.1) rotate(-15deg);
-  }
+  0% { transform: translate3d(0, 0, 0) scale(1.05) rotate(0deg); }
+  50% { transform: translate3d(70px, -50px, 0) scale(0.95) rotate(15deg); }
+  100% { transform: translate3d(-30px, 60px, 0) scale(1.08) rotate(-10deg); }
 }
 
 @keyframes auroraDriftBurgundy {
-  0% {
-    transform: translate3d(0, 0, 0) scale(0.95) rotate(0deg);
-  }
-  40% {
-    transform: translate3d(-70px, -50px, 0) scale(1.15) rotate(-12deg);
-  }
-  80% {
-    transform: translate3d(60px, 40px, 0) scale(1.02) rotate(18deg);
-  }
-  100% {
-    transform: translate3d(-20px, 20px, 0) scale(1) rotate(-5deg);
-  }
+  0% { transform: translate3d(0, 0, 0) scale(0.95) rotate(0deg); }
+  50% { transform: translate3d(-50px, -40px, 0) scale(1.1) rotate(-10deg); }
+  100% { transform: translate3d(40px, 30px, 0) scale(1) rotate(12deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {

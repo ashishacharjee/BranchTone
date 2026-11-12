@@ -1,15 +1,14 @@
+/* ── Passage Node: Daylight Executive Studio Aesthetic ──────────────────── */
 .node {
   display: flex;
   align-items: center;
   gap: 12px;
-  width: 224px;
+  width: 230px;
   padding: 12px 14px;
-  background: linear-gradient(180deg, rgba(22, 28, 31, 0.85) 0%, rgba(12, 16, 18, 0.94) 100%);
-  backdrop-filter: blur(20px) saturate(190%);
-  -webkit-backdrop-filter: blur(20px) saturate(190%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   border-radius: 14px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.14);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
   cursor: pointer;
   position: relative;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
@@ -20,51 +19,51 @@
 
 .node:hover {
   transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.16);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.22);
+  border-color: #CBD5E1;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .nodeValid {
-  border-color: rgba(3, 195, 123, 0.35);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 12px rgba(3, 195, 123, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+  border-color: #E2E8F0;
 }
 
 .nodeValid.nodeSelected {
-  border-color: rgba(3, 195, 123, 0.8);
-  background: linear-gradient(180deg, rgba(16, 32, 28, 0.9) 0%, rgba(10, 18, 16, 0.95) 100%);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 24px rgba(3, 195, 123, 0.35), inset 0 1px 0 0 rgba(3, 195, 123, 0.45);
+  border-color: #10B981;
+  background: #F0FDF4;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.18);
 }
 
 .nodeIssue {
-  border-color: rgba(240, 79, 117, 0.5);
-  background: linear-gradient(180deg, rgba(32, 16, 20, 0.88) 0%, rgba(18, 10, 13, 0.95) 100%);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 16px rgba(240, 79, 117, 0.15), inset 0 1px 0 0 rgba(240, 79, 117, 0.25);
+  border-color: #FCA5A5;
+  background: #FEF2F2;
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.12);
 }
 
 .nodeIssue.nodeSelected {
-  border-color: rgba(240, 79, 117, 0.85);
-  background: linear-gradient(180deg, rgba(42, 16, 22, 0.92) 0%, rgba(20, 9, 13, 0.97) 100%);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 28px rgba(240, 79, 117, 0.4), inset 0 1px 0 0 rgba(240, 79, 117, 0.5);
+  border-color: #EF4444;
+  background: #FEE2E2;
+  box-shadow: 0 6px 22px rgba(239, 68, 68, 0.22);
 }
 
 .nodeInactive {
-  opacity: 0.5;
-  border-color: rgba(255, 255, 255, 0.05);
+  opacity: 0.55;
+  border-color: #F1F5F9;
+  background: #F8FAFC;
   box-shadow: none;
 }
 
 .thumbWrap {
-  width: 52px;
-  height: 52px;
-  border-radius: 8px;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
   overflow: hidden;
   flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid #E2E8F0;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  background: #000;
+  background: #F1F5F9;
 }
 
 .thumbImg {
@@ -97,97 +96,90 @@
 
 .title {
   font-size: 13px;
-  font-weight: 600;
-  color: var(--bt-text);
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  font-weight: 700;
+  color: #0F172A;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .passageId {
-  font-size: 11px;
   font-family: var(--bt-font-mono);
-  color: var(--bt-text-secondary);
+  font-size: 10px;
+  color: #64748B;
+  flex-shrink: 0;
 }
 
 .metaRow {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-size: 11px;
-  color: var(--bt-text-muted);
 }
 
-.metaItem {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-}
-
-.intensityDotted {
+.metaBadge {
   font-family: var(--bt-font-mono);
-  color: var(--bt-text-secondary);
-  font-weight: 500;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: #F1F5F9;
+  color: #475569;
+  border: 1px solid #E2E8F0;
 }
 
-.statusRow {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 11px;
-  margin-top: 1px;
-}
-
-.statusDotValid {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--bt-accent);
-  box-shadow: 0 0 6px var(--bt-accent);
-}
-
-.statusDotIssue {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--bt-error);
-  box-shadow: 0 0 6px var(--bt-error);
-}
-
-.statusTextValid {
-  color: var(--bt-text-secondary);
-  font-weight: 500;
-}
-
-.statusTextIssue {
-  color: var(--bt-error-soft);
-  font-weight: 500;
-}
-
-.badge {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--bt-error);
-  color: #fff;
+.issueBadge {
+  font-family: var(--bt-font-mono);
   font-size: 10px;
   font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: #FEE2E2;
+  color: #DC2626;
+  border: 1px solid #FECACA;
 }
 
-/* React Flow handles — invisible styling with target zones */
-.handle {
-  width: 6px;
-  height: 6px;
-  background: transparent;
-  border: none;
+.cleanBadge {
+  font-family: var(--bt-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: #DCFCE7;
+  color: #16A34A;
+  border: 1px solid #BBF7D0;
+}
+
+.cueIndicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: #64748B;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.cueIndicator code {
+  color: #0F172A;
+  font-weight: 600;
+}
+
+.targetHandle, .sourceHandle {
+  background: #94A3B8 !important;
+  width: 8px !important;
+  height: 8px !important;
+  border: 2px solid #FFFFFF !important;
+}
+
+.nodeSelected .targetHandle,
+.nodeSelected .sourceHandle {
+  background: #10B981 !important;
+}
+
+.nodeIssue.nodeSelected .targetHandle,
+.nodeIssue.nodeSelected .sourceHandle {
+  background: #EF4444 !important;
 }

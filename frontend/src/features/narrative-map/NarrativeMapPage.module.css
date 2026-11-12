@@ -1,20 +1,20 @@
-/* ── Narrative Map Workspace: Studio Aesthetic ─────────────────────────── */
+/* ── Narrative Map Workspace: Daylight Executive Studio Aesthetic ───────── */
 .narrativeMap {
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow-y: auto;
-  padding: 32px 36px;
+  padding: 28px 32px 60px;
   background: transparent;
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 1440px;
   width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
   padding-bottom: 40px;
 }
 
@@ -23,13 +23,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 24px;
-  background: linear-gradient(180deg, rgba(22, 28, 31, 0.75) 0%, rgba(12, 16, 18, 0.88) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.16);
-  backdrop-filter: blur(24px) saturate(190%);
-  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  padding: 16px 24px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
 .routeSelector {
@@ -43,7 +41,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--bt-text-secondary);
+  color: #64748B;
 }
 
 .routePill {
@@ -52,27 +50,27 @@
   gap: 8px;
   padding: 6px 16px;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--bt-text-secondary);
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  color: #475569;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .routePill:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.16);
+  background: #F1F5F9;
+  color: #0F172A;
+  border-color: #CBD5E1;
   transform: translateY(-1px);
 }
 
 .routePillActive {
-  background: linear-gradient(135deg, rgba(3, 195, 123, 0.2) 0%, rgba(3, 195, 123, 0.08) 100%);
-  border-color: rgba(3, 195, 123, 0.55);
-  color: #fff;
-  box-shadow: 0 0 18px rgba(3, 195, 123, 0.28), inset 0 1px 0 0 rgba(3, 195, 123, 0.4);
+  background: #DCFCE7;
+  border-color: #86EFAC;
+  color: #065F46;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
 }
 
 .pillBadge {
@@ -82,43 +80,30 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
+  background: #E2E8F0;
   font-size: 10px;
   font-family: var(--bt-font-mono);
   font-weight: 700;
-  color: var(--bt-text-muted);
+  color: #475569;
 }
 
 .routePillActive .pillBadge {
-  background: var(--bt-accent);
-  color: #070B0C;
-  box-shadow: 0 0 8px rgba(3, 195, 123, 0.5);
+  background: #10B981;
+  color: #FFFFFF;
 }
 
 /* ── Intensity Plot Panel ────────────────────────────────────────────────── */
 .plotPanel {
-  background: linear-gradient(180deg, rgba(22, 28, 31, 0.75) 0%, rgba(12, 16, 18, 0.88) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   border-radius: 20px;
   padding: 24px 28px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.16);
-  backdrop-filter: blur(24px) saturate(190%);
-  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
   position: relative;
   overflow: hidden;
-}
-
-.plotPanel::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(3, 195, 123, 0.4), transparent);
 }
 
 .plotHeader {
@@ -126,15 +111,15 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid #E2E8F0;
 }
 
 .plotTitle {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #fff;
+  color: #0F172A;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -147,8 +132,8 @@
 }
 
 .passageStepCard {
-  background: linear-gradient(180deg, rgba(26, 34, 38, 0.7) 0%, rgba(14, 19, 21, 0.9) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
   border-radius: 16px;
   padding: 20px;
   display: flex;
@@ -156,26 +141,27 @@
   gap: 12px;
   cursor: pointer;
   position: relative;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
 }
 
 .passageStepCard:hover {
-  border-color: rgba(3, 195, 123, 0.45);
-  background: linear-gradient(180deg, rgba(30, 40, 44, 0.8) 0%, rgba(16, 22, 25, 0.95) 100%);
+  border-color: #86EFAC;
+  background: #FFFFFF;
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), 0 0 16px rgba(3, 195, 123, 0.15);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }
 
 .stepSelected {
-  border-color: var(--bt-accent) !important;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 24px rgba(3, 195, 123, 0.3), inset 0 1px 0 0 rgba(3, 195, 123, 0.4) !important;
-  background: linear-gradient(180deg, rgba(16, 36, 30, 0.85) 0%, rgba(10, 20, 18, 0.95) 100%) !important;
+  border-color: #10B981 !important;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.16) !important;
+  background: #F0FDF4 !important;
 }
 
 .stepIssue {
-  border-color: rgba(240, 79, 117, 0.6) !important;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5), 0 0 20px rgba(240, 79, 117, 0.2), inset 0 1px 0 0 rgba(240, 79, 117, 0.3) !important;
+  border-color: #FCA5A5 !important;
+  background: #FEF2F2 !important;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.08) !important;
 }
 
 .stepTop {
@@ -189,17 +175,17 @@
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: var(--bt-accent);
-  background: rgba(3, 195, 123, 0.12);
+  color: #065F46;
+  background: #DCFCE7;
   padding: 3px 8px;
   border-radius: 9999px;
-  border: 1px solid rgba(3, 195, 123, 0.3);
+  border: 1px solid #BBF7D0;
 }
 
 .stepTitle {
   font-size: 15px;
   font-weight: 700;
-  color: #fff;
+  color: #0F172A;
   letter-spacing: -0.01em;
 }
 
@@ -208,7 +194,7 @@
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: var(--bt-text-secondary);
+  color: #64748B;
 }
 
 .intensityRow {
@@ -222,27 +208,26 @@
   display: flex;
   justify-content: space-between;
   font-size: 11px;
-  color: var(--bt-text-muted);
+  color: #64748B;
 }
 
 .intensityValue {
   font-family: var(--bt-font-mono);
   font-weight: 700;
-  color: #fff;
+  color: #0F172A;
 }
 
 .intensityBarBg {
   height: 6px;
-  background: rgba(255, 255, 255, 0.08);
+  background: #E2E8F0;
   border-radius: 9999px;
   overflow: hidden;
 }
 
 .intensityBarFill {
   height: 100%;
-  background: var(--bt-accent);
+  background: #10B981;
   border-radius: 9999px;
-  box-shadow: 0 0 8px rgba(3, 195, 123, 0.5);
   transition: width 0.3s ease;
 }
 
@@ -258,29 +243,27 @@
 }
 
 .factNoReveal {
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--bt-text-secondary);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #F1F5F9;
+  color: #475569;
+  border: 1px solid #E2E8F0;
 }
 
 .factReveal {
-  background: rgba(3, 195, 123, 0.15);
-  color: var(--bt-accent);
-  border: 1px solid rgba(3, 195, 123, 0.35);
+  background: #DCFCE7;
+  color: #065F46;
+  border: 1px solid #BBF7D0;
 }
 
 /* ── Annotation Review ──────────────────────────────────────────────────── */
 .annotationSection {
-  background: linear-gradient(180deg, rgba(22, 28, 31, 0.75) 0%, rgba(12, 16, 18, 0.88) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   border-radius: 20px;
   padding: 24px 28px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.16);
-  backdrop-filter: blur(24px) saturate(190%);
-  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
 }
 
 .annotationGrid {
@@ -290,35 +273,35 @@
 }
 
 .annotationCard {
-  background: linear-gradient(180deg, rgba(26, 34, 38, 0.7) 0%, rgba(14, 19, 21, 0.9) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
   border-radius: 16px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
 }
 
 .annotationCard:hover {
-  background: linear-gradient(180deg, rgba(30, 40, 44, 0.8) 0%, rgba(16, 22, 25, 0.95) 100%);
-  border-color: rgba(3, 195, 123, 0.4);
+  background: #FFFFFF;
+  border-color: #CBD5E1;
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
 }
 
 .annotationCard:focus-visible {
-  outline: 2px solid var(--bt-accent);
+  outline: 2px solid #10B981;
 }
 
 .annotationApproved {
-  border-color: rgba(3, 195, 123, 0.35);
+  border-color: #86EFAC;
 }
 
 .annotationPending {
-  border-color: rgba(234, 179, 8, 0.35);
+  border-color: #FCD34D;
 }
 
 .actionRow {
@@ -333,17 +316,16 @@
   font-size: 11px;
   font-weight: 700;
   border-radius: 8px;
-  background: rgba(3, 195, 123, 0.18);
-  border: 1px solid rgba(3, 195, 123, 0.4);
-  color: var(--bt-accent);
+  background: #DCFCE7;
+  border: 1px solid #86EFAC;
+  color: #065F46;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .approveBtn:hover {
-  background: var(--bt-accent);
-  color: #070B0C;
-  box-shadow: 0 0 12px rgba(3, 195, 123, 0.4);
+  background: #10B981;
+  color: #FFFFFF;
 }
 
 .rejectBtn {
@@ -351,22 +333,21 @@
   font-size: 11px;
   font-weight: 700;
   border-radius: 8px;
-  background: rgba(240, 79, 117, 0.18);
-  border: 1px solid rgba(240, 79, 117, 0.4);
-  color: var(--bt-error);
+  background: #FEE2E2;
+  border: 1px solid #FCA5A5;
+  color: #DC2626;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .rejectBtn:hover {
-  background: var(--bt-error);
-  color: #fff;
-  box-shadow: 0 0 12px rgba(240, 79, 117, 0.4);
+  background: #EF4444;
+  color: #FFFFFF;
 }
 
 .demoActionNotice {
   font-size: 11px;
-  color: var(--bt-text-muted);
+  color: #64748B;
   font-style: italic;
 }
 
@@ -383,9 +364,9 @@
   letter-spacing: 0.05em;
   padding: 3px 8px;
   border-radius: 9999px;
-  background: rgba(3, 195, 123, 0.15);
-  color: var(--bt-accent);
-  border: 1px solid rgba(3, 195, 123, 0.3);
+  background: #DCFCE7;
+  color: #065F46;
+  border: 1px solid #86EFAC;
 }
 
 .badgePending {
@@ -395,14 +376,14 @@
   letter-spacing: 0.05em;
   padding: 3px 8px;
   border-radius: 9999px;
-  background: rgba(234, 179, 8, 0.15);
-  color: #EAB308;
-  border: 1px solid rgba(234, 179, 8, 0.3);
+  background: #FEF3C7;
+  color: #D97706;
+  border: 1px solid #FDE68A;
 }
 
 .annotationText {
   font-size: 13px;
-  color: var(--bt-text-secondary);
+  color: #334155;
   line-height: 1.55;
 }
 

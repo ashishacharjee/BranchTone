@@ -1,643 +1,785 @@
-/* Hallmark · checked: 2026-11-12 · genre: atmospheric · built: the project · redesign: polish · v2.0.0 */
-/* ── Overview Workspace: Apple Studio Bento Grid ────────────────────────── */
+/* ── Overview Workspace: Daylight Executive Creator Studio (Video Match) ────────── */
 .overview {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: 100%;
   overflow-y: auto;
-  padding: 36px 40px 60px;
+  padding: 28px 32px 64px;
   background: transparent;
   position: relative;
 }
 
 .container {
-  max-width: var(--bt-max-content-width);
+  max-width: 1440px;
   width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
   position: relative;
   z-index: 2;
 }
 
-/* ── Bento Grid Layout System ───────────────────────────────────────────── */
+/* ── Bento Grid System ──────────────────────────────────────────────────────── */
 .bentoRow {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 20px;
+  gap: 18px;
 }
 
-.bentoCol8 {
+.col8 {
   grid-column: span 8;
 }
 
-.bentoCol4 {
+.col4 {
   grid-column: span 4;
 }
 
-.bentoCol7 {
+.col6 {
+  grid-column: span 6;
+}
+
+.col7 {
   grid-column: span 7;
 }
 
-.bentoCol5 {
+.col5 {
   grid-column: span 5;
 }
 
-.bentoCol12 {
+.col12 {
   grid-column: span 12;
 }
 
 @media (max-width: 1100px) {
-  .bentoCol8, .bentoCol4, .bentoCol7, .bentoCol5 {
+  .col8, .col4, .col6, .col7, .col5 {
     grid-column: span 12;
   }
 }
 
-/* ── Bento Base Card (Apple Liquid Glass & Hardware Finish) ─────────────── */
-.bentoCard {
-  background: var(--bt-card-liquid-bg);
-  backdrop-filter: blur(28px) saturate(200%);
-  -webkit-backdrop-filter: blur(28px) saturate(200%);
-  border: 1px solid var(--bt-card-line);
-  border-radius: var(--bt-radius-xl);
-  box-shadow: var(--bt-shadow-liquid);
+/* ── Base Bento Card (White Studio Card) ────────────────────────────────────── */
+.card {
+  background: var(--bt-card-white);
+  border: 1px solid var(--bt-card-border);
+  border-radius: var(--bt-radius-card);
+  box-shadow: var(--bt-shadow-card);
+  padding: 24px 28px;
   position: relative;
-  overflow: hidden;
-  padding: 28px 32px;
   display: flex;
   flex-direction: column;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--bt-shadow-card-hover);
+}
+
+/* ── Card 1: Studio Brief / Hero Bento Card ─────────────────────────────────── */
+.briefCard {
+  composes: card;
   gap: 16px;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  justify-content: space-between;
 }
 
-.bentoCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--bt-card-highlight) 50%, transparent);
-  pointer-events: none;
+.briefHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
 }
 
-.bentoCard:hover {
-  transform: translateY(-3px);
-  border-color: var(--bt-border-accent);
-  box-shadow: var(--bt-shadow-liquid-hover);
-}
-
-/* ── Top Header / Hero Terminal Card ────────────────────────────────────── */
-.header {
-  composes: bentoCard;
-  padding: 28px 32px;
-}
-
-.terminalPrompt {
+.sparkleIconWrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: #FFF4E5;
+  color: #FF8A00;
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-family: var(--bt-font-mono);
-  font-size: 11px;
-  color: var(--bt-accent);
-  padding: 4px 8px;
-  border-radius: var(--bt-radius-full);
-  background: var(--bt-accent-subtle);
-  border: 1px solid var(--bt-border-accent);
-  align-self: flex-start;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(255, 138, 0, 0.15);
 }
 
-.headerLeft {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.titleRow {
+.briefTitleRow {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
-.title {
-  font-size: 32px;
+.briefTitle {
+  font-size: 24px;
   font-weight: 700;
-  letter-spacing: -0.035em;
-  color: var(--bt-text);
+  color: var(--bt-ink);
+  letter-spacing: -0.03em;
   margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
 }
 
 .versionBadge {
   font-family: var(--bt-font-mono);
   font-size: 11px;
   font-weight: 600;
-  padding: 4px 8px;
-  border-radius: var(--bt-radius-full);
-  background: var(--bt-accent-subtle);
-  color: var(--bt-accent);
-  border: 1px solid var(--bt-border-accent);
+  padding: 3px 8px;
+  border-radius: 9999px;
+  background: #EEF2F6;
+  color: #475569;
+  border: 1px solid #E2E8F0;
 }
 
-.subtitle {
-  font-size: 15px;
+.briefDesc {
+  font-size: 13.5px;
   color: var(--bt-text-secondary);
-  line-height: 1.6;
-  max-width: 900px;
+  line-height: 1.55;
   margin: 0;
-  font-weight: 400;
-  letter-spacing: -0.01em;
 }
 
-.headerMetaPills {
+.briefFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-top: 14px;
+  border-top: 1px solid var(--bt-border-light);
+}
+
+.briefChips {
   display: flex;
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
-  padding-top: 8px;
-  border-top: 1px solid var(--bt-card-line);
 }
 
-.headerMetaPill {
+.chip {
+  font-family: var(--bt-font-mono);
+  font-size: 11px;
+  color: var(--bt-text-muted);
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  padding: 4px 9px;
+  border-radius: 8px;
+}
+
+.chip code {
+  color: var(--bt-ink);
+  font-weight: 600;
+}
+
+.talkBtn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 4px 8px;
-  border-radius: var(--bt-radius-full);
-  background: var(--bt-border-subtle);
-  border: 1px solid var(--bt-card-line);
-  font-family: var(--bt-font-mono);
-  font-size: 11px;
-  color: var(--bt-text-secondary);
+  padding: 10px 18px;
+  border-radius: 9999px;
+  background: #0F172A;
+  color: #FFFFFF;
+  border: none;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.14);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s, box-shadow 0.2s;
 }
 
-.headerMetaPill code {
-  color: var(--bt-accent);
-  background: var(--bt-accent-subtle);
-  padding: 2px 4px;
-  border-radius: var(--bt-radius-xs);
+.talkBtn:hover:not(:disabled) {
+  background: #1E293B;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.22);
 }
 
-/* ── Music Glass / Audio Audition Widget (micheledu.com signature) ──────── */
-.musicGlassCard {
-  composes: bentoCard;
+.talkBtn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.talkBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* ── Card 2: Approval Card (Needs your approval) ─────────────────────────────── */
+.approvalCard {
+  composes: card;
+  gap: 14px;
   justify-content: space-between;
 }
 
-.musicGlassHeader {
+.approvalHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.musicGlassTag {
-  font-family: var(--bt-font-ui);
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--bt-accent);
-}
-
-.musicGlassEqualizer {
+.approvalTagGroup {
   display: flex;
-  align-items: flex-end;
-  height: 16px;
-  gap: 4px;
+  align-items: center;
+  gap: 10px;
 }
 
-.auditionActionBtn {
+.purpleIconWrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: #F3E8FF;
+  color: #9333EA;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  width: 100%;
-  padding: 12px 20px;
-  border-radius: var(--bt-radius-full);
-  background: var(--bt-accent-subtle);
-  border: 1px solid var(--bt-border-accent);
-  box-shadow: var(--bt-shadow-sm);
-  color: var(--bt-text);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
 }
 
-.auditionActionBtn:hover:not(:disabled) {
-  background: var(--bt-accent);
-  color: var(--bt-text-inverse);
-  border-color: var(--bt-accent-soft);
-  box-shadow: var(--bt-shadow-glow);
-  transform: translateY(-2px);
-}
-
-.auditionActionBtn:active:not(:disabled) {
-  transform: scale(0.98) translateY(0);
-}
-
-.auditionActionBtn:disabled {
-  opacity: 0.65;
-}
-
-.musicGlassNote {
-  font-size: 12px;
-  color: var(--bt-text-muted);
-  line-height: 1.5;
-}
-
-/* ── Concept Card / Walkthrough Deck ────────────────────────────────────── */
-.conceptCard {
-  composes: bentoCard;
-  padding: 28px 32px;
-}
-
-.conceptTop {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-}
-
-.conceptTitle {
-  font-size: 15px;
+.approvalTitle {
+  font-size: 14.5px;
   font-weight: 700;
-  color: var(--bt-text);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.conceptExplanation {
-  font-size: 13px;
-  color: var(--bt-text-secondary);
-  line-height: 1.6;
+  color: var(--bt-ink);
   margin: 0;
 }
 
-.routeComparisonGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-top: 4px;
-}
-
-@media (max-width: 800px) {
-  .routeComparisonGrid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.routeComparisonCard {
-  background: var(--bt-card-bg);
-  border: 1px solid var(--bt-card-line);
-  border-radius: var(--bt-radius-md);
-  padding: 16px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  transition: border-color var(--bt-transition-fast), box-shadow var(--bt-transition-fast), transform var(--bt-transition-fast);
-}
-
-.routeClean {
-  border-color: var(--bt-border-accent);
-  box-shadow: inset 0 1px 0 var(--bt-accent-glow);
-}
-
-.routeClean:hover {
-  border-color: var(--bt-accent);
-  box-shadow: 0 0 20px var(--bt-accent-subtle);
-}
-
-.routeDefect {
-  border-color: var(--bt-error-subtle);
-  box-shadow: inset 0 1px 0 var(--bt-error-glow);
-}
-
-.routeDefect:hover {
-  border-color: var(--bt-error);
-  box-shadow: 0 0 20px var(--bt-error-subtle);
-}
-
-.routeCardHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.routeName {
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--bt-text);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.routeStatusBadgeClean {
+.findingBadgeRed {
   font-family: var(--bt-font-mono);
   font-size: 10px;
-  font-weight: 600;
-  padding: 4px 8px;
-  border-radius: var(--bt-radius-full);
-  background: var(--bt-accent-subtle);
-  color: var(--bt-accent);
-  border: 1px solid var(--bt-border-accent);
-}
-
-.routeStatusBadgeDefect {
-  font-family: var(--bt-font-mono);
-  font-size: 10px;
-  font-weight: 600;
-  padding: 4px 8px;
-  border-radius: var(--bt-radius-full);
-  background: var(--bt-error-subtle);
-  color: var(--bt-error);
-  border: 1px solid var(--bt-error-glow);
-}
-
-.routePathSteps {
-  font-family: var(--bt-font-mono);
-  font-size: 11.5px;
-  color: var(--bt-text-secondary);
-  background: var(--bt-border-subtle);
-  padding: 8px 12px;
-  border-radius: var(--bt-radius-sm);
-  border: 1px solid var(--bt-card-line);
-}
-
-.routeSummaryText {
-  font-size: 12px;
-  color: var(--bt-text-secondary);
-  line-height: 1.5;
-}
-
-/* ── Metric Bento Grid (4 Cards Row) ────────────────────────────────────── */
-.metricGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-
-@media (max-width: 900px) {
-  .metricGrid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.metricCard {
-  composes: bentoCard;
-  padding: 20px 24px;
-  border-radius: var(--bt-radius-lg);
-  text-align: left;
-  cursor: pointer;
-  gap: 8px;
-}
-
-.metricHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-family: var(--bt-font-ui);
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--bt-text-muted);
-}
-
-.metricIconWrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: var(--bt-radius-sm);
-  background: var(--bt-border-subtle);
-  border: 1px solid var(--bt-card-line);
-  color: var(--bt-accent);
-}
-
-.metricValue {
-  font-size: 34px;
   font-weight: 700;
-  color: var(--bt-text);
-  letter-spacing: -0.04em;
-  line-height: 1;
-  margin-top: 4px;
+  padding: 3px 7px;
+  border-radius: 9999px;
+  background: #FEE2E2;
+  color: #DC2626;
+  border: 1px solid #FECACA;
 }
 
-.metricValueNotEvaluated {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--bt-text-muted);
-  font-family: var(--bt-font-mono);
-  line-height: 1.4;
-  margin-top: 4px;
-}
-
-.metricSubtext {
-  font-size: 11.5px;
-  color: var(--bt-text-muted);
-  line-height: 1.4;
-}
-
-/* ── Main Content Grid ──────────────────────────────────────────────────── */
-.contentGrid {
-  display: grid;
-  grid-template-columns: 7fr 5fr;
-  gap: 20px;
-}
-
-@media (max-width: 1000px) {
-  .contentGrid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.panel {
-  composes: bentoCard;
-}
-
-.panelHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.panelTitle {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--bt-text);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.panelDesc {
+.findingText {
   font-size: 12.5px;
   color: var(--bt-text-secondary);
   line-height: 1.5;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 12px 14px;
 }
 
-/* ── Finding Card ───────────────────────────────────────────────────────── */
-.findingCard {
-  background: var(--bt-error-subtle);
-  border: 1px solid var(--bt-error-glow);
-  box-shadow: inset 0 1px 0 var(--bt-card-line);
-  border-radius: var(--bt-radius);
-  padding: 16px 20px;
+.findingText strong {
+  color: var(--bt-ink);
+}
+
+.approvalActions {
   display: flex;
-  flex-direction: column;
   gap: 8px;
-}
-
-.findingTop {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-.findingIdGroup {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.findingCode {
-  font-family: var(--bt-font-mono);
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--bt-error);
-}
-
-.findingBadge {
-  font-size: 10px;
-  padding: 2px 4px;
-  border-radius: var(--bt-radius-xs);
-  background: var(--bt-error-subtle);
-  color: var(--bt-error);
-  font-weight: 600;
-}
-
-.findingDesc {
-  font-size: 12.5px;
-  color: var(--bt-text-secondary);
-  line-height: 1.5;
-}
-
-.findingMeta {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 11.5px;
-  color: var(--bt-text-muted);
-}
-
-.findingMeta strong {
-  color: var(--bt-text);
-}
-
-.findingActionBtn {
+.approvePillBtn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  align-self: flex-start;
+  gap: 6px;
   padding: 8px 16px;
-  border-radius: var(--bt-radius-full);
-  background: var(--bt-border-subtle);
-  border: 1px solid var(--bt-card-line);
-  box-shadow: inset 0 1px 0 var(--bt-card-line);
-  color: var(--bt-text);
+  border-radius: 9999px;
+  background: #0F172A;
+  color: #FFFFFF;
+  border: none;
   font-size: 12px;
-  font-weight: 500;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.findingActionBtn:hover {
-  background: var(--bt-hover-surface);
-  border-color: var(--bt-border-accent);
-  color: var(--bt-text);
+.approvePillBtn:hover {
+  background: #1E293B;
   transform: translateY(-1px);
 }
 
-.findingActionBtn:active {
-  transform: scale(0.97);
-}
-
-/* ── Warning Box ────────────────────────────────────────────────────────── */
-.warningBox {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 12px 16px;
-  border-radius: var(--bt-radius);
-  background: var(--bt-error-subtle);
-  border: 1px solid var(--bt-error-glow);
-  font-size: 12px;
-  color: var(--bt-text-secondary);
-  line-height: 1.5;
-}
-
-/* ── Audio Inventory Rows ───────────────────────────────────────────────── */
-.inventoryRow {
-  display: flex;
+.inspectPillBtn {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 8px 12px;
-  border-radius: var(--bt-radius-sm);
-  background: var(--bt-border-subtle);
-  font-size: 12.5px;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 9999px;
+  background: #F1F5F9;
+  color: var(--bt-ink);
+  border: 1px solid #E2E8F0;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ── Quick Action List ──────────────────────────────────────────────────── */
-.actionList {
+.inspectPillBtn:hover {
+  background: #E2E8F0;
+  border-color: #CBD5E1;
+}
+
+/* ── Gradient Metric Cards (Green & Orange Video Cards) ──────────────────────── */
+.gradientCard {
+  border-radius: var(--bt-radius-card);
+  padding: 24px 26px;
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  justify-content: space-between;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.actionItem {
+.gradientCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.14);
+}
+
+.greenCard {
+  composes: gradientCard;
+  background: var(--bt-gradient-green);
+}
+
+.orangeCard {
+  composes: gradientCard;
+  background: var(--bt-gradient-orange);
+}
+
+.cardTopBadgeRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  padding: 8px 16px;
-  border-radius: var(--bt-radius);
-  background: var(--bt-border-subtle);
-  border: 1px solid var(--bt-card-line);
-  color: var(--bt-text);
+  margin-bottom: 12px;
+}
+
+.whiteTranslucentBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.cardTitleLight {
   font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.numberArea {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 12px 0 16px;
+}
+
+.numberSubtext {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.92);
   font-weight: 500;
-  transition: background-color var(--bt-transition-fast), border-color var(--bt-transition-fast), transform var(--bt-transition-fast);
+  line-height: 1.4;
+  max-width: 180px;
 }
 
-.actionItem:hover {
-  background: var(--bt-hover-surface-subtle);
-  border-color: var(--bt-border-accent);
-  transform: translateX(2px);
+.equalizerWave {
+  display: flex;
+  align-items: flex-end;
+  gap: 3.5px;
+  height: 28px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-.actionLeft {
+.eqBar {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 2px;
+  min-height: 4px;
+  transition: height 0.3s ease;
+  animation: eqPulse 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes eqPulse {
+  0% {
+    opacity: 0.6;
+    transform: scaleY(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1.15);
+  }
+}
+
+/* ── Card 5: Schedule / Route Traversal Card (Frame 06 Match) ───────────────── */
+.scheduleCard {
+  composes: card;
+  gap: 16px;
+}
+
+.scheduleHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.scheduleTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--bt-ink);
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.metricCard:focus-visible,
-.auditionActionBtn:focus-visible,
-.findingActionBtn:focus-visible,
-.actionItem:focus-visible {
-  outline: 2px solid var(--bt-accent);
-  outline-offset: 2px;
+.scheduleSubtitle {
+  font-size: 12.5px;
+  color: var(--bt-text-secondary);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .bentoCard,
-  .routeComparisonCard,
-  .auditionActionBtn,
-  .findingActionBtn,
-  .actionItem {
-    animation: none !important;
-    transition: none !important;
+.timelineTrack {
+  position: relative;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 24px 20px 20px;
+  margin-top: 4px;
+}
+
+.timelineRuler {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 0 8px;
+  border-bottom: 1px dashed #CBD5E1;
+  padding-bottom: 8px;
+}
+
+.timeMarker {
+  font-family: var(--bt-font-mono);
+  font-size: 11px;
+  color: var(--bt-text-muted);
+}
+
+.routeTracksContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+}
+
+.routeTrackRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.routeTrackLabel {
+  width: 90px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--bt-ink);
+  font-family: var(--bt-font-mono);
+}
+
+.routeSegments {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.sceneBlockClean {
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  font-size: 12px;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.sceneBlockClean:hover {
+  border-color: #10B981;
+  color: #047857;
+  transform: translateY(-1px);
+}
+
+.sceneBlockAlert {
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: #FEF2F2;
+  border: 1.5px solid #EF4444;
+  font-size: 12px;
+  font-weight: 700;
+  color: #DC2626;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+  transition: all 0.2s;
+}
+
+.sceneBlockAlert:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.25);
+}
+
+.scrubberLine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 42%;
+  width: 2px;
+  background: #DC2626;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.scrubberThumb {
+  position: absolute;
+  top: -8px;
+  left: -5px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #DC2626;
+  box-shadow: 0 0 8px rgba(220, 38, 38, 0.6);
+}
+
+/* ── Interactive Dark Tooltip (Frame 06 match) ───────────────────────────────── */
+.scheduleTooltip {
+  position: absolute;
+  top: -110px;
+  left: 36%;
+  background: #0F172A;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 12px 16px;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.25);
+  z-index: 20;
+  width: 260px;
+  pointer-events: none;
+  animation: fadeInTooltip 0.2s ease-out;
+}
+
+.scheduleTooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 30px;
+  width: 12px;
+  height: 12px;
+  background: #0F172A;
+  transform: rotate(45deg);
+}
+
+@keyframes fadeInTooltip {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tooltipTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: #F8FAFC;
+  margin-bottom: 4px;
+}
+
+.tooltipMeta {
+  font-size: 11px;
+  color: #94A3B8;
+  line-height: 1.4;
+}
+
+/* ── Card 6: Priorities Checklist ───────────────────────────────────────────── */
+.prioritiesCard {
+  composes: card;
+  gap: 16px;
+}
+
+.priorityList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.priorityItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  font-size: 12.5px;
+  color: var(--bt-ink);
+  transition: background 0.15s;
+}
+
+.priorityItem:hover {
+  background: #F1F5F9;
+}
+
+.statusPillDone {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  background: #DCFCE7;
+  color: #16A34A;
+}
+
+.statusPillWorking {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  background: #DBEAFE;
+  color: #2563EB;
+}
+
+.statusPillReview {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  background: #FEF3C7;
+  color: #D97706;
+}
+
+.statusPillDecision {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  background: #F3E8FF;
+  color: #9333EA;
+}
+
+/* ── Card 7: AI Team & Adaption Labs Tuner ───────────────────────────────────── */
+.aiTeamCard {
+  composes: card;
+  gap: 16px;
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 800px) {
+  .teamGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.teamMiniCard {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.teamMiniCard:hover {
+  background: #FFFFFF;
+  border-color: #CBD5E1;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.teamMiniRole {
+  font-size: 11px;
+  color: var(--bt-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.teamMiniName {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--bt-ink);
+}
+
+.teamMiniStatus {
+  font-size: 11.5px;
+  color: var(--bt-text-secondary);
+  line-height: 1.4;
+}
+
+/* ── Floating Toast Notification (Matching Video) ────────────────────────────── */
+.floatingToast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0F172A;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 12px 22px;
+  border-radius: 9999px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.28);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 1000;
+  font-size: 13px;
+  font-weight: 500;
+  animation: slideUpToast 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUpToast {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+.undoBtn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #F8FAFC;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.undoBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Additional Utility Elements Required by Tests ───────────────────────────── */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }

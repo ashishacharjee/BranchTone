@@ -27,6 +27,7 @@ import { playAuditionTone, playCueTriggerSound } from '../services/synth';
 import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
 import { JudgeTourModal } from '../components/JudgeTourModal';
 import { KeyboardShortcutsModal } from '../components/KeyboardShortcutsModal';
+import { AdaptionLabsModal } from '../components/AdaptionLabsModal';
 import styles from './Topbar.module.css';
 
 const WORKSPACE_LABELS: Record<string, string> = {
@@ -47,6 +48,7 @@ export function Topbar() {
   const [isValidationModalOpen, setIsValidationModalOpen] = useState(false);
   const [isJudgeTourOpen, setIsJudgeTourOpen] = useState(false);
   const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
+  const [isAdaptionModalOpen, setIsAdaptionModalOpen] = useState(false);
   const [isPlayingAudition, setIsPlayingAudition] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
 
@@ -253,6 +255,18 @@ export function Topbar() {
         )}
       </div>
 
+      {/* ── Adaption Labs Sponsor Bonus Button ──────────────────────── */}
+      <button
+        type="button"
+        className={styles.adaptionBadgeBtn}
+        onClick={() => setIsAdaptionModalOpen(true)}
+        title="Adaption Labs AI Engine — Fine-Tuning Sponsor Bonus Track"
+        aria-label="Adaption Labs AI Engine Sponsor Details"
+      >
+        <Sparkles size={12} color="#4F46E5" aria-hidden="true" />
+        <span>Adaption Labs AI</span>
+      </button>
+
       {/* ── Judge Tour 60s CTA ───────────────────────────────────────── */}
       <button
         type="button"
@@ -415,6 +429,12 @@ export function Topbar() {
       <JudgeTourModal
         isOpen={isJudgeTourOpen}
         onClose={() => setIsJudgeTourOpen(false)}
+      />
+
+      {/* ── Adaption Labs Sponsor Modal ──────────────────────────────── */}
+      <AdaptionLabsModal
+        isOpen={isAdaptionModalOpen}
+        onClose={() => setIsAdaptionModalOpen(false)}
       />
 
       {/* ── Studio Keyboard Shortcuts Modal ───────────────────────────── */}

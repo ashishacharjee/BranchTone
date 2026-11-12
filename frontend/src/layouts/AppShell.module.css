@@ -1,10 +1,36 @@
-/* Hallmark · checked: 2026-11-12 · genre: atmospheric · built: the project · redesign: polish · v2.0.0 */
-.shell {
+/* Hallmark · checked: 2026-11-13 · genre: atmospheric · built: the project · redesign: polish · v2.0.0 */
+.shellWrapper {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: var(--bt-bg);
   position: relative;
+  background-color: var(--bt-canvas-outer);
+}
+
+.shell {
+  display: flex;
+  width: calc(100vw - 28px);
+  max-width: 1540px;
+  height: calc(100vh - 28px);
+  border-radius: 28px;
+  overflow: hidden;
+  background-color: var(--bt-canvas-inner);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 32px 80px -15px rgba(0, 0, 0, 0.12), 0 8px 24px -6px rgba(0, 0, 0, 0.06);
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 1024px) {
+  .shell {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+  }
 }
 
 .body {
@@ -15,14 +41,15 @@
   overflow: hidden;
   position: relative;
   z-index: 1;
+  background: transparent;
 }
 
 .main {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  /* Ensure main can receive programmatic focus for skip-link targets */
   outline: none;
   position: relative;
   z-index: 1;
+  background: transparent;
 }

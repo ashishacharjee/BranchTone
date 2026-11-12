@@ -1,33 +1,18 @@
-/* ── Sidebar: micheledu.com-inspired Liquid Glass Command Column ────────── */
+/* Hallmark · checked: 2026-11-13 · genre: atmospheric · built: the project · redesign: polish · v2.0.0 */
 .sidebar {
   width: var(--bt-sidebar-width);
   flex-shrink: 0;
-  background: rgba(10, 14, 16, 0.72);
-  backdrop-filter: blur(24px) saturate(190%);
-  -webkit-backdrop-filter: blur(24px) saturate(190%);
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  background: #F8FAFC;
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;
-  z-index: 30;
-  box-shadow: 10px 0 35px rgba(0, 0, 0, 0.6);
+  z-index: 20;
 }
 
-.sidebar::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(3, 195, 123, 0.5), transparent 70%);
-  pointer-events: none;
-}
-
-/* Skip navigation link — visible only on focus */
 .skipLink {
   position: absolute;
   top: -100%;
@@ -36,7 +21,7 @@
   padding: 6px 12px;
   font-size: var(--bt-text-sm);
   background: var(--bt-accent);
-  color: #000;
+  color: #FFFFFF;
   border-radius: var(--bt-radius);
   text-decoration: none;
   font-weight: 600;
@@ -47,67 +32,62 @@
   top: 8px;
 }
 
-/* ── Brand ─────────────────────────────────────────────────────────────── */
+/* ── Brand (Matches black squircle from video) ───────────────────────────── */
 .brand {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 18px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  background: rgba(255, 255, 255, 0.015);
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .brandIcon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, rgba(3, 195, 123, 0.2) 0%, rgba(3, 195, 123, 0.04) 100%);
-  border: 1px solid rgba(3, 195, 123, 0.35);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 14px rgba(3, 195, 123, 0.2);
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: #111827;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   flex-shrink: 0;
 }
 
 .brandName {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
-  color: #FFFFFF;
+  color: #111827;
   letter-spacing: -0.02em;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 /* ── Section headers ────────────────────────────────────────────────────── */
 .section {
-  padding: 12px 14px 6px;
+  padding: 12px 16px 4px;
 }
 
 .sectionLabel {
   display: block;
-  font-family: var(--bt-font-mono);
-  font-size: 9.5px;
+  font-family: var(--bt-font-ui);
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  color: rgba(255, 255, 255, 0.36);
+  letter-spacing: 0.06em;
+  color: #9CA3AF;
   text-transform: uppercase;
   margin-bottom: 6px;
-  padding-left: 6px;
+  padding-left: 4px;
 }
 
 .workspaceSelector {
   padding: 6px 10px;
   border-radius: var(--bt-radius-sm);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .workspaceName {
   font-size: 12px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.8);
+  color: #374151;
 }
 
 /* ── Current Project Card ───────────────────────────────────────────────── */
@@ -115,28 +95,27 @@
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 14px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
   text-align: left;
-  transition: all var(--bt-transition-fast);
+  cursor: pointer;
+  transition: transform var(--bt-transition-fast), border-color var(--bt-transition-fast);
 }
 
 .projectCardBtn:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(3, 195, 123, 0.3);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 4px 16px rgba(0, 0, 0, 0.4);
+  border-color: rgba(16, 185, 129, 0.4);
+  transform: translateY(-1px);
 }
 
 .projectThumb {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 8px;
-  background: linear-gradient(135deg, rgba(3, 195, 123, 0.3) 0%, rgba(240, 79, 117, 0.25) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(135deg, #10B981 0%, #3B82F6 100%);
   flex-shrink: 0;
 }
 
@@ -148,135 +127,119 @@
 }
 
 .projectName {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
-  color: #FFFFFF;
-  white-space: nowrap;
+  color: #111827;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .projectMeta {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.44);
+  font-size: 10px;
+  color: #6B7280;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .projectTags {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   margin-top: 2px;
 }
 
 .tag {
-  font-size: 10px;
-  padding: 1px 6px;
+  font-size: 9px;
+  font-weight: 600;
+  color: #4B5563;
+  background: #F3F4F6;
+  padding: 1px 5px;
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.6);
 }
 
 .tagVersion {
-  font-family: var(--bt-font-mono);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
-  padding: 1px 6px;
-  border-radius: 999px;
-  background: rgba(3, 195, 123, 0.12);
-  color: var(--bt-accent);
-  border: 1px solid rgba(3, 195, 123, 0.25);
+  color: #10B981;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 1px 5px;
+  border-radius: 4px;
 }
 
-/* ── Navigation links ───────────────────────────────────────────────────── */
+/* ── Nav Links (Matches video vertical squircle cards) ──────────────────── */
 .nav {
-  padding: 6px 0;
+  padding: 8px 12px;
   flex: 1;
 }
 
 .navList {
   list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  padding: 0 12px;
+  gap: 4px;
 }
 
 .navLink {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 12px;
+  padding: 9px 12px;
   border-radius: 12px;
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.68);
+  color: #4B5563;
   text-decoration: none;
+  font-size: 12.5px;
+  font-weight: 500;
   border: 1px solid transparent;
-  transition: all var(--bt-transition-fast);
-  position: relative;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
 }
 
 .navLink:hover {
-  background: rgba(255, 255, 255, 0.05);
-  color: #FFFFFF;
-  border-color: rgba(255, 255, 255, 0.08);
+  background: #F1F5F9;
+  color: #111827;
 }
 
 .navLinkActive {
-  background: linear-gradient(135deg, rgba(3, 195, 123, 0.14) 0%, rgba(3, 195, 123, 0.04) 100%);
-  color: #FFFFFF;
+  background: #FFFFFF;
+  color: #111827;
   font-weight: 600;
-  border: 1px solid rgba(3, 195, 123, 0.32);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 0 18px -2px rgba(3, 195, 123, 0.18);
-}
-
-.navLinkActive::before {
-  content: '';
-  position: absolute;
-  left: 3px;
-  width: 4px;
-  height: 16px;
-  border-radius: 999px;
-  background: var(--bt-accent);
-  box-shadow: 0 0 8px var(--bt-accent);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .navIcon {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  opacity: 0.85;
-}
-
-.navLinkActive .navIcon {
-  color: var(--bt-accent);
-  opacity: 1;
+  color: inherit;
 }
 
 .navLabel {
-  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-/* ── Status Bar ─────────────────────────────────────────────────────────── */
+/* ── Status Bar & User Avatar ───────────────────────────────────────────── */
 .statusBar {
-  margin-top: auto;
-  padding: 14px 18px;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(0, 0, 0, 0.2);
+  padding: 14px 18px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  background: #F8FAFC;
+  font-size: 12px;
+  color: #6B7280;
 }
 
 .statusIcon {
-  color: var(--bt-accent);
+  color: #10B981;
 }
 
 .statusText {
-  font-family: var(--bt-font-mono);
-  font-size: 11px;
   font-weight: 600;
-  color: var(--bt-accent);
-  letter-spacing: 0.04em;
+  color: #111827;
 }

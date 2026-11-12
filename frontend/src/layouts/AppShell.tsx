@@ -1,7 +1,6 @@
 /**
- * AppShell — the full-height application frame.
- * Contains: Sidebar (left), Topbar (top), main content area (Outlet).
- * Matches the DESIGN.md §3 desktop shell specification.
+ * AppShell — Floating studio window matching the video design.
+ * Features left icon sidebar dock, top bar, and main workspace canvas.
  */
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
@@ -11,19 +10,21 @@ import styles from './AppShell.module.css';
 
 export function AppShell() {
   return (
-    <div className={styles.shell}>
+    <div className={styles.shellWrapper}>
       <AppleBackground />
-      <Sidebar />
-      <div className={styles.body}>
-        <Topbar />
-        <main
-          id="main-content"
-          className={styles.main}
-          tabIndex={-1}
-          aria-label="Workspace content"
-        >
-          <Outlet />
-        </main>
+      <div className={styles.shell}>
+        <Sidebar />
+        <div className={styles.body}>
+          <Topbar />
+          <main
+            id="main-content"
+            className={styles.main}
+            tabIndex={-1}
+            aria-label="Workspace content"
+          >
+            <Outlet />
+          </main>
+        </div>
       </div>
     </div>
   );
