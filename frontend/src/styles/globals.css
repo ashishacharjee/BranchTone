@@ -247,3 +247,34 @@ a {
   margin-left: 4px;
   animation: terminalBlink 1s infinite;
 }
+
+/* ── Antigravity Spatial Floats & Entrances ────────────────────────────── */
+@keyframes antigravityFloatIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.antigravity-float {
+  animation: antigravityFloatIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
+/* ── Accessibility: Reduced Motion ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

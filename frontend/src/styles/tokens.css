@@ -66,6 +66,11 @@
   --bt-shadow-glow: 0 0 28px -2px var(--bt-accent-glow);
   --bt-shadow-error: 0 0 28px -2px var(--bt-error-glow);
 
+  /* ── Antigravity Spatial & Motion Tokens ─────────────────────────────── */
+  --bt-perspective: 1200px;
+  --bt-shadow-antigravity: 0 24px 60px -12px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --bt-shadow-antigravity-hover: 0 32px 72px -16px rgba(0, 0, 0, 0.85), 0 0 32px rgba(3, 195, 123, 0.2), 0 0 0 1px rgba(3, 195, 123, 0.35);
+
   /* ── Radii ────────────────────────────────────────────────────────────── */
   --bt-radius-xs: 4px;
   --bt-radius-sm: 8px;
