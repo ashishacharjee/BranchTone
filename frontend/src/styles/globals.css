@@ -30,13 +30,6 @@ body {
   line-height: 1.5;
   color: var(--bt-text);
   background-color: var(--bt-bg);
-  background-image:
-    radial-gradient(rgba(255, 255, 255, 0.075) 1px, transparent 1px),
-    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(3, 195, 123, 0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 30% at 85% 85%, rgba(240, 79, 117, 0.04) 0%, transparent 60%),
-    linear-gradient(180deg, #07090A 0%, #040607 100%);
-  background-size: 24px 24px, 100% 100%, 100% 100%, 100% 100%;
-  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;

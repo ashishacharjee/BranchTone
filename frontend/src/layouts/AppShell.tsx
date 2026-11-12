@@ -6,11 +6,13 @@
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Topbar } from './Topbar';
+import { AppleBackground } from '../components/AppleBackground';
 import styles from './AppShell.module.css';
 
 export function AppShell() {
   return (
     <div className={styles.shell}>
+      <AppleBackground />
       <Sidebar />
       <div className={styles.body}>
         <Topbar />
