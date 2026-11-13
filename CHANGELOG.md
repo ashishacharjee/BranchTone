@@ -1,6 +1,25 @@
 # CHANGELOG.md — Pack and Implementation History
 
-## 2.15 — 13 November 2026 (Liquid Glass Materials, Dynamic Aurora Mesh, Interactive Scrubber & Adaption Labs AI Copilot)
+## 2.16 — 13 November 2026 (Unslop Redesign: Precision Audio Workbench)
+
+- **Comprehensive 9-Pass Unslop Transformation (heydamir/unslop methodology):**
+  * **Pass 1 (Spacing)**: Enforced strict 4px grid rhythm. Navigation rows standardized to 34px height with 2px gap; cards use 20–24px padding; controls use 8px internal padding.
+  * **Pass 2 (Color)**: Replaced high-saturation neon gradients and floating pastel aurora blobs with a calm, high-precision technical studio chassis (`#FFFFFF` surfaces on `#F8FAFC` daylight canvas, hairline borders `rgba(15, 23, 42, 0.08)`). Color is strictly reserved for data meaning: Emerald `#10B981` (clean signals/selection), Amber `#F59E0B` (suspense/intensity), and Red `#DC2626` (defect BT-001).
+  * **Pass 3 (Icons)**: Replaced unicode emojis (`🤍 Mood`, `❔ Identity Revealed`) and non-AI sparkle badges (`✨`) with precise Lucide line icons (`Activity`, `ShieldCheck`, `Cpu`, `Sliders`, `Volume2`).
+  * **Pass 4 (Copy)**: Unslopped conversational AI greeting copy. Replaced `"Talk to BranchTone"` with `"Audition Traversal (Space)"`; replaced `"Needs your approval"` with `"Needs Creator Approval"`; replaced `"98.7% LEAK RISK"` with `"Trigger Defect: High Confidence"`.
+  * **Pass 5 (Type)**: Adopted **Geist** and **Geist Mono** typography (Google Fonts) with sentence-case headings everywhere (eliminated wide uppercase tracking). Figures and timestamps use `tabular-nums`.
+  * **Pass 6 (Layout)**: Unified workspace docking into a solid 16px studio chassis without floaty multi-window distortion.
+  * **Pass 7 (Details & Nested Radii)**: Eradicated 22+ pill-shaped capsules (`border-radius: 9999px`). Enforced nested radius math: `4px` tags/keycaps, `6px` to `8px` controls/inputs/buttons, `12px` to `14px` cards/panels, `16px` window chassis.
+  * **Pass 8 (Visuals)**: Replaced the rainbow gradient scrubber with a calibrated dark DAW transport groove (`#0F172A`) featuring fine timecode nudge buttons (`-5s`, `+5s`), interactive scene jump blocks, and real-time Web Audio pitch-shifted playback.
+  * **Pass 9 (Motion)**: Eliminated all 20s–28s looping aurora keyframes. Standardized transitions to `cubic-bezier(0.22, 1, 0.36, 1)` with snappy 120ms–180ms ease.
+- **Enhanced Hackathon Track & Sponsor Documentation in `README.md`:**
+  * Documented alignment across all 3 tracks: Track 01 (Storytelling & Co-Writers), Track 02 (Music & Audio Studios), and Track 03 (Autonomous Creator Agents).
+  * Highlighted Adaption Labs autonomous agent integration for the 25% AI Integration & Technical Depth sponsor bonus.
+- **Verification & Deployment:**
+  * 100% test pass rate: All 43 frontend Vitest tests and all 11 backend Pytest tests pass.
+  * Zero TypeScript errors (`tsc -b` exit code 0).
+  * Deployed live to production at `https://branchtone.vercel.app`.
+
 
 - **Apple Liquid Glass Materials & Visible Organic Aurora Mesh Background:**
   * Rebuilt `.shellWrapper` as transparent and `.shell` as a translucent Apple Liquid Glass floating master window (`rgba(255, 255, 255, 0.72)` + `backdrop-filter: blur(40px) saturate(200%)` + `border: 1.5px solid rgba(255, 255, 255, 0.85)` + specular ambient shadows).

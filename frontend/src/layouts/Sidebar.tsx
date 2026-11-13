@@ -31,63 +31,63 @@ interface NavSection {
 
 const NAV_SECTIONS: NavSection[] = [
   {
-    category: 'COCKPIT',
+    category: 'Cockpit',
     items: [
       {
         path: '/overview',
         label: 'Overview',
-        icon: <LayoutDashboard size={16} aria-hidden="true" />,
+        icon: <LayoutDashboard size={15} aria-hidden="true" />,
         workspaceId: 'overview',
       },
     ],
   },
   {
-    category: 'STORY & GRAPH',
+    category: 'Story & graph',
     items: [
       {
         path: '/story-graph',
         label: 'Story Graph',
-        icon: <GitBranch size={16} aria-hidden="true" />,
+        icon: <GitBranch size={15} aria-hidden="true" />,
         workspaceId: 'story-graph',
       },
       {
         path: '/narrative-map',
         label: 'Narrative Map',
-        icon: <Map size={16} aria-hidden="true" />,
+        icon: <Map size={15} aria-hidden="true" />,
         workspaceId: 'narrative-map',
       },
     ],
   },
   {
-    category: 'AUDIO & SIMULATION',
+    category: 'Audio & simulation',
     items: [
       {
         path: '/cue-library',
         label: 'Cue Library',
-        icon: <Music2 size={16} aria-hidden="true" />,
+        icon: <Music2 size={15} aria-hidden="true" />,
         workspaceId: 'cue-library',
       },
       {
         path: '/route-lab',
         label: 'Route Lab',
-        icon: <FlaskConical size={16} aria-hidden="true" />,
+        icon: <FlaskConical size={15} aria-hidden="true" />,
         workspaceId: 'route-lab',
       },
     ],
   },
   {
-    category: 'QA & COMPLIANCE',
+    category: 'QA & compliance',
     items: [
       {
         path: '/validation-centre',
         label: 'Validation Centre',
-        icon: <ShieldCheck size={16} aria-hidden="true" />,
+        icon: <ShieldCheck size={15} aria-hidden="true" />,
         workspaceId: 'validation-centre',
       },
       {
         path: '/reports',
         label: 'Reports',
-        icon: <FileBarChart size={16} aria-hidden="true" />,
+        icon: <FileBarChart size={15} aria-hidden="true" />,
         workspaceId: 'reports',
       },
     ],

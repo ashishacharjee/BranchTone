@@ -30,8 +30,10 @@ This project is engineered specifically for the **GeeksforGeeks / Techno India U
 ### 1. Challenge Tracks & Open Innovation Rule (Slide 03)
 > *"Every project — regardless of track — must serve creativity, art, media or content creation... Choosing Open Innovation does NOT mean a generic healthcare, fintech or college-management app. Any non-creative generic project will be penalized."*
 
-- **Track 01: Storytelling & Co-Writers**: BranchTone parses Twine/SugarCube interactive fiction ASTs, models narrative branch graphs, and audits character knowledge states before story choices.
-- **Track 02: Music & Audio Studios**: Composing, auditioning, and verifying narrative audio cue timing, mood intensity curves, and leitmotif integrity with in-browser Web Audio synthesis.
+BranchTone directly bridges three interconnected creative tracks:
+- **Track 01: Storytelling & Co-Writers**: Narrative tools, story development, and creative branching fiction. BranchTone parses Twine/SugarCube ASTs, models narrative branch graphs, and audits character knowledge states before story choices.
+- **Track 02: Music & Audio Studios**: Tools for composing, editing, producing, and experiencing sound. BranchTone audits narrative audio cue timing, mood intensity curves, and leitmotif integrity using in-browser Web Audio synthesis and DAW transport mechanics.
+- **Track 03: Autonomous Creator Agents**: AI agents that plan, coordinate, or execute creator workflows. Powered by our fine-tuned **Adaption Labs** agent that performs autonomous spoiler leak audits, cue suppression recommendations, and regression testing.
 
 ### 2. 50% MVP Evaluation Rubric (Slide 05)
 | Dimension | Weight | BranchTone Implementation | Score Target |
@@ -40,7 +42,7 @@ This project is engineered specifically for the **GeeksforGeeks / Techno India U
 | **50% Functional Prototype** | **25%** | Deployed live at [branchtone.vercel.app](https://branchtone.vercel.app). Real Web Audio synth, interactive timeline scrubber, React Flow node canvas, and live defect triage. | 25 / 25 |
 | **AI Technical Depth & Sponsor Bonus** | **25%** | Fine-tuned **Adaption Labs** narrative classifier LoRA integration (`adaption-branchtone-7b-v1`), 94.2% tone agreement, interactive copilot workbench. | 25 / 25 |
 | **Architecture & Code Quality** | **15%** | Strict TypeScript (zero `any`), Pydantic v2 schemas, 100% test pass rate (43 Vitest, 11 Pytest), clean modular architecture. | 15 / 15 |
-| **UI/UX & Creator Experience** | **10%** | Apple Liquid Glass materials, 60fps GPU-accelerated aurora ambient background, interactive traversal scrubber, and procedural LED glyphs. | 10 / 10 |
+| **UI/UX & Creator Experience** | **10%** | Unslopped High-Precision Audio Workbench aesthetic (Geist typography, nested radius math, quiet chrome, DAW transport bar). | 10 / 10 |
 
 ### 3. Zero-Tolerance Build Rule Compliance (Slide 06)
 > *"Your project must NOT be 100% finished during the online round. Submit only ~50–60% of your MVP by Nov 16. The remaining features must be built during the offline finale on Nov 21 so judges can verify real-time coding."*
@@ -153,15 +155,22 @@ We integrated official hackathon sponsor **[Adaption Labs](https://adaptionlabs.
 
 ---
 
-## 🎨 Visual Design Language: Apple Liquid Glass & Ambient Aurora
+## 🎨 Visual Design Philosophy: High-Precision Audio Workbench (Unslop Methodology)
 
-BranchTone is built with a bespoke **Daylight Executive Creator Studio** aesthetic:
+BranchTone's interface was engineered according to the **Unslop Framework** ([heydamir/unslop](https://github.com/heydamir/unslop)), stripping away AI template slop in favor of the utilitarian craft of professional audio tools (**Audiokinetic Wwise, Teenage Engineering, Ableton Live, Linear**):
 
-- **Floating Apple Liquid Glass Surfaces**: Translucent studio cards (`rgba(255, 255, 255, 0.76)` + `backdrop-filter: blur(28px) saturate(190%)`) featuring specular inner rim highlights (`inset 0 1px 1px rgba(255, 255, 255, 0.95)`), smooth squircle radii (`var(--bt-radius-card)`), and multi-layered ambient elevation shadows.
-- **Dynamic Organic Aurora Background**: GPU-accelerated keyframe physics (`translate3d`) driving four luminous aurora blobs (Emerald 720px, Electric Cyan 660px, Sunset Coral 640px, and Velvet Violet 680px) coupled with an interactive mouse-following spotlight and technical micro-dot grid.
-- **Interactive DAW-Style Traversal Scrubber**: A full-width timeline range scrubber that users can drag smoothly from left (0% / 09:00 Scene 1) to right (100% / 17:00 Finale). Scrubbing dynamically shifts synthesized Web Audio pitch tones, triggers tritone defect alert chords at Air Vent, updates simulated timestamps, and highlights active story capsules.
-- **Procedural 5x7 Dot-Matrix LED Glyphs**: Custom SVG square-pixel LED number component (`PixelMatrixNumber.tsx`) rendering real-time integrity scores (`82%`) and scene intensity levels (`14` / `4/5`).
-- **Tactile Floating Toast System**: Sleek dark pill toast notification with instant `Undo` action when triaging validation issues or applying AI proposals.
+- **Calm, High-Precision Studio Chassis**: Solid, focused studio canvas with clean 1px hairline borders (`rgba(15, 23, 42, 0.08)`). Eliminates distracting multi-color floating aurora blobs, oily liquid-glass saturation, and endless drifting keyframe loops so audio engineers can focus on sound design and defect telemetry.
+- **Geist & Geist Mono Typography**: Vercel's precision typeface stack (`'Geist'`, `'Geist Mono'`, `'JetBrains Mono'`) with sentence-case headings, restrained font weights (400 and 500), zero uppercase tracking noise, and `tabular-nums` for all timecodes and defect metrics.
+- **Strict Nested Radius Math**: Replaced 22+ pill-shaped capsules (`border-radius: 9999px`) with mathematically nested control geometry:
+  - Tags and keycaps: `4px`
+  - Control buttons & inputs: `6px` to `8px`
+  - Cards and dialogs: `12px` to `14px`
+  - Workspace chassis window: `16px`
+- **Quiet Chrome & Calibrated Signal Accents**: Neutral graphite/slate ramps (`#0F1115` / `#FFFFFF`) where color is strictly reserved for data meaning:
+  - **Emerald (`#10B981`)**: Active audio signals, verified story transitions, and clean sound stems.
+  - **Amber (`#F59E0B`)**: Suspense cues and foreshadowing moments.
+  - **Red (`#EF4444`)**: Defect BT-001 premature cue collisions.
+- **Calibrated DAW Transport Bar & Interactive Scrubber**: A full-width timeline scrubber with interactive route switching, scene stepping (`Prev Scene`, `Next Scene`), fine timecode nudging (`-5s`, `+5s`), real Web Audio tone synthesis, and interactive scene markers.
 
 ---
 

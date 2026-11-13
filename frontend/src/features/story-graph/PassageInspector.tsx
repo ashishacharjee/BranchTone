@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { X, Heart, HelpCircle, Music, FileText, AlertCircle, ShieldAlert, GitBranch, ArrowRight, Volume2 } from 'lucide-react';
+import { X, Activity, ShieldCheck, Music, FileText, AlertCircle, ShieldAlert, GitBranch, ArrowRight, Volume2 } from 'lucide-react';
 import type { PassageDisplayData } from '../../services/fixtures';
 import { getFindingsForPassage, getAudioCuesForPassage, getRoute } from '../../services/fixtures';
 import { playCueTriggerSound } from '../../services/synth';
@@ -88,7 +88,7 @@ export function PassageInspector({
         <div className={styles.propList}>
           <div className={styles.propRow}>
             <span className={styles.propLabel}>
-              <Heart size={12} aria-hidden="true" />
+              <Activity size={12} aria-hidden="true" />
               Mood
             </span>
             <span className={styles.propValue}>{passage.mood ?? 'Neutral'}</span>
@@ -118,7 +118,7 @@ export function PassageInspector({
 
           <div className={styles.propRow}>
             <span className={styles.propLabel}>
-              <HelpCircle size={12} aria-hidden="true" />
+              <ShieldCheck size={12} aria-hidden="true" />
               Identity Revealed
             </span>
             <span className={styles.propValue}>{identityRevealedText}</span>

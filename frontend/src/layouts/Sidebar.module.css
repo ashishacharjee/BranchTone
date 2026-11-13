@@ -1,11 +1,9 @@
-/* Hallmark · checked: 2026-11-13 · genre: atmospheric · built: the project · redesign: polish · v2.0.0 */
+/* ── High-Precision Studio Sidebar (Unslop Pass 1, 2, 5 & 7) ──────────────── */
 .sidebar {
   width: var(--bt-sidebar-width);
   flex-shrink: 0;
-  background: rgba(248, 250, 252, 0.72);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
-  border-right: 1px solid rgba(255, 255, 255, 0.75);
+  background: #FFFFFF;
+  border-right: 1px solid rgba(15, 23, 42, 0.08);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -26,7 +24,7 @@
   color: #FFFFFF;
   border-radius: var(--bt-radius);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   transition: top var(--bt-transition);
 }
 
@@ -34,62 +32,61 @@
   top: 8px;
 }
 
-/* ── Brand (Matches black squircle from video) ───────────────────────────── */
+/* ── Brand Chassis ───────────────────────────────────────────────────────── */
 .brand {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 20px 20px 16px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 18px 18px 14px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .brandIcon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 12px;
-  background: #111827;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #0F172A;
+  color: #FFFFFF;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
   flex-shrink: 0;
 }
 
 .brandName {
-  font-size: 16px;
-  font-weight: 700;
-  color: #111827;
-  letter-spacing: -0.02em;
+  font-size: 15px;
+  font-weight: 600;
+  color: #0F172A;
+  letter-spacing: -0.01em;
 }
 
-/* ── Section headers ────────────────────────────────────────────────────── */
+/* ── Section headers: Sentence Case & Calm Spacing ───────────────────────── */
 .section {
-  padding: 12px 16px 4px;
+  padding: 14px 14px 2px;
 }
 
 .sectionLabel {
   display: block;
   font-family: var(--bt-font-ui);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: #9CA3AF;
-  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 500;
+  color: #64748B;
   margin-bottom: 6px;
-  padding-left: 4px;
+  padding-left: 6px;
 }
 
 .workspaceSelector {
   padding: 6px 10px;
-  border-radius: var(--bt-radius-sm);
-  background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 6px;
+  background: #F8FAFC;
+  border: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .workspaceName {
   font-size: 12px;
   font-weight: 500;
-  color: #374151;
+  color: #334155;
 }
 
 /* ── Current Project Card ───────────────────────────────────────────────── */
@@ -98,48 +95,52 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #F8FAFC;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02);
   text-align: left;
   cursor: pointer;
-  transition: transform var(--bt-transition-fast), border-color var(--bt-transition-fast);
+  transition: border-color var(--bt-transition-fast), background-color var(--bt-transition-fast);
 }
 
 .projectCardBtn:hover {
-  border-color: rgba(16, 185, 129, 0.4);
-  transform: translateY(-1px);
+  border-color: rgba(16, 185, 129, 0.5);
+  background: #F1F5F9;
 }
 
 .projectThumb {
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #10B981 0%, #3B82F6 100%);
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: #0F172A;
+  color: #10B981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
 }
 
 .projectInfo {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
   min-width: 0;
 }
 
 .projectName {
   font-size: 12px;
   font-weight: 600;
-  color: #111827;
+  color: #0F172A;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .projectMeta {
-  font-size: 10px;
-  color: #6B7280;
+  font-size: 10.5px;
+  color: #64748B;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -153,26 +154,27 @@
 }
 
 .tag {
-  font-size: 9px;
-  font-weight: 600;
-  color: #4B5563;
-  background: #F3F4F6;
+  font-size: 9.5px;
+  font-weight: 500;
+  color: #475569;
+  background: #E2E8F0;
   padding: 1px 5px;
   border-radius: 4px;
 }
 
 .tagVersion {
-  font-size: 9px;
-  font-weight: 600;
-  color: #10B981;
-  background: rgba(16, 185, 129, 0.1);
+  font-size: 9.5px;
+  font-family: var(--bt-font-mono);
+  font-weight: 500;
+  color: #047857;
+  background: #D1FAE5;
   padding: 1px 5px;
   border-radius: 4px;
 }
 
-/* ── Nav Links (Matches video vertical squircle cards) ──────────────────── */
+/* ── Nav Links: 34px rows, 2px gap, 6px radius ──────────────────────────── */
 .nav {
-  padding: 8px 12px;
+  padding: 6px 10px;
   flex: 1;
 }
 
@@ -182,41 +184,46 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .navLink {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 9px 12px;
-  border-radius: 12px;
-  color: #4B5563;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 6px;
+  color: #475569;
   text-decoration: none;
-  font-size: 12.5px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 450;
   border: 1px solid transparent;
-  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  transition: background-color var(--bt-transition-fast), color var(--bt-transition-fast);
 }
 
 .navLink:hover {
   background: #F1F5F9;
-  color: #111827;
+  color: #0F172A;
 }
 
 .navLinkActive {
-  background: #FFFFFF;
-  color: #111827;
-  font-weight: 600;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background: #F1F5F9;
+  color: #0F172A;
+  font-weight: 550;
+  border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .navIcon {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: inherit;
+  color: #64748B;
+  width: 16px;
+}
+
+.navLinkActive .navIcon {
+  color: #10B981;
 }
 
 .navLabel {
@@ -225,16 +232,16 @@
   white-space: nowrap;
 }
 
-/* ── Status Bar & User Avatar ───────────────────────────────────────────── */
+/* ── Status Bar ─────────────────────────────────────────────────────────── */
 .statusBar {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 14px 18px;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 12px 16px;
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
   background: #F8FAFC;
-  font-size: 12px;
-  color: #6B7280;
+  font-size: 11.5px;
+  color: #64748B;
 }
 
 .statusIcon {
@@ -242,6 +249,6 @@
 }
 
 .statusText {
-  font-weight: 600;
-  color: #111827;
+  font-weight: 500;
+  color: #0F172A;
 }

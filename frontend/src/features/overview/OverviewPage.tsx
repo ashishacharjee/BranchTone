@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Sparkles,
   ShieldAlert,
   ArrowRight,
   Check,
@@ -14,6 +13,7 @@ import {
   Pause,
   SkipBack,
   SkipForward,
+  Sliders,
 } from 'lucide-react';
 import {
   getDemoProject,
@@ -244,7 +244,7 @@ export function OverviewPage() {
               </div>
 
               <div className={styles.sparkleIconWrap} aria-hidden="true">
-                <Sparkles size={22} />
+                <Sliders size={20} />
               </div>
             </div>
 
@@ -260,10 +260,10 @@ export function OverviewPage() {
                 className={styles.talkBtn}
                 onClick={handleAuditionRouteB}
                 disabled={isPlayingAudition}
-                title="Audition Route B traversal and defect alert via browser Web Audio synth"
+                title="Audition Route B traversal and defect alert via browser Web Audio synth (Space)"
               >
                 <Volume2 size={15} aria-hidden="true" />
-                <span>{isPlayingAudition ? 'Auditioning Traversal...' : 'Talk to BranchTone'}</span>
+                <span>{isPlayingAudition ? 'Auditioning Traversal...' : 'Audition Traversal (Space)'}</span>
               </button>
             </div>
           </div>
@@ -459,6 +459,24 @@ export function OverviewPage() {
                   >
                     <SkipBack size={12} aria-hidden="true" />
                     <span>Prev Scene</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    className={styles.transportBtn}
+                    onClick={() => setScrubberProgress(Math.max(0, scrubberProgress - 5))}
+                    title="Nudge scrubber backward by 5% along narrative timeline"
+                  >
+                    <span>-5s</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    className={styles.transportBtn}
+                    onClick={() => setScrubberProgress(Math.min(100, scrubberProgress + 5))}
+                    title="Nudge scrubber forward by 5% along narrative timeline"
+                  >
+                    <span>+5s</span>
                   </button>
 
                   <button
@@ -710,9 +728,9 @@ export function OverviewPage() {
                 type="button"
                 className="sponsor-pill"
                 onClick={() => setIsAdaptionModalOpen(true)}
-                title="Open Adaption Labs Model Benchmark"
+                title="Open Adaption Labs Model Benchmark (Sponsor Bonus)"
               >
-                <Sparkles size={11} aria-hidden="true" />
+                <Cpu size={11} aria-hidden="true" />
                 <span>Adaption Labs Tuner</span>
               </button>
             </div>
@@ -740,15 +758,15 @@ export function OverviewPage() {
             <div className={styles.copilotBox}>
               <div className={styles.copilotHeader}>
                 <span className={styles.copilotTitle}>
-                  <Sparkles size={13} color="#7C3AED" aria-hidden="true" />
+                  <Cpu size={13} color="#0F172A" aria-hidden="true" />
                   <span>Adaption 7B Copilot: {selectedCopilotPassage}</span>
                 </span>
-                <span style={{ fontSize: '11px', fontFamily: 'var(--bt-font-mono)', color: '#6D28D9', fontWeight: 600 }}>
+                <span style={{ fontSize: '11px', fontFamily: 'var(--bt-font-mono)', color: selectedCopilotPassage === 'P-003' ? '#DC2626' : '#047857', fontWeight: 600 }}>
                   {selectedCopilotPassage === 'P-003'
-                    ? '98.7% LEAK RISK (Premature)'
+                    ? 'Trigger Defect: High Confidence'
                     : selectedCopilotPassage === 'P-002'
-                    ? '0.4% CLEAN (Dossier Read)'
-                    : '< 1.0% CLEAN'}
+                    ? 'Verified Valid: Dossier Read'
+                    : 'Verified Valid: Clean State'}
                 </span>
               </div>
 
@@ -769,7 +787,7 @@ export function OverviewPage() {
                           : '40%',
                       background:
                         selectedCopilotPassage === 'P-003'
-                          ? 'linear-gradient(90deg, #F59E0B, #EF4444)'
+                          ? '#EF4444'
                           : selectedCopilotPassage === 'P-004'
                           ? '#EF4444'
                           : '#10B981',
@@ -811,8 +829,8 @@ export function OverviewPage() {
                   onClick={handleApplyAiProposal}
                   disabled={isAiFixApplied}
                 >
-                  <Sparkles size={13} aria-hidden="true" />
-                  <span>{isAiFixApplied ? '✓ AI Fix Applied & Suppressed' : '⚡ Apply AI Fix Proposal'}</span>
+                  <Check size={13} aria-hidden="true" />
+                  <span>{isAiFixApplied ? '✓ Proposed Rule Delay Applied' : 'Apply Proposed Delay Rule'}</span>
                 </button>
               )}
             </div>

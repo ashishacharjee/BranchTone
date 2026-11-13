@@ -1,4 +1,4 @@
-/* ── Apple-grade Cinematic Ambient Background with Dynamic Aurora Mesh ──── */
+/* ── Calm Precision Studio Background (Unslop Pass 2 & 8) ─────────────── */
 .backgroundContainer {
   position: fixed;
   inset: 0;
@@ -8,151 +8,48 @@
   background-color: #E2E8F0;
 }
 
-/* ── Deep Field Base ─────────────────────────────────────────────────────── */
+/* ── Deep Field Base: Calm Studio Daylight Gradient ────────────────────────── */
 .deepField {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 120% 90% at 50% -20%, #EEF2F8 0%, #E0E7F1 50%, #D2DBE8 100%);
+  background: radial-gradient(ellipse 120% 90% at 50% -10%, #F1F4F9 0%, #E2E8F0 60%, #CBD5E1 100%);
 }
 
-/* ── Aurora Mesh Layer ───────────────────────────────────────────────────── */
-.auroraLayer {
+/* ── Technical Micro Dot-Grid (24px Audio Workbench Grid) ─────────────────── */
+.dotGrid {
   position: absolute;
   inset: 0;
-  filter: blur(75px);
-  -webkit-filter: blur(75px);
+  background-image: radial-gradient(rgba(15, 23, 42, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 50%, transparent 95%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 50%, transparent 95%);
   opacity: 0.85;
 }
 
-.auroraBlob {
-  position: absolute;
-  border-radius: 50%;
-  will-change: transform;
-  transform: translate3d(0, 0, 0);
-}
-
-/* 1. Emerald Primary Aurora (Luminous Studio Mint) */
-.blobEmerald {
-  width: 720px;
-  height: 720px;
-  top: -160px;
-  left: 20%;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.42) 0%, rgba(52, 211, 153, 0.22) 45%, transparent 70%);
-  animation: auroraDriftEmerald 20s ease-in-out infinite alternate;
-}
-
-/* 2. Electric Cyan Secondary Aurora */
-.blobCyan {
-  width: 660px;
-  height: 660px;
-  top: 30%;
-  left: -120px;
-  background: radial-gradient(circle, rgba(14, 165, 233, 0.38) 0%, rgba(56, 189, 248, 0.18) 45%, transparent 70%);
-  animation: auroraDriftCyan 25s ease-in-out infinite alternate;
-}
-
-/* 3. Sunset Amber / Coral Aurora */
-.blobAmber {
-  width: 640px;
-  height: 640px;
-  bottom: -140px;
-  right: -80px;
-  background: radial-gradient(circle, rgba(249, 115, 22, 0.32) 0%, rgba(251, 146, 60, 0.16) 45%, transparent 70%);
-  animation: auroraDriftAmber 28s ease-in-out infinite alternate;
-}
-
-/* 4. Velvet Violet / Orchid Aurora */
-.blobViolet {
-  width: 680px;
-  height: 680px;
-  top: 15%;
-  right: 15%;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.32) 0%, rgba(168, 85, 247, 0.15) 50%, transparent 72%);
-  animation: auroraDriftViolet 24s ease-in-out infinite alternate;
-}
-
-/* ── Interactive Cursor Spotlight ────────────────────────────────────────── */
+/* ── Interactive Cursor Spotlight: Quiet, Subtle Studio Highlight ─────────── */
 .spotlight {
   position: absolute;
   inset: 0;
   --spotlight-x: 50vw;
   --spotlight-y: 35vh;
   background: radial-gradient(
-    750px circle at var(--spotlight-x) var(--spotlight-y),
-    rgba(16, 185, 129, 0.22) 0%,
-    rgba(14, 165, 233, 0.12) 35%,
-    transparent 65%
+    600px circle at var(--spotlight-x) var(--spotlight-y),
+    rgba(16, 185, 129, 0.06) 0%,
+    rgba(15, 23, 42, 0.02) 40%,
+    transparent 70%
   );
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 
-/* ── Technical Micro Dot-Grid ────────────────────────────────────────────── */
-.dotGrid {
+/* ── Subtle Studio Chassis Vignette ────────────────────────────────────────── */
+.vignette {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1.2px, transparent 1.2px);
-  background-size: 24px 24px;
-  mask-image: radial-gradient(ellipse 90% 75% at 50% 35%, black 40%, transparent 95%);
-  -webkit-mask-image: radial-gradient(ellipse 90% 75% at 50% 35%, black 40%, transparent 95%);
-  opacity: 0.9;
-}
-
-/* ── Keyframe Physics Animations ────────────────────────────────────────── */
-@keyframes auroraDriftEmerald {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-  }
-  50% {
-    transform: translate3d(120px, 60px, 0) scale(1.15) rotate(45deg);
-  }
-  100% {
-    transform: translate3d(-60px, 110px, 0) scale(0.92) rotate(-20deg);
-  }
-}
-
-@keyframes auroraDriftCyan {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-  }
-  50% {
-    transform: translate3d(80px, -80px, 0) scale(1.12) rotate(-35deg);
-  }
-  100% {
-    transform: translate3d(140px, 40px, 0) scale(0.95) rotate(25deg);
-  }
-}
-
-@keyframes auroraDriftAmber {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-  }
-  50% {
-    transform: translate3d(-100px, -70px, 0) scale(1.18) rotate(40deg);
-  }
-  100% {
-    transform: translate3d(50px, -120px, 0) scale(0.88) rotate(-30deg);
-  }
-}
-
-@keyframes auroraDriftViolet {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-  }
-  50% {
-    transform: translate3d(-90px, 80px, 0) scale(1.14) rotate(-45deg);
-  }
-  100% {
-    transform: translate3d(60px, -60px, 0) scale(0.94) rotate(30deg);
-  }
+  box-shadow: inset 0 0 100px rgba(15, 23, 42, 0.04);
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .blobEmerald,
-  .blobCyan,
-  .blobAmber,
-  .blobViolet {
-    animation: none !important;
-  }
   .spotlight {
     display: none;
   }

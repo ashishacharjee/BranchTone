@@ -1,10 +1,10 @@
-/* ── Overview Workspace: Daylight Executive Creator Studio (Video Match) ────────── */
+/* ── High-Precision Audio QA Studio Overview (Unslop Pass 1–9) ─────────────── */
 .overview {
   display: flex;
   flex-direction: column;
   min-height: 100%;
   overflow-y: auto;
-  padding: 28px 32px 64px;
+  padding: 24px 28px 48px;
   background: transparent;
   position: relative;
 }
@@ -15,7 +15,7 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   position: relative;
   z-index: 2;
 }
@@ -24,7 +24,7 @@
 .bentoRow {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 18px;
+  gap: 16px;
 }
 
 .col8 {
@@ -57,31 +57,28 @@
   }
 }
 
-/* ── Base Bento Card (Liquid Glass Studio Card) ─────────────────────────────── */
+/* ── Base Studio Card (Quiet Chrome, Nested Radius 14px) ───────────────────── */
 .card {
-  background: rgba(255, 255, 255, 0.76);
-  backdrop-filter: blur(28px) saturate(190%);
-  -webkit-backdrop-filter: blur(28px) saturate(190%);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  border-radius: var(--bt-radius-card);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.92), 0 8px 30px rgba(0, 0, 0, 0.04);
-  padding: 24px 28px;
+  background: #FFFFFF;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
+  padding: 20px 24px;
   position: relative;
   display: flex;
   flex-direction: column;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+  transition: border-color var(--bt-transition-fast), box-shadow var(--bt-transition-fast);
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.98), 0 16px 40px rgba(0, 0, 0, 0.07);
-  border-color: rgba(255, 255, 255, 0.95);
+  border-color: rgba(15, 23, 42, 0.16);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
 }
 
-/* ── Card 1: Studio Brief / Hero Bento Card ─────────────────────────────────── */
+/* ── Card 1: Studio Brief Hero ─────────────────────────────────────────────── */
 .briefCard {
   composes: card;
-  gap: 16px;
+  gap: 14px;
   justify-content: space-between;
 }
 
@@ -92,19 +89,6 @@
   gap: 16px;
 }
 
-.sparkleIconWrap {
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  background: #FFF4E5;
-  color: #FF8A00;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(255, 138, 0, 0.15);
-}
-
 .briefTitleRow {
   display: flex;
   align-items: center;
@@ -113,39 +97,52 @@
 }
 
 .briefTitle {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--bt-ink);
-  letter-spacing: -0.03em;
+  font-size: 20px;
+  font-weight: 600;
+  color: #0F172A;
+  letter-spacing: -0.01em;
   margin: 0;
 }
 
 .versionBadge {
   font-family: var(--bt-font-mono);
   font-size: 11px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 9999px;
-  background: #EEF2F6;
-  color: #475569;
-  border: 1px solid #E2E8F0;
+  font-weight: 500;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: #ECFDF5;
+  color: #047857;
+  border: 1px solid #A7F3D0;
 }
 
 .briefDesc {
-  font-size: 13.5px;
-  color: var(--bt-text-secondary);
-  line-height: 1.55;
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.5;
   margin: 0;
+  max-width: 680px;
+}
+
+.sparkleIconWrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #F1F5F9;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .briefFooter {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
-  padding-top: 14px;
-  border-top: 1px solid var(--bt-border-light);
+  padding-top: 12px;
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .briefChips {
@@ -156,55 +153,48 @@
 }
 
 .chip {
-  font-family: var(--bt-font-mono);
   font-size: 11px;
-  color: var(--bt-text-muted);
+  font-family: var(--bt-font-mono);
+  color: #64748B;
   background: #F8FAFC;
-  border: 1px solid #E2E8F0;
-  padding: 4px 9px;
-  border-radius: 8px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  padding: 3px 8px;
+  border-radius: 4px;
 }
 
 .chip code {
-  color: var(--bt-ink);
-  font-weight: 600;
+  color: #0F172A;
+  font-weight: 500;
 }
 
 .talkBtn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  border-radius: 9999px;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 6px;
   background: #0F172A;
   color: #FFFFFF;
-  border: none;
-  font-size: 12.5px;
-  font-weight: 600;
+  border: 1px solid #0F172A;
+  font-size: 12px;
+  font-weight: 500;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.14);
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s, box-shadow 0.2s;
+  transition: background-color 0.12s ease;
 }
 
-.talkBtn:hover:not(:disabled) {
+.talkBtn:hover {
   background: #1E293B;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.22);
-}
-
-.talkBtn:active:not(:disabled) {
-  transform: scale(0.98);
 }
 
 .talkBtn:disabled {
-  opacity: 0.7;
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
-/* ── Card 2: Approval Card (Needs your approval) ─────────────────────────────── */
+/* ── Card 2: Approval Card (Suppression Queue) ─────────────────────────────── */
 .approvalCard {
   composes: card;
-  gap: 14px;
+  gap: 12px;
   justify-content: space-between;
 }
 
@@ -221,11 +211,11 @@
 }
 
 .purpleIconWrap {
-  width: 36px;
-  height: 36px;
-  border-radius: 12px;
-  background: #F3E8FF;
-  color: #9333EA;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: #FEF2F2;
+  color: #DC2626;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -233,35 +223,35 @@
 }
 
 .approvalTitle {
-  font-size: 14.5px;
-  font-weight: 700;
-  color: var(--bt-ink);
+  font-size: 14px;
+  font-weight: 600;
+  color: #0F172A;
   margin: 0;
 }
 
 .findingBadgeRed {
   font-family: var(--bt-font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  padding: 3px 7px;
-  border-radius: 9999px;
-  background: #FEE2E2;
+  font-size: 10.5px;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #FEF2F2;
   color: #DC2626;
   border: 1px solid #FECACA;
 }
 
 .findingText {
   font-size: 12.5px;
-  color: var(--bt-text-secondary);
+  color: #334155;
   line-height: 1.5;
   background: #F8FAFC;
-  border: 1px solid #E2E8F0;
-  border-radius: 12px;
-  padding: 12px 14px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 8px;
+  padding: 10px 12px;
 }
 
 .findingText strong {
-  color: var(--bt-ink);
+  color: #0F172A;
 }
 
 .approvalActions {
@@ -275,150 +265,148 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 16px;
-  border-radius: 9999px;
+  padding: 6px 14px;
+  border-radius: 6px;
   background: #0F172A;
   color: #FFFFFF;
-  border: none;
+  border: 1px solid #0F172A;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.12s ease;
 }
 
 .approvePillBtn:hover {
   background: #1E293B;
-  transform: translateY(-1px);
 }
 
 .inspectPillBtn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 14px;
-  border-radius: 9999px;
-  background: #F1F5F9;
-  color: var(--bt-ink);
-  border: 1px solid #E2E8F0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: #F8FAFC;
+  color: #0F172A;
+  border: 1px solid rgba(15, 23, 42, 0.12);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.12s ease;
 }
 
 .inspectPillBtn:hover {
-  background: #E2E8F0;
-  border-color: #CBD5E1;
+  background: #F1F5F9;
+  border-color: #94A3B8;
 }
 
-/* ── Gradient Metric Cards (Green & Orange Video Cards) ──────────────────────── */
+/* ── High-Craft Metric Cards: Story Transitions & Air Vent ─────────────────── */
 .gradientCard {
-  border-radius: var(--bt-radius-card);
-  padding: 24px 26px;
+  border-radius: 14px;
+  padding: 20px 22px;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
-  color: #FFFFFF;
+  background: #FFFFFF;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  color: #0F172A;
   cursor: pointer;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: border-color var(--bt-transition-fast), box-shadow var(--bt-transition-fast);
 }
 
 .gradientCard:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.14);
+  border-color: rgba(15, 23, 42, 0.16);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
 }
 
 .greenCard {
   composes: gradientCard;
-  background: var(--bt-gradient-green);
+  border-top: 3px solid #10B981;
 }
 
 .orangeCard {
   composes: gradientCard;
-  background: var(--bt-gradient-orange);
+  border-top: 3px solid #F59E0B;
 }
 
 .cardTopBadgeRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .whiteTranslucentBadge {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 4px 10px;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  font-size: 11.5px;
-  font-weight: 600;
-  color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  gap: 4px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: #F1F5F9;
+  font-size: 11px;
+  font-weight: 500;
+  color: #475569;
+  border: 1px solid #E2E8F0;
 }
 
 .cardTitleLight {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  color: #64748B;
+  text-transform: none;
 }
 
 .numberArea {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin: 12px 0 16px;
+  margin: 10px 0 14px;
 }
 
 .numberSubtext {
-  font-size: 12.5px;
-  color: rgba(255, 255, 255, 0.92);
-  font-weight: 500;
+  font-size: 12px;
+  color: #475569;
+  font-weight: 450;
   line-height: 1.4;
-  max-width: 180px;
+  text-align: right;
+}
+
+.numberSubtext strong {
+  color: #0F172A;
 }
 
 .equalizerWave {
   display: flex;
   align-items: flex-end;
-  gap: 3.5px;
-  height: 28px;
-  padding-top: 6px;
-  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  gap: 3px;
+  height: 20px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .eqBar {
   flex: 1;
-  background: rgba(255, 255, 255, 0.75);
-  border-radius: 2px;
-  min-height: 4px;
-  transition: height 0.3s ease;
-  animation: eqPulse 1.4s ease-in-out infinite alternate;
+  background: #CBD5E1;
+  border-radius: 1px;
+  min-height: 3px;
+  transition: height 0.2s ease;
 }
 
-@keyframes eqPulse {
-  0% {
-    opacity: 0.6;
-    transform: scaleY(0.7);
-  }
-  100% {
-    opacity: 1;
-    transform: scaleY(1.15);
-  }
+.greenCard .eqBar {
+  background: #A7F3D0;
 }
 
-/* ── Card 5: Schedule / Route Traversal Card (Frame 06 Match) ───────────────── */
+.orangeCard .eqBar {
+  background: #FDE68A;
+}
+
+/* ── Card 5: Schedule / Route Traversal Card ───────────────────────────────── */
 .scheduleCard {
   composes: card;
-  gap: 16px;
+  gap: 14px;
 }
 
 .scheduleHeader {
@@ -428,29 +416,26 @@
 }
 
 .scheduleTitle {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--bt-ink);
+  font-size: 14px;
+  font-weight: 600;
+  color: #0F172A;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
 .scheduleSubtitle {
-  font-size: 12.5px;
-  color: var(--bt-text-secondary);
+  font-size: 12px;
+  color: #64748B;
 }
 
 .timelineTrack {
   position: relative;
-  background: rgba(248, 250, 252, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(226, 232, 240, 0.85);
-  border-radius: 18px;
-  padding: 20px 22px 20px;
-  margin-top: 6px;
-  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.9);
+  background: #F8FAFC;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-top: 4px;
 }
 
 /* ── Interactive Scrubber Transport & Controls Bar ─────────────────────────── */
@@ -458,39 +443,39 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
-  padding-bottom: 16px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .transportGroup {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .routeToggleGroup {
   display: flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(241, 245, 249, 0.8);
-  padding: 4px;
-  border-radius: 9999px;
-  border: 1px solid rgba(203, 213, 225, 0.6);
+  gap: 4px;
+  background: #F1F5F9;
+  padding: 3px;
+  border-radius: 6px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .routeToggleBtn {
   font-size: 11.5px;
-  font-weight: 600;
-  padding: 5px 12px;
-  border-radius: 9999px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 4px;
   border: none;
   background: transparent;
   color: #64748B;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.12s ease;
   display: flex;
   align-items: center;
   gap: 5px;
@@ -499,82 +484,70 @@
 .routeToggleBtnActive {
   background: #FFFFFF;
   color: #0F172A;
-  font-weight: 700;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
 }
 
 .routeToggleBtnActiveAlert {
   background: #FEF2F2;
   color: #DC2626;
-  font-weight: 700;
-  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.15);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(220, 38, 38, 0.1);
 }
 
 .transportBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 6px 13px;
-  border-radius: 9999px;
+  gap: 4px;
+  padding: 5px 10px;
+  border-radius: 6px;
   background: #FFFFFF;
-  border: 1px solid #CBD5E1;
+  border: 1px solid rgba(15, 23, 42, 0.1);
   color: #334155;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11.5px;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.12s ease;
 }
 
 .transportBtn:hover {
   background: #F8FAFC;
   border-color: #94A3B8;
   color: #0F172A;
-  transform: translateY(-1px);
 }
 
 .transportBtnPlay {
   background: #0F172A;
   color: #FFFFFF;
   border: 1px solid #0F172A;
-  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.2);
 }
 
 .transportBtnPlay:hover {
   background: #1E293B;
   color: #FFFFFF;
-  border-color: #1E293B;
 }
 
 .transportBtnActive {
-  background: #059669;
+  background: #047857;
   color: #FFFFFF;
-  border-color: #059669;
-  box-shadow: 0 0 14px rgba(16, 185, 129, 0.4);
-  animation: pulsePlay 1.2s infinite alternate;
-}
-
-@keyframes pulsePlay {
-  0% { box-shadow: 0 0 8px rgba(16, 185, 129, 0.3); }
-  100% { box-shadow: 0 0 18px rgba(16, 185, 129, 0.6); }
+  border-color: #047857;
 }
 
 .scrubberLiveBadge {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-family: var(--bt-font-mono);
-  font-size: 11.5px;
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(203, 213, 225, 0.8);
-  padding: 5px 12px;
-  border-radius: 9999px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  font-size: 11px;
+  background: #FFFFFF;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  padding: 4px 10px;
+  border-radius: 6px;
 }
 
 .liveTimeText {
-  font-weight: 700;
+  font-weight: 600;
   color: #0F172A;
 }
 
@@ -583,45 +556,43 @@
 }
 
 .liveAlertBadge {
-  background: #FEE2E2;
+  background: #FEF2F2;
   color: #DC2626;
-  font-weight: 700;
-  padding: 2px 7px;
-  border-radius: 9999px;
-  font-size: 10.5px;
-  animation: alertPulse 1.2s infinite alternate;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
 }
 
 .liveCleanBadge {
-  background: #DCFCE7;
-  color: #15803D;
-  font-weight: 700;
-  padding: 2px 7px;
-  border-radius: 9999px;
-  font-size: 10.5px;
+  background: #ECFDF5;
+  color: #047857;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
 }
 
-/* ── Interactive Range Slider ──────────────────────────────────────────────── */
+/* ── Interactive Range Slider: Precision DAW Transport Track ─────────────── */
 .sliderTrackArea {
   position: relative;
   width: 100%;
-  margin-bottom: 18px;
-  padding: 0 4px;
+  margin-bottom: 14px;
+  padding: 0 2px;
 }
 
 .rangeSlider {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 8px;
-  border-radius: 9999px;
-  background: linear-gradient(90deg, #10B981 0%, #3B82F6 40%, #EF4444 48%, #10B981 65%, #10B981 100%);
+  height: 6px;
+  border-radius: 3px;
+  background: #0F172A;
   outline: none;
   cursor: grab;
   position: relative;
   z-index: 10;
-  transition: opacity 0.2s;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+  transition: opacity 0.15s;
 }
 
 .rangeSlider:active {
@@ -631,71 +602,66 @@
 .rangeSlider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 22px;
-  height: 22px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: #FFFFFF;
-  border: 3px solid #0F172A;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25), 0 0 12px rgba(16, 185, 129, 0.35);
+  border: 2px solid #0F172A;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.2);
   cursor: grab;
-  transition: transform 0.15s ease, border-color 0.15s ease;
+  transition: border-color 0.12s ease;
 }
 
 .rangeSlider::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
   border-color: #10B981;
 }
 
 .rangeSlider::-webkit-slider-thumb:active {
-  transform: scale(1.25);
   cursor: grabbing;
   border-color: #DC2626;
-  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.45);
 }
 
 .rangeSlider::-moz-range-thumb {
-  width: 22px;
-  height: 22px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: #FFFFFF;
-  border: 3px solid #0F172A;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border: 2px solid #0F172A;
   cursor: grab;
 }
 
 .timelineRuler {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
-  padding: 0 8px;
-  border-bottom: 1px dashed #CBD5E1;
-  padding-bottom: 8px;
+  margin-bottom: 14px;
+  padding: 0 4px 6px;
+  border-bottom: 1px dashed rgba(15, 23, 42, 0.12);
 }
 
 .timeMarker {
   font-family: var(--bt-font-mono);
-  font-size: 11px;
-  color: var(--bt-text-muted);
+  font-size: 10.5px;
+  color: #64748B;
 }
 
 .routeTracksContainer {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
   position: relative;
 }
 
 .routeTrackRow {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .routeTrackLabel {
-  width: 90px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--bt-ink);
+  width: 80px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #0F172A;
   font-family: var(--bt-font-mono);
 }
 
@@ -703,68 +669,55 @@
   flex: 1;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   position: relative;
 }
 
 .sceneBlockClean {
-  padding: 8px 14px;
-  border-radius: 10px;
+  padding: 6px 12px;
+  border-radius: 6px;
   background: #FFFFFF;
-  border: 1px solid #CBD5E1;
-  font-size: 12px;
-  font-weight: 600;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  font-size: 11.5px;
+  font-weight: 500;
   color: #334155;
   cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  transition: all 0.12s ease;
 }
 
 .sceneBlockClean:hover {
   border-color: #10B981;
   color: #047857;
-  transform: translateY(-1px);
 }
 
 .sceneBlockActiveClean {
-  border-color: #059669 !important;
-  color: #065F46 !important;
+  border-color: #10B981 !important;
+  color: #047857 !important;
   background: #ECFDF5 !important;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25), 0 4px 12px rgba(16, 185, 129, 0.2) !important;
-  transform: translateY(-2px);
-  font-weight: 700 !important;
+  font-weight: 600 !important;
 }
 
 .sceneBlockAlert {
-  padding: 8px 14px;
-  border-radius: 10px;
+  padding: 6px 12px;
+  border-radius: 6px;
   background: #FEF2F2;
-  border: 1.5px solid #EF4444;
-  font-size: 12px;
-  font-weight: 700;
+  border: 1px solid #FCA5A5;
+  font-size: 11.5px;
+  font-weight: 600;
   color: #DC2626;
   cursor: pointer;
   position: relative;
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
-  transition: all 0.2s;
+  transition: all 0.12s ease;
 }
 
 .sceneBlockAlert:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.25);
+  border-color: #DC2626;
 }
 
 .sceneBlockActiveAlert {
   border-color: #DC2626 !important;
   background: #FEF2F2 !important;
-  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.3), 0 4px 18px rgba(220, 38, 38, 0.35) !important;
-  transform: translateY(-2px);
-  animation: alertPulse 1.2s infinite alternate;
-}
-
-@keyframes alertPulse {
-  0% { box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2), 0 4px 12px rgba(220, 38, 38, 0.2); }
-  100% { box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.4), 0 6px 20px rgba(220, 38, 38, 0.45); }
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2) !important;
 }
 
 .scrubberLine {
@@ -780,63 +733,50 @@
 
 .scrubberThumb {
   position: absolute;
-  top: -8px;
-  left: -5px;
-  width: 12px;
-  height: 12px;
+  top: -6px;
+  left: -4px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: #DC2626;
-  box-shadow: 0 0 8px rgba(220, 38, 38, 0.6);
 }
 
-/* ── Interactive Dark Tooltip (Frame 06 match) ───────────────────────────────── */
+/* ── Interactive Dark Tooltip ──────────────────────────────────────────────── */
 .scheduleTooltip {
   position: absolute;
-  top: -110px;
+  top: -95px;
   left: 36%;
   background: #0F172A;
   color: #FFFFFF;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 14px;
-  padding: 12px 16px;
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.25);
+  border-radius: 8px;
+  padding: 10px 14px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.25);
   z-index: 20;
-  width: 260px;
+  width: 250px;
   pointer-events: none;
-  animation: fadeInTooltip 0.2s ease-out;
 }
 
 .scheduleTooltip::after {
   content: '';
   position: absolute;
-  bottom: -6px;
-  left: 30px;
-  width: 12px;
-  height: 12px;
+  bottom: -5px;
+  left: 24px;
+  width: 10px;
+  height: 10px;
   background: #0F172A;
   transform: rotate(45deg);
 }
 
-@keyframes fadeInTooltip {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .tooltipTitle {
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 600;
   color: #F8FAFC;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .tooltipMeta {
-  font-size: 11px;
+  font-size: 10.5px;
   color: #94A3B8;
   line-height: 1.4;
 }
@@ -844,26 +784,26 @@
 /* ── Card 6: Priorities Checklist ───────────────────────────────────────────── */
 .prioritiesCard {
   composes: card;
-  gap: 16px;
+  gap: 14px;
 }
 
 .priorityList {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .priorityItem {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 14px;
-  border-radius: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
   background: #F8FAFC;
-  border: 1px solid #E2E8F0;
-  font-size: 12.5px;
-  color: var(--bt-ink);
-  transition: background 0.15s;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  font-size: 12px;
+  color: #0F172A;
+  transition: background 0.12s ease;
 }
 
 .priorityItem:hover {
@@ -871,51 +811,51 @@
 }
 
 .statusPillDone {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 9999px;
-  background: #DCFCE7;
-  color: #16A34A;
+  font-size: 10.5px;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #ECFDF5;
+  color: #047857;
 }
 
 .statusPillWorking {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 9999px;
-  background: #DBEAFE;
-  color: #2563EB;
+  font-size: 10.5px;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #EFF6FF;
+  color: #1D4ED8;
 }
 
 .statusPillReview {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 9999px;
+  font-size: 10.5px;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 4px;
   background: #FEF3C7;
-  color: #D97706;
+  color: #B45309;
 }
 
 .statusPillDecision {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 9999px;
+  font-size: 10.5px;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 4px;
   background: #F3E8FF;
-  color: #9333EA;
+  color: #7E22CE;
 }
 
 /* ── Card 7: AI Team & Adaption Labs Tuner ───────────────────────────────────── */
 .aiTeamCard {
   composes: card;
-  gap: 16px;
+  gap: 14px;
 }
 
 .teamGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 10px;
 }
 
 @media (max-width: 800px) {
@@ -925,97 +865,46 @@
 }
 
 .teamMiniCard {
-  padding: 14px 16px;
-  border-radius: 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
   background: #F8FAFC;
-  border: 1px solid #E2E8F0;
+  border: 1px solid rgba(15, 23, 42, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  transition: all 0.2s;
+  gap: 4px;
+  transition: border-color var(--bt-transition-fast), background-color var(--bt-transition-fast);
 }
 
 .teamMiniCard:hover {
   background: #FFFFFF;
-  border-color: #CBD5E1;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  border-color: #94A3B8;
 }
 
 .teamMiniRole {
-  font-size: 11px;
-  color: var(--bt-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 700;
+  font-size: 10.5px;
+  color: #64748B;
+  font-weight: 500;
 }
 
 .teamMiniName {
-  font-size: 13.5px;
-  font-weight: 700;
-  color: var(--bt-ink);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #0F172A;
 }
 
 .teamMiniStatus {
-  font-size: 11.5px;
-  color: var(--bt-text-secondary);
-  line-height: 1.4;
-}
-
-/* ── Floating Toast Notification (Matching Video) ────────────────────────────── */
-.floatingToast {
-  position: fixed;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #0F172A;
-  color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 12px 22px;
-  border-radius: 9999px;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.28);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  z-index: 1000;
-  font-size: 13px;
-  font-weight: 500;
-  animation: slideUpToast 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes slideUpToast {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 20px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0) scale(1);
-  }
-}
-
-.undoBtn {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #F8FAFC;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 9999px;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-
-.undoBtn:hover {
-  background: rgba(255, 255, 255, 0.15);
+  font-size: 11px;
+  color: #475569;
+  line-height: 1.3;
 }
 
 /* ── Adaption Labs Interactive Copilot Panel ─────────────────────────────── */
 .aiPassageSelector {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   overflow-x: auto;
-  padding: 4px 0 10px;
+  padding: 2px 0 8px;
   scrollbar-width: none;
 }
 
@@ -1026,15 +915,15 @@
 .aiPassagePill {
   font-family: var(--bt-font-mono);
   font-size: 11px;
-  font-weight: 600;
-  padding: 5px 10px;
-  border-radius: 8px;
-  background: rgba(241, 245, 249, 0.7);
-  border: 1px solid rgba(226, 232, 240, 0.9);
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #F1F5F9;
+  border: 1px solid rgba(15, 23, 42, 0.08);
   color: #475569;
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.12s ease;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -1042,7 +931,7 @@
 
 .aiPassagePill:hover {
   background: #FFFFFF;
-  border-color: #CBD5E1;
+  border-color: #94A3B8;
   color: #0F172A;
 }
 
@@ -1050,25 +939,22 @@
   background: #0F172A !important;
   color: #FFFFFF !important;
   border-color: #0F172A !important;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
 }
 
 .aiPassagePillAlert {
-  border-color: #FCA5A5;
+  border-color: #FECACA;
   color: #DC2626;
   background: #FEF2F2;
 }
 
 .copilotBox {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(226, 232, 240, 0.85);
-  border-radius: 14px;
-  padding: 14px 16px;
+  background: #F8FAFC;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 8px;
+  padding: 12px 14px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  gap: 8px;
 }
 
 .copilotHeader {
@@ -1079,8 +965,8 @@
 
 .copilotTitle {
   font-size: 12px;
-  font-weight: 700;
-  color: var(--bt-ink);
+  font-weight: 600;
+  color: #0F172A;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -1089,14 +975,14 @@
 .tensionBarWrapper {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 11.5px;
+  gap: 8px;
+  font-size: 11px;
 }
 
 .tensionBarBg {
   flex: 1;
-  height: 6px;
-  border-radius: 9999px;
+  height: 5px;
+  border-radius: 3px;
   background: #E2E8F0;
   overflow: hidden;
   position: relative;
@@ -1104,18 +990,19 @@
 
 .tensionBarFill {
   height: 100%;
-  border-radius: 9999px;
-  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 3px;
+  transition: width 0.25s ease;
 }
 
 .copilotProposal {
-  font-size: 12px;
+  font-size: 11.5px;
   line-height: 1.5;
   color: #334155;
-  background: rgba(248, 250, 252, 0.9);
-  padding: 10px 12px;
-  border-radius: 10px;
-  border-left: 3px solid #8B5CF6;
+  background: #FFFFFF;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-left: 3px solid #10B981;
 }
 
 .applyFixBtn {
@@ -1123,31 +1010,63 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 7px 14px;
-  border-radius: 9999px;
-  background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: #0F172A;
   color: #FFFFFF;
-  border: none;
-  font-size: 12px;
-  font-weight: 600;
+  border: 1px solid #0F172A;
+  font-size: 11.5px;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
-  margin-top: 4px;
+  transition: background-color 0.12s ease;
+  margin-top: 2px;
 }
 
 .applyFixBtn:hover {
-  background: linear-gradient(135deg, #6D28D9 0%, #5B21B6 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.35);
+  background: #1E293B;
 }
 
 .applyFixBtn:disabled {
   background: #E2E8F0;
-  color: #94A3B8;
+  color: #64748B;
+  border-color: #E2E8F0;
   cursor: not-allowed;
-  box-shadow: none;
-  transform: none;
+}
+
+/* ── Floating Toast Notification ────────────────────────────────────────────── */
+.floatingToast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0F172A;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 10px 18px;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 1000;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.undoBtn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #F8FAFC;
+  font-size: 11.5px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.undoBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
 }
 
 /* ── Additional Utility Elements Required by Tests ───────────────────────────── */

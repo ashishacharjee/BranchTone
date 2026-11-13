@@ -44,24 +44,16 @@ export function AppleBackground() {
 
   return (
     <div className={styles.backgroundContainer} aria-hidden="true">
-      {/* ── Base Obsidian Deep Field ───────────────────────────────── */}
+      {/* ── Calm Technical Studio Field ────────────────────────────── */}
       <div className={styles.deepField} />
 
-      {/* ── Animated Apple Aurora Mesh Blobs ──────────────────────── */}
-      <div className={styles.auroraLayer}>
-        <div className={[styles.auroraBlob, styles.blobEmerald].join(' ')} />
-        <div className={[styles.auroraBlob, styles.blobCyan].join(' ')} />
-        <div className={[styles.auroraBlob, styles.blobAmber].join(' ')} />
-        <div className={[styles.auroraBlob, styles.blobViolet].join(' ')} />
-      </div>
-
-      {/* ── Interactive Cursor Spotlight ──────────────────────────── */}
-      <div ref={spotlightRef} className={styles.spotlight} />
-
-      {/* ── Apple Technical Dot Grid Mask ─────────────────────────── */}
+      {/* ── Precision Audio Studio Micro Dot Grid ───────────────────── */}
       <div className={styles.dotGrid} />
 
-      {/* ── Top Subtle Specular Vignette ───────────────────────────── */}
+      {/* ── Quiet Cursor Spotlight (Subtle Neutral Track) ──────────── */}
+      <div ref={spotlightRef} className={styles.spotlight} />
+
+      {/* ── Subtle Studio Chassis Vignette ──────────────────────────── */}
       <div className={styles.vignette} />
     </div>
   );

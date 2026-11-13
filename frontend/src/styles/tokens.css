@@ -102,14 +102,15 @@
   --bt-shadow-antigravity: 0 40px 100px -20px rgba(0, 0, 0, 0.14), 0 20px 40px -15px rgba(0, 0, 0, 0.08);
   --bt-shadow-antigravity-hover: 0 48px 110px -20px rgba(0, 0, 0, 0.18), 0 24px 48px -15px rgba(0, 0, 0, 0.1);
 
-  /* ── Radii ────────────────────────────────────────────────────────────── */
+  /* ── Nested Radii (Tokens.md: Controls 6-8px, Cards 12-14px, Windows 16-20px) ─ */
   --bt-radius-xs: 4px;
-  --bt-radius-sm: 8px;
-  --bt-radius: 12px;
-  --bt-radius-md: 16px;
-  --bt-radius-lg: 20px;
-  --bt-radius-xl: 24px;
+  --bt-radius-sm: 6px;
+  --bt-radius: 8px;
+  --bt-radius-md: 12px;
+  --bt-radius-lg: 14px;
+  --bt-radius-xl: 18px;
   --bt-radius-full: 999px;
+  --bt-radius-card: 14px;
 
   /* ── Dimensions ───────────────────────────────────────────────────────── */
   --bt-sidebar-width: 240px;
@@ -126,9 +127,9 @@
   --bt-space-7: 32px;
   --bt-space-8: 40px;
 
-  /* ── Font Families (Apple SF Pro & SF Mono priority) ─────────────────── */
-  --bt-font-ui: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', system-ui, sans-serif;
-  --bt-font-mono: 'SF Mono', 'IBM Plex Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  /* ── Precision Type Families (Geist & Geist Mono Workbench Font) ─────── */
+  --bt-font-ui: 'Geist', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
+  --bt-font-mono: 'Geist Mono', 'JetBrains Mono', 'IBM Plex Mono', SFMono-Regular, Menlo, monospace;
 
   /* ── Font Sizes ───────────────────────────────────────────────────────── */
   --bt-text-2xs: 10px;
@@ -143,10 +144,10 @@
   --bt-text-4xl: 36px;
   --bt-text-hero: 44px;
 
-  /* ── Apple Spring Transitions ─────────────────────────────────────────── */
-  --bt-spring: cubic-bezier(0.16, 1, 0.3, 1);
-  --bt-spring-snappy: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --bt-transition-fast: 0.15s var(--bt-spring);
-  --bt-transition: 0.25s var(--bt-spring);
-  --bt-transition-slow: 0.4s var(--bt-spring);
+  /* ── Unslop Motion & Transition Curves (tokens.md: cubic-bezier(0.22, 1, 0.36, 1)) ── */
+  --bt-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --bt-spring-snappy: cubic-bezier(0.22, 1, 0.36, 1);
+  --bt-transition-fast: 0.12s var(--bt-spring);
+  --bt-transition: 0.18s var(--bt-spring);
+  --bt-transition-slow: 0.3s var(--bt-spring);
 }

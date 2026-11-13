@@ -1,4 +1,4 @@
-/* Hallmark · checked: 2026-11-13 · genre: atmospheric · built: the project · redesign: polish · v2.0.0 */
+/* ── Studio Chassis Window Frame (Unslop Pass 6 & 7) ─────────────────────── */
 .shellWrapper {
   display: flex;
   align-items: center;
@@ -12,18 +12,15 @@
 
 .shell {
   display: flex;
-  width: calc(100vw - 28px);
-  max-width: 1540px;
-  height: calc(100vh - 28px);
-  border-radius: 28px;
+  width: calc(100vw - 24px);
+  max-width: 1560px;
+  height: calc(100vh - 24px);
+  border-radius: 16px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(40px) saturate(200%);
-  -webkit-backdrop-filter: blur(40px) saturate(200%);
-  border: 1.5px solid rgba(255, 255, 255, 0.85);
-  box-shadow: 0 36px 90px -15px rgba(15, 23, 42, 0.14),
-              0 12px 36px -6px rgba(15, 23, 42, 0.08),
-              inset 0 1px 2px 0 rgba(255, 255, 255, 0.95);
+  background: #FFFFFF;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 20px 50px -12px rgba(15, 23, 42, 0.09),
+              0 4px 16px -2px rgba(15, 23, 42, 0.04);
   position: relative;
   z-index: 1;
 }
@@ -45,7 +42,7 @@
   overflow: hidden;
   position: relative;
   z-index: 1;
-  background: transparent;
+  background: #F8FAFC;
 }
 
 .main {

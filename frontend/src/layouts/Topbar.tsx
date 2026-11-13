@@ -18,7 +18,7 @@ import {
   ShieldAlert,
   ArrowRight,
   Info,
-  Sparkles,
+  Cpu,
   Keyboard,
 } from 'lucide-react';
 import { getPassages, getAllFindings } from '../services/fixtures';
@@ -255,15 +255,15 @@ export function Topbar() {
         )}
       </div>
 
-      {/* ── Adaption Labs Sponsor Bonus Button ──────────────────────── */}
+      {/* ── Adaption Labs Sponsor Engine Button ──────────────────────── */}
       <button
         type="button"
         className={styles.adaptionBadgeBtn}
         onClick={() => setIsAdaptionModalOpen(true)}
-        title="Adaption Labs AI Engine — Fine-Tuning Sponsor Bonus Track"
+        title="Adaption Labs AI Engine — Fine-Tuning Sponsor Track (LoRA 7B Classifier)"
         aria-label="Adaption Labs AI Engine Sponsor Details"
       >
-        <Sparkles size={12} color="#4F46E5" aria-hidden="true" />
+        <Cpu size={13} aria-hidden="true" />
         <span>Adaption Labs AI</span>
       </button>
 
@@ -272,9 +272,9 @@ export function Topbar() {
         type="button"
         className={styles.judgeTourBtn}
         onClick={() => setIsJudgeTourOpen(true)}
-        title="Open interactive 60-second walkthrough for hackathon judges (Hot key: T)"
+        title="Open interactive 60-second walkthrough for hackathon judges (Hotkey: T)"
       >
-        <Sparkles size={14} aria-hidden="true" />
+        <PlayCircle size={13} aria-hidden="true" />
         <span>Judge Tour (60s)</span>
       </button>
 
