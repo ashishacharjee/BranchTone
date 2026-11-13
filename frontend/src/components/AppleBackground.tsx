@@ -51,7 +51,8 @@ export function AppleBackground() {
       <div className={styles.auroraLayer}>
         <div className={[styles.auroraBlob, styles.blobEmerald].join(' ')} />
         <div className={[styles.auroraBlob, styles.blobCyan].join(' ')} />
-        <div className={[styles.auroraBlob, styles.blobBurgundy].join(' ')} />
+        <div className={[styles.auroraBlob, styles.blobAmber].join(' ')} />
+        <div className={[styles.auroraBlob, styles.blobViolet].join(' ')} />
       </div>
 
       {/* ── Interactive Cursor Spotlight ──────────────────────────── */}

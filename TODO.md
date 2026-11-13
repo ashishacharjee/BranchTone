@@ -25,7 +25,10 @@ Update a checkbox only when the task is actually complete and evidence/tests exi
 - [x] Align UI/UX exactly with user video aesthetic (`e97b19e1da0a9d2ba8a0bc9c81835d87.mp4`): daylight executive canvas (`#DFE3E8`), floating studio window (`#F4F6F8`), 5x7 square-pixel dot-matrix LED glyphs (`PixelMatrixNumber`), 7 bento cards (Morning Brief, Approval card with undo toast, Green gradient integrity card, Orange gradient intensity card, interactive Schedule timeline with dark hover tooltip, Priorities checklist, AI Team card).
 - [x] Integrate hackathon sponsor Adaption Labs (`adaptionlabs.ai/app/auth/referral?ref=c902663068828f4bf2e63348`) with LoRA emotion classifier benchmark modal, qualifying for the 25% AI depth bonus track.
 - [x] Full Daylight Studio CSS Harmonization across all 7 workspaces (`StoryGraph`, `NarrativeMap`, `CueLibrary`, `RouteLab`, `ValidationCentre`, `Reports`) eliminating all legacy dark/black blocks and obsidian gradients.
-- [x] Author comprehensive competition-winning `README.md` with problem statement, track alignment, sponsor integration, 50% MVP scope boundaries, and 60-second judge walkthrough.
+- [x] Apple Liquid Glass Materials & Visible Dynamic Aurora Mesh Background: Removed opaque wrappers, converted AppShell to floating translucent window, added 4 GPU-accelerated breathing aurora blobs with interactive cursor spotlight and micro-dot grid.
+- [x] Interactive Traversal Scrubber in Overview: Full-width range slider scrubbing across story depth (09:00 Scene 1 to 17:00 Finale) with real-time Web Audio pitch shifting, tritone defect alert chord at Air Vent, 60fps auto-play traversal, and route switcher.
+- [x] Elevated Adaption Labs AI Copilot Workbench & Sandbox: Interactive passage tabs (`P-001` through `P-005`), live tension gauge, spoiler leak risk percentage (98.7% on P-003 vs 0.4% on P-002), one-click `⚡ Apply AI Fix Proposal` action with undo toast, and custom text sandbox in `AdaptionLabsModal.tsx` with official referral link.
+- [x] Author comprehensive competition-winning `README.md` with problem statement, track alignment, sponsor integration, mathematical invariant formulation of Rule BT-001, 50% MVP scope boundaries, and 60-second judge walkthrough.
 
 ## Gate 2 — Contracts and fixture integrity
 - [x] Align TypeScript types, Pydantic models and JSON Schema.

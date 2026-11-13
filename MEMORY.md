@@ -1,6 +1,33 @@
 # MEMORY.md — Project Decisions and Verified Context
 
-**Updated:** 12 November 2026. Keep this file factual and short. Update only after a decision or verification.
+**Updated:** 13 November 2026. Keep this file factual and short. Update only after a decision or verification.
+
+## Apple Liquid Glass Materials, Interactive Traversal Scrubber & Elevated Adaption Labs AI (13 Nov 2026)
+
+- **Apple Liquid Glass Materials & Visible Organic Aurora Mesh Background**:
+  * Eliminated opaque outer canvas backgrounds (`#DFE3E8`, `#F4F6F8`) that were occluding the animated aurora background layer.
+  * Rebuilt `.shell` as a translucent Apple Liquid Glass floating master window (`background: rgba(255, 255, 255, 0.72)`, `backdrop-filter: blur(40px) saturate(200%)`, `border: 1.5px solid rgba(255, 255, 255, 0.85)`, multi-layered ambient specular drop shadows).
+  * Rebuilt `.card` and bento cards across Overview with translucent frosted liquid glass (`background: rgba(255, 255, 255, 0.76)`, `backdrop-filter: blur(28px) saturate(190%)`, `border: 1px solid rgba(255, 255, 255, 0.85)`, specular inner highlight `inset 0 1px 1px rgba(255, 255, 255, 0.92)`).
+  * Background aurora mesh visibly breathes with 4 GPU-accelerated blobs (Emerald 720px, Electric Cyan 660px, Sunset Amber 640px, Velvet Violet 680px) and 60fps spring-interpolated cursor spotlight.
+- **Interactive DAW / Antigravity-Style Traversal Scrubber**:
+  * Full-width draggable range slider allowing smooth scrubbing across story depth from 0% (09:00 Scene 1 Lobby) to 100% (17:00 Finale Safe House).
+  * Dynamic Web Audio synthesis pitch shifts in real-time as each story gate is crossed (440Hz -> 493.88Hz -> 523Hz -> 587Hz).
+  * Automatic tritone dissonance defect alert chord triggered upon scrubbing into Air Vent (`P-003`) on Route B.
+  * 60fps Auto-Play Traversal button animating the scrubber across the entire route with live acoustic feedback and node illumination.
+  * Route switcher toggle embedded directly in scrubber header: `Route B (Stealth · BT-001 Defect)` vs `Route A (Investigation · Clean)`.
+  * Scene capsules highlight dynamically with glowing emerald (`.sceneBlockActiveClean`) and ruby (`.sceneBlockActiveAlert`) rings.
+- **Elevated Adaption Labs AI Copilot Workbench & Interactive Sandbox**:
+  * Upgraded Overview Card 7 into an interactive Copilot Workbench: passage tabs (`P-001` through `P-005`), live tension gauge, spoiler leak risk percentage (98.7% on P-003 vs 0.4% on P-002), and one-click `⚡ Apply AI Fix Proposal` button with undo toast.
+  * Upgraded `AdaptionLabsModal.tsx` with preset passage testing, a custom text sandbox for arbitrary branching dialogue, live prediction metrics, and prominent official referral integration (`https://adaptionlabs.ai/app/auth/referral?ref=c902663068828f4bf2e63348`).
+- **Masterwork README.md**:
+  * Added complete Mermaid architecture flowchart (Ingestion -> DAG -> Traversal -> Rules + Adaption AI -> Web Audio Synth -> Cryptographic Reports).
+  * Documented mathematical invariant formulation of Rule BT-001 Reveal Protection: $\forall r \in \mathcal{R}(G), \quad \text{fires}(c_{\text{reveal}}, v) \implies \text{known}(K_r(v), \text{fact}_{\text{traitor}})$.
+  * Documented 50% MVP scope boundaries per Hackathon Slide 06, comprehensive tech stack matrix, and 60s judge walkthrough.
+- **100% Verification & Deployment**:
+  * 43/43 Vitest frontend tests pass.
+  * 11/11 Pytest backend tests pass.
+  * Strict TypeScript check (`tsc -b`) passed with 0 errors.
+  * Production bundle built and deployed live to `https://branchtone.vercel.app` (Deployment `dpl_Hc3ECMUycyiBQJYa9XVueiYY3hCr`).
 
 ## Complete Daylight Studio CSS Harmonization across All 7 Workspaces & Competition-Winning README (12 Nov 2026)
 

@@ -1,12 +1,12 @@
 /* Hallmark · checked: 2026-11-13 · genre: atmospheric · built: the project · redesign: polish · v2.0.0 */
 :root {
   /* ── Video Reference Design Tokens (Daniel/Atlas Daylight Canvas) ────── */
-  --bt-canvas-outer: #DFE3E8;
-  --bt-canvas-inner: #F4F6F8;
-  --bt-card-white: #FFFFFF;
-  --bt-card-border: rgba(0, 0, 0, 0.06);
-  --bt-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
-  --bt-card-shadow-hover: 0 14px 28px -6px rgba(0, 0, 0, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
+  --bt-canvas-outer: transparent;
+  --bt-canvas-inner: transparent;
+  --bt-card-white: rgba(255, 255, 255, 0.78);
+  --bt-card-border: rgba(255, 255, 255, 0.82);
+  --bt-card-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --bt-card-shadow-hover: 0 16px 36px -6px rgba(0, 0, 0, 0.08), 0 6px 14px -2px rgba(0, 0, 0, 0.04);
   --bt-ink: #111827;
   --bt-ink-secondary: #4B5563;
   --bt-ink-muted: #9CA3AF;
@@ -26,19 +26,19 @@
   --bt-surface-hover: #E5E7EB;
 
   /* ── Liquid Glass & Bento Tokens ──────────────────────────────────────── */
-  --bt-card-bg: #FFFFFF;
-  --bt-card-liquid-bg: #FFFFFF;
-  --bt-card-raise: #F9FAFB;
-  --bt-card-line: rgba(0, 0, 0, 0.06);
-  --bt-card-highlight: rgba(255, 255, 255, 0.8);
-  --bt-glass: rgba(255, 255, 255, 0.85);
-  --bt-glass-elevated: rgba(255, 255, 255, 0.95);
-  --bt-glass-border: rgba(0, 0, 0, 0.06);
-  --bt-overlay-bg: rgba(17, 24, 39, 0.55);
-  --bt-hover-surface: rgba(0, 0, 0, 0.04);
-  --bt-hover-surface-subtle: rgba(0, 0, 0, 0.02);
-  --bt-dark-well: #F3F4F6;
-  --bt-dark-tray: #F9FAFB;
+  --bt-card-bg: rgba(255, 255, 255, 0.82);
+  --bt-card-liquid-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.86) 0%, rgba(255, 255, 255, 0.72) 100%);
+  --bt-card-raise: rgba(255, 255, 255, 0.92);
+  --bt-card-line: rgba(255, 255, 255, 0.85);
+  --bt-card-highlight: rgba(255, 255, 255, 0.95);
+  --bt-glass: rgba(255, 255, 255, 0.78);
+  --bt-glass-elevated: rgba(255, 255, 255, 0.92);
+  --bt-glass-border: rgba(255, 255, 255, 0.8);
+  --bt-overlay-bg: rgba(15, 23, 42, 0.45);
+  --bt-hover-surface: rgba(15, 23, 42, 0.04);
+  --bt-hover-surface-subtle: rgba(15, 23, 42, 0.02);
+  --bt-dark-well: rgba(241, 245, 249, 0.8);
+  --bt-dark-tray: rgba(248, 250, 252, 0.8);
 
   /* ── Ambient Background & Aurora Tokens ────────────────────────────────── */
   --bt-aurora-deep-1: #E4E7EB;
