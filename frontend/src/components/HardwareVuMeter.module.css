@@ -1,0 +1,91 @@
+/* ── Physical Hardware VU Meter Channel Strip ───────────────────────────── */
+.vuMeterContainer {
+  background: #0B0E14;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+  transition: border-color 0.15s ease;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.vuMeterContainer:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.meterHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--bt-font-mono);
+  font-size: 9.5px;
+}
+
+.meterTitle {
+  color: #64748B;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.meterScale {
+  color: #475569;
+  font-size: 8.5px;
+}
+
+.channelRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.channelLabel {
+  font-family: var(--bt-font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: #94A3B8;
+  width: 10px;
+}
+
+.ledTrack {
+  position: relative;
+  flex: 1;
+  height: 6px;
+  background: #141923;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.ledFill {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    #10B981 0%,
+    #10B981 65%,
+    #F59E0B 80%,
+    #EF4444 95%
+  );
+  border-radius: 3px;
+  transition: width 0.05s ease-out;
+}
+
+.peakIndicator {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #FFFFFF;
+  box-shadow: 0 0 4px #FFFFFF;
+  border-radius: 1px;
+}
+
+.dbValue {
+  font-family: var(--bt-font-mono);
+  font-size: 9.5px;
+  color: #64748B;
+  width: 36px;
+  text-align: right;
+}

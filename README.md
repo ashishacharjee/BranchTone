@@ -155,11 +155,14 @@ We integrated official hackathon sponsor **[Adaption Labs](https://adaptionlabs.
 
 ---
 
-## 🎨 Visual Design Philosophy: High-Precision Audio Workbench (Unslop Methodology)
+## 🎨 Visual Design Philosophy: Awwwards Nominee & Tactile Audio Studio
 
-BranchTone's interface was engineered according to the **Unslop Framework** ([heydamir/unslop](https://github.com/heydamir/unslop)), stripping away AI template slop in favor of the utilitarian craft of professional audio tools (**Audiokinetic Wwise, Teenage Engineering, Ableton Live, Linear**):
+BranchTone rejects generic AI template aesthetics in favor of the tangible, utilitarian beauty of professional broadcast workstations and analog audio hardware (**Teenage Engineering, Nagra, Elektron, Audiokinetic Wwise, Awwwards Nominee audio experiences**):
 
-- **Calm, High-Precision Studio Chassis**: Solid, focused studio canvas with clean 1px hairline borders (`rgba(15, 23, 42, 0.08)`). Eliminates distracting multi-color floating aurora blobs, oily liquid-glass saturation, and endless drifting keyframe loops so audio engineers can focus on sound design and defect telemetry.
+- **Deep Obsidian Studio Chassis & Organic Film Grain**: Framed in an ultra-deep obsidian field (`#080A0E` to `#0F1218`) overlaid with subtle SVG fractal noise grain (`opacity: 0.035`) and architectural coordinate crosshairs (`+`), delivering an authentic physical laboratory presence rather than a flat digital canvas.
+- **Real-Time 60fps Phosphor Oscilloscope**: A custom hardware CRT visualizer driven directly by the browser's Web Audio `AnalyserNode`. Renders real-time time-domain waveforms during audition traversal, falling back to a subtle 44.1 kHz ambient carrier wave with phosphor bloom.
+- **Physical Stereo LED VU Meters**: Calibrated dual-channel Left/Right audio level meters with dynamic decibel telemetry (`-24dB` to `+3dB`), responsive peak-hold indicators, and an interactive calibration tone trigger.
+- **Tactile Micro-Sound Feedback**: Every transport click, route toggle, scene step, and modal switch produces an audible 15ms analog relay switch click (`playMechanicalClick()`), giving physical acoustic weight to every user action.
 - **Geist & Geist Mono Typography**: Vercel's precision typeface stack (`'Geist'`, `'Geist Mono'`, `'JetBrains Mono'`) with sentence-case headings, restrained font weights (400 and 500), zero uppercase tracking noise, and `tabular-nums` for all timecodes and defect metrics.
 - **Strict Nested Radius Math**: Replaced 22+ pill-shaped capsules (`border-radius: 9999px`) with mathematically nested control geometry:
   - Tags and keycaps: `4px`
@@ -271,8 +274,8 @@ backend\.venv\Scripts\python.exe -m uvicorn backend.app.main:app --port 8000
 
 If you are a hackathon judge evaluating this project in 60 seconds:
 
-1. **Step 1 (0:00–0:10)**: Open [branchtone.vercel.app](https://branchtone.vercel.app). Notice the floating Liquid Glass studio canvas and breathing ambient aurora background. Click **"Talk to BranchTone"** on the hero card to audition the route traversal and tritone dissonance defect sound.
-2. **Step 2 (0:10–0:25)**: Drag the **Route Traversal Scrubber** slider left and right across the story timeline. Notice the live time counter, active passage glow, and pitch-shifted Web Audio tones as each scene gate is crossed. Hover over the red Air Vent block to inspect the defect tooltip.
+1. **Step 1 (0:00–0:10)**: Open [branchtone.vercel.app](https://branchtone.vercel.app). Observe the deep obsidian chassis, organic film-grain texture, and precision architectural corner crosshairs. Click **"Talk to BranchTone"** on the hero card to audition the route traversal with mechanical relay feedback and tritone defect alert chords.
+2. **Step 2 (0:10–0:25)**: Observe the **Live 60fps Oscilloscope** and **Hardware Stereo VU Meters** in the Route Traversal Console. Drag the timeline slider left and right or click **"Auto Traversal"**. Watch the oscilloscope waveform react to real-time audio analysis while the VU meters bounce and hold peak decibel telemetry.
 3. **Step 3 (0:25–0:35)**: On the **AI Team** card, switch passage tabs (`P-001` through `P-005`) to observe the Adaption Labs AI Copilot tension radar and the **98.7% Leak Risk** detected at Air Vent. Click **"⚡ Apply AI Fix Proposal"** to watch the proposal get applied with a live undo toast.
 4. **Step 4 (0:35–0:45)**: Click **"Story Graph"** on the left dock. Switch between **Route B** (which highlights the red cue defect at Air Vent) and **Route A** (which demonstrates a verified clean traversal where the conspirator dossier is legitimately read first).
 5. **Step 5 (0:45–0:55)**: Click **"Validation Centre"** to inspect defect `BT-001`, view the exact source evidence quote, and click **"Mark Resolved"** to test status triage.

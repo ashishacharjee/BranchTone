@@ -1,51 +1,85 @@
-/* ── Calm Precision Studio Background (Unslop Pass 2 & 8) ─────────────── */
+/* ── Awwwards-Grade Atmospheric Studio Background ─────────────────────────── */
 .backgroundContainer {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
-  background-color: #E2E8F0;
+  background-color: #080A0E;
 }
 
-/* ── Deep Field Base: Calm Studio Daylight Gradient ────────────────────────── */
+/* ── Deep Obsidian Field: Multi-stop Studio Falloff ─────────────────────────── */
 .deepField {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 120% 90% at 50% -10%, #F1F4F9 0%, #E2E8F0 60%, #CBD5E1 100%);
+  background: radial-gradient(
+    ellipse 120% 90% at 50% -10%,
+    #111622 0%,
+    #0B0E15 50%,
+    #06080B 100%
+  );
 }
 
-/* ── Technical Micro Dot-Grid (24px Audio Workbench Grid) ─────────────────── */
-.dotGrid {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(15, 23, 42, 0.07) 1px, transparent 1px);
-  background-size: 24px 24px;
-  mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 50%, transparent 95%);
-  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 50%, transparent 95%);
-  opacity: 0.85;
-}
-
-/* ── Interactive Cursor Spotlight: Quiet, Subtle Studio Highlight ─────────── */
+/* ── Interactive Cursor Glow: Subtle Luminous Emerald/Titanium Flare ──────── */
 .spotlight {
   position: absolute;
   inset: 0;
   --spotlight-x: 50vw;
   --spotlight-y: 35vh;
   background: radial-gradient(
-    600px circle at var(--spotlight-x) var(--spotlight-y),
-    rgba(16, 185, 129, 0.06) 0%,
-    rgba(15, 23, 42, 0.02) 40%,
+    650px circle at var(--spotlight-x) var(--spotlight-y),
+    rgba(16, 185, 129, 0.08) 0%,
+    rgba(30, 41, 59, 0.04) 45%,
     transparent 70%
   );
   transition: opacity 0.2s ease;
 }
 
+/* ── Technical Micro Dot-Grid: High-Precision 24px Audio Grid ─────────────── */
+.dotGrid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 50%, transparent 95%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 50%, transparent 95%);
+  opacity: 0.8;
+}
+
+/* ── Organic Film Grain Noise Overlay ───────────────────────────────────────── */
+.grainOverlay {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* ── Precision CAD Crosshairs ───────────────────────────────────────────────── */
+.cornerCrosshairTL,
+.cornerCrosshairTR,
+.cornerCrosshairBL,
+.cornerCrosshairBR {
+  position: absolute;
+  font-family: var(--bt-font-mono);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.15);
+  font-weight: 300;
+  line-height: 1;
+  user-select: none;
+  z-index: 2;
+}
+
+.cornerCrosshairTL { top: 14px; left: 16px; }
+.cornerCrosshairTR { top: 14px; right: 16px; }
+.cornerCrosshairBL { bottom: 14px; left: 16px; }
+.cornerCrosshairBR { bottom: 14px; right: 16px; }
+
 /* ── Subtle Studio Chassis Vignette ────────────────────────────────────────── */
 .vignette {
   position: absolute;
   inset: 0;
-  box-shadow: inset 0 0 100px rgba(15, 23, 42, 0.04);
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.6);
   pointer-events: none;
 }
 

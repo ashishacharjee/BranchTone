@@ -23,10 +23,12 @@ import {
   getAllFindings,
   getAudioAssets,
 } from '../../services/fixtures';
-import { playAuditionTone, playCueTriggerSound } from '../../services/synth';
+import { playAuditionTone, playCueTriggerSound, playMechanicalClick } from '../../services/synth';
 import { useWorkspaceStore } from '../../stores/workspace';
 import { PixelMatrixNumber } from '../../components/PixelMatrixNumber';
 import { AdaptionLabsModal } from '../../components/AdaptionLabsModal';
+import { OscilloscopeCanvas } from '../../components/OscilloscopeCanvas';
+import { HardwareVuMeter } from '../../components/HardwareVuMeter';
 import styles from './OverviewPage.module.css';
 
 interface ScrubberSceneInfo {
@@ -208,6 +210,7 @@ export function OverviewPage() {
   };
 
   const handleJumpScrubberToPassage = (progressVal: number, routeId: 'route_a' | 'route_b', passageId: string) => {
+    playMechanicalClick();
     setActiveScrubberRoute(routeId);
     setScrubberProgress(progressVal);
     setSelectedRoute(routeId);
@@ -397,6 +400,21 @@ export function OverviewPage() {
             </div>
 
             <div className={styles.timelineTrack}>
+              {/* ── Precision Audio Telemetry Bridge (Awwwards Studio Engine) ─── */}
+              <div className={styles.audioTelemetryBridge}>
+                <div className={styles.oscilloscopeSection}>
+                  <OscilloscopeCanvas
+                    height={64}
+                    isAlert={currentScrubberScene.isAlert}
+                    activePassage={currentScrubberScene.passageId}
+                    routeId={activeScrubberRoute}
+                  />
+                </div>
+                <div className={styles.vuMeterSection}>
+                  <HardwareVuMeter isAlert={currentScrubberScene.isAlert} />
+                </div>
+              </div>
+
               {/* Interactive Transport & Route Switcher Bar */}
               <div className={styles.scrubberControlsBar}>
                 {/* Route Switcher Toggle */}
@@ -408,6 +426,7 @@ export function OverviewPage() {
                       activeScrubberRoute === 'route_b' ? styles.routeToggleBtnActiveAlert : '',
                     ].join(' ')}
                     onClick={() => {
+                      playMechanicalClick();
                       setActiveScrubberRoute('route_b');
                       setSelectedRoute('route_b');
                     }}
@@ -423,6 +442,7 @@ export function OverviewPage() {
                       activeScrubberRoute === 'route_a' ? styles.routeToggleBtnActive : '',
                     ].join(' ')}
                     onClick={() => {
+                      playMechanicalClick();
                       setActiveScrubberRoute('route_a');
                       setSelectedRoute('route_a');
                     }}
@@ -442,6 +462,7 @@ export function OverviewPage() {
                       isAutoPlaying ? styles.transportBtnActive : '',
                     ].join(' ')}
                     onClick={() => {
+                      playMechanicalClick();
                       if (scrubberProgress >= 100) setScrubberProgress(0);
                       setIsAutoPlaying(!isAutoPlaying);
                     }}
@@ -454,7 +475,10 @@ export function OverviewPage() {
                   <button
                     type="button"
                     className={styles.transportBtn}
-                    onClick={() => setScrubberProgress(Math.max(0, scrubberProgress - 25))}
+                    onClick={() => {
+                      playMechanicalClick();
+                      setScrubberProgress(Math.max(0, scrubberProgress - 25));
+                    }}
                     title="Step backward to previous story node"
                   >
                     <SkipBack size={12} aria-hidden="true" />
@@ -464,7 +488,10 @@ export function OverviewPage() {
                   <button
                     type="button"
                     className={styles.transportBtn}
-                    onClick={() => setScrubberProgress(Math.max(0, scrubberProgress - 5))}
+                    onClick={() => {
+                      playMechanicalClick();
+                      setScrubberProgress(Math.max(0, scrubberProgress - 5));
+                    }}
                     title="Nudge scrubber backward by 5% along narrative timeline"
                   >
                     <span>-5s</span>
@@ -473,7 +500,10 @@ export function OverviewPage() {
                   <button
                     type="button"
                     className={styles.transportBtn}
-                    onClick={() => setScrubberProgress(Math.min(100, scrubberProgress + 5))}
+                    onClick={() => {
+                      playMechanicalClick();
+                      setScrubberProgress(Math.min(100, scrubberProgress + 5));
+                    }}
                     title="Nudge scrubber forward by 5% along narrative timeline"
                   >
                     <span>+5s</span>
@@ -482,7 +512,10 @@ export function OverviewPage() {
                   <button
                     type="button"
                     className={styles.transportBtn}
-                    onClick={() => setScrubberProgress(Math.min(100, scrubberProgress + 25))}
+                    onClick={() => {
+                      playMechanicalClick();
+                      setScrubberProgress(Math.min(100, scrubberProgress + 25));
+                    }}
                     title="Step forward to next story node"
                   >
                     <span>Next Scene</span>
@@ -493,6 +526,7 @@ export function OverviewPage() {
                     type="button"
                     className={styles.transportBtn}
                     onClick={() => {
+                      playMechanicalClick();
                       setIsAutoPlaying(false);
                       setScrubberProgress(0);
                     }}

@@ -13,6 +13,7 @@
 
 let audioCtx: AudioContext | null = null;
 let masterGain: GainNode | null = null;
+let analyserNode: AnalyserNode | null = null;
 let currentVolume = 0.7; // 0 to 1
 
 function getAudioContext(): AudioContext | null {
@@ -23,13 +24,45 @@ function getAudioContext(): AudioContext | null {
       audioCtx = new AudioContextClass();
       masterGain = audioCtx.createGain();
       masterGain.gain.setValueAtTime(currentVolume, audioCtx.currentTime);
-      masterGain.connect(audioCtx.destination);
+
+      analyserNode = audioCtx.createAnalyser();
+      analyserNode.fftSize = 256;
+      analyserNode.smoothingTimeConstant = 0.8;
+
+      masterGain.connect(analyserNode);
+      analyserNode.connect(audioCtx.destination);
     }
   }
   if (audioCtx && audioCtx.state === 'suspended') {
     void audioCtx.resume();
   }
   return audioCtx;
+}
+
+export function getAudioAnalyser(): AnalyserNode | null {
+  getAudioContext();
+  return analyserNode;
+}
+
+export function playMechanicalClick() {
+  try {
+    const ctx = getAudioContext();
+    if (!ctx || !masterGain) return;
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(1600, now);
+    osc.frequency.exponentialRampToValueAtTime(140, now + 0.018);
+    gain.gain.setValueAtTime(0.06, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.018);
+    osc.connect(gain);
+    gain.connect(masterGain);
+    osc.start(now);
+    osc.stop(now + 0.018);
+  } catch {
+    // Ignore audio autoplay restrictions
+  }
 }
 
 export function setMasterVolume(valPercent: number) {

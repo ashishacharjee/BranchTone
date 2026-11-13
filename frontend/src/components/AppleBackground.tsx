@@ -2,8 +2,9 @@ import { useEffect, useRef } from 'react';
 import styles from './AppleBackground.module.css';
 
 /**
- * Apple-grade Cinematic Ambient Background with Breathing Aurora Mesh & Interactive Spotlight.
- * Fully GPU-accelerated, pointer-events: none, respects prefers-reduced-motion.
+ * Awwwards-Grade Cinematic Audio Studio Background.
+ * Combines deep obsidian chassis, tactile film-grain texture,
+ * interactive spring-damped pointer glow, and precision architectural corner crosshairs.
  */
 export function AppleBackground() {
   const spotlightRef = useRef<HTMLDivElement>(null);
@@ -21,9 +22,8 @@ export function AppleBackground() {
     }
 
     function updateSpotlight() {
-      // Smooth spring-damped interpolation (Apple fluid follow)
-      currentX += (targetX - currentX) * 0.08;
-      currentY += (targetY - currentY) * 0.08;
+      currentX += (targetX - currentX) * 0.06;
+      currentY += (targetY - currentY) * 0.06;
 
       if (spotlightRef.current) {
         spotlightRef.current.style.setProperty('--spotlight-x', `${currentX.toFixed(1)}px`);
@@ -44,16 +44,25 @@ export function AppleBackground() {
 
   return (
     <div className={styles.backgroundContainer} aria-hidden="true">
-      {/* ── Calm Technical Studio Field ────────────────────────────── */}
+      {/* ── Deep Obsidian Studio Ground ───────────────────────────── */}
       <div className={styles.deepField} />
 
-      {/* ── Precision Audio Studio Micro Dot Grid ───────────────────── */}
-      <div className={styles.dotGrid} />
-
-      {/* ── Quiet Cursor Spotlight (Subtle Neutral Track) ──────────── */}
+      {/* ── Interactive Ambient Glow ──────────────────────────────── */}
       <div ref={spotlightRef} className={styles.spotlight} />
 
-      {/* ── Subtle Studio Chassis Vignette ──────────────────────────── */}
+      {/* ── Technical Micro Dot-Grid ──────────────────────────────── */}
+      <div className={styles.dotGrid} />
+
+      {/* ── Tactile Micro-Film Grain Texture ──────────────────────── */}
+      <div className={styles.grainOverlay} />
+
+      {/* ── Architectural Studio Corner Crosshairs ────────────────── */}
+      <div className={styles.cornerCrosshairTL}>+</div>
+      <div className={styles.cornerCrosshairTR}>+</div>
+      <div className={styles.cornerCrosshairBL}>+</div>
+      <div className={styles.cornerCrosshairBR}>+</div>
+
+      {/* ── Subtle Studio Chassis Vignette ────────────────────────── */}
       <div className={styles.vignette} />
     </div>
   );
