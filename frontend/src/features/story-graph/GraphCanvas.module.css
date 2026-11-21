@@ -1,10 +1,10 @@
-/* ── Graph Canvas: Daylight Executive Studio Aesthetic ──────────────────── */
+/* ── Graph Canvas: Authoritative Dark Obsidian Studio Aesthetic (DESIGN.md §2) ── */
 .canvasWrap {
   flex: 1;
   display: flex;
   flex-direction: column;
   position: relative;
-  background-color: transparent;
+  background-color: var(--bt-bg, #0B1011);
   overflow: hidden;
   height: 100%;
 }
@@ -27,20 +27,20 @@
   align-items: center;
   gap: 10px;
   pointer-events: auto;
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(16, 23, 25, 0.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   padding: 6px 12px;
   border-radius: 9999px;
-  border: 1px solid #E2E8F0;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--bt-border, rgba(176, 198, 193, 0.16));
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
 }
 
 .routeLabel {
   font-size: 11px;
-  color: #64748B;
+  color: var(--bt-text-secondary, #AAB8B3);
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-right: 4px;
 }
@@ -51,41 +51,41 @@
   gap: 8px;
   padding: 6px 14px;
   border-radius: 9999px;
-  border: 1px solid #E2E8F0;
-  background: #F8FAFC;
-  color: #475569;
+  border: 1px solid var(--bt-border-subtle, rgba(176, 198, 193, 0.12));
+  background: var(--bt-surface, #141C1E);
+  color: var(--bt-text-secondary, #AAB8B3);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .routePill:hover {
-  background: #F1F5F9;
-  color: #0F172A;
-  border-color: #CBD5E1;
+  background: var(--bt-surface-2, #1A2426);
+  color: var(--bt-text, #EDF3F0);
+  border-color: rgba(176, 198, 193, 0.24);
   transform: translateY(-1px);
 }
 
 .routePillActive {
-  background: #DCFCE7;
-  border-color: #86EFAC;
-  color: #065F46;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
+  background: rgba(41, 201, 138, 0.14);
+  border-color: var(--bt-accent, #29C98A);
+  color: var(--bt-accent, #29C98A);
+  box-shadow: 0 0 12px rgba(41, 201, 138, 0.2);
 }
 
 .routePillActive:hover {
-  background: #BBF7D0;
+  background: rgba(41, 201, 138, 0.22);
 }
 
 .pillBadge {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #E2E8F0;
-  color: #475569;
+  background: rgba(176, 198, 193, 0.12);
+  color: var(--bt-text-secondary, #AAB8B3);
   font-size: 10px;
-  font-family: var(--bt-font-mono);
+  font-family: var(--bt-font-mono, monospace);
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -93,19 +93,19 @@
 }
 
 .routePillActive .pillBadge {
-  background: #10B981;
-  color: #FFFFFF;
+  background: var(--bt-accent, #29C98A);
+  color: #06090A;
 }
 
 .pillAlertBadge {
   font-size: 9px;
-  font-family: var(--bt-font-mono);
+  font-family: var(--bt-font-mono, monospace);
   font-weight: 700;
   padding: 2px 6px;
   border-radius: 9999px;
-  background: #FEE2E2;
-  color: #DC2626;
-  border: 1px solid #FECACA;
+  background: rgba(240, 79, 117, 0.2);
+  color: var(--bt-error, #F04F75);
+  border: 1px solid rgba(240, 79, 117, 0.38);
 }
 
 .toolbarActions {
@@ -113,34 +113,34 @@
   align-items: center;
   gap: 8px;
   pointer-events: auto;
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(16, 23, 25, 0.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   padding: 6px 10px;
   border-radius: 9999px;
-  border: 1px solid #E2E8F0;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--bt-border, rgba(176, 198, 193, 0.16));
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
 }
 
 .actionBtn {
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 6px 12px;
-  background: #F8FAFC;
-  border: 1px solid #E2E8F0;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--bt-surface, #141C1E);
+  border: 1px solid var(--bt-border-subtle, rgba(176, 198, 193, 0.12));
   border-radius: 9999px;
-  color: #475569;
+  color: var(--bt-text-secondary, #AAB8B3);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .actionBtn:hover {
-  background: #F1F5F9;
-  color: #0F172A;
-  border-color: #CBD5E1;
+  background: var(--bt-surface-2, #1A2426);
+  color: var(--bt-text, #EDF3F0);
+  border-color: rgba(176, 198, 193, 0.24);
   transform: translateY(-1px);
 }
 
@@ -160,15 +160,15 @@
   align-items: center;
   gap: 16px;
   z-index: 10;
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(16, 23, 25, 0.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   padding: 6px 14px;
   border-radius: 9999px;
-  border: 1px solid #E2E8F0;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--bt-border, rgba(176, 198, 193, 0.16));
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
   font-size: 11px;
-  color: #64748B;
+  color: var(--bt-text-secondary, #AAB8B3);
 }
 
 .legendItem {
@@ -182,20 +182,22 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #10B981;
+  background: var(--bt-accent, #29C98A);
+  box-shadow: 0 0 6px rgba(41, 201, 138, 0.5);
 }
 
 .legendDotIssue {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #EF4444;
+  background: var(--bt-error, #F04F75);
+  box-shadow: 0 0 6px rgba(240, 79, 117, 0.5);
 }
 
 .legendDashed {
   width: 14px;
   height: 2px;
-  border-top: 2px dashed #10B981;
+  border-top: 2px dashed var(--bt-accent, #29C98A);
 }
 
 /* ── Toast Notification ─────────────────────────────────────────────────── */
@@ -203,13 +205,14 @@
   position: absolute;
   top: 70px;
   right: 20px;
-  background: #0F172A;
-  color: #FFFFFF;
+  background: var(--bt-surface-3, #202B2D);
+  color: var(--bt-text, #EDF3F0);
+  border: 1px solid var(--bt-border-strong, rgba(176, 198, 193, 0.28));
   padding: 10px 18px;
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 12px;
   font-weight: 600;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
   z-index: 100;
   pointer-events: none;
   animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);

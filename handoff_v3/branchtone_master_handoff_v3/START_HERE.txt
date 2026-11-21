@@ -1,0 +1,11 @@
+BRANCHTONE MASTER HANDOFF — START HERE
+
+1. Open and follow BranchTone_Master_100_Percent_Implementation_and_Premium_UIUX_Spec.md first. It is the authoritative consolidated instruction.
+2. Use references/Option2_StoryGraph_Master.png as the locked visual reference.
+3. Read project_context/BranchTone_Project_README.md for the original product/architecture/domain context.
+4. Read project_context/Previous_Premium_UI_UX_Handoff.md for the earlier UI screen details.
+5. Read project_context/Latest_Antigravity_Audit_Summary_User_Provided.txt for the latest status summary and the five decisions already made.
+6. In the Antigravity local workspace, inspect the full audit file if it still exists at the path recorded in that summary.
+7. Inspect the repository, run baseline tests/build, preserve existing uncommitted work, and work locally. Do not commit or push.
+
+Do not declare 100% complete until all acceptance criteria in the master specification are verified.

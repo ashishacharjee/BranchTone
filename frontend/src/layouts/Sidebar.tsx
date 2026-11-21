@@ -165,7 +165,9 @@ export function Sidebar() {
             </span>
             <ul role="list" className={styles.navList}>
               {section.items.map((item) => {
-                const isActive = location.pathname.startsWith(item.path);
+                const isActive =
+                  location.pathname.startsWith(item.path) ||
+                  (location.pathname === '/' && item.path === '/story-graph');
                 return (
                   <li key={item.path}>
                     <NavLink

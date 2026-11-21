@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS story_versions (
   version_label TEXT NOT NULL,
   source_filename TEXT NOT NULL,
   source_sha256 TEXT NOT NULL,
-  story_format TEXT NOT NULL CHECK (story_format = 'twee_harlowe_subset'),
+  story_format TEXT NOT NULL CHECK (story_format IN ('twee_harlowe_subset', 'ink_subset')),
   compilation_status TEXT NOT NULL CHECK (compilation_status IN ('success','warning','failed')),
   compiled_at TEXT,
   UNIQUE(project_id, version_label)

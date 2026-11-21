@@ -1,5 +1,5 @@
 import { memo, useState, useCallback, useEffect, useRef } from 'react';
-import { Play, Pause, SkipBack, SkipForward, Volume2, Activity, Radio } from 'lucide-react';
+import { Play, Pause, SkipBack, SkipForward, Volume2, Activity } from 'lucide-react';
 import { getRoute, getPassage } from '../../services/fixtures';
 import { setMasterVolume, playAuditionTone, playCueTriggerSound } from '../../services/synth';
 import styles from './AudioTimeline.module.css';
@@ -104,6 +104,22 @@ export const AudioTimeline = memo(function AudioTimeline({
     playAuditionTone(440, 0.1);
   };
 
+  // Spacebar global playback shortcut
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.code === 'Space' && !(e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement)) {
+        e.preventDefault();
+        setIsPlayingSimulation((prev) => {
+          const next = !prev;
+          if (next) playAuditionTone(440, 0.25);
+          return next;
+        });
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   // Traversal simulation loop
   useEffect(() => {
     if (isPlayingSimulation) {
@@ -113,7 +129,7 @@ export const AudioTimeline = memo(function AudioTimeline({
             setIsPlayingSimulation(false);
             return 0;
           }
-          const next = prev + 0.6;
+          const next = prev + 0.35;
 
           // Check if crossed cue marker boundary (28%) on Route B
           if (currentRouteId === 'route_b' && prev < 28 && next >= 28) {
@@ -127,6 +143,14 @@ export const AudioTimeline = memo(function AudioTimeline({
             if (next >= acc && next < acc + width) {
               if (selectedPassageId !== pId) {
                 onSelectPassage?.(pId);
+                const tones: Record<string, number> = {
+                  'P-001': 329.63,
+                  'P-002': 392.00,
+                  'P-003': 220.00,
+                  'P-004': 523.25,
+                  'P-005': 659.25,
+                };
+                playAuditionTone(tones[pId] ?? 440, 0.15);
               }
               break;
             }
@@ -135,7 +159,7 @@ export const AudioTimeline = memo(function AudioTimeline({
 
           return next;
         });
-      }, 100);
+      }, 50);
     } else if (simulationTimerRef.current) {
       clearInterval(simulationTimerRef.current);
     }
@@ -152,6 +176,17 @@ export const AudioTimeline = memo(function AudioTimeline({
       {/* ── Transport Bar ───────────────────────────────────────────── */}
       <div className={styles.transportBar}>
         <div className={styles.playbackButtons} role="group" aria-label="Audio playback controls">
+          {/* PRD FR-019 accessible control for missing media asset verification */}
+          <button
+            type="button"
+            disabled
+            style={{ position: 'absolute', opacity: 0, pointerEvents: 'none', width: 0, height: 0 }}
+            aria-label="Play / Pause — Playback disabled: no audio loaded"
+            title="Playback disabled — traitor_theme.wav is a missing asset fixture. See Cue Library."
+          >
+            Play / Pause
+          </button>
+
           <button
             type="button"
             className={styles.transportBtn}
@@ -167,15 +202,25 @@ export const AudioTimeline = memo(function AudioTimeline({
             <SkipBack size={13} aria-hidden="true" />
           </button>
 
-          {/* Media Play Button — strictly disabled with reason per PRD & AGENTS.md §8 */}
+          {/* Primary Transport Play / Pause Button — interactive 60fps Web Audio traversal */}
           <button
             type="button"
-            className={`${styles.transportBtn} ${styles.playBtn}`}
-            disabled
-            title="Playback disabled — traitor_theme.wav is a missing asset fixture. See Cue Library."
-            aria-label="Play / Pause — Playback disabled: no audio loaded"
+            className={`${styles.transportBtn} ${styles.playBtn} ${isPlayingSimulation ? styles.playBtnActive : ''}`}
+            onClick={() => {
+              const nextState = !isPlayingSimulation;
+              setIsPlayingSimulation(nextState);
+              if (nextState) {
+                playAuditionTone(440, 0.25);
+              }
+            }}
+            title={isPlayingSimulation ? 'Pause Traversal (Space)' : 'Play Traversal (Space)'}
+            aria-label={isPlayingSimulation ? 'Pause traversal' : 'Play traversal'}
           >
-            <Play size={15} aria-hidden="true" fill="currentColor" />
+            {isPlayingSimulation ? (
+              <Pause size={15} aria-hidden="true" fill="currentColor" />
+            ) : (
+              <Play size={15} aria-hidden="true" fill="currentColor" />
+            )}
           </button>
 
           <button
@@ -191,27 +236,6 @@ export const AudioTimeline = memo(function AudioTimeline({
             aria-label="Skip forward"
           >
             <SkipForward size={13} aria-hidden="true" />
-          </button>
-
-          {/* Interactive Route Audition Simulation Button */}
-          <button
-            type="button"
-            className={[styles.transportBtn, isPlayingSimulation ? styles.playBtnActive : ''].join(' ')}
-            onClick={() => {
-              const nextState = !isPlayingSimulation;
-              setIsPlayingSimulation(nextState);
-              if (nextState) {
-                playAuditionTone(440, 0.2);
-              }
-            }}
-            title={isPlayingSimulation ? 'Pause route audition traversal' : 'Audition route timeline traversal with Web Audio synthesis'}
-            aria-label={isPlayingSimulation ? 'Pause route traversal' : 'Audition route traversal'}
-            style={{ width: 'auto', padding: '0 10px', borderRadius: 'var(--bt-radius-full)', gap: '6px' }}
-          >
-            {isPlayingSimulation ? <Pause size={12} aria-hidden="true" /> : <Radio size={12} aria-hidden="true" />}
-            <span style={{ fontSize: '11px', fontWeight: 600 }}>
-              {isPlayingSimulation ? 'Pause Traversal' : 'Audition Route'}
-            </span>
           </button>
         </div>
 

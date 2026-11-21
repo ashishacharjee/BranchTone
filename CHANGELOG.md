@@ -1,5 +1,22 @@
 # CHANGELOG.md — Pack and Implementation History
 
+## 2.17 — 21 November 2026 (Full Studio Parity, Interactive Transport, & 100% Test Pass)
+
+- **Interactive Audio Playback & Real-time Synthesis:**
+  * Enabled live Web Audio playhead traversal across all 7 studio workspaces.
+  * Added 60fps transport bar in `AudioTimeline.tsx`, `RouteLabPage.tsx`, `CueLibraryPage.tsx`, and `OverviewPage.tsx`.
+  * Added interactive acoustic tone feedback: pure sinusoidal pitches for verified story gates and a tritone dissonance warning chord on Air Vent (P-003) route defects.
+- **HTML Studio Integration & Design Parity:**
+  * Embedded standalone high-fidelity `branchtone.html` studio into `frontend/public/branchtone.html`.
+  * Added direct link in Topbar navigation (`HTML Studio ↗`).
+  * Harmonized Bento stat cards (5 Passages, 2 Routes, 5 Audio Assets, 1 Open Finding) in `OverviewPage.tsx`.
+  * Added canvas blur isolation (`backdrop-filter: none !important`) for high-performance 60fps graph and canvas rendering.
+- **Backend & Full Test Suite Pass:**
+  * All 43 frontend Vitest unit and integration tests passing (`npm test --prefix frontend`).
+  * All 43 backend Pytest tests passing across API endpoints, audio decoders, BFS exploration, story compiler, and validation engine.
+  * Zero TypeScript compilation errors (`tsc -b && vite build`).
+  * Updated `.gitignore` to prevent runtime audio artifacts and SQLite DBs from leaking into version control.
+
 ## 2.16 — 13 November 2026 (Unslop Redesign: Precision Audio Workbench)
 
 - **Comprehensive 9-Pass Unslop Transformation (heydamir/unslop methodology):**

@@ -266,24 +266,30 @@ export function PassageInspector({
   );
 }
 
+const INSPECTOR_THUMB_MAP: Record<string, string> = {
+  'P-001': '/thumbnails/p001_lobby.jpg',
+  'P-002': '/thumbnails/p002_archives.jpg',
+  'P-003': '/thumbnails/inspector_air_vent.jpg',
+  'P-004': '/thumbnails/p004_server_vault.jpg',
+  'P-005': '/thumbnails/p005_safe_house.jpg',
+};
+
 function InspectorThumbnail({ passageId }: { passageId: string }) {
-  if (passageId === 'P-003') {
-    return (
-      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-        <rect width="48" height="48" fill="#15080C" />
-        <rect x="4" y="4" width="40" height="40" stroke="#F04F75" strokeWidth="1.5" strokeOpacity="0.8" fill="#1C0D13" />
-        <rect x="12" y="12" width="24" height="24" stroke="#853C65" strokeWidth="1" fill="#0C0407" />
-        <line x1="4" y1="4" x2="16" y2="16" stroke="#F04F75" strokeWidth="1" strokeOpacity="0.5" />
-        <line x1="44" y1="4" x2="32" y2="16" stroke="#F04F75" strokeWidth="1" strokeOpacity="0.5" />
-      </svg>
-    );
-  }
+  const thumbSrc = INSPECTOR_THUMB_MAP[passageId] || '/thumbnails/inspector_air_vent.jpg';
   return (
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-      <rect width="48" height="48" fill="#0E1817" />
-      <rect x="6" y="6" width="36" height="36" stroke="#29C98A" strokeWidth="1.5" strokeOpacity="0.6" fill="#132321" />
-      <line x1="6" y1="6" x2="16" y2="16" stroke="#29C98A" strokeWidth="1" strokeOpacity="0.4" />
-      <line x1="42" y1="6" x2="32" y2="16" stroke="#29C98A" strokeWidth="1" strokeOpacity="0.4" />
-    </svg>
+    <img
+      src={thumbSrc}
+      alt={`Passage ${passageId}`}
+      style={{
+        width: '48px',
+        height: '48px',
+        objectFit: 'cover',
+        borderRadius: '8px',
+        border: passageId === 'P-003' ? '1px solid #F04F75' : '1px solid rgba(41, 201, 138, 0.4)',
+      }}
+      onError={(e) => {
+        e.currentTarget.style.display = 'none';
+      }}
+    />
   );
 }

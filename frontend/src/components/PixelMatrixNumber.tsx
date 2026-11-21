@@ -101,8 +101,8 @@ interface PixelMatrixNumberProps {
 
 export function PixelMatrixNumber({
   value,
-  dotSize = 7,
-  gap = 3,
+  dotSize = 4.5,
+  gap = 2,
   color = '#FFFFFF',
   label,
 }: PixelMatrixNumberProps) {

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BranchTone</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#080A0E;--g:#0F1218;--p:rgba(22,28,30,.82);--b:rgba(255,255,255,.09);--em:#10B981;--am:#F59E0B;--rd:#EF4444;--bu:#7a1f33;--tx:#ECE8E1;--t2:#a6adb5;--t3:#6b737c;--mono:'Geist Mono','JetBrains Mono',ui-monospace,monospace;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}html,body{height:100%;margin:0}
+body{background:radial-gradient(900px 500px at 70% -10%,rgba(16,185,129,.10),transparent),var(--bg);color:var(--tx);font:13px/1.45 'Geist',system-ui,sans-serif;overflow:hidden}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--em);outline-offset:1px}
+.app{display:grid;grid-template-columns:208px 1fr;grid-template-rows:44px 1fr 46px;height:100%;gap:0;border:1px solid var(--b);border-radius:16px;overflow:hidden;background:var(--g)}
+.side{grid-row:1/4;background:#0b0e12;border-right:1px solid var(--b);padding:12px;display:flex;flex-direction:column;gap:10px}
+.logo{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:500}
+.proj{border:1px solid var(--b);border-radius:12px;padding:10px;background:var(--p)}
+.proj b{display:block;font-weight:500}.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav button{background:none;border:0;border-radius:8px;text-align:left;padding:7px 10px;color:var(--t2);display:flex;gap:8px;align-items:center;position:relative}
+.nav button.on{background:rgba(16,185,129,.16);color:var(--tx)}
+.nav button.on:before{content:"";position:absolute;left:0;top:7px;bottom:7px;width:2px;background:var(--em);border-radius:2px}
+.top{display:flex;align-items:center;gap:10px;padding:0 14px;border-bottom:1px solid var(--b)}
+.top .sp{flex:1}
+.btn{background:rgba(255,255,255,.05);border:1px solid var(--b);border-radius:7px;padding:5px 10px}
+.btn:hover{background:rgba(255,255,255,.09)}
+.btn.pri{background:var(--em);color:#04130d;border-color:var(--em);font-weight:500}
+.btn.red{border-color:rgba(239,68,68,.5);color:#fca5a5}
+.btn[disabled]{opacity:.4;cursor:default}
+main{overflow:auto;padding:14px;animation:fi .18s ease}
+@keyframes fi{from{opacity:0;transform:translateY(3px)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.bar{display:flex;align-items:center;gap:10px;padding:0 14px;border-top:1px solid var(--b);background:#0b0e12}
+.card{background:var(--p);border:1px solid var(--b);border-radius:12px;padding:12px;backdrop-filter:blur(6px)}
+.card h3{margin:0 0 8px;font-weight:500;font-size:13px}
+h2{font-weight:500;font-size:18px;margin:0}.sub{color:var(--t3);font-size:12px}
+.grid{display:grid;gap:12px}.g4{grid-template-columns:repeat(4,1fr)}.g2{grid-template-columns:1fr 1fr}
+.g31{grid-template-columns:1fr 300px}.g13{grid-template-columns:200px 1fr 320px}
+@media(max-width:900px){.app{grid-template-columns:1fr}.side{display:none}.g4,.g2,.g31,.g13{grid-template-columns:1fr}}
+.stat b{font-size:26px;font-weight:400;display:block}
+.tag{font-family:var(--mono);font-size:11px;border-radius:4px;padding:1px 6px;border:1px solid var(--b);color:var(--t2);display:inline-block}
+.hi{color:#fca5a5;border-color:rgba(239,68,68,.5)}.md{color:#fcd34d;border-color:rgba(245,158,11,.5)}.ok{color:#6ee7b7;border-color:rgba(16,185,129,.5)}
+table{width:100%;border-collapse:collapse}th{color:var(--t3);font-weight:400;text-align:left}
+td,th{padding:6px 8px;border-bottom:1px solid var(--b)}tr.sel td{background:rgba(16,185,129,.1)}tr.clk{cursor:pointer}tr.clk:hover td{background:rgba(255,255,255,.04)}
+.seg{display:inline-flex;border:1px solid var(--b);border-radius:8px;overflow:hidden}
+.seg button{background:none;border:0;padding:5px 12px;color:var(--t2)}.seg button.on{background:rgba(16,185,129,.2);color:var(--tx)}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.kv{display:grid;grid-template-columns:110px 1fr;gap:4px 8px}.kv span:nth-child(odd){color:var(--t3)}
+svg text{font-family:var(--mono);fill:var(--t2);font-size:10px}
+.node{cursor:pointer}.node rect{fill:#141a1c;stroke:rgba(16,185,129,.5);transition:all .15s}.node.bad rect{fill:#2a1519;stroke:var(--rd)}.node.sel rect{stroke-width:2.5;filter:drop-shadow(0 0 6px rgba(16,185,129,.4))}.node.bad.sel rect{filter:drop-shadow(0 0 6px rgba(239,68,68,.4))}.node.dim{opacity:.3}
+.edge{stroke:#3a4448;fill:none;stroke-width:1.5}.edge.on{stroke:var(--em);stroke-width:2.2}
+pre{background:#090c0f;border:1px solid var(--b);border-radius:8px;padding:10px;overflow:auto;font:11px/1.5 var(--mono);white-space:pre-wrap;margin:0}
+.log div{padding:3px 0;border-bottom:1px solid var(--b);font-family:var(--mono);font-size:11px}
+.toast{position:fixed;right:16px;bottom:64px;background:#10161a;border:1px solid var(--em);border-radius:10px;padding:8px 12px;z-index:9}
+.pal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;justify-content:center;padding-top:15vh;z-index:10}
+.pal>div{width:min(420px,92vw);height:fit-content;background:#10161a;border:1px solid var(--b);border-radius:12px;padding:8px}
+.pal button{display:block;width:100%;text-align:left;background:none;border:0;padding:8px;border-radius:6px}.pal button:hover{background:rgba(16,185,129,.15)}
+input[type=range]{accent-color:var(--em)}
+.diff{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+body{background:radial-gradient(1100px 600px at 78% -15%,rgba(16,185,129,.13),transparent 60%),radial-gradient(800px 520px at -5% 110%,rgba(122,31,51,.18),transparent 60%),#07090c;letter-spacing:-.005em}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.08;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.app{margin:0;border-color:rgba(255,255,255,.1);background:linear-gradient(180deg,#0d1115,#090b0e);box-shadow:0 40px 100px -20px #000,inset 0 1px 0 rgba(255,255,255,.06)}
+.side{background:linear-gradient(180deg,#0c1013,#090b0e);padding:16px 12px}
+.logo{font-size:17px;letter-spacing:-.02em;padding:2px 6px 10px}
+.proj{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.01));border-color:rgba(255,255,255,.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.nav button{padding:8px 10px;transition:background .15s,color .15s}.nav button:hover{background:rgba(255,255,255,.04);color:var(--tx)}
+.nav button.on{background:linear-gradient(90deg,rgba(16,185,129,.2),rgba(16,185,129,.04));box-shadow:inset 0 0 0 1px rgba(16,185,129,.18)}
+.nav button.on svg{color:var(--em)}
+.top{background:rgba(10,13,16,.7);backdrop-filter:blur(10px)}
+main{padding:22px 26px 40px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.012)),rgba(13,17,20,.8);border:1px solid rgba(255,255,255,.075);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 14px 34px -16px rgba(0,0,0,.8);padding:16px}
+.card h3{font-size:11.5px;letter-spacing:.01em;color:var(--t2);margin-bottom:12px}
+.btn{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));border-color:rgba(255,255,255,.11);box-shadow:inset 0 1px 0 rgba(255,255,255,.07);transition:all .15s}
+.btn:hover{border-color:rgba(16,185,129,.45)}
+.btn.pri{background:linear-gradient(180deg,#19c795,#0c9a6b);border-color:#34d3a5;color:#031510;box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 6px 18px -6px rgba(16,185,129,.55)}
+.btn.red:hover{background:rgba(239,68,68,.1)}
+.seg{background:rgba(0,0,0,.3);padding:2px;gap:2px;border-radius:9px}.seg button{border-radius:7px;transition:all .15s}.seg button.on{background:rgba(16,185,129,.22);box-shadow:inset 0 0 0 1px rgba(16,185,129,.35)}
+.stat{position:relative;overflow:hidden;color:var(--t2)}.stat b{font-size:38px;font-weight:300;letter-spacing:-.04em;color:var(--tx);line-height:1.1;margin-bottom:2px}
+.stat:after{content:"";position:absolute;left:16px;right:16px;top:0;height:1px;background:linear-gradient(90deg,var(--em),transparent)}
+th{font-size:11px;color:var(--t3)}td,th{border-bottom:1px solid rgba(255,255,255,.055);padding:9px 8px}
+.tag{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border-color:rgba(255,255,255,.13);box-shadow:0 1px 0 rgba(0,0,0,.6)}
+.kv span:nth-child(odd){font-size:12px}
+.bar{background:rgba(10,13,16,.85);backdrop-filter:blur(10px)}
+.hero{position:relative;overflow:hidden;border-radius:14px;border:1px solid rgba(255,255,255,.09);height:208px;margin-bottom:14px;background:#0a0f12;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 24px 50px -24px #000}
+.hero>svg{position:absolute;inset:0;width:100%;height:100%}
+.hero .ct{position:relative;z-index:1;padding:26px 30px;height:100%;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(90deg,rgba(7,9,12,.88) 0%,rgba(7,9,12,.35) 55%,transparent)}
+.hero h1{font-weight:400;font-size:40px;letter-spacing:-.035em;margin:6px 0 2px}
+.hero p{margin:0;color:var(--t2);max-width:360px}
+.node rect{fill:url(#ng)}.node.bad rect{fill:url(#nb)}
+.edge.on{stroke-dasharray:420;animation:draw .7s ease}
+@keyframes draw{from{stroke-dashoffset:420}to{stroke-dashoffset:0}}
+.node text:first-of-type{font-weight:500}
+*{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.16) transparent}
+html{background:#06080a}
+html::before{content:"";position:fixed;inset:-25%;z-index:-1;pointer-events:none;background:radial-gradient(38% 38% at 22% 28%,rgba(16,185,129,.26),transparent 70%),radial-gradient(34% 34% at 78% 22%,rgba(20,140,120,.2),transparent 70%),radial-gradient(40% 40% at 68% 88%,rgba(160,32,64,.24),transparent 70%);filter:blur(50px);animation:drift 26s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(5%,4%,0) rotate(8deg) scale(1.1)}}
+@keyframes rise{from{opacity:0;transform:translateY(22px) scale(.985);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+@keyframes pop{from{opacity:0;transform:scale(.95) translateY(8px)}}
+@keyframes eq{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
+@keyframes beam{0%,100%{opacity:.45}50%{opacity:1}}
+body{background:transparent}
+.app{grid-template-columns:228px 1fr;grid-template-rows:58px 1fr;gap:12px;padding:12px;border:0;border-radius:0;background:transparent;box-shadow:none;overflow:visible}
+.side,.top,.bar{background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.03)),rgba(20,25,29,.5);backdrop-filter:blur(30px) saturate(1.9);-webkit-backdrop-filter:blur(30px) saturate(1.9);border:1px solid rgba(255,255,255,.11);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 -1px 0 rgba(0,0,0,.3),0 24px 60px -24px rgba(0,0,0,.85)}
+.side{grid-row:1/3;border-radius:26px;padding:18px 12px}
+.top{border-radius:20px;padding:0 16px}
+main{min-height:0;padding:6px 8px 110px;animation:none}
+.bar{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:8;height:52px;border-radius:28px;padding:0 16px;width:min(660px,calc(100% - 32px))}
+.proj{border-radius:16px}
+.nav button{border-radius:12px;transition:all .3s cubic-bezier(.2,.8,.2,1)}.nav button:hover{transform:translateX(3px)}
+.card{position:relative;border-radius:22px;padding:18px;background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.02)),rgba(18,23,27,.45);backdrop-filter:blur(26px) saturate(1.7);-webkit-backdrop-filter:blur(26px) saturate(1.7);border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 30px 60px -30px rgba(0,0,0,.9);transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s,border-color .3s}
+.card:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .35s;background:radial-gradient(300px circle at var(--mx,50%) var(--my,-60%),rgba(255,255,255,.11),transparent 60%)}
+.card:hover:before{opacity:1}
+.stat:hover{transform:translateY(-4px);border-color:rgba(16,185,129,.4)}
+.stat b{font-size:52px;letter-spacing:-.05em}
+.btn{border-radius:11px;padding:7px 14px;transition:transform .2s cubic-bezier(.2,.8,.2,1),border-color .2s,box-shadow .2s}.btn:hover{transform:translateY(-1px)}.btn:active{transform:scale(.96)}
+.btn.pri{box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 10px 30px -8px rgba(16,185,129,.7)}
+.seg{border-radius:12px}.seg button{border-radius:9px;padding:6px 14px}
+tr.clk td{transition:background .2s}
+.hero{height:280px;border-radius:30px;border-color:rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 40px 80px -30px #000}
+.hero .ct{padding:30px 36px}.hero h1{font-size:60px;font-weight:500;letter-spacing:-.05em;line-height:1}.hero p{font-size:15px;margin-top:8px}
+.hero polygon:first-of-type{animation:beam 6s ease-in-out infinite}
+.hero rect[rx="3"]{transform-box:fill-box;transform-origin:bottom;animation:eq 3.2s ease-in-out infinite alternate}
+.hero rect:nth-of-type(3n){animation-duration:4.3s;animation-delay:-.9s}.hero rect:nth-of-type(4n){animation-duration:2.6s;animation-delay:-1.6s}.hero rect:nth-of-type(5n){animation-duration:5s}
+.in>*{animation:rise .9s cubic-bezier(.16,1,.3,1) both}
+.in>*:nth-child(2){animation-delay:.08s}.in>*:nth-child(3){animation-delay:.16s}.in>*:nth-child(4){animation-delay:.24s}.in>*:nth-child(5){animation-delay:.32s}.in>*:nth-child(6){animation-delay:.4s}
+.in .grid>*{animation:rise .9s cubic-bezier(.16,1,.3,1) both}.in .grid>*:nth-child(2){animation-delay:.1s}.in .grid>*:nth-child(3){animation-delay:.18s}.in .grid>*:nth-child(4){animation-delay:.26s}
+.in>.grid{animation:none}
+.node{transition:opacity .4s}.node:hover rect{stroke:#34d3a5}.node rect{transition:all .35s cubic-bezier(.2,.8,.2,1)}
+.toast{animation:rise .5s cubic-bezier(.16,1,.3,1);border-radius:16px;backdrop-filter:blur(20px);background:rgba(16,22,26,.8)}
+.pal{backdrop-filter:blur(10px)}.pal>div{border-radius:22px;animation:pop .3s cubic-bezier(.16,1,.3,1);background:rgba(18,23,27,.7);backdrop-filter:blur(30px) saturate(1.8)}
+.pal button{border-radius:12px;transition:background .15s}
+@media(max-width:900px){.app{grid-template-columns:1fr;grid-template-rows:58px 1fr}.side{display:none}.hero h1{font-size:40px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+#land{position:fixed;inset:0;z-index:30;overflow:auto;background:radial-gradient(60% 50% at 20% 0%,rgba(16,185,129,.2),transparent 70%),radial-gradient(50% 40% at 90% 60%,rgba(160,32,64,.2),transparent 70%),#06080a;transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);scroll-behavior:smooth}
+#land.out{opacity:0;transform:scale(1.04);pointer-events:none}
+#land:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(520px circle at var(--lx,50%) var(--ly,30%),rgba(16,185,129,.13),transparent 60%)}
+#land>*{position:relative;z-index:1}
+.ln{position:sticky;top:12px;margin:12px auto 0;width:min(1080px,calc(100% - 32px));display:flex;align-items:center;justify-content:space-between;padding:10px 12px 10px 20px;border-radius:22px;background:rgba(20,25,29,.5);backdrop-filter:blur(30px) saturate(1.9);border:1px solid rgba(255,255,255,.11);box-shadow:inset 0 1px 0 rgba(255,255,255,.14);z-index:5!important}
+.ln .lk{display:flex;gap:26px}.ln a{color:var(--t2);cursor:pointer;transition:color .2s}.ln a:hover{color:var(--tx)}
+.lh{min-height:calc(100vh - 70px);display:grid;place-items:center;text-align:center;overflow:hidden}
+.lh canvas{position:absolute;left:0;bottom:0;width:100%;height:48%;opacity:.55;-webkit-mask-image:linear-gradient(transparent,#000 40%,#000 70%,transparent);mask-image:linear-gradient(transparent,#000 40%,#000 70%,transparent)}
+.lc{position:relative;max-width:980px;padding:0 20px}
+.lc h1{font-size:clamp(44px,8.4vw,116px);font-weight:500;letter-spacing:-.055em;line-height:.97;margin:22px 0}
+.lc h1 span{display:inline-block;animation:rise 1.1s cubic-bezier(.16,1,.3,1) var(--d) both}
+.lc h1 span:nth-last-child(-n+3){color:var(--t3)}
+.lc p{font-size:clamp(15px,1.6vw,19px);color:var(--t2);max-width:620px;margin:0 auto 30px}
+.lc .row{justify-content:center}.big{padding:13px 24px!important;font-size:15px;border-radius:14px!important}
+.rv{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}.rv.vis{opacity:1;transform:none}
+.ls{width:min(1080px,calc(100% - 32px));margin:0 auto;padding:110px 0}
+.ls h2{font-size:clamp(30px,4.6vw,58px);font-weight:500;letter-spacing:-.045em;line-height:1.04;margin:0 0 16px}
+.ls p.lead{color:var(--t2);font-size:16px;max-width:480px}
+.dg{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.dp{display:flex;flex-direction:column;align-items:center}.dp i{width:2px;height:16px;background:rgba(255,255,255,.2)}
+.ch{padding:9px 18px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);transition:all .45s;min-width:160px;text-align:center}
+.ch.bad{background:rgba(239,68,68,.16);border-color:#EF4444;color:#fecaca}.ch.good{background:rgba(16,185,129,.16);border-color:#10B981}
+.vd{margin-top:16px;border-radius:14px;padding:14px 16px;border:1px solid;transition:all .45s}.vd p{margin:4px 0 0;color:var(--t2)}
+.vd.bad{border-color:rgba(239,68,68,.6);background:rgba(239,68,68,.09)}.vd.good{border-color:rgba(16,185,129,.5);background:rgba(16,185,129,.08)}
+.tilt{transition:transform .25s ease-out;will-change:transform}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:36px}
+.fc{cursor:pointer}.fc:hover{transform:translateY(-6px);border-color:rgba(16,185,129,.45)}.fc svg{width:26px;height:26px;color:var(--em);margin-bottom:14px}.fc b{font-weight:500;font-size:16px;display:block;margin-bottom:6px}.fc span{color:var(--t2)}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-top:30px}.sg b{display:block;font-size:68px;font-weight:400;letter-spacing:-.05em;line-height:1}
+.lf{text-align:center}
+@media(max-width:760px){.dg{grid-template-columns:1fr}.ln .lk{display:none}}
+#land{background:#000}#land:before{background:radial-gradient(420px circle at var(--lx,50%) var(--ly,30%),rgba(16,185,129,.07),transparent 60%)}
+#land>.at,#land>.ix{position:fixed;z-index:6}
+.at{top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:22px 32px;font:11px var(--mono);letter-spacing:.2em;color:var(--t2)}
+.at b{font-weight:500;color:#fff;letter-spacing:.34em}
+.at button,.st{background:none;border:1px solid rgba(255,255,255,.2);border-radius:0;padding:8px 14px;font:11px var(--mono);letter-spacing:.2em;color:#fff;transition:all .25s}.at button:hover,.st:hover{border-color:var(--em);color:var(--em)}
+.st{border:0;border-bottom:1px solid transparent;padding:4px 10px;color:var(--t3)}.st.on{color:#fff;border-bottom-color:var(--em)}
+.ix{left:32px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:16px;font:10.5px var(--mono);letter-spacing:.22em;color:var(--t3);text-transform:uppercase}
+.ix a{cursor:pointer;transition:color .25s,transform .35s cubic-bezier(.16,1,.3,1)}.ix a:hover{color:#fff;transform:translateX(6px)}.ix i{font-style:normal;color:var(--em);margin-right:12px}
+#land .lh{display:block;min-height:100vh;position:relative}
+#land .lh canvas{top:0;bottom:auto;height:100%;opacity:1;-webkit-mask-image:none;mask-image:none}
+.hl{position:absolute;left:0;right:0;bottom:9vh;text-align:center;padding:0 20px}
+.hl small,.mk{font:11px var(--mono);letter-spacing:.3em;color:var(--t3);display:block}
+.hl h1{font:300 clamp(38px,9.4vw,150px) 'Geist',sans-serif;letter-spacing:.2em;padding-left:.2em;margin:16px 0 12px;line-height:1}
+.hl p{font-size:17px;font-weight:300;color:var(--t2);margin:0 0 14px}
+#land .ls{width:100%;max-width:1280px;padding:150px 40px 150px 140px;margin:0 auto}
+#land .ls h2{font:300 clamp(34px,5.2vw,76px) 'Geist',sans-serif;letter-spacing:-.045em;margin:14px 0 16px}
+.rw{display:grid;grid-template-columns:60px 1.1fr 1.6fr 90px;gap:20px;align-items:center;padding:26px 0;border-top:1px solid rgba(255,255,255,.13);cursor:pointer;transition:padding .5s cubic-bezier(.16,1,.3,1),background .4s}
+.rw:last-child{border-bottom:1px solid rgba(255,255,255,.13)}.rw b{font:300 clamp(22px,2.6vw,36px) 'Geist',sans-serif;letter-spacing:-.03em}.rw span{color:var(--t2);font-size:13px}.rw span.mono{color:var(--em)}
+.rw:hover{padding-left:22px;background:linear-gradient(90deg,rgba(16,185,129,.1),transparent)}.rw:hover b{color:var(--em)}
+.scw{border-top:1px solid rgba(255,255,255,.13);border-bottom:1px solid rgba(255,255,255,.13);margin-top:44px}.scw canvas{width:100%;height:300px;display:block}
+#land .card,#land .ch,#land .vd,#land .btn,#land .seg,#land .seg button{border-radius:0}
+#land .card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.14);backdrop-filter:none;box-shadow:none}#land .card:before{display:none}
+#land .btn{background:none;border:1px solid rgba(255,255,255,.22);font:11px var(--mono);letter-spacing:.2em;box-shadow:none}#land .btn:hover{border-color:var(--em);color:var(--em)}
+#land .sg b{font:300 64px 'Geist',sans-serif}
+@media(max-width:760px){.ix{display:none}#land .ls{padding:90px 22px}.rw{grid-template-columns:36px 1fr}.rw span:nth-child(3),.rw span:nth-child(4){display:none}.at{padding:16px}}
+html{background:#000}html::before{opacity:.55}
+.wh{margin:2px 4px 22px}.wh .mk{font:11px var(--mono);letter-spacing:.3em;color:var(--t3)}.wh h2{font:300 36px 'Geist',sans-serif;letter-spacing:-.045em;margin:8px 0 0}
+.card h3{font:11px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--t3);margin-bottom:14px}
+th{font:10.5px var(--mono);letter-spacing:.16em;text-transform:uppercase}
+.side .logo{cursor:pointer;transition:opacity .2s}.side .logo:hover{opacity:.7}
+.bar .btn:first-child{min-width:76px;background:linear-gradient(180deg,#19c795,#0c9a6b);color:#031510;border-color:#34d3a5;font-weight:500}
+#osc{margin:0 8px;flex:none}#pb{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--em);border-radius:2px;box-shadow:0 0 12px var(--em)}
+#pls{fill:#10B981;filter:drop-shadow(0 0 8px #10B981);transition:opacity .4s}
+.rg{fill:none;stroke:#10B981;stroke-width:2;transform-box:fill-box;transform-origin:center;animation:rgo 1s ease-out forwards;pointer-events:none}.rg.bad{stroke:#EF4444}
+@keyframes rgo{from{transform:scale(.3);opacity:1}to{transform:scale(2.4);opacity:0}}
+#ph{filter:drop-shadow(0 0 4px #fff)}
+.hl h1 span{display:inline-block;animation:rise 1.3s cubic-bezier(.16,1,.3,1) var(--d) backwards;transition:color .3s,transform .5s cubic-bezier(.16,1,.3,1)}.hl h1 span:hover{color:var(--em);transform:translateY(-12px)}
+#land>.pg{position:fixed;top:0;left:0;right:0;height:2px;background:var(--em);transform-origin:0 50%;transform:scaleX(0);z-index:7;box-shadow:0 0 12px var(--em)}
+.ix a.on{color:#fff}.ix a.on i{text-shadow:0 0 10px var(--em)}
+.cur{position:fixed;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;border:1px solid rgba(255,255,255,.55);border-radius:50%;pointer-events:none;z-index:40;mix-blend-mode:difference;transition:width .3s,height .3s,margin .3s,background .3s}.cur.h{width:68px;height:68px;margin:-34px 0 0 -34px;background:#fff}
+@media(hover:none){.cur{display:none!important}}
+</style></head><body>
+<div class="app" id="app"></div><div id="ov"></div>
+<script>
+const $=s=>document.querySelector(s);
+// ---------- story model (data-driven; graph, routes, validation all derive from this) ----------
+const M={passages:[
+{id:'P-001',n:'Lobby',mood:'Calm',i:3,x:30,y:105,conf:null,txt:'Sen enters the empty lobby of the Meridian building.'},
+{id:'P-002',n:'Archives',mood:'Curious',i:4,x:230,y:25,reveal:{fact:'conspirator_known',ord:1,note:'Dossier names the traitor'},conf:null,txt:'Sen finds the conspirator dossier and learns who is behind the conspiracy.'},
+{id:'P-003',n:'Air Vent',mood:'Suspense',i:4,x:230,y:190,conf:'Locked hallway',txt:'Sen squeezes through the dark metal duct to bypass the locked hallway, completely unaware of who is behind the conspiracy.'},
+{id:'P-004',n:'Server Vault',mood:'Focused',i:3,x:440,y:105,reveal:{fact:'conspirator_known',ord:1,note:'Inspector revealed on this route'},conf:'Confrontation',txt:'In the vault, the inspector is unmasked.'},
+{id:'P-005',n:'Safe House',mood:'Relief',i:3,x:640,y:105,conf:'Resolution',txt:'Dawn. The case is closed.'}],
+edges:[['P-001','P-002'],['P-001','P-003'],['P-002','P-004'],['P-003','P-004'],['P-004','P-005']],
+cues:[
+{id:'C1',asset:'rain_loop.wav',layer:'Ambience',p:'P-001',loop:true},
+{id:'C2',asset:'paper_rustle.wav',layer:'SFX',p:'P-002'},
+{id:'C3',asset:'suspense_drone.wav',layer:'Ambience',p:'P-003',loop:true},
+{id:'C4',asset:'traitor_theme.wav',layer:'Music',p:'P-003',requires:'conspirator_known',ord:2},
+{id:'C5',asset:'morning_birds.wav',layer:'Ambience',p:'P-005',loop:true}],
+assets:{'rain_loop.wav':{layer:'Ambience',up:true},'suspense_drone.wav':{layer:'Ambience',up:true},'paper_rustle.wav':{layer:'SFX',up:true},'traitor_theme.wav':{layer:'Music',up:false},'morning_birds.wav':{layer:'Ambience',up:true}}};
+const P=id=>M.passages.find(p=>p.id===id);
+const SRC_HASH=()=>'';
+// ---------- BFS exploration (state = passage + knowledge facts) ----------
+function explore(B={depth:12,routes:50,states:500}){
+ const out=[],q=[{p:'P-001',f:[],path:['P-001']}];let seen=0,trunc=false;
+ while(q.length){const s=q.shift();if(++seen>B.states){trunc=true;break}
+  const ps=P(s.p),f=new Set(s.f);if(ps.reveal)f.add(ps.reveal.fact);
+  const nx=M.edges.filter(e=>e[0]===s.p).map(e=>e[1]);
+  if(!nx.length){if(out.length<B.routes)out.push({path:s.path,facts:[...f]});else trunc=true;continue}
+  for(const n of nx){if(s.path.includes(n))continue;if(s.path.length>=B.depth){trunc=true;continue}q.push({p:n,f:[...f],path:[...s.path,n]})}}
+ out.forEach((r,i)=>r.name='Route '+String.fromCharCode(65+i));
+ return{routes:out,seen,trunc}}
+// per-route simulation: events in order, knowledge before each passage
+function simulate(route){
+ const ev=[];let facts=new Set(),k=0;
+ route.path.forEach((pid,ix)=>{const ps=P(pid),before=new Set(facts);
+  ev.push({k:k++,pid,type:'enter',t:ix*10,txt:'Enter '+ps.n});
+  if(ps.reveal){facts.add(ps.reveal.fact);ev.push({k:k++,pid,type:'reveal',t:ix*10,ord:ps.reveal.ord,txt:'Reveal: '+ps.reveal.fact+' = true'})}
+  M.cues.filter(c=>c.p===pid).forEach(c=>{let v='pass',why='no protected fact';
+   if(c.requires){const known=before.has(c.requires);
+    if(known){v='pass';why=c.requires+' known before entry'}
+    else if(ps.reveal&&ps.reveal.fact===c.requires){if(c.ord==null){v='unverified';why='same-passage order metadata missing'}else if(c.ord>ps.reveal.ord){v='pass';why='cue ord '+c.ord+' after reveal ord '+ps.reveal.ord}else{v='fail';why='cue fires before reveal in passage'}}
+    else{v='fail';why=c.requires+' = false when cue fires'}}
+   ev.push({k:k++,pid,type:'cue',t:ix*10,cue:c,v,why,facts:[...before],txt:'Cue '+c.asset+' ('+c.layer+', entry)'})});});
+ return ev}
+function validate(){
+ const ex=explore(),f=[];let n=0;
+ ex.routes.forEach(r=>simulate(r).filter(e=>e.type==='cue'&&e.cue.requires&&e.v!=='pass').forEach(e=>f.push({id:'BT-00'+(++n),rule:'Reveal Protection',cat:'Narrative Protection',sev:e.v==='fail'?'High':'Medium',route:r.name,p:e.pid,cue:e.cue.asset,res:e.v,expl:e.v==='fail'?'The traitor theme starts before the character\u2019s identity is established on this route.':'Event order inside the passage is unknown; ordering cannot be verified.',ev:e.why,src:'story.twee :: '+e.pid})));
+ Object.keys(M.assets).forEach(a=>{if(!M.assets[a].up&&M.cues.some(c=>c.asset===a)){const cs=M.cues.filter(c=>c.asset===a),ps=cs.map(c=>c.p);f.push({id:'BT-00'+(++n),rule:'Missing Media Asset',cat:'Audio Integrity',sev:'Medium',route:ex.routes.filter(r=>r.path.some(p=>ps.includes(p))).map(r=>r.name.slice(-1)).join('+'),p:ps.join(','),cue:a,res:'fail',expl:a+' is referenced by a cue but no binary was uploaded.',ev:'asset.up=false; cues '+cs.map(c=>c.id).join(','),src:'cue map :: '+cs.map(c=>c.id).join(',')})}});
+ f.forEach(x=>x.status=(S.fs[x.cat+x.cue+x.route]||'Open'));
+ return{findings:f,ex}}
+// ---------- state ----------
+const S={ws:'overview',route:'Route B',pid:'P-003',fid:null,t:0,playing:false,auto:false,fs:{},runs:[],run:null,lab:{step:-1,log:[]},lib:'All',asset:'traitor_theme.wav',nmf:'all',undo:null,copilot:'P-003',prop:null,sfx:true,hist:[]};
+const WS=[['overview','Overview'],['graph','Story Graph'],['narrative','Narrative Map'],['library','Cue Library'],['lab','Route Lab'],['validation','Validation Centre'],['reports','Reports']];
+function runVal(){const r=validate();S.run=r;const x=r.findings;S.runs.push({n:S.runs.length+1,at:new Date().toLocaleTimeString(),total:x.length,high:x.filter(f=>f.sev==='High').length,open:x.filter(f=>f.status!=='Resolved').length});if(!S.fid&&x[0])S.fid=x[0].id;return r}
+const route=()=>S.run.ex.routes.find(r=>r.name===S.route)||S.run.ex.routes[0];
+const fOf=pid=>S.run.findings.filter(f=>f.route.includes(S.route.slice(-1))&&f.p.includes(pid));
+const fin=()=>S.run.findings.find(f=>f.id===S.fid);
+// ---------- audio (synthetic; kept separate from real file playback) ----------
+let AC;const ac=()=>AC||(AC=new (window.AudioContext||window.webkitAudioContext)());
+function tone(fr,d,type='sine'){try{const c=ac(),o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.value=fr;g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(.12,c.currentTime+.02);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+d);o.connect(g).connect(out());o.start();o.stop(c.currentTime+d)}catch(e){}}
+const playAuditionTone=(f,d)=>{tone(f,d);tone(f*2,d)};
+const playCueTriggerSound=v=>v?(tone(440,.4),tone(622,.4)):(tone(523,.4),tone(659,.4),tone(784,.4));
+const click=()=>S.sfx&&tone(1800,.015,'square');
+const toast=m=>{const d=document.createElement('div');d.className='toast';d.textContent=m;document.body.appendChild(d);setTimeout(()=>d.remove(),2600)};
+// ---------- UI pieces ----------
+const sevc=s=>s==='High'?'hi':s==='Medium'?'md':'ok';
+const ico=d=>`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+const ICON={overview:'<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>',graph:'<circle cx="6" cy="12" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="18" cy="18" r="2"/><path d="M8 12l8-5M8 12l8 5"/>',narrative:'<path d="M3 12h4l3-8 4 16 3-8h4"/>',library:'<path d="M4 6v12M9 3v18M14 8v8M19 5v14"/>',lab:'<path d="M9 3h6M10 3v6l-5 10a1 1 0 001 1h12a1 1 0 001-1l-5-10V3"/>',validation:'<path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',reports:'<path d="M6 3h9l4 4v14H6z"/><path d="M9 13h7M9 17h7"/>'};
+function shell(body){const pj=P('P-001');return `
+<aside class="side"><div class="logo"><svg width="26" height="20" viewBox="0 0 26 20" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round"><path d="M2 8v4M7 4v12M13 1v18M19 5v10M24 8v4"/></svg>BranchTone</div>
+<div class="proj"><b>The Last Signal</b><span class="sub">Interactive Detective Story</span><div class="mono sub">v0.4</div></div>
+<nav class="nav" aria-label="Workspaces">${WS.map(([k,l])=>`<button data-ws="${k}" class="${S.ws===k?'on':''}">${ico(ICON[k])}${l}</button>`).join('')}</nav>
+<div style="flex:1"></div><div class="row sub"><span style="width:7px;height:7px;border-radius:50%;background:var(--em)"></span>Ready · deterministic engine</div><div class="mono sub">v0.4.0</div></aside>
+<header class="top"><span class="sub">The Last Signal / ${WS.find(w=>w[0]===S.ws)[1]}</span><span class="tag">v0.4</span><span class="sub">Saved in session</span><span class="sp"></span>
+<button class="btn" data-act="pal">Search ⌘K</button><button class="btn" data-act="undo" ${S.undo?'':'disabled'}>Undo</button><button class="btn pri" data-act="run">Run Validation</button></header>
+<main class="${S.anim?'in':''}">${hd()}${body}</main>
+<footer class="bar"><button class="btn" data-act="play" aria-label="Play or pause">${S.playing?'Pause':'Play'}</button><button class="btn" data-act="stop">Stop</button><span class="mono" id="tc">${fmt(S.t)}</span><span class="tag">${S.route}</span><span class="sub">${P(S.pid).n}</span><canvas id='osc' width='180' height='34'></canvas><i id='pb'></i><span style="flex:1"></span><label class="sub">Vol <input type="range" id="vol" min="0" max="1" step=".05" value="${VOL}"></label></footer>`}
+let VOL=.6;const fmt=t=>String(Math.floor(t/60)).padStart(2,'0')+':'+String(Math.floor(t%60)).padStart(2,'0');
+const routeSeg=()=>`<div class="seg">${S.run.ex.routes.map(r=>`<button data-route="${r.name}" class="${r.name===S.route?'on':''}">${r.name}</button>`).join('')}</div>`;
+const sevCount=()=>{const f=S.run.findings.filter(x=>x.status!=='Resolved');return f.length};
+function donut(h,m,l){const t=h+m+l||1,C=2*Math.PI*30;let o=0;return `<svg width="90" height="90" viewBox="0 0 80 80"><circle cx="40" cy="40" r="30" fill="none" stroke="#222" stroke-width="9"/>${[[h,'#EF4444'],[m,'#F59E0B'],[l,'#10B981']].map(([v,c])=>{const d=v/t*C,s=`<circle cx="40" cy="40" r="30" fill="none" stroke="${c}" stroke-width="9" stroke-dasharray="${d} ${C-d}" stroke-dashoffset="${-o}" transform="rotate(-90 40 40)"/>`;o+=d;return v?s:''}).join('')}</svg>`}
+function waveSvg(a,w=300,h=60){const A=M.assets[a];if(!A||!A.peaks)return `<div class="sub" style="border:1px dashed var(--b);border-radius:8px;padding:14px;text-align:center">${!A||!A.up?'No audio binary uploaded: no waveform available.':'Not decoded yet. Import the file to decode and measure it.'}</div>`;
+ return `<svg viewBox="0 0 ${w} ${h}" width="100%" height="${h}">${A.peaks.map((p,i)=>`<line x1="${i*w/128}" x2="${i*w/128}" y1="${h/2-p*h/2}" y2="${h/2+p*h/2}" stroke="#10B981"/>`).join('')}</svg>`}
+// ---------- workspaces ----------
+const W={
+overview(){const r=S.run,x=r.findings,ex=r.ex,np=M.passages.length;const cp=P(S.copilot);const pr=S.prop;
+ return `<section class="hero"><svg viewBox="0 0 900 208" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1a1a"/><stop offset="1" stop-color="#070b0d"/></linearGradient><linearGradient id="bm" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#e9f7ef" stop-opacity=".5"/><stop offset="1" stop-color="#10B981" stop-opacity="0"/></linearGradient><linearGradient id="sb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#10B981" stop-opacity=".55"/><stop offset="1" stop-color="#10B981" stop-opacity=".05"/></linearGradient></defs><rect width="900" height="208" fill="url(#sk)"/><circle cx="600" cy="46" r="22" fill="#d9e8df" opacity=".16"/><polygon points="792,92 330,30 330,150" fill="url(#bm)"/>${Array.from({length:70},(_,i)=>{const h=8+Math.abs(Math.sin(i*.55)*Math.cos(i*.17))*46;return `<rect x="${i*13+3}" y="${208-h}" width="6" height="${h}" rx="3" fill="url(#sb)"/>`}).join('')}<polygon points="776,208 782,96 802,96 808,208" fill="#06090b"/><rect x="781" y="82" width="22" height="14" fill="#06090b"/><rect x="787" y="86" width="10" height="6" fill="#f3efe2"/></svg><div class="ct"><div class="row"><span class="tag ok">v0.4</span><span class="tag">demo project</span><span class="tag">${S.runs.length} validation run${S.runs.length>1?'s':''}</span></div><div><h1>The Last Signal</h1><p>Interactive detective story. Sound design you can test, not just hear.</p></div><div class="row"><button class="btn pri" data-act="run">Run Validation</button><button class="btn" data-act="importStory">Import Story</button><button class="btn" data-go="graph">Open Story Graph</button></div></div></section>
+<div class="grid g4"><div class="card stat"><b class="mono">${np}</b>Passages</div><div class="card stat"><b class="mono">${ex.routes.length}</b>Routes discovered${ex.trunc?' (truncated)':''}</div><div class="card stat"><b class="mono">${Object.keys(M.assets).length}</b>Audio assets · ${Object.values(M.assets).filter(a=>!a.up).length} missing</div><div class="card stat" style="${sevCount()?'border-color:rgba(239,68,68,.45)':''}"><b class="mono">${sevCount()}</b>Open findings</div></div>
+<div class="grid g2" style="margin-top:12px"><div class="card"><h3>Project health</h3><div class="kv"><span>Validation</span><span>Run #${S.runs.length} · ${sevCount()?sevCount()+' open':'no open findings'}</span><span>Import</span><span>Bundled demo story (twee-style model)</span><span>Assets</span><span>${Object.values(M.assets).filter(a=>a.up).length}/${Object.keys(M.assets).length} uploaded · ${Object.values(M.assets).filter(a=>a.peaks).length} decoded</span><span>Exploration</span><span>${ex.routes.length} routes · ${ex.seen} states · ${ex.trunc?'TRUNCATED':'complete within budget'}</span></div>
+<div class="sub" style="margin-top:8px">Coverage % is not shown: audio decoding is incomplete.</div></div>
+<div class="card"><h3>QA priorities</h3>${x.filter(f=>f.status!=='Resolved').map(f=>`<div class="row" style="padding:4px 0"><span class="tag ${sevc(f.sev)}">${f.sev}</span><a href="#" data-find="${f.id}" style="color:var(--tx)">${f.id} ${f.rule}</a><span class="sub">${f.cue}</span></div>`).join('')||'<span class="sub">Nothing outstanding.</span>'}
+<h3 style="margin-top:10px">Recent activity</h3>${S.hist.slice(-4).reverse().map(h=>`<div class="sub">${h}</div>`).join('')||'<div class="sub">Validation run #1 completed at load.</div>'}</div></div>
+<div class="card" style="margin-top:12px"><h3>Traversal scrubber</h3><div class="row">${routeSeg()}<button class="btn" data-step="-1">Prev</button><button class="btn" data-step="1">Next</button><button class="btn" data-act="auto">${S.auto?'Stop auto':'Auto traversal'}</button><span class="mono">${P(S.pid).id} ${P(S.pid).n}</span></div><input type="range" style="width:100%;margin-top:8px" min="0" max="${route().path.length*10-1}" value="${S.t}" id="scrub"><div class="row sub">${route().path.map(p=>`<span class="tag">${p}${M.cues.some(c=>c.p===p)?' · cue':''}</span>`).join(' → ')}</div></div>
+<div class="grid g2" style="margin-top:12px"><div class="card"><h3>Talk to BranchTone</h3><div class="sub">Plays a synthetic audition tone (Web Audio), not an audio file.</div><div class="row" style="margin-top:8px"><button class="btn" data-tone="440">440 Hz</button><button class="btn" data-tone="523">523 Hz</button><button class="btn" data-tone="587">587 Hz</button><button class="btn" data-act="viol">Defect tritone</button><button class="btn" data-act="good">Verified chord</button><label class="sub"><input type="checkbox" id="sfx" ${S.sfx?'checked':''}> UI sounds</label></div></div>
+<div class="card"><h3>AI Copilot · Adaption Labs</h3><div class="row">${M.passages.map(p=>`<button class="btn" data-cp="${p.id}" style="${p.id===S.copilot?'border-color:var(--em)':''}">${p.id}</button>`).join('')}</div>
+<div class="sub" style="margin:8px 0">Service not connected: no inference credentials in this build, so no AI mood, tension or spoiler scores are shown. Deterministic data for ${cp.id}: mood ${cp.mood}, intensity ${cp.i}/5.</div>
+${fOf(cp.id).filter(f=>f.res==='fail'&&f.rule==='Reveal Protection').length?`<button class="btn" data-act="propose">Propose fix (rule-based)</button>`:'<span class="sub">No reveal-protection finding on this passage.</span>'}</div></div>
+${pr?`<div class="card" style="margin-top:12px;border-color:var(--am)"><h3>Review proposed change</h3><div class="diff"><div><div class="sub">Original</div><pre>Cue traitor_theme.wav → P-003 (entry, ord 2)</pre></div><div><div class="sub">Proposed</div><pre>Cue traitor_theme.wav → P-004 (entry, ord 2, after reveal)</pre></div></div><div class="row" style="margin-top:8px"><button class="btn pri" data-act="apply">Approve and apply</button><button class="btn" data-act="reject">Reject</button></div></div>`:''}`},
+graph(){const r=route(),on=new Set(r.path),f=fOf(S.pid),sp=P(S.pid),c=M.cues.filter(c=>c.p===S.pid),F=fin();
+ const edges=M.edges.map(([a,b])=>{const A=P(a),B=P(b),h=on.has(a)&&on.has(b)&&r.path.indexOf(b)===r.path.indexOf(a)+1;const x1=A.x+130,y1=A.y+34,x2=B.x,y2=B.y+34;return `<path class="edge ${h?'on':''}" d="M${x1} ${y1}C${x1+40} ${y1},${x2-40} ${y2},${x2} ${y2}"/>`}).join('');
+ const nodes=M.passages.map(p=>{const bad=S.run.findings.some(f=>f.res!=='pass'&&f.rule==='Reveal Protection'&&f.p===p.id&&f.route.includes(S.route.slice(-1)));const n=M.cues.filter(c=>c.p===p.id).length;return `<g class="node ${bad?'bad':''} ${p.id===S.pid?'sel':''} ${on.has(p.id)?'':'dim'}" data-pid="${p.id}" tabindex="0" transform="translate(${p.x},${p.y})"><rect width="130" height="68" rx="10"/><text x="10" y="20" style="fill:var(--tx);font-size:12px">${p.n}</text><text x="10" y="35">${p.id}</text><text x="10" y="55">${p.mood} ${p.i}/5 · ${n?n+' cue':'no cue'}</text><circle cx="116" cy="14" r="3.5" fill="${bad?'#EF4444':'#10B981'}"><title>${bad?'Issue':'Valid'}</title></circle><rect x="10" y="61" width="110" height="2" rx="1" fill="#ffffff" fill-opacity=".08" stroke="none"/><rect x="10" y="61" width="${p.i/5*110}" height="2" rx="1" fill="${bad?'#EF4444':'#10B981'}" stroke="none"/></g>`}).join('');
+ const T=route().path.length*10,tr={Music:[],Ambience:[],SFX:[]};
+ return `<div class="grid g31"><div><div class="card"><div class="row" style="margin-bottom:6px">${routeSeg()}<span class="sub">Edges and nodes generated from the story model</span></div><svg viewBox="0 0 800 290" width="100%" id="gsvg"><defs><linearGradient id="ng" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2427"/><stop offset="1" stop-color="#0f1518"/></linearGradient><linearGradient id="nb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#34161c"/><stop offset="1" stop-color="#1a0d11"/></linearGradient></defs>${edges}${nodes}<circle id='pls' r='7' cx='-20' cy='-20'/></svg></div>
+<div class="card" style="margin-top:12px"><h3>Timeline · ${S.route} <span class="sub">(10 s per passage, simulated)</span></h3><svg viewBox="0 0 800 130" width="100%" id="tl" style="cursor:pointer">${r.path.map((p,i)=>`<line x1="${60+i*(730/r.path.length)}" x2="${60+i*(730/r.path.length)}" y1="8" y2="125" stroke="#2a3236"/><text x="${64+i*(730/r.path.length)}" y="18">${p}</text>`).join('')}${['Music','Ambience','SFX'].map((L,k)=>`<text x="4" y="${52+k*32}">${L.toUpperCase()}</text>${r.path.map((p,i)=>M.cues.filter(c=>c.p===p&&c.layer===L).map(c=>{const up=M.assets[c.asset].up,w=730/r.path.length;return `<rect x="${60+i*w+2}" y="${34+k*32}" width="${c.loop?w*(r.path.length-i)*0+w-4:w/2}" height="22" rx="4" fill="${up?'rgba(16,185,129,.25)':'none'}" stroke="${up?'#10B981':'#F59E0B'}" ${up?'':'stroke-dasharray="4 3"'}/><text x="${60+i*w+6}" y="${49+k*32}">${c.asset.slice(0,14)}${up?'':' (missing)'}</text>`}).join('')).join('')}`).join('')}<line id="ph" x1="${60+S.t/T*730}" x2="${60+S.t/T*730}" y1="4" y2="128" stroke="#fff"/></svg><div class="sub">Waveforms appear only for decoded files. Missing assets are drawn dashed with no waveform.</div></div></div>
+<div class="card"><h3>Passage Inspector</h3><h2>${sp.n}</h2><div class="mono sub">${sp.id} · ${S.route}</div>
+<div class="kv" style="margin:10px 0"><span>Mood</span><span>${sp.mood}</span><span>Intensity</span><span>${sp.i}/5</span><span>Identity revealed</span><span>${simulate(r).filter(e=>e.type==='reveal'&&r.path.indexOf(e.pid)<r.path.indexOf(S.pid)).length?'Yes':'No'}</span></div>
+${c.map(c=>`<div class="kv"><span>Audio cue</span><span class="mono">${c.asset}</span><span>Layer</span><span>${c.layer}</span><span>Trigger</span><span>Passage entry</span></div>`).join('')||'<div class="sub">No cue on this passage.</div>'}
+${f.map(x=>`<div class="card" style="border-color:rgba(239,68,68,.5);margin-top:8px"><b class="mono">${x.id}</b> <span class="tag ${sevc(x.sev)}">${x.sev}</span><div>${x.rule}</div><div class="sub">${x.expl}</div><div class="row" style="margin-top:6px"><button class="btn" data-find="${x.id}" data-go="validation">Open</button><button class="btn" data-find="${x.id}" data-go="lab" data-act2="repro">Reproduce</button></div></div>`).join('')}
+<h3 style="margin-top:10px">Source</h3><pre>${sp.txt}</pre></div></div>`},
+narrative(){const r=route(),ev=simulate(r),n=r.path.length,X=i=>70+i*(600/(n-1)),lanes=['Story Beats','Characters','Reveals','Conflicts','Mood'];
+ const known=r.path.map((p,i)=>ev.some(e=>e.type==='reveal'&&r.path.indexOf(e.pid)<=i));
+ const other=S.run.ex.routes.find(x=>x!==r);const sp=P(S.pid);
+ const lane=(l,y)=>`<text x="4" y="${y+3}">${l}</text><line x1="70" x2="670" y1="${y}" y2="${y}" stroke="#222"/>`;
+ return `<div class="grid g31"><div class="card"><div class="row">${routeSeg()}<div class="seg">${['all','reveal','conflict'].map(k=>`<button data-nmf="${k}" class="${S.nmf===k?'on':''}">${k}</button>`).join('')}</div><span class="sub">compare route dashed</span></div>
+<svg viewBox="0 0 700 270" width="100%">${lanes.map((l,i)=>lane(l,30+i*50)).join('')}
+${r.path.map((p,i)=>`<g data-pid="${p}" class="node" tabindex="0"><text x="${X(i)-10}" y="12">${p}</text>
+<circle cx="${X(i)}" cy="30" r="5" fill="${S.pid===p?'#fff':'#10B981'}" ${S.nmf==='reveal'||S.nmf==='conflict'?'opacity=".25"':''}/>
+<circle cx="${X(i)}" cy="80" r="5" fill="${known[i]?'#10B981':'#7a1f33'}"/><text x="${X(i)+8}" y="84">${known[i]?'knows':'unaware'}</text>
+${P(p).reveal&&S.nmf!=='conflict'?`<circle cx="${X(i)}" cy="130" r="6" fill="#F59E0B"/>`:''}
+${P(p).conf&&S.nmf!=='reveal'?`<rect x="${X(i)-5}" y="175" width="10" height="10" fill="#EF4444"/><text x="${X(i)+8}" y="184">${P(p).conf}</text>`:''}</g>`).join('')}
+${other?`<polyline fill="none" stroke="#555" stroke-dasharray="3 3" points="${other.path.map((p,i)=>X(i)+','+(280-P(p).i*10-30)).join(' ')}"/>`:''}
+<polyline fill="none" stroke="#10B981" stroke-width="2" points="${r.path.map((p,i)=>X(i)+','+(280-P(p).i*10-30)).join(' ')}"/></svg>
+<div class="sub">Knowledge fact <span class="mono">conspirator_known</span> is computed from reveal events, not passage titles. Route A: true after P-002. Route B: false until P-004.</div></div>
+<div class="card"><h3>Event details</h3><h2>${sp.n}</h2><div class="mono sub">${sp.id} · ${S.route}</div><p>${sp.txt}</p><div class="kv"><span>Mood</span><span>${sp.mood} ${sp.i}/5</span><span>Reveal</span><span>${sp.reveal?sp.reveal.note:'none'}</span><span>Conflict</span><span>${sp.conf||'none'}</span><span>Known after</span><span class="mono">conspirator_known=${known[r.path.indexOf(S.pid)]}</span></div><div class="row" style="margin-top:8px"><button class="btn" data-go="graph">View in Graph</button><button class="btn" data-go="library">Cues</button></div></div></div>`},
+library(){const A=M.assets,use=a=>M.cues.filter(c=>c.asset===a).length,iss=a=>S.run.findings.some(f=>f.cue===a&&f.status!=='Resolved');
+ const flt={All:()=>1,Music:a=>A[a].layer==='Music',Ambience:a=>A[a].layer==='Ambience',SFX:a=>A[a].layer==='SFX',Used:a=>use(a),Unused:a=>!use(a),Missing:a=>!A[a].up,Issues:iss};
+ const list=Object.keys(A).filter(flt[S.lib]),a=A[S.asset];const st=x=>!A[x].up?'<span class="tag hi">Missing / not uploaded</span>':A[x].peaks?'<span class="tag ok">Decoded</span>':'<span class="tag md">Registered, not decoded</span>';
+ return `<div class="grid g13"><div class="card"><h3>Filters</h3>${Object.keys(flt).map(k=>`<div><button class="btn" style="width:100%;margin-bottom:4px;text-align:left;${S.lib===k?'border-color:var(--em)':''}" data-lib="${k}">${k}</button></div>`).join('')}</div>
+<div class="card"><div class="row" style="margin-bottom:8px"><input id="q" placeholder="Search cues" class="btn" style="flex:1"><button class="btn pri" data-act="imp">Import audio</button><input type="file" id="file" accept=".wav,.flac,audio/wav,audio/flac" hidden></div>
+<table><tr><th>Name</th><th>Type</th><th>Duration</th><th>Uses</th><th>Status</th></tr>${list.map(k=>`<tr class="clk ${k===S.asset?'sel':''}" data-asset="${k}"><td class="mono">${k}</td><td>${A[k].layer}</td><td class="mono">${A[k].dur?A[k].dur.toFixed(2)+' s':'—'}</td><td class="mono">${use(k)}</td><td>${st(k)}</td></tr>`).join('')}</table></div>
+<div class="card"><h3 class="mono">${S.asset}</h3>${st(S.asset)}<div style="margin:8px 0">${waveSvg(S.asset)}</div>
+<div class="kv"><span>Format</span><span>${a.fmt||'—'}</span><span>Sample rate</span><span class="mono">${a.sr?a.sr+' Hz':'—'}</span><span>Channels</span><span>${a.ch||'—'}</span><span>Duration</span><span class="mono">${a.dur?a.dur.toFixed(3)+' s':'—'}</span><span>Peak</span><span class="mono">${a.pk!=null?(20*Math.log10(a.pk||1e-6)).toFixed(1)+' dBFS':'not measured'}</span><span>Clipping</span><span>${a.pk!=null?(a.pk>=.999?'Possible clipping':'None detected'):'not measured'}</span><span>Loudness</span><span>not measured</span><span>SHA-256</span><span class="mono" style="word-break:break-all">${a.hash?a.hash.slice(0,16)+'…':'—'}</span></div>
+<div class="row" style="margin-top:8px"><button class="btn" data-act="playAsset" ${a.buf?'':'disabled'}>Play file</button></div>
+<h3 style="margin-top:10px">Cue assignments</h3>${M.cues.filter(c=>c.asset===S.asset).map(c=>`<div class="mono sub">${c.id} · ${c.layer} · ${c.p} entry · ${c.loop?'loop':'one-shot'}${c.requires?' · protects '+c.requires:''}</div>`).join('')||'<div class="sub">Unused</div>'}</div></div>`},
+lab(){const r=route(),L=S.lab,ev=simulate(r),cur=L.step<0?null:r.path[L.step],ps=cur&&P(cur),shown=ev.filter(e=>e.k<=L.last),facts=new Set();ev.filter(e=>e.type==='reveal'&&shown.includes(e)).forEach(e=>facts.add('conspirator_known'));
+ const viol=shown.find(e=>e.type==='cue'&&e.v==='fail');
+ return `<div class="row" style="margin-bottom:10px">${routeSeg()}<button class="btn pri" data-lab="start">Start</button><button class="btn" data-lab="prev">Prev</button><button class="btn" data-lab="next">Next</button><button class="btn" data-lab="restart">Restart</button><button class="btn red" data-lab="repro">Reproduce BT-001</button></div>
+<div class="card"><div class="row">${r.path.map((p,i)=>`<span class="tag ${i===L.step?'ok':''}" style="${i===L.step?'border-color:var(--em)':''}">${p} ${P(p).n}</span>${i<r.path.length-1?'→':''}`).join('')}</div></div>
+<div class="grid g2" style="margin-top:12px"><div class="card"><h3>Narrative state</h3>${ps?`<div class="kv"><span>Passage</span><span>${ps.id} ${ps.n}</span><span>Route</span><span>${S.route}</span><span>Mood</span><span>${ps.mood}</span><span>Intensity</span><span>${ps.i}/5</span><span>conspirator_known</span><span class="mono" style="color:${facts.has('conspirator_known')?'#6ee7b7':'#fca5a5'}">${facts.has('conspirator_known')}</span><span>Conflict</span><span>${ps.conf||'none'}</span></div>`:'<div class="sub">Not started.</div>'}
+${viol?`<div class="card" style="border-color:var(--rd);margin-top:8px"><b>BT-001 violation</b><div class="sub">${viol.cue.asset} fired at ${viol.pid} with conspirator_known=false. Evidence: ${viol.why}.</div></div>`:''}</div>
+<div class="card"><h3>Audio event monitor</h3><div class="log">${shown.map(e=>`<div>#${e.k} ${fmt(e.t)} ${e.pid} ${e.type==='cue'?e.cue.layer+' '+e.cue.asset+' → '+(M.assets[e.cue.asset].up?'would play':'MISSING')+' ['+e.v+']':e.txt}</div>`).join('')||'<div class="sub">No events.</div>'}</div></div></div>`},
+validation(){const x=S.run.findings,F=fin(),cats=['Narrative Protection','Narrative State','Audio Integrity','Audio Continuity','Loop Integrity','Route Consistency'];
+ return `<div class="grid g13"><div class="card"><h3>Rule categories</h3>${cats.map(c=>`<div class="row" style="padding:3px 0">${c}<span class="tag" style="margin-left:auto">${x.filter(f=>f.cat===c).length}</span></div>`).join('')}<div class="sub" style="margin-top:6px">Unimplemented categories report 0 because they are not evaluated here.</div></div>
+<div class="card"><table><tr><th>ID</th><th>Rule</th><th>Sev</th><th>Route</th><th>Passage</th><th>Status</th></tr>${x.map(f=>`<tr class="clk ${f.id===S.fid?'sel':''}" data-find="${f.id}"><td class="mono">${f.id}</td><td>${f.rule}${f.res==='unverified'?' (unverified)':''}</td><td><span class="tag ${sevc(f.sev)}">${f.sev}</span></td><td>${f.route}</td><td class="mono">${f.p}</td><td>${f.status}</td></tr>`).join('')||'<tr><td colspan=6 class="sub">No findings in the last run.</td></tr>'}</table></div>
+<div class="card"><h3>Finding Inspector</h3>${F?`<b class="mono">${F.id}</b> <span class="tag ${sevc(F.sev)}">${F.sev}</span><p>${F.expl}</p><div class="kv"><span>Rule</span><span>${F.rule}</span><span>Cue</span><span class="mono">${F.cue}</span><span>Evidence</span><span>${F.ev}</span><span>Source</span><span class="mono">${F.src}</span></div>
+<div class="row" style="margin-top:8px"><button class="btn" data-go="graph">View in Graph</button><button class="btn" data-go="lab" data-act2="repro">Reproduce</button><button class="btn" data-go="library">Cue Library</button><button class="btn" data-set="In Review">Mark In Review</button><button class="btn" data-set="Resolved">Mark Resolved</button></div><div class="sub" style="margin-top:6px">Resolved marks persist only if the next run still reports the issue closed.</div>`:'<div class="sub">Select a finding.</div>'}</div></div>`},
+reports(){const x=S.run.findings,ex=S.run.ex,rep=reportObj();
+ return `<div class="grid g2"><div class="card"><h3>Summary</h3><div class="kv"><span>Routes explored</span><span class="mono">${ex.routes.length}</span><span>Routes evaluated</span><span class="mono">${ex.routes.length}</span><span>Not evaluated</span><span class="mono">0 (budget ${ex.trunc?'hit':'not hit'})</span><span>Passages reached</span><span class="mono">${new Set(ex.routes.flatMap(r=>r.path)).size}/${M.passages.length}</span><span>Assets decoded</span><span class="mono">${Object.values(M.assets).filter(a=>a.peaks).length}/${Object.keys(M.assets).length}</span><span>Audio coverage</span><span>Partial: audio not fully verified</span></div>
+<div class="row" style="margin-top:10px">${donut(x.filter(f=>f.sev==='High').length,x.filter(f=>f.sev==='Medium').length,x.filter(f=>f.sev==='Low').length)}<div class="sub">High ${x.filter(f=>f.sev==='High').length} · Medium ${x.filter(f=>f.sev==='Medium').length} · Low 0</div></div></div>
+<div class="card"><h3>Validation history</h3><svg viewBox="0 0 300 90" width="100%"><polyline fill="none" stroke="#10B981" stroke-width="2" points="${S.runs.map((r,i)=>(20+i*(260/Math.max(1,S.runs.length-1)))+','+(80-r.open*20)).join(' ')}"/>${S.runs.map((r,i)=>`<circle cx="${20+i*(260/Math.max(1,S.runs.length-1))}" cy="${80-r.open*20}" r="3" fill="#10B981"/><text x="${14+i*(260/Math.max(1,S.runs.length-1))}" y="90">#${r.n}</text>`).join('')}</svg><div class="sub">Open findings per run</div></div></div>
+<div class="card" style="margin-top:12px"><div class="row"><h3 style="margin:0">Report</h3><button class="btn" data-act="copyj">Copy JSON</button><button class="btn" data-act="mdr">Show Markdown</button><span class="sub">PDF export is not available in this single-file build.</span></div><div class="mono sub" id="hash" style="margin:8px 0">SHA-256: computing…</div><pre id="rep">${esc(S.md?mdReport(rep):JSON.stringify(rep,null,1))}</pre></div>`}};
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function reportObj(){const ex=S.run.ex;return{project:'The Last Signal',version:'v0.4',source:'bundled demo model',storyModelHash:S.mh,config:{maxDepth:12,maxRoutes:50,maxStates:500},truncated:ex.trunc,routes:ex.routes.map(r=>({name:r.name,path:r.path,facts:r.facts,status:'evaluated'})),findings:S.run.findings.map(f=>({id:f.id,rule:f.rule,severity:f.sev,route:f.route,passage:f.p,cue:f.cue,result:f.res,status:f.status,evidence:f.ev,source:f.src})),assets:Object.entries(M.assets).map(([k,a])=>({name:k,uploaded:a.up,decoded:!!a.peaks,sha256:a.hash||null})),runs:S.runs}}
+const mdReport=r=>`# BranchTone report: ${r.project} ${r.version}\n\nRoutes: ${r.routes.length} (truncated: ${r.truncated})\n\n## Findings\n`+r.findings.map(f=>`- ${f.id} ${f.rule} [${f.severity}] route ${f.route} ${f.passage} (${f.result}, ${f.status}): ${f.evidence}`).join('\n');
+async function sha(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+// ---------- render & events ----------
+function render(){document.documentElement.style.setProperty('--x','0');$('#app').innerHTML=shell(W[S.ws]());if(S.anim)cnt();upd();if(S.ws==='reports')sha($('#rep').textContent).then(h=>{const e=$('#hash');if(e)e.textContent='SHA-256 of displayed report: '+h})}
+function cnt(){document.querySelectorAll('.stat b').forEach(e=>{const v=+e.textContent;if(!(v>0))return;const t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/1000);e.textContent=Math.round(v*(1-Math.pow(1-k,4)));if(k<1)requestAnimationFrame(f)})(t0)})}
+document.addEventListener('pointermove',e=>{const c=e.target.closest&&e.target.closest('.card');if(c){const r=c.getBoundingClientRect();c.style.setProperty('--mx',e.clientX-r.left+'px');c.style.setProperty('--my',e.clientY-r.top+'px')}});
+function go(ws){S.ws=ws;S.anim=1;click();render();S.anim=0}
+function setPid(p){S.pid=p;S.t=Math.max(0,route().path.indexOf(p))*10;render()}
+function upd(){const r=route(),T=r.path.length*10,ph=$('#ph');if(ph){const x=60+S.t/T*730;ph.setAttribute('x1',x);ph.setAttribute('x2',x)}const tc=$('#tc');if(tc)tc.textContent=fmt(S.t);const sc=$('#scrub');if(sc)sc.value=S.t;const pb=$('#pb');if(pb)pb.style.width=(S.t/T*100)+'%';const pl=$('#pls');if(pl){const i=Math.min(r.path.length-1,Math.floor(S.t/10)),u=(S.t%10)/10,a=P(r.path[i]),b=P(r.path[Math.min(i+1,r.path.length-1)]);let f=u>.6?(u-.6)/.4:0;f=f*f*(3-2*f);pl.setAttribute('cx',a.x+65+(b.x-a.x)*f);pl.setAttribute('cy',a.y+34+(b.y-a.y)*f);pl.style.opacity=(S.playing||S.t>0)?1:0}}
+function hd(){var T={graph:['Every route. Every cue. One canvas.','02 / STORY GRAPH'],narrative:['What the player knows, beat by beat.','03 / NARRATIVE MAP'],library:['Your sound, inventoried honestly.','04 / CUE LIBRARY'],lab:['Replay the player\u2019s experience.','05 / ROUTE LAB'],validation:['Find it before they hear it.','06 / VALIDATION CENTRE'],reports:['Evidence you can verify.','07 / REPORTS']}[S.ws];return T?`<div class='wh'><span class='mk'>${T[1]}</span><h2>${T[0]}</h2></div>`:''}
+let timer;function tick(){const r=route(),T=r.path.length*10;S.t+=.5;if(S.t>=T){S.t=T-.01;stopP();return}const i=Math.floor(S.t/10),p=r.path[i];if(p!==S.pid){S.pid=p;const e=simulate(r).filter(e=>e.pid===p&&e.type==='cue');e.forEach(x=>playCueTriggerSound(x.v==='fail'));render()}else upd()}
+function startP(){S.playing=true;ac();if(S.t>=route().path.length*10-.1)S.t=0;S.lt=performance.now();cancelAnimationFrame(S.raf);S.raf=requestAnimationFrame(frame);render()}
+function stopP(){S.playing=false;cancelAnimationFrame(S.raf);render()}
+function frame(now){if(!S.playing)return;var dt=Math.min(.05,(now-S.lt)/1000);S.lt=now;var r=route(),T=r.path.length*10;S.t+=dt*1.5;if(S.t>=T){S.t=T-.01;S.auto=false;stopP();return}var p=r.path[Math.floor(S.t/10)];if(p!==S.pid){S.pid=p;var cs=simulate(r).filter(function(e){return e.pid===p&&e.type==='cue'});cs.forEach(function(x){playCueTriggerSound(x.v==='fail')});render();upd();ring(cs.some(function(x){return x.v==='fail'}),p)}else upd();S.raf=requestAnimationFrame(frame)}
+function ring(bad,p){var g=document.getElementById('gsvg'),n=P(p);if(!g)return;var c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('class','rg'+(bad?' bad':''));c.setAttribute('cx',n.x+65);c.setAttribute('cy',n.y+34);c.setAttribute('r',34);g.appendChild(c);setTimeout(function(){c.remove()},1100)}
+function labGo(k){const r=route();const L=S.lab;if(k==='restart'||k==='start'){L.step=0}else if(k==='next'&&L.step<r.path.length-1)L.step++;else if(k==='prev'&&L.step>0)L.step--;
+ const ev=simulate(r);L.last=Math.max(...ev.filter(e=>r.path.indexOf(e.pid)<=L.step).map(e=>e.k));S.pid=r.path[L.step];S.t=L.step*10;render()}
+document.addEventListener('click',e=>{const t=e.target.closest('button,[data-pid],[data-asset],tr[data-find],a[data-find],#tl');if(!t)return;const d=t.dataset;
+ if(d.ws)return go(d.ws);
+ if(d.route){S.route=d.route;if(!route().path.includes(S.pid))S.pid=route().path[0];S.t=0;S.lab={step:-1,log:[]};click();return render()}
+ if(d.pid){S.pid=d.pid;S.t=Math.max(0,route().path.indexOf(d.pid))*10;return render()}
+ if(d.asset){S.asset=d.asset;return render()}
+ if(d.lib){S.lib=d.lib;return render()}
+ if(d.nmf){S.nmf=d.nmf;return render()}
+ if(d.cp){S.copilot=d.cp;return render()}
+ if(d.tone){playAuditionTone(+d.tone,.5);return}
+ if(d.step){const r=route(),i=Math.min(r.path.length-1,Math.max(0,r.path.indexOf(S.pid)+ +d.step));return setPid(r.path[i])}
+ if(d.set){const f=fin();S.fs[f.cat+f.cue+f.route]=d.set;f.status=d.set;S.hist.push(f.id+' marked '+d.set);return render()}
+ if(d.find){e.preventDefault();S.fid=d.find;const f=fin();if(f){S.route='Route '+f.route.slice(-1);S.pid=f.p.split(',')[0]}
+  if(d.go){if(d.act2==='repro')return repro();return go(d.go)}return render()}
+ if(d.go){if(d.act2==='repro')return repro();return go(d.go)}
+ if(d.lab){if(d.lab==='repro')return repro();return labGo(d.lab)}
+ if(t.id==='tl'){const b=t.getBoundingClientRect(),T=route().path.length*10;S.t=Math.max(0,(e.clientX-b.left)/b.width*800-60)/730*T;S.pid=route().path[Math.min(route().path.length-1,Math.floor(S.t/10))];return render()}
+ const a=d.act;if(!a)return;
+ if(a==='run'){const o=S.run;runVal();S.hist.push('Validation run #'+S.runs.length);toast('Validation complete: '+S.run.findings.filter(f=>f.status!=='Resolved').length+' open');render()}
+ else if(a==='play')S.playing?stopP():startP();else if(a==='stop'){S.t=0;S.pid=route().path[0];stopP()}
+ else if(a==='auto'){S.auto=!S.auto;S.auto?startP():stopP()}
+ else if(a==='pal')pal();else if(a==='viol')playCueTriggerSound(true);else if(a==='good')playCueTriggerSound(false);
+ else if(a==='propose'){S.prop=true;render()}else if(a==='reject'){S.prop=null;render()}
+ else if(a==='apply'){const c=M.cues.find(c=>c.asset==='traitor_theme.wav');S.undo={c,p:c.p,ord:c.ord};c.p='P-004';c.ord=2;S.prop=null;S.hist.push('Cue traitor_theme.wav moved to P-004 (approved)');runVal();toast('Applied and revalidated. Undo available.');render()}
+ else if(a==='undo'&&S.undo){S.undo.c.p=S.undo.p;S.undo.c.ord=S.undo.ord;S.undo=null;S.hist.push('Fix undone');runVal();render()}
+ else if(a==='imp')$('#file').click();
+ else if(a==='playAsset'){const A=M.assets[S.asset];const s=ac().createBufferSource();s.buffer=A.buf;s.connect(out());s.start()}
+ else if(a==='copyj'){navigator.clipboard&&navigator.clipboard.writeText(JSON.stringify(reportObj(),null,1)).then(()=>toast('JSON copied'),()=>toast('Copy blocked: select the text manually'))}
+ else if(a==='mdr'){S.md=!S.md;render()}
+ else if(a==='importStory')toast('Twee/Ink import is not included in this single-file build; showing the bundled model.')});
+function repro(){S.route='Route B';S.pid='P-003';S.ws='lab';S.lab={step:0,log:[]};labGo('restart');S.ws='lab';const r=route();S.lab.step=r.path.indexOf('P-003');labGo('next');S.lab.step=r.path.indexOf('P-003');const ev=simulate(r);S.lab.last=Math.max(...ev.filter(e=>r.path.indexOf(e.pid)<=S.lab.step).map(e=>e.k));S.pid='P-003';render()}
+document.addEventListener('change',async e=>{if(e.target.id==='sfx')S.sfx=e.target.checked;if(e.target.id==='file'){const f=e.target.files[0];if(!f)return;
+ try{const ab=await f.arrayBuffer(),buf=await ac().decodeAudioData(ab.slice(0)),d=buf.getChannelData(0),pk=[],n=Math.floor(d.length/128);let m=0;for(let i=0;i<128;i++){let x=0;for(let j=i*n;j<(i+1)*n;j++)x=Math.max(x,Math.abs(d[j]));pk.push(x);m=Math.max(m,x)}
+  const h=await sha(String.fromCharCode(...new Uint8Array(ab.slice(0,4096))))+'';const A=M.assets[f.name]||(M.assets[f.name]={layer:'SFX'});Object.assign(A,{up:true,buf,peaks:pk,dur:buf.duration,sr:buf.sampleRate,ch:buf.numberOfChannels,pk:m,fmt:f.name.split('.').pop().toUpperCase(),hash:h});S.asset=f.name;S.hist.push(f.name+' imported');runVal();toast('Decoded '+f.name);render()}catch(x){toast('Cannot decode '+f.name+': invalid or unsupported audio')}}});
+document.addEventListener('input',e=>{if(e.target.id==='vol')VOL=+e.target.value;if(e.target.id==='scrub'){S.t=+e.target.value;S.pid=route().path[Math.floor(S.t/10)];render()}if(e.target.id==='q'){const v=e.target.value.toLowerCase();document.querySelectorAll('tr[data-asset]').forEach(r=>r.style.display=r.dataset.asset.includes(v)?'':'none')}});
+function pal(){$('#ov').innerHTML=`<div class="pal" id="pal"><div>${WS.map(([k,l])=>`<button data-pg="${k}">${l}</button>`).join('')}<button data-pg="__run">Run Validation</button></div></div>`;$('#pal button').focus()}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-pg]');if(b){$('#ov').innerHTML='';b.dataset.pg==='__run'?(runVal(),render()):go(b.dataset.pg)}else if(e.target.id==='pal')$('#ov').innerHTML=''});
+document.addEventListener('keydown',e=>{const m=e.ctrlKey||e.metaKey;if(m&&e.key==='k'){e.preventDefault();pal()}else if(e.key==='Escape')$('#ov').innerHTML='';else if(m&&e.key==='s'){e.preventDefault();toast('Session state is held in memory in this build')}else if(m&&e.key==='z'&&S.undo){e.preventDefault();document.querySelector('[data-act=undo]').click()}else if(e.key===' '&&!/INPUT|BUTTON|TEXTAREA/.test(document.activeElement.tagName)){e.preventDefault();S.playing?stopP():startP()}else if((e.key==='Enter')&&document.activeElement.dataset&&document.activeElement.dataset.pid)document.activeElement.dispatchEvent(new MouseEvent('click',{bubbles:true}))});
+sha(JSON.stringify([M.passages,M.edges])).then(h=>{S.mh=h});
+runVal();S.fid='BT-001';S.anim=1;render();S.anim=0;
+const LOGO='<svg width="26" height="20" viewBox="0 0 26 20" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round"><path d="M2 8v4M7 4v12M13 1v18M19 5v10M24 8v4"/></svg>';
+const FEAT={overview:'Project health, QA priorities and a scrubber tied to real route state.',graph:'Every passage and route, with cues and findings shown on the node.',narrative:'Follow what the player knows, beat by beat, on any route.',library:'Audio assets with real decoding, waveforms and honest missing-file status.',lab:'Replay a route step by step and watch cues fire against story state.',validation:'Deterministic rules with evidence, status and source references.',reports:'Reproducible exports with a SHA-256 you can verify.'};
+function demoHTML(nm){const r=S.run.ex.routes.find(x=>x.name===nm),cue=simulate(r).find(e=>e.type==='cue'&&e.cue.requires),bad=cue&&cue.v==='fail';
+ return `<div class="dp">${r.path.map((p,i)=>`<span class="ch ${cue&&cue.pid===p?(bad?'bad':'good'):''}">${P(p).n}</span>${i<r.path.length-1?'<i></i>':''}`).join('')}</div><div class="vd ${bad?'bad':'good'}"><b class="mono">${bad?'BT-001 · Reveal Protection · High':cue&&cue.v==='unverified'?'Unverified':'No finding'}</b><p>${!cue?'No protected cue on this route.':bad?cue.cue.asset+' starts at '+P(cue.pid).n+' while conspirator_known is false.':cue.v==='unverified'?'Event order inside the passage is unknown.':cue.cue.asset+' plays at '+P(cue.pid).n+', after the player has learned the truth.'}</p></div>`}
+const land=document.createElement('div');land.id='land';document.body.appendChild(land);
+function buildLand(){const ex=S.run.ex;land.innerHTML=`<nav class="ln"><div class="logo" style="padding:0">${LOGO}BranchTone</div><div class="lk"><a data-s="demo">How it works</a><a data-s="ws">Workspaces</a><a data-s="proof">Proof</a></div><button class="btn pri" data-l="overview">Launch studio</button></nav>
+<section class="lh"><canvas id="cv"></canvas><div class="lc"><span class="tag ok rv">Narrative audio QA and regression testing</span><h1>${'Sound design you can test, not just hear.'.split(' ').map((w,i)=>`<span style="--d:${.1+i*.09}s">${w}</span>`).join(' ')}</h1><p class="rv">BranchTone replays every route through your branching story and flags the moment a sound gives away something the player does not know yet.</p><div class="row rv"><button class="btn pri big" data-l="overview">Launch studio</button><button class="btn big" data-l="repro">Reproduce BT-001</button></div></div></section>
+<section class="ls" id="demo"><div class="dg"><div class="rv"><h2>One theme. Two routes. Two outcomes.</h2><p class="lead">The same cue is fine on one path and a spoiler on another. Pick a route and BranchTone runs the story model to tell you which.</p><div class="seg" style="margin-top:22px">${ex.routes.map((r,i)=>`<button data-lr="${r.name}" class="${i?'':'on'}">${r.name}</button>`).join('')}</div></div><div class="card tilt rv" id="dm">${demoHTML(ex.routes[0].name)}</div></div></section>
+<section class="ls" id="ws"><h2 class="rv">Seven workspaces, one source of truth.</h2><p class="lead rv">Select a passage, finding or route anywhere and it stays selected everywhere.</p><div class="fg">${WS.map(([k,l])=>`<div class="card fc rv" data-l="${k}" tabindex="0">${ico(ICON[k])}<b>${l}</b><span>${FEAT[k]}</span></div>`).join('')}</div></section>
+<section class="ls" id="proof"><h2 class="rv">Numbers from the live model.</h2><div class="sg"><div class="card rv"><b>${M.passages.length}</b>passages</div><div class="card rv"><b>${ex.routes.length}</b>routes found</div><div class="card rv"><b>${ex.seen}</b>states explored</div><div class="card rv"><b>${S.run.findings.length}</b>findings</div></div></section>
+<section class="ls lf"><h2 class="rv">Hear the problem before your players do.</h2><div class="row rv" style="justify-content:center;margin-top:24px"><button class="btn pri big" data-l="overview">Launch studio</button></div></section>`;
+ const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('vis')),{root:land,threshold:.12});land.querySelectorAll('.rv').forEach(el=>io.observe(el))}
+function loop(t){const c=document.getElementById('cv');if(!c||land.style.display==='none')return;const d=devicePixelRatio||1,w=c.width=c.clientWidth*d,h=c.height=c.clientHeight*d,g=c.getContext('2d'),n=Math.floor(w/(14*d)),s=t/1000;for(let i=0;i<n;i++){const a=(Math.sin(i*.13+s*1.1)*.5+.5)*(Math.sin(i*.037-s*.6)*.5+.5),bh=(.08+a*.9)*h*.5,col=i/n>.62&&i/n<.78?'239,68,68':'16,185,129',gr=g.createLinearGradient(0,h/2-bh,0,h/2+bh);gr.addColorStop(0,`rgba(${col},0)`);gr.addColorStop(.5,`rgba(${col},.8)`);gr.addColorStop(1,`rgba(${col},0)`);g.fillStyle=gr;g.fillRect(i*14*d+2,h/2-bh,5*d,bh*2)}if(!matchMedia('(prefers-reduced-motion:reduce)').matches)requestAnimationFrame(loop)}
+function launch(l){land.classList.add('out');setTimeout(()=>{land.style.display='none'},650);if(l==='repro')repro();else{S.ws=l;S.anim=1;render();S.anim=0}}
+function showLand(){buildLand();land.style.display='';land.scrollTop=0;requestAnimationFrame(()=>{land.classList.remove('out');requestAnimationFrame(loop)})}
+land.addEventListener('click',e=>{const b=e.target.closest('[data-l],[data-lr],[data-s]');if(!b)return;if(b.dataset.l)return launch(b.dataset.l);if(b.dataset.s)return document.getElementById(b.dataset.s).scrollIntoView({behavior:'smooth'});land.querySelectorAll('[data-lr]').forEach(x=>x.classList.toggle('on',x===b));document.getElementById('dm').innerHTML=demoHTML(b.dataset.lr)});
+land.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.dataset.l)launch(e.target.dataset.l)});
+land.addEventListener('pointermove',e=>{land.style.setProperty('--lx',e.clientX+'px');land.style.setProperty('--ly',e.clientY+'px');const d=e.target.closest('.tilt');if(d&&d.classList.contains('vis')){const r=d.getBoundingClientRect();d.style.transform=`perspective(900px) rotateY(${((e.clientX-r.left)/r.width-.5)*9}deg) rotateX(${-((e.clientY-r.top)/r.height-.5)*9}deg)`}});
+land.addEventListener('pointerout',e=>{const d=e.target.closest('.tilt');if(d&&!d.contains(e.relatedTarget))d.style.transform=''});
+var ST={mode:0,aud:0,sp:-.01,rip:[],mx:600,my:400},BD=.85,TOT=0,NT=[],PB={},RM=matchMedia('(prefers-reduced-motion:reduce)');
+[[62,1],[66,1],[69,1],[74,2],[71,1],[69,1],[68,1,1],[64,1],[62,1],[64,1],[66,1],[69,1],[71,1],[74,1],[76,2],[74,1],[71,1],[69,1],[66,1],[62,2]].forEach(function(a){NT.push({m:a[0],s:TOT,d:a[1],bad:a[2]});TOT+=a[1]});
+var PT=(function(){var a=[],n=1500,ga=Math.PI*(3-Math.sqrt(5));for(var i=0;i<n;i++){var y=1-2*(i+.5)/n,r=Math.sqrt(1-y*y),th=ga*i;a.push({sx:Math.cos(th)*r,sy:y,sz:Math.sin(th)*r,x:0,y:0,z:0,k:i%23===0?1:i%41===0?2:0})}return a})();
+function pluck(m){var c=ac(),sr=c.sampleRate,f=440*Math.pow(2,(m-69)/12),n=Math.round(sr/f),L=sr*3,b=c.createBuffer(1,L,sr),d=b.getChannelData(0),w=new Float32Array(n),p=0,q,i;for(i=0;i<n;i++)w[i]=Math.random()*2-1;for(i=0;i<L;i++){q=(p+1)%n;d[i]=w[p];w[p]=(w[p]+w[q])*.4985;p=q}return b}
+function ag(){if(!ST.m){var c=ac(),m=c.createGain(),cv=c.createConvolver(),wet=c.createGain(),sr=c.sampleRate,ir=c.createBuffer(2,Math.floor(sr*2.8),sr);for(var k=0;k<2;k++){var d=ir.getChannelData(k);for(var i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,3)}cv.buffer=ir;wet.gain.value=.4;m.gain.value=.55;m.connect(c.destination);m.connect(cv);cv.connect(wet);wet.connect(c.destination);ST.m=m}return ST.m}
+function nt(m,bad){var c=ac(),s=c.createBufferSource(),g=c.createGain();s.buffer=PB[m]||(PB[m]=pluck(m));g.gain.value=bad?.55:.7;s.connect(g);g.connect(ag());s.start()}
+function adv(dt){var p=ST.sp,n=p+dt/BD;if(n>TOT+2.5)n=-.01;NT.forEach(function(x){if(x.s>p&&x.s<=n){nt(x.m,x.bad);ST.rip.push({u:x.s/TOT,m:x.m,t:performance.now()/1000})}});if(Math.floor(n/4)!==Math.floor(p/4)&&n>=0&&n<TOT)nt(50,0);ST.sp=n}
+function dHero(c,t){var d=Math.min(devicePixelRatio||1,2),w=c.clientWidth,h=c.clientHeight;if(c.width!==Math.round(w*d)){c.width=w*d;c.height=h*d}var g=c.getContext('2d');g.setTransform(d,0,0,d,0,0);g.clearRect(0,0,w,h);var s=t/1000;ST.ro=(ST.ro||0)+((ST.mode?.35:s*.12)-(ST.ro||0))*.05;var R=Math.min(w,h)*.3,cx=w/2,cy=h*.4,ry=ST.ro+(ST.mx/innerWidth-.5)*.9,rx=(ST.my/innerHeight-.5)*.5,cr=Math.cos(ry),sr=Math.sin(ry),cX=Math.cos(rx),sX=Math.sin(rx),r=c.getBoundingClientRect(),mx=ST.mx-r.left,my=ST.my-r.top;
+ for(var i=0;i<PT.length;i++){var p=PT[i],tx,ty,tz;if(ST.mode){var u=(i%50)/50-.5,v=Math.floor(i/50)/30-.5;tx=u*3.2;tz=v*1.6;ty=Math.sin(u*9+s*1.4)*Math.cos(v*3.2)*.38}else{tx=p.sx;ty=p.sy;tz=p.sz}p.x+=(tx-p.x)*.07;p.y+=(ty-p.y)*.07;p.z+=(tz-p.z)*.07;
+ var x1=p.x*cr+p.z*sr,z1=-p.x*sr+p.z*cr,y1=p.y*cX-z1*sX,z2=p.y*sX+z1*cX,k=1/(1-z2*.25),kk=1+(ST.kk||0)*(.3+(i%9)/9*.5),px=cx+x1*R*k*kk,py=cy+y1*R*k*kk,dx=px-mx,dy=py-my,q=dx*dx+dy*dy;if(q<9000){var f=(1-q/9000)*26/Math.sqrt(q+1);px+=dx*f;py+=dy*f}
+ g.fillStyle=p.k===1?'rgba(239,68,68,'+(.45+z2*.3)+')':p.k===2?'rgba(16,185,129,'+(.55+z2*.3)+')':'rgba(236,232,225,'+(.2+(z2+1)*.28)+')';var z=.7+(z2+1)*.8;g.fillRect(px,py,z,z)}}
+function dScore(c,s){var d=Math.min(devicePixelRatio||1,2),W=c.clientWidth,H=c.clientHeight;c.width=W*d;c.height=H*d;var g=c.getContext('2d');g.setTransform(d,0,0,d,0,0);var y0=H*.32,gp=H*.07,X=function(b){return 70+b/TOT*(W-110)},Y=function(m){return y0+4*gp-(m-64)*gp*.3};g.lineWidth=1;
+ for(var i=0;i<5;i++){g.beginPath();g.strokeStyle='rgba(236,232,225,.5)';for(var x=0;x<=W;x+=8){var y=y0+i*gp+Math.sin(x*.011+s*1.1+i*.7)*3+Math.sin(x*.027-s*.8)*1.5;x?g.lineTo(x,y):g.moveTo(x,y)}g.stroke()}
+ g.font='11px Geist Mono,monospace';g.fillStyle='rgba(236,232,225,.5)';g.fillText('4/4',22,y0+gp*2.3);g.strokeStyle='rgba(236,232,225,.3)';for(var b=4;b<TOT;b+=4){var bx=X(b)-10;g.beginPath();g.moveTo(bx,y0);g.lineTo(bx,y0+4*gp);g.stroke()}
+ ST.rip=ST.rip.filter(function(r){return s-r.t<2.4});ST.rip.forEach(function(r){var a=s-r.t;g.strokeStyle='rgba(16,185,129,'+(.6*(1-a/2.4))+')';g.beginPath();g.ellipse(X(r.u*TOT),Y(r.m),a*70,a*26,0,0,7);g.stroke()});
+ NT.forEach(function(n){var x=X(n.s),y=Y(n.m),col=n.bad?'#EF4444':(ST.aud&&ST.sp>=n.s)?'#10B981':'rgba(236,232,225,.9)';g.fillStyle=col;g.strokeStyle=col;g.beginPath();g.ellipse(x,y,7,5,-.35,0,7);g.fill();g.beginPath();g.moveTo(x+6,y);g.lineTo(x+6,y-34);g.stroke();if(n.bad)g.fillText('BT-001: plays before the reveal',x-70,y+36)});
+ if(ST.aud&&ST.sp>=0){var px=X(ST.sp);g.strokeStyle='rgba(16,185,129,.7)';g.beginPath();g.moveTo(px,y0-30);g.lineTo(px,y0+4*gp+30);g.stroke()}}
+function loop(t){if(land.style.display==='none')return;var dt=Math.min(.05,(t-(ST.l||t))/1000);ST.l=t;if(ST.aud)adv(dt);ST.kk=(ST.kk||0)*.93;ST.cx=(ST.cx||ST.mx)+(ST.mx-(ST.cx||ST.mx))*.18;ST.cy=(ST.cy||ST.my)+(ST.my-(ST.cy||ST.my))*.18;cur.style.transform='translate('+ST.cx+'px,'+ST.cy+'px)';var h=document.getElementById('cv'),s=document.getElementById('sc');if(h&&land.scrollTop<innerHeight*1.3)dHero(h,t);if(s&&s.getBoundingClientRect().top<innerHeight)dScore(s,t/1000);ST.f=(ST.f||0)+1;if(RM.matches&&ST.f>2)return;requestAnimationFrame(loop)}
+function upL(){land.querySelectorAll('[data-a]').forEach(function(b){b.textContent=b.dataset.a==='play'?(ST.aud?'STOP SCORE':'PLAY SCORE'):(ST.aud?'AUDIO ON':'AUDIO OFF')})}
+function launch(l){ST.aud=0;land.classList.add('out');setTimeout(function(){land.style.display='none';cur.style.display='none'},650);if(l==='repro')repro();else{S.ws=l;S.anim=1;render();S.anim=0}}
+function buildLand(){var ex=S.run.ex;ST.f=0;ST.aud=0;cur.style.display='block';land.innerHTML=`<i class='pg' id='pg'></i><div class='at'><b>BRANCHTONE</b><span class='row' style='gap:12px'><button data-a='audio'>AUDIO OFF</button><button data-l='overview'>ENTER STUDIO</button></span></div><nav class='ix'><a data-s='sig'><i>01</i>Signal</a><a data-s='fld'><i>02</i>Field</a><a data-s='scr'><i>03</i>Score</a><a data-s='tst'><i>04</i>Test</a></nav>
+<section class='lh' id='sig'><canvas id='cv'></canvas><div class='hl'><small>EXP 00 // PRIMORDIAL SIGNAL</small><h1>${'BRANCHTONE'.split('').map(function(c,i){return `<span style='--d:${.2+i*.06}s'>${c}</span>`}).join('')}</h1><small>NARRATIVE AUDIO QA &amp; REGRESSION TESTING</small><div class='row' style='justify-content:center;margin:26px 0 20px'><span class='mk' style='display:inline'>CLICK THE SPHERE TO PLUCK · SIGNAL STATE</span><button class='st on' data-st='0'>01 SPHERE</button><button class='st' data-st='1'>02 WAVEFORM</button></div><p>“Sound design you can test, not just hear.”</p><small>φ = 1.618033… // MANIFESTO</small></div></section>
+<section class='ls' id='fld'><div class='mk rv'>01 / THE WORKSPACES</div><h2 class='rv'>Enter the field.</h2><p class='lead rv'>Seven workspaces for finding the moment a sound tells the player too much.</p><div style='margin-top:50px'>${WS.map(function(w,i){return `<div class='rw rv' data-l='${w[0]}' tabindex='0'><span class='mono'>0${i+1}</span><b>${w[1]}</b><span>${FEAT[w[0]]}</span><span class='mk'>${['STORY','STORY','STORY','AUDIO','TEST','TEST','REPORT'][i]}</span></div>`}).join('')}</div></section>
+<section class='ls' id='scr'><div class='mk rv'>EXP 02 // SCORE</div><h2 class='rv'>A cue sheet is a score.</h2><p class='lead rv'>Every cue is a note that must sound at the right moment. Press play: a D pentatonic line, plucked by a string synth built live in your browser. One note is wrong on purpose.</p><div class='scw rv'><canvas id='sc'></canvas></div><div class='row' style='justify-content:space-between;margin-top:16px'><span class='mk'>D PENTATONIC · 4/4 ADAGIO · KARPLUS-STRONG PLUCK · NO SAMPLES</span><button class='btn' data-a='play'>PLAY SCORE</button></div></section>
+<section class='ls' id='tst'><div class='dg'><div class='rv'><div class='mk'>EXP 03 // TEST</div><h2>One theme. Two routes.</h2><p class='lead'>The same cue is fine on one path and a spoiler on another. Pick a route and the story model decides.</p><div class='seg' style='margin-top:22px'>${ex.routes.map(function(r,i){return `<button data-lr='${r.name}' class='${i?'':'on'}'>${r.name}</button>`}).join('')}</div></div><div class='card tilt rv' id='dm'>${demoHTML(ex.routes[0].name)}</div></div><div class='sg'><div class='card rv'><b>${M.passages.length}</b>passages</div><div class='card rv'><b>${ex.routes.length}</b>routes</div><div class='card rv'><b>${ex.seen}</b>states explored</div><div class='card rv'><b>${S.run.findings.length}</b>findings</div></div><div class='row rv' style='justify-content:center;margin-top:90px'><button class='btn' data-l='overview'>ENTER STUDIO</button></div></section>`;
+ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('vis')})},{root:land,threshold:.12});land.querySelectorAll('.rv').forEach(function(el){io.observe(el)})}
+land.addEventListener('click',function(e){var b=e.target.closest('[data-a],[data-st]');if(!b)return;if(b.dataset.st!==undefined){ST.mode=+b.dataset.st;land.querySelectorAll('[data-st]').forEach(function(x){x.classList.toggle('on',x===b)})}else{ST.aud=!ST.aud;if(ST.aud){ac().resume&&ac().resume();ST.sp=-.01}upL()}});
+land.addEventListener('pointermove',function(e){ST.mx=e.clientX;ST.my=e.clientY});
+document.addEventListener('click',e=>{if(e.target.closest('.side .logo'))showLand()});
+var ANL,cur=document.createElement('div');cur.className='cur';document.body.appendChild(cur);
+function out(){if(!ANL){var c=ac();ANL=c.createAnalyser();ANL.fftSize=1024;ANL.connect(c.destination)}return ANL}
+function scope(){var c=document.getElementById('osc');if(c){var g=c.getContext('2d'),W=c.width,H=c.height;g.clearRect(0,0,W,H);if(ANL){var d=new Uint8Array(ANL.fftSize),pk=0;ANL.getByteTimeDomainData(d);g.strokeStyle='#10B981';g.lineWidth=1.3;g.beginPath();for(var i=0;i<W-24;i++){var v=(d[Math.floor(i/(W-24)*d.length)]-128)/128;pk=Math.max(pk,Math.abs(v));var y=H/2+v*H*.45;i?g.lineTo(i,y):g.moveTo(i,y)}g.stroke();ST.pk=Math.max(pk,(ST.pk||0)-.015);g.fillStyle='rgba(255,255,255,.12)';g.fillRect(W-14,2,8,H-4);g.fillStyle=ST.pk>.9?'#EF4444':'#10B981';var bh=(H-4)*Math.min(1,ST.pk);g.fillRect(W-14,H-2-bh,8,bh)}else{g.strokeStyle='rgba(255,255,255,.2)';g.beginPath();g.moveTo(0,H/2);g.lineTo(W-24,H/2);g.stroke()}}requestAnimationFrame(scope)}
+scope();
+land.addEventListener('click',function(e){if(e.target.id==='cv'){ST.kk=1.2;nt([62,66,69,74,71,76][Math.floor(Math.random()*6)],0)}});
+land.addEventListener('pointermove',function(e){cur.classList.toggle('h',!!e.target.closest('button,.rw,a,#cv'));var m=e.target.closest('.at button,#land .btn');if(ST.mg&&ST.mg!==m)ST.mg.style.transform='';if(m){var r=m.getBoundingClientRect();m.style.transform='translate('+(e.clientX-r.left-r.width/2)*.25+'px,'+(e.clientY-r.top-r.height/2)*.35+'px)'}ST.mg=m});
+land.addEventListener('scroll',function(){var p=document.getElementById('pg');if(p)p.style.transform='scaleX('+(land.scrollTop/Math.max(1,land.scrollHeight-land.clientHeight))+')';var cs='sig';['sig','fld','scr','tst'].forEach(function(id){var e=document.getElementById(id);if(e&&e.offsetTop<=land.scrollTop+innerHeight*.45)cs=id});land.querySelectorAll('.ix a').forEach(function(a){a.classList.toggle('on',a.dataset.s===cs)})});
+showLand();
+</script></body></html>

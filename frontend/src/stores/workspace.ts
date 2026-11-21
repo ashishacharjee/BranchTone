@@ -10,12 +10,14 @@
  */
 import { create } from 'zustand';
 import type { WorkspaceId } from '../types/branchtone';
+import type { CanonicalStoryIRResponse } from '../services/api';
 
 interface WorkspaceState {
   // ── Project context ──────────────────────────────────────────────────────
   activeProjectId: string | null;
   activeStoryVersionId: string | null;
   demoMode: boolean;
+  loadedStoryIR: CanonicalStoryIRResponse | null;
 
   // ── Workspace navigation ─────────────────────────────────────────────────
   activeWorkspace: WorkspaceId;
@@ -33,6 +35,7 @@ interface WorkspaceState {
   setActiveWorkspace: (workspace: WorkspaceId) => void;
   setSelectedRoute: (routeId: string | null) => void;
   setSelectedPassage: (passageId: string | null) => void;
+  setLoadedStoryIR: (ir: CanonicalStoryIRResponse | null) => void;
   /**
    * Deep-link from a finding: sets route, passage and finding consistently.
    * (AGENTS.md §5 — finding deep-link updates all three together)
@@ -53,6 +56,7 @@ export const initialWorkspaceState = {
   activeProjectId: 'prj_the_last_signal_demo',
   activeStoryVersionId: 'ver_the_last_signal_v04',
   demoMode: true,
+  loadedStoryIR: null as CanonicalStoryIRResponse | null,
   activeWorkspace: 'story-graph' as WorkspaceId,
   selectedRouteId: 'route_b',
   selectedPassageId: 'P-003',
@@ -124,6 +128,16 @@ export const useWorkspaceStore = create<WorkspaceState>()((set) => ({
   setActiveSimulation: (simulationId) => set({ activeSimulationId: simulationId }),
 
   setActiveValidationRun: (runId) => set({ activeValidationRunId: runId }),
+
+  setLoadedStoryIR: (ir) =>
+    set({
+      loadedStoryIR: ir,
+      demoMode: ir === null,
+      activeStoryVersionId: ir ? ir.story_version.version_id : initialWorkspaceState.activeStoryVersionId,
+      selectedPassageId: ir ? (ir.passages[0]?.passage_id ?? null) : initialWorkspaceState.selectedPassageId,
+      selectedRouteId: ir ? null : initialWorkspaceState.selectedRouteId,
+      selectedFindingId: ir ? null : initialWorkspaceState.selectedFindingId,
+    }),
 
   reset: () => set(initialWorkspaceState),
 }));

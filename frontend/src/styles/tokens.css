@@ -1,92 +1,92 @@
-/* Hallmark · checked: 2026-11-13 · genre: atmospheric · built: the project · redesign: polish · v2.0.0 */
+/* Hallmark · checked: 2026-11-20 · genre: atmospheric · built: BranchTone Master UI Option 2 Dark Studio */
 :root {
-  /* ── Video Reference Design Tokens (Daniel/Atlas Daylight Canvas) ────── */
-  --bt-canvas-outer: transparent;
-  --bt-canvas-inner: transparent;
-  --bt-card-white: rgba(255, 255, 255, 0.78);
-  --bt-card-border: rgba(255, 255, 255, 0.82);
-  --bt-card-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
-  --bt-card-shadow-hover: 0 16px 36px -6px rgba(0, 0, 0, 0.08), 0 6px 14px -2px rgba(0, 0, 0, 0.04);
-  --bt-ink: #111827;
-  --bt-ink-secondary: #4B5563;
-  --bt-ink-muted: #9CA3AF;
-  --bt-ink-faint: #D1D5DB;
+  /* ── Authoritative BranchTone Dark Creative Workstation Tokens (DESIGN.md §2) ── */
+  --bt-canvas-outer: #06090A;
+  --bt-canvas-inner: #0B1011;
+  --bt-card-white: rgba(20, 28, 30, 0.85);
+  --bt-card-border: rgba(176, 198, 193, 0.16);
+  --bt-card-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --bt-card-shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.65), 0 0 20px rgba(41, 201, 138, 0.12);
+  --bt-ink: #EDF3F0;
+  --bt-ink-secondary: #AAB8B3;
+  --bt-ink-muted: #87958F;
+  --bt-ink-faint: #586661;
 
-  /* ── Vibrant Gradient Cards from Video ─────────────────────────────────── */
-  --bt-gradient-green: linear-gradient(135deg, #2ED378 0%, #10B981 100%);
-  --bt-gradient-orange: linear-gradient(135deg, #FF9B66 0%, #FF5A36 100%);
+  /* ── Vibrant Gradient Accents (Option 2 Master Reference) ─────────────── */
+  --bt-gradient-green: linear-gradient(135deg, #29C98A 0%, #145C43 100%);
+  --bt-gradient-orange: linear-gradient(135deg, #D9A65D 0%, #8A5B1D 100%);
 
   /* ── Canvas & Surface Inks ────────────────────────────────────────────── */
-  --bt-bg: #DFE3E8;
-  --bt-bg-gradient: radial-gradient(ellipse 80% 50% at 50% -20%, #E8EBF0 0%, #DFE3E8 100%);
-  --bt-bg-elevated: #FFFFFF;
-  --bt-surface: #FFFFFF;
-  --bt-surface-2: #F9FAFB;
-  --bt-surface-3: #F3F4F6;
-  --bt-surface-hover: #E5E7EB;
+  --bt-bg: #0B1011;
+  --bt-bg-gradient: radial-gradient(ellipse 90% 60% at 50% -20%, #101719 0%, #0B1011 100%);
+  --bt-bg-elevated: #101719;
+  --bt-surface: #141C1E;
+  --bt-surface-2: #1A2426;
+  --bt-surface-3: #202B2D;
+  --bt-surface-hover: #263335;
 
-  /* ── Liquid Glass & Bento Tokens ──────────────────────────────────────── */
-  --bt-card-bg: rgba(255, 255, 255, 0.82);
-  --bt-card-liquid-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.86) 0%, rgba(255, 255, 255, 0.72) 100%);
-  --bt-card-raise: rgba(255, 255, 255, 0.92);
-  --bt-card-line: rgba(255, 255, 255, 0.85);
-  --bt-card-highlight: rgba(255, 255, 255, 0.95);
-  --bt-glass: rgba(255, 255, 255, 0.78);
-  --bt-glass-elevated: rgba(255, 255, 255, 0.92);
-  --bt-glass-border: rgba(255, 255, 255, 0.8);
-  --bt-overlay-bg: rgba(15, 23, 42, 0.45);
-  --bt-hover-surface: rgba(15, 23, 42, 0.04);
-  --bt-hover-surface-subtle: rgba(15, 23, 42, 0.02);
-  --bt-dark-well: rgba(241, 245, 249, 0.8);
-  --bt-dark-tray: rgba(248, 250, 252, 0.8);
+  /* ── Smoked Glass & Metal Tokens ─────────────────────────────────────── */
+  --bt-card-bg: rgba(20, 28, 30, 0.85);
+  --bt-card-liquid-bg: linear-gradient(135deg, rgba(22, 32, 34, 0.9) 0%, rgba(16, 24, 26, 0.8) 100%);
+  --bt-card-raise: rgba(26, 36, 38, 0.95);
+  --bt-card-line: rgba(176, 198, 193, 0.18);
+  --bt-card-highlight: rgba(255, 255, 255, 0.08);
+  --bt-glass: rgba(20, 31, 31, 0.82);
+  --bt-glass-elevated: rgba(24, 36, 38, 0.95);
+  --bt-glass-border: rgba(176, 198, 193, 0.16);
+  --bt-overlay-bg: rgba(6, 9, 10, 0.8);
+  --bt-hover-surface: rgba(176, 198, 193, 0.08);
+  --bt-hover-surface-subtle: rgba(176, 198, 193, 0.04);
+  --bt-dark-well: #0B0F11;
+  --bt-dark-tray: #0D1214;
 
   /* ── Ambient Background & Aurora Tokens ────────────────────────────────── */
-  --bt-aurora-deep-1: #E4E7EB;
-  --bt-aurora-deep-2: #DFE3E8;
-  --bt-aurora-deep-3: #D8DCE2;
-  --bt-aurora-emerald-1: rgba(16, 185, 129, 0.15);
-  --bt-aurora-emerald-2: rgba(16, 185, 129, 0.04);
-  --bt-aurora-cyan-1: rgba(14, 165, 233, 0.12);
-  --bt-aurora-cyan-2: rgba(20, 184, 166, 0.03);
-  --bt-aurora-burgundy-1: rgba(240, 79, 117, 0.1);
+  --bt-aurora-deep-1: #06090A;
+  --bt-aurora-deep-2: #0B1011;
+  --bt-aurora-deep-3: #101719;
+  --bt-aurora-emerald-1: rgba(41, 201, 138, 0.12);
+  --bt-aurora-emerald-2: rgba(41, 201, 138, 0.03);
+  --bt-aurora-cyan-1: rgba(14, 165, 233, 0.08);
+  --bt-aurora-cyan-2: rgba(20, 184, 166, 0.02);
+  --bt-aurora-burgundy-1: rgba(240, 79, 117, 0.08);
   --bt-aurora-burgundy-2: rgba(158, 63, 117, 0.02);
-  --bt-aurora-spotlight-1: rgba(16, 185, 129, 0.08);
-  --bt-aurora-spotlight-2: rgba(16, 185, 129, 0.02);
-  --bt-aurora-dot: rgba(0, 0, 0, 0.05);
-  --bt-aurora-vignette: rgba(0, 0, 0, 0.04);
+  --bt-aurora-spotlight-1: rgba(41, 201, 138, 0.06);
+  --bt-aurora-spotlight-2: rgba(41, 201, 138, 0.015);
+  --bt-aurora-dot: rgba(176, 198, 193, 0.08);
+  --bt-aurora-vignette: rgba(0, 0, 0, 0.65);
 
   /* ── Borders ──────────────────────────────────────────────────────────── */
-  --bt-border: rgba(0, 0, 0, 0.08);
-  --bt-border-subtle: rgba(0, 0, 0, 0.04);
-  --bt-border-strong: rgba(0, 0, 0, 0.12);
-  --bt-border-accent: rgba(16, 185, 129, 0.35);
+  --bt-border: rgba(176, 198, 193, 0.16);
+  --bt-border-subtle: rgba(176, 198, 193, 0.08);
+  --bt-border-strong: rgba(176, 198, 193, 0.28);
+  --bt-border-accent: rgba(41, 201, 138, 0.35);
 
   /* ── Typography Colors ────────────────────────────────────────────────── */
-  --bt-text: #111827;
-  --bt-text-secondary: #4B5563;
-  --bt-text-muted: #9CA3AF;
-  --bt-text-inverse: #FFFFFF;
+  --bt-text: #EDF3F0;
+  --bt-text-secondary: #AAB8B3;
+  --bt-text-muted: #87958F;
+  --bt-text-inverse: #0B1011;
 
   /* ── Accent (Vibrant Studio Emerald / Mint) ────────────────────────────── */
-  --bt-accent: #10B981;
-  --bt-accent-soft: #34D399;
-  --bt-accent-deep: #065F46;
-  --bt-accent-glow: rgba(16, 185, 129, 0.25);
-  --bt-accent-subtle: rgba(16, 185, 129, 0.08);
+  --bt-accent: #29C98A;
+  --bt-accent-soft: #74D9B0;
+  --bt-accent-deep: #145C43;
+  --bt-accent-glow: rgba(41, 201, 138, 0.25);
+  --bt-accent-subtle: rgba(41, 201, 138, 0.08);
 
   /* ── Status Colors ────────────────────────────────────────────────────── */
-  --bt-error: #EF4444;
-  --bt-error-soft: #F87171;
-  --bt-error-glow: rgba(239, 68, 68, 0.25);
-  --bt-error-subtle: rgba(239, 68, 68, 0.08);
+  --bt-error: #F04F75;
+  --bt-error-soft: #F58AA1;
+  --bt-error-glow: rgba(240, 79, 117, 0.25);
+  --bt-error-subtle: rgba(240, 79, 117, 0.1);
 
-  --bt-warning: #F59E0B;
-  --bt-warning-soft: #FBBF24;
-  --bt-warning-subtle: rgba(245, 158, 11, 0.1);
+  --bt-warning: #D9A65D;
+  --bt-warning-soft: #E8BF7F;
+  --bt-warning-subtle: rgba(217, 166, 93, 0.12);
 
-  --bt-success: #10B981;
-  --bt-magenta: #EC4899;
-  --bt-focus: #10B981;
+  --bt-success: #35D69A;
+  --bt-magenta: #853C65;
+  --bt-focus: #A2EACB;
 
   /* ── Bento Shadows & Bevel Effects ────────────────────────────────────── */
   --bt-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
@@ -144,9 +144,9 @@
   --bt-text-4xl: 36px;
   --bt-text-hero: 44px;
 
-  /* ── Unslop Motion & Transition Curves (tokens.md: cubic-bezier(0.22, 1, 0.36, 1)) ── */
-  --bt-spring: cubic-bezier(0.22, 1, 0.36, 1);
-  --bt-spring-snappy: cubic-bezier(0.22, 1, 0.36, 1);
+  /* ── Motion & Spring Curves (Antigravity & BranchTone canonical: cubic-bezier(0.16, 1, 0.3, 1)) ── */
+  --bt-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --bt-spring-snappy: cubic-bezier(0.16, 1, 0.3, 1);
   --bt-transition-fast: 0.12s var(--bt-spring);
   --bt-transition: 0.18s var(--bt-spring);
   --bt-transition-slow: 0.3s var(--bt-spring);

@@ -1,19 +1,35 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useWorkspaceStore } from '../../stores/workspace';
 import { getPassage } from '../../services/fixtures';
+import type { PassageDisplayData } from '../../services/fixtures';
 import { GraphCanvas } from './GraphCanvas';
 import { PassageInspector } from './PassageInspector';
 import { AudioTimeline } from './AudioTimeline';
 import styles from './StoryGraphPage.module.css';
 
 export function StoryGraphPage() {
+  const loadedStoryIR = useWorkspaceStore((state) => state.loadedStoryIR);
   const selectedRouteId = useWorkspaceStore((state) => state.selectedRouteId);
   const selectedPassageId = useWorkspaceStore((state) => state.selectedPassageId);
   const setSelectedRoute = useWorkspaceStore((state) => state.setSelectedRoute);
   const setSelectedPassage = useWorkspaceStore((state) => state.setSelectedPassage);
 
-  // Look up selected passage data from the typed fixture adapter
-  const currentPassage = selectedPassageId ? getPassage(selectedPassageId) : undefined;
+  // Look up selected passage data from loaded custom story or demonstration fixtures
+  const currentPassage: PassageDisplayData | undefined = useMemo(() => {
+    if (loadedStoryIR) {
+      const p = loadedStoryIR.passages.find((x) => x.passage_id === selectedPassageId) ?? loadedStoryIR.passages[0];
+      if (!p) return undefined;
+      return {
+        ...p,
+        hasAudio: false,
+        issueCount: 0,
+        mood: 'neutral',
+        intensity: 2,
+        identity_revealed_at_entry: false,
+      };
+    }
+    return selectedPassageId ? getPassage(selectedPassageId) : undefined;
+  }, [loadedStoryIR, selectedPassageId]);
 
   const handleSelectRoute = useCallback(
     (routeId: string) => {

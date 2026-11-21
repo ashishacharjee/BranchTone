@@ -68,7 +68,7 @@ class StoryVersion(BaseModel):
     version_label: str
     source_filename: str
     source_sha256: str
-    story_format: Literal["twee_harlowe_subset"] = "twee_harlowe_subset"
+    story_format: Literal["twee_harlowe_subset", "ink_subset"] = "twee_harlowe_subset"
     compiled_at: datetime | None = None
     compilation_status: Literal["success", "warning", "failed"]
     warnings: list[str] = Field(default_factory=list)
@@ -304,5 +304,20 @@ class Finding(BaseModel):
     source_end: int | None = None
     route_trace: list[str]
     suggested_action: str | None = None
+    created_at: datetime
+    provenance: Literal["backend_validation", "demo_fixture"]
+
+
+class ValidationRun(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    run_id: str
+    project_id: str
+    version_id: str
+    simulation_id: str
+    status: Literal["completed", "failed"]
+    total_findings: int
+    findings: list[Finding]
+    rule_counts: dict[str, int]
     created_at: datetime
     provenance: Literal["backend_validation", "demo_fixture"]

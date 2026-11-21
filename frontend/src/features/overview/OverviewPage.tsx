@@ -13,7 +13,8 @@ import {
   Pause,
   SkipBack,
   SkipForward,
-  Sliders,
+  PlayCircle,
+  RefreshCw,
 } from 'lucide-react';
 import {
   getDemoProject,
@@ -24,6 +25,7 @@ import {
   getAudioAssets,
 } from '../../services/fixtures';
 import { playAuditionTone, playCueTriggerSound, playMechanicalClick } from '../../services/synth';
+import { createValidationRun } from '../../services/api';
 import { useWorkspaceStore } from '../../stores/workspace';
 import { PixelMatrixNumber } from '../../components/PixelMatrixNumber';
 import { AdaptionLabsModal } from '../../components/AdaptionLabsModal';
@@ -131,6 +133,29 @@ export function OverviewPage() {
   const navigateToFinding = useWorkspaceStore((s) => s.navigateToFinding);
   const setSelectedRoute = useWorkspaceStore((s) => s.setSelectedRoute);
   const setSelectedPassage = useWorkspaceStore((s) => s.setSelectedPassage);
+  const activeProjectId = useWorkspaceStore((s) => s.activeProjectId) ?? 'prj_the_last_signal_demo';
+  const setActiveValidationRun = useWorkspaceStore((s) => s.setActiveValidationRun);
+  const [isRunningQa, setIsRunningQa] = useState(false);
+
+  const handleRunFullQa = async () => {
+    setIsRunningQa(true);
+    try {
+      const run = await createValidationRun(activeProjectId, {
+        simulation: undefined as unknown as any,
+        cues: [],
+        passages: [],
+      });
+      setActiveValidationRun(run.run_id);
+      playAuditionTone(587.33, 0.2);
+      setToastMessage(`✓ QA Engine executed: ${run.total_findings} finding(s) verified & saved to SQLite.`);
+      setShowToast(true);
+    } catch (e: unknown) {
+      setToastMessage(e instanceof Error ? e.message : 'QA Run failed');
+      setShowToast(true);
+    } finally {
+      setIsRunningQa(false);
+    }
+  };
 
   const missingAssetsCount = audioAssets.filter((a) => a.status === 'missing').length;
 
@@ -246,8 +271,17 @@ export function OverviewPage() {
                 </p>
               </div>
 
-              <div className={styles.sparkleIconWrap} aria-hidden="true">
-                <Sliders size={20} />
+              {/* Lighthouse Artistic SVG from branchtone.html */}
+              <div style={{ width: '130px', height: '74px', flexShrink: 0, borderRadius: '8px', overflow: 'hidden' }} aria-hidden="true">
+                <svg viewBox="0 0 100 70" fill="none" style={{ width: '100%', height: '100%' }}>
+                  <rect width="100" height="70" fill="#0A1316" rx="6" />
+                  <path d="M 0,55 Q 35,45 70,58 T 100,62 L 100,70 L 0,70 Z" fill="#0F1F24" />
+                  <polygon points="75,20 83,20 86,55 72,55" fill="#1C3036" />
+                  <rect x="76" y="16" width="6" height="4" fill="#10B981" opacity="0.9" />
+                  <circle cx="79" cy="18" r="1.5" fill="#FFFFFF" />
+                  <polygon points="79,18 0,0 0,40" fill="rgba(16, 185, 129, 0.35)" />
+                  <circle cx="25" cy="20" r="7" fill="#10B981" opacity="0.15" />
+                </svg>
               </div>
             </div>
 
@@ -258,16 +292,50 @@ export function OverviewPage() {
                 <span className={styles.chip}>Engine: <code>Deterministic Rule Suite (BT-001)</code></span>
               </div>
 
-              <button
-                type="button"
-                className={styles.talkBtn}
-                onClick={handleAuditionRouteB}
-                disabled={isPlayingAudition}
-                title="Audition Route B traversal and defect alert via browser Web Audio synth (Space)"
-              >
-                <Volume2 size={15} aria-hidden="true" />
-                <span>{isPlayingAudition ? 'Auditioning Traversal...' : 'Audition Traversal (Space)'}</span>
-              </button>
+              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                <button
+                  type="button"
+                  className={styles.talkBtn}
+                  style={{ background: '#10B981', color: '#04100B', borderColor: '#059669' }}
+                  onClick={handleRunFullQa}
+                  disabled={isRunningQa}
+                  title="Execute the deterministic validation engine on the backend"
+                  aria-label="Run QA validation engine"
+                >
+                  {isRunningQa ? (
+                    <>
+                      <RefreshCw size={14} className="spin" aria-hidden="true" />
+                      <span>Running QA…</span>
+                    </>
+                  ) : (
+                    <>
+                      <PlayCircle size={15} aria-hidden="true" />
+                      <span>Run QA Engine</span>
+                    </>
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  className={styles.talkBtn}
+                  onClick={handleAuditionRouteB}
+                  disabled={isPlayingAudition}
+                  title="Audition Route B traversal and defect alert via browser Web Audio synth (Space)"
+                >
+                  <Volume2 size={15} aria-hidden="true" />
+                  <span>{isPlayingAudition ? 'Auditioning Traversal...' : 'Audition Traversal (Space)'}</span>
+                </button>
+
+                <button
+                  type="button"
+                  className={styles.talkBtn}
+                  onClick={() => navigate('/story-graph')}
+                  title="Open interactive Story Graph canvas"
+                >
+                  <span>Open Story Graph</span>
+                  <ArrowRight size={13} aria-hidden="true" />
+                </button>
+              </div>
             </div>
           </div>
 
@@ -310,6 +378,26 @@ export function OverviewPage() {
                 <ArrowRight size={13} aria-hidden="true" />
               </button>
             </div>
+          </div>
+        </div>
+
+        {/* ── 4 Bento Stat Tiles (matching branchtone.html) ──────────────── */}
+        <div className={styles.bentoRow} style={{ marginTop: '12px' }}>
+          <div className={[styles.briefCard, styles.col3].join(' ')} style={{ padding: '16px' }}>
+            <span style={{ fontSize: '32px', fontWeight: 300, color: 'var(--bt-text)', fontFamily: 'var(--bt-font-mono)' }}>5</span>
+            <span style={{ fontSize: '12px', color: 'var(--bt-text-muted)' }}>Passages</span>
+          </div>
+          <div className={[styles.briefCard, styles.col3].join(' ')} style={{ padding: '16px' }}>
+            <span style={{ fontSize: '32px', fontWeight: 300, color: 'var(--bt-text)', fontFamily: 'var(--bt-font-mono)' }}>2</span>
+            <span style={{ fontSize: '12px', color: 'var(--bt-text-muted)' }}>Routes discovered</span>
+          </div>
+          <div className={[styles.briefCard, styles.col3].join(' ')} style={{ padding: '16px' }}>
+            <span style={{ fontSize: '32px', fontWeight: 300, color: 'var(--bt-text)', fontFamily: 'var(--bt-font-mono)' }}>5</span>
+            <span style={{ fontSize: '12px', color: 'var(--bt-text-muted)' }}>Audio assets · {missingAssetsCount} missing</span>
+          </div>
+          <div className={[styles.briefCard, styles.col3].join(' ')} style={{ padding: '16px', borderColor: 'rgba(239, 68, 68, 0.4)' }}>
+            <span style={{ fontSize: '32px', fontWeight: 300, color: '#EF4444', fontFamily: 'var(--bt-font-mono)' }}>1</span>
+            <span style={{ fontSize: '12px', color: 'var(--bt-text-muted)' }}>Open finding</span>
           </div>
         </div>
 
@@ -904,6 +992,66 @@ export function OverviewPage() {
                 <div style={{ fontSize: '11px', color: 'var(--bt-text-muted)' }}>
                   Requires route exploration engine
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Talk to BranchTone Live Browser Synthesizer (from branchtone.html) ── */}
+        <div className={styles.bentoRow} style={{ marginTop: '14px' }}>
+          <div className={[styles.briefCard, styles.col12].join(' ')}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px' }}>
+              <div>
+                <h3 style={{ margin: '0 0 4px', fontSize: '13px', fontWeight: 600, color: 'var(--bt-text)' }}>
+                  Talk to BranchTone · Live Browser Synthesizer
+                </h3>
+                <span style={{ fontSize: '12px', color: 'var(--bt-text-muted)' }}>
+                  Direct Web Audio API synthesis: audition tones, check interval dissonance, and audition the BT-001 defect tritone live.
+                </span>
+              </div>
+              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                <button
+                  type="button"
+                  className={styles.talkBtn}
+                  onClick={() => playAuditionTone(440, 0.3)}
+                  title="Audition 440 Hz (Concert A)"
+                >
+                  440 Hz
+                </button>
+                <button
+                  type="button"
+                  className={styles.talkBtn}
+                  onClick={() => playAuditionTone(523.25, 0.3)}
+                  title="Audition 523 Hz (C5)"
+                >
+                  523 Hz
+                </button>
+                <button
+                  type="button"
+                  className={styles.talkBtn}
+                  onClick={() => playAuditionTone(587.33, 0.3)}
+                  title="Audition 587 Hz (D5)"
+                >
+                  587 Hz
+                </button>
+                <button
+                  type="button"
+                  className={styles.talkBtn}
+                  style={{ borderColor: 'rgba(239, 68, 68, 0.5)', color: '#FCA5A5' }}
+                  onClick={() => playCueTriggerSound(true)}
+                  title="Audition BT-001 Defect Tritone Alert"
+                >
+                  Defect Tritone
+                </button>
+                <button
+                  type="button"
+                  className={styles.talkBtn}
+                  style={{ borderColor: 'rgba(16, 185, 129, 0.5)', color: '#6EE7B7' }}
+                  onClick={() => playCueTriggerSound(false)}
+                  title="Audition Verified Harmonic Chord"
+                >
+                  Verified Chord
+                </button>
               </div>
             </div>
           </div>

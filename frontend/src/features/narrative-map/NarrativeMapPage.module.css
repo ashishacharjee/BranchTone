@@ -1,4 +1,4 @@
-/* ── Narrative Map Workspace: Daylight Executive Studio Aesthetic ───────── */
+/* ── Narrative Map Workspace: Authoritative Dark Obsidian Studio Aesthetic (DESIGN.md §2) ── */
 .narrativeMap {
   display: flex;
   flex-direction: column;
@@ -24,10 +24,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 24px;
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 18px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  background: var(--bt-surface, #141C1E);
+  border: 1px solid var(--bt-border, rgba(176, 198, 193, 0.16));
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
 .routeSelector {
@@ -41,7 +41,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #64748B;
+  color: var(--bt-text-secondary, #AAB8B3);
 }
 
 .routePill {
@@ -50,27 +50,27 @@
   gap: 8px;
   padding: 6px 16px;
   border-radius: 9999px;
-  background: #F8FAFC;
-  border: 1px solid #E2E8F0;
-  color: #475569;
+  background: var(--bt-surface-2, #1A2426);
+  border: 1px solid var(--bt-border-subtle, rgba(176, 198, 193, 0.12));
+  color: var(--bt-text-secondary, #AAB8B3);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .routePill:hover {
-  background: #F1F5F9;
-  color: #0F172A;
-  border-color: #CBD5E1;
+  background: var(--bt-surface-3, #202B2D);
+  color: var(--bt-text, #EDF3F0);
+  border-color: rgba(176, 198, 193, 0.24);
   transform: translateY(-1px);
 }
 
 .routePillActive {
-  background: #DCFCE7;
-  border-color: #86EFAC;
-  color: #065F46;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
+  background: rgba(41, 201, 138, 0.14);
+  border-color: var(--bt-accent, #29C98A);
+  color: var(--bt-accent, #29C98A);
+  box-shadow: 0 0 12px rgba(41, 201, 138, 0.2);
 }
 
 .pillBadge {
@@ -80,28 +80,28 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #E2E8F0;
+  background: rgba(176, 198, 193, 0.12);
   font-size: 10px;
-  font-family: var(--bt-font-mono);
+  font-family: var(--bt-font-mono, monospace);
   font-weight: 700;
-  color: #475569;
+  color: var(--bt-text-secondary, #AAB8B3);
 }
 
 .routePillActive .pillBadge {
-  background: #10B981;
-  color: #FFFFFF;
+  background: var(--bt-accent, #29C98A);
+  color: #06090A;
 }
 
 /* ── Intensity Plot Panel ────────────────────────────────────────────────── */
 .plotPanel {
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 20px;
+  background: var(--bt-surface, #141C1E);
+  border: 1px solid var(--bt-border, rgba(176, 198, 193, 0.16));
+  border-radius: 14px;
   padding: 24px 28px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
   position: relative;
   overflow: hidden;
 }
@@ -111,7 +111,7 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: 14px;
-  border-bottom: 1px solid #E2E8F0;
+  border-bottom: 1px solid var(--bt-border, rgba(176, 198, 193, 0.16));
 }
 
 .plotTitle {
@@ -119,7 +119,7 @@
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #0F172A;
+  color: var(--bt-text, #EDF3F0);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -132,9 +132,9 @@
 }
 
 .passageStepCard {
-  background: #F8FAFC;
-  border: 1px solid #E2E8F0;
-  border-radius: 16px;
+  background: var(--bt-surface-2, #1A2426);
+  border: 1px solid var(--bt-border-subtle, rgba(176, 198, 193, 0.12));
+  border-radius: 12px;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -142,26 +142,26 @@
   cursor: pointer;
   position: relative;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .passageStepCard:hover {
-  border-color: #86EFAC;
-  background: #FFFFFF;
+  border-color: rgba(176, 198, 193, 0.3);
+  background: var(--bt-surface-3, #202B2D);
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .stepSelected {
-  border-color: #10B981 !important;
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.16) !important;
-  background: #F0FDF4 !important;
+  border-color: var(--bt-accent, #29C98A) !important;
+  box-shadow: 0 0 0 1px var(--bt-accent, #29C98A), 0 6px 24px rgba(41, 201, 138, 0.2) !important;
+  background: rgba(20, 36, 32, 0.95) !important;
 }
 
 .stepIssue {
-  border-color: #FCA5A5 !important;
-  background: #FEF2F2 !important;
-  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.08) !important;
+  border-color: rgba(240, 79, 117, 0.45) !important;
+  background: rgba(32, 20, 24, 0.95) !important;
+  box-shadow: 0 4px 16px rgba(240, 79, 117, 0.15) !important;
 }
 
 .stepTop {
@@ -171,21 +171,21 @@
 }
 
 .stepIndex {
-  font-family: var(--bt-font-mono);
+  font-family: var(--bt-font-mono, monospace);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #065F46;
-  background: #DCFCE7;
+  color: var(--bt-accent, #29C98A);
+  background: rgba(41, 201, 138, 0.12);
   padding: 3px 8px;
   border-radius: 9999px;
-  border: 1px solid #BBF7D0;
+  border: 1px solid rgba(41, 201, 138, 0.28);
 }
 
 .stepTitle {
   font-size: 15px;
   font-weight: 700;
-  color: #0F172A;
+  color: var(--bt-text, #EDF3F0);
   letter-spacing: -0.01em;
 }
 
@@ -194,7 +194,7 @@
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: #64748B;
+  color: var(--bt-text-secondary, #AAB8B3);
 }
 
 .intensityRow {
@@ -208,25 +208,25 @@
   display: flex;
   justify-content: space-between;
   font-size: 11px;
-  color: #64748B;
+  color: var(--bt-text-secondary, #AAB8B3);
 }
 
 .intensityValue {
-  font-family: var(--bt-font-mono);
+  font-family: var(--bt-font-mono, monospace);
   font-weight: 700;
-  color: #0F172A;
+  color: var(--bt-text, #EDF3F0);
 }
 
 .intensityBarBg {
   height: 6px;
-  background: #E2E8F0;
+  background: var(--bt-dark-well, #0B0F11);
   border-radius: 9999px;
   overflow: hidden;
 }
 
 .intensityBarFill {
   height: 100%;
-  background: #10B981;
+  background: var(--bt-accent, #29C98A);
   border-radius: 9999px;
   transition: width 0.3s ease;
 }
@@ -243,27 +243,27 @@
 }
 
 .factNoReveal {
-  background: #F1F5F9;
-  color: #475569;
-  border: 1px solid #E2E8F0;
+  background: var(--bt-surface-3, #202B2D);
+  color: var(--bt-text-secondary, #AAB8B3);
+  border: 1px solid var(--bt-border-subtle, rgba(176, 198, 193, 0.12));
 }
 
 .factReveal {
-  background: #DCFCE7;
-  color: #065F46;
-  border: 1px solid #BBF7D0;
+  background: rgba(41, 201, 138, 0.12);
+  color: var(--bt-accent, #29C98A);
+  border: 1px solid rgba(41, 201, 138, 0.28);
 }
 
 /* ── Annotation Review ──────────────────────────────────────────────────── */
 .annotationSection {
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 20px;
+  background: var(--bt-surface, #141C1E);
+  border: 1px solid var(--bt-border, rgba(176, 198, 193, 0.16));
+  border-radius: 14px;
   padding: 24px 28px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
 }
 
 .annotationGrid {
@@ -273,35 +273,35 @@
 }
 
 .annotationCard {
-  background: #F8FAFC;
-  border: 1px solid #E2E8F0;
-  border-radius: 16px;
+  background: var(--bt-surface-2, #1A2426);
+  border: 1px solid var(--bt-border-subtle, rgba(176, 198, 193, 0.12));
+  border-radius: 12px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .annotationCard:hover {
-  background: #FFFFFF;
-  border-color: #CBD5E1;
+  background: var(--bt-surface-3, #202B2D);
+  border-color: rgba(176, 198, 193, 0.28);
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .annotationCard:focus-visible {
-  outline: 2px solid #10B981;
+  outline: 2px solid var(--bt-accent, #29C98A);
 }
 
 .annotationApproved {
-  border-color: #86EFAC;
+  border-color: rgba(41, 201, 138, 0.35);
 }
 
 .annotationPending {
-  border-color: #FCD34D;
+  border-color: rgba(217, 166, 93, 0.35);
 }
 
 .actionRow {
@@ -316,16 +316,16 @@
   font-size: 11px;
   font-weight: 700;
   border-radius: 8px;
-  background: #DCFCE7;
-  border: 1px solid #86EFAC;
-  color: #065F46;
+  background: rgba(41, 201, 138, 0.14);
+  border: 1px solid var(--bt-accent, #29C98A);
+  color: var(--bt-accent, #29C98A);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .approveBtn:hover {
-  background: #10B981;
-  color: #FFFFFF;
+  background: var(--bt-accent, #29C98A);
+  color: #06090A;
 }
 
 .rejectBtn {
@@ -333,21 +333,21 @@
   font-size: 11px;
   font-weight: 700;
   border-radius: 8px;
-  background: #FEE2E2;
-  border: 1px solid #FCA5A5;
-  color: #DC2626;
+  background: rgba(240, 79, 117, 0.16);
+  border: 1px solid var(--bt-error, #F04F75);
+  color: var(--bt-error, #F04F75);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .rejectBtn:hover {
-  background: #EF4444;
+  background: var(--bt-error, #F04F75);
   color: #FFFFFF;
 }
 
 .demoActionNotice {
   font-size: 11px;
-  color: #64748B;
+  color: var(--bt-text-secondary, #AAB8B3);
   font-style: italic;
 }
 
@@ -364,9 +364,9 @@
   letter-spacing: 0.05em;
   padding: 3px 8px;
   border-radius: 9999px;
-  background: #DCFCE7;
-  color: #065F46;
-  border: 1px solid #86EFAC;
+  background: rgba(41, 201, 138, 0.14);
+  color: var(--bt-accent, #29C98A);
+  border: 1px solid rgba(41, 201, 138, 0.28);
 }
 
 .badgePending {
@@ -376,14 +376,14 @@
   letter-spacing: 0.05em;
   padding: 3px 8px;
   border-radius: 9999px;
-  background: #FEF3C7;
-  color: #D97706;
-  border: 1px solid #FDE68A;
+  background: rgba(217, 166, 93, 0.16);
+  color: var(--bt-warning, #D9A65D);
+  border: 1px solid rgba(217, 166, 93, 0.35);
 }
 
 .annotationText {
   font-size: 13px;
-  color: #334155;
+  color: var(--bt-text, #EDF3F0);
   line-height: 1.55;
 }
 

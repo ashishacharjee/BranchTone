@@ -2,13 +2,15 @@
  * AppShell — Floating studio window matching the video design.
  * Features left icon sidebar dock, top bar, and main workspace canvas.
  */
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Topbar } from './Topbar';
 import { AppleBackground } from '../components/AppleBackground';
 import styles from './AppShell.module.css';
 
 export function AppShell() {
+  const location = useLocation();
+
   return (
     <div className={styles.shellWrapper}>
       <AppleBackground />
@@ -22,7 +24,9 @@ export function AppShell() {
             tabIndex={-1}
             aria-label="Workspace content"
           >
-            <Outlet />
+            <div key={location.pathname} className={styles.routeTransitionWrapper}>
+              <Outlet />
+            </div>
           </main>
         </div>
       </div>

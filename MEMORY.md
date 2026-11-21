@@ -1,6 +1,39 @@
 # MEMORY.md — Project Decisions and Verified Context
 
-**Updated:** 13 November 2026. Keep this file factual and short. Update only after a decision or verification.
+**Updated:** 20 November 2026. Keep this file factual and short. Update only after a decision or verification.
+
+## Master Handoff v3 Implementation & Full Studio Integration (20 Nov 2026)
+
+- **Master Handoff v3 Package Integrated**:
+  * Executed the authoritative brief `BranchTone_Master_100_Percent_Implementation_and_Premium_UIUX_Spec.md`.
+  * **SQLite Persistence Layer**: Built `backend/app/db/repository.py` backed by `storage/branchtone.db` and the canonical 14-table schema (`content/sqlite_schema.reference.sql`). Persists projects, story versions, simulation runs, validation runs, individual findings with triage status (`open`, `resolved`, `accepted_risk`, `false_positive`), and audio assets across server restarts. Verified via `backend/app/tests/test_sqlite_persistence.py`.
+  * **Real Audio Streaming & HTTP Range (206 Partial Content)**: Implemented `GET /api/v1/projects/:id/assets/:id/stream` supporting partial content streaming, byte ranges (`bytes=start-end`), open-ended ranges (`bytes=start-`), out-of-bounds 416 handling, and MIME type dispatch (`audio/wav`, `audio/flac`). Verified via `backend/app/tests/test_audio_assets.py`.
+  * **Real Audio Playback in Cue Library**: Added an HTML5 seekable streaming player with interactive Play/Pause, duration/elapsed timecode formatting, and range scrubber in `CueLibraryPage.tsx`.
+  * **Dynamic Story Ingestion into Story Graph**: Added explicit confirmation-backed **"Load Into Story Graph Canvas"** button in `StoryImportModal.tsx`. Updates Zustand `loadedStoryIR`, dynamically replacing React Flow canvas nodes, coordinates, and edges in `GraphCanvas.tsx` and `StoryGraphPage.tsx` with a one-click "Reset to Demo Story" action.
+  * **Inkle Ink Subset Scope Honest Disclosure**: Prominently surfaced that the engine compiles the Inkle Ink Core Structural Subset (global `VAR`, knots, stitches, diverts `->`, choices `*`, and mutations `~`), while multi-branch gathers are structured as sequential prose.
+- **85 Automated Tests Passing (100% Pass Rate)**:
+  * Backend: **42 / 42 Pytest tests passed** in 3.15s across all 15 test suites.
+  * Frontend: **43 / 43 Vitest tests passed** in 21.21s across all 6 test suites.
+  * TypeScript strict compilation (`npx tsc -b frontend`): **0 errors**.
+  * Production build (`vite build`): **Succeeded in 17.39s**.
+  * Live background daemons: FastAPI (`http://127.0.0.1:8000`), Vite dev server (`http://127.0.0.1:5173`).
+  * Strict constraint compliance: Zero remote git commits or pushes executed; all modifications preserved in local working tree.
+
+- **Selection Achieved**: Qualified for the Offline Finale at Techno India University / GeeksforGeeks.
+- **Milestones M1–M6 Fully Implemented**:
+  * **Milestone 1 (Twee Ingestion & Lexer)**: Built `app/ingestion/source_map.py`, `lexer.py`, `parser.py`. Full Unicode code-point tracking, SHA-256 source hashing, CRLF/LF invariance, and unsupported macro diagnostics (`UNSUPPORTED_STORY_SYNTAX`).
+  * **Milestone 2 (Canonical Story IR & Compiler)**: Built `app/compiler/story_compiler.py` and `app/api/routes/imports.py`. Converts parsed blocks into typed `Passage`, `StoryEdge`, `StateMutation`, and `StoryVersion`. Connects incoming/outgoing edges and flags dangling links (`MISSING_LINK_TARGET`).
+  * **Milestone 3 (Directed Graph & Route Simulator)**: Built `app/graph/story_graph.py`, `route_simulator.py`, and `app/api/routes/simulation.py`. Simulates branching story paths with fact state propagation ($K_r(v)$), cycle detection, state/depth budgets, and evaluates passage-entry cue triggers emitting `CueActivationEvent` traces.
+  * **Milestone 4 (Audio Asset Backend & Waveform Decoder)**: Built `app/audio/asset_service.py`, `waveform_decoder.py`, and `app/api/routes/assets.py`. Enforces 50MB size limit, path traversal sanitization, RIFF/WAV header validation, and real PCM peak extraction (128 buckets, [0.0, 1.0]).
+  * **Milestone 5 (Deterministic Validation Suite & BT-001)**: Built `app/rules/evaluator.py`, `reveal_protection.py`, `cue_coverage.py`, `tension_lifecycle.py`, `emotional_continuity.py`, and `app/api/routes/validation.py`. Dynamically detects Rule BT-001 Reveal Protection violations on Route B Air Vent entry, extracts verbatim quotes, supports negative controls (Route A passes), and provides finding status triage (`PATCH /findings/{id}`).
+  * **Milestone 6 (Reporting Service)**: Built `app/reporting/report_generator.py` and `app/api/routes/reports.py`. Serializes reproducible JSON reports (with SHA-256 checksum) and structured Markdown audit reports.
+- **80 Automated Tests Passing (100% Pass Rate)**:
+  * Backend: **37 / 37 Pytest tests passed** in 3.92s across all 14 test suites (`test_twee_parser.py`, `test_ink_parser.py`, `test_story_compiler.py`, `test_route_simulation.py`, `test_bfs_exploration.py`, `test_audio_assets.py`, `test_flac_decoder.py`, `test_validation_engine.py`, `test_api_endpoints.py`, `test_reporting.py`, `test_domain_models.py`, `test_error_handling.py`, `test_health.py`, `test_sqlite_schema.py`).
+  * Frontend: **43 / 43 Vitest tests passed** in 14.48s.
+  * TypeScript strict compilation (`tsc -b`): **0 errors**.
+  * Production build (`vite build`): **Succeeded in 29.47s**.
+  * Both servers running locally: FastAPI backend on `http://127.0.0.1:8000`, Vite frontend on `http://127.0.0.1:5173`.
+  * Strict constraint compliance: Zero remote git commits or pushes executed; all modifications preserved in local working tree.
 
 ## Apple Liquid Glass Materials, Interactive Traversal Scrubber & Elevated Adaption Labs AI (13 Nov 2026)
 

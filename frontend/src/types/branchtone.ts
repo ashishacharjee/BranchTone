@@ -252,6 +252,19 @@ export interface Finding {
   provenance: 'backend_validation' | 'demo_fixture';
 }
 
+export interface ValidationRun {
+  run_id: string;
+  project_id: string;
+  version_id: string;
+  simulation_id: string;
+  status: 'completed' | 'failed';
+  total_findings: number;
+  findings: Finding[];
+  rule_counts: Record<string, number>;
+  created_at: string;
+  provenance: 'backend_validation' | 'demo_fixture';
+}
+
 // ── API envelope ─────────────────────────────────────────────────────────────
 
 export interface ApiError {

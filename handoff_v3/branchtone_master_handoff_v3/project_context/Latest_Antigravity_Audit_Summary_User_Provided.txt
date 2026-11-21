@@ -1,0 +1,25 @@
+LATEST ANTIGRAVITY AUDIT SUMMARY (AS PASTED BY THE USER)
+
+Antigravity reported:
+- A local exhaustive end-to-end technical audit and handover document was generated at:
+  C:/Users/achar/.gemini/antigravity/brain/80238e39-f4ec-4653-8db3-749ef7699928/branchtone-100-percent-audit-and-handover.md
+  (This full local file is not included in this ZIP. Antigravity should inspect it directly if it still exists.)
+- `git status` was checked.
+- Current simulation and validation runs are held in memory with deterministic seed fallbacks for the demo project.
+- `StoryImportModal.tsx` parses `.twee` and `.ink` and outputs AST metrics: passages, edges, mutations and SHA-256.
+- Add an explicit “Load Into Story Graph Canvas” action to dynamically render an imported story in React Flow.
+- WAV/FLAC binary decoder reportedly generates real 128-bucket waveforms from uploaded files; current audition still uses Web Audio tone synthesis.
+- Add actual HTTP audio streaming/playback/seek support, proposed route:
+  GET /api/v1/projects/:id/assets/:id/stream
+- Ink parser currently supports the “Inkle Ink Core Structural Subset”: global variables, knots (`===`), stitches (`=`), diverts (`->`), choices (`*`, `+`), tags (`#`), mutations (`~`). Complex nested multi-branch gathers may currently be treated as sequential prose; disclose this limitation unless fully implemented and tested.
+- Latest summary reports 43 frontend tests and 37 backend tests, while original README reports 43 frontend and 11 backend tests. Verify exact current test counts from repository execution.
+- Existing modifications are local. User instruction: do not commit or push.
+
+DECISIONS ALREADY MADE BY USER:
+1. SQLite persistence: YES.
+2. Dynamic imported story loading into React Flow: YES.
+3. Real audio streaming/playback: YES.
+4. Ink subset limitations: disclose honestly; do not claim full Ink support.
+5. Git: local only; no commit/push/destructive cleanup.
+
+IMPORTANT: This is a summary pasted by the user, not independent repository verification. Antigravity must inspect code and its local audit document before treating any status as verified.

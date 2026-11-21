@@ -1,9 +1,9 @@
-/* ── High-Precision Studio Sidebar (Unslop Pass 1, 2, 5 & 7) ──────────────── */
+/* ── High-Precision Studio Sidebar (Dark Creative Workstation per DESIGN.md) ── */
 .sidebar {
   width: var(--bt-sidebar-width);
   flex-shrink: 0;
-  background: #FFFFFF;
-  border-right: 1px solid rgba(15, 23, 42, 0.08);
+  background: var(--bt-bg-elevated);
+  border-right: 1px solid var(--bt-border);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -21,7 +21,7 @@
   padding: 6px 12px;
   font-size: var(--bt-text-sm);
   background: var(--bt-accent);
-  color: #FFFFFF;
+  color: var(--bt-text-inverse);
   border-radius: var(--bt-radius);
   text-decoration: none;
   font-weight: 500;
@@ -38,7 +38,7 @@
   align-items: center;
   gap: 12px;
   padding: 18px 18px 14px;
-  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  border-bottom: 1px solid var(--bt-border);
 }
 
 .brandIcon {
@@ -48,16 +48,17 @@
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  background: #0F172A;
-  color: #FFFFFF;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
+  background: var(--bt-surface);
+  color: var(--bt-accent);
+  border: 1px solid var(--bt-border-accent);
+  box-shadow: 0 0 12px var(--bt-accent-glow);
   flex-shrink: 0;
 }
 
 .brandName {
   font-size: 15px;
   font-weight: 600;
-  color: #0F172A;
+  color: var(--bt-text);
   letter-spacing: -0.01em;
 }
 
@@ -71,22 +72,24 @@
   font-family: var(--bt-font-ui);
   font-size: 11px;
   font-weight: 500;
-  color: #64748B;
+  color: var(--bt-text-muted);
   margin-bottom: 6px;
   padding-left: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .workspaceSelector {
   padding: 6px 10px;
   border-radius: 6px;
-  background: #F8FAFC;
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  background: var(--bt-surface);
+  border: 1px solid var(--bt-border);
 }
 
 .workspaceName {
   font-size: 12px;
   font-weight: 500;
-  color: #334155;
+  color: var(--bt-text-secondary);
 }
 
 /* ── Current Project Card ───────────────────────────────────────────────── */
@@ -97,25 +100,33 @@
   gap: 10px;
   padding: 8px 10px;
   border-radius: 8px;
-  background: #F8FAFC;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02);
+  background: var(--bt-surface);
+  border: 1px solid var(--bt-border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   text-align: left;
   cursor: pointer;
-  transition: border-color var(--bt-transition-fast), background-color var(--bt-transition-fast);
+  transition: border-color var(--bt-transition-fast), background-color var(--bt-transition-fast), transform var(--bt-transition-fast), box-shadow var(--bt-transition-fast);
 }
 
 .projectCardBtn:hover {
-  border-color: rgba(16, 185, 129, 0.5);
-  background: #F1F5F9;
+  border-color: var(--bt-border-accent);
+  background: var(--bt-surface-2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 12px rgba(41, 201, 138, 0.12);
+}
+
+.projectCardBtn:active {
+  transform: scale(0.985);
 }
 
 .projectThumb {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: 6px;
-  background: #0F172A;
-  color: #10B981;
+  background-color: var(--bt-surface-2);
+  background-image: url('/thumbnails/project_thumb.jpg');
+  background-size: cover;
+  background-position: center;
+  border: 1px solid var(--bt-border);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -132,7 +143,7 @@
 .projectName {
   font-size: 12px;
   font-weight: 600;
-  color: #0F172A;
+  color: var(--bt-text);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -140,7 +151,7 @@
 
 .projectMeta {
   font-size: 10.5px;
-  color: #64748B;
+  color: var(--bt-text-muted);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -156,8 +167,9 @@
 .tag {
   font-size: 9.5px;
   font-weight: 500;
-  color: #475569;
-  background: #E2E8F0;
+  color: var(--bt-text-secondary);
+  background: var(--bt-surface-3);
+  border: 1px solid var(--bt-border);
   padding: 1px 5px;
   border-radius: 4px;
 }
@@ -166,8 +178,9 @@
   font-size: 9.5px;
   font-family: var(--bt-font-mono);
   font-weight: 500;
-  color: #047857;
-  background: #D1FAE5;
+  color: var(--bt-accent);
+  background: rgba(41, 201, 138, 0.12);
+  border: 1px solid rgba(41, 201, 138, 0.25);
   padding: 1px 5px;
   border-radius: 4px;
 }
@@ -194,36 +207,42 @@
   height: 34px;
   padding: 0 10px;
   border-radius: 6px;
-  color: #475569;
+  color: var(--bt-text-secondary);
   text-decoration: none;
   font-size: 13px;
   font-weight: 450;
   border: 1px solid transparent;
-  transition: background-color var(--bt-transition-fast), color var(--bt-transition-fast);
+  transition: background-color var(--bt-transition-fast), color var(--bt-transition-fast), border-color var(--bt-transition-fast), transform var(--bt-transition-fast);
 }
 
 .navLink:hover {
-  background: #F1F5F9;
-  color: #0F172A;
+  background: var(--bt-surface);
+  color: var(--bt-text);
+  transform: translateX(2px);
+}
+
+.navLink:active {
+  transform: scale(0.98) translateX(1px);
 }
 
 .navLinkActive {
-  background: #F1F5F9;
-  color: #0F172A;
+  background: var(--bt-surface-2);
+  color: var(--bt-text);
   font-weight: 550;
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--bt-border-accent);
+  box-shadow: inset 2px 0 0 var(--bt-accent);
 }
 
 .navIcon {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #64748B;
+  color: var(--bt-text-muted);
   width: 16px;
 }
 
 .navLinkActive .navIcon {
-  color: #10B981;
+  color: var(--bt-accent);
 }
 
 .navLabel {
@@ -238,17 +257,17 @@
   align-items: center;
   gap: 8px;
   padding: 12px 16px;
-  border-top: 1px solid rgba(15, 23, 42, 0.06);
-  background: #F8FAFC;
+  border-top: 1px solid var(--bt-border);
+  background: var(--bt-surface);
   font-size: 11.5px;
-  color: #64748B;
+  color: var(--bt-text-muted);
 }
 
 .statusIcon {
-  color: #10B981;
+  color: var(--bt-accent);
 }
 
 .statusText {
   font-weight: 500;
-  color: #0F172A;
+  color: var(--bt-text);
 }

@@ -1,10 +1,10 @@
-/* ── High-Precision Adaption Labs Studio Modal (Unslop Pass 1, 2, 7) ───────── */
+/* ── High-Precision Adaption Labs Studio Modal: Authoritative Dark Obsidian Studio Aesthetic (DESIGN.md §2) ── */
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: rgba(6, 9, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,10 +15,10 @@
 .modal {
   width: 100%;
   max-width: 580px;
-  background: #FFFFFF;
-  border: 1px solid rgba(15, 23, 42, 0.1);
-  border-radius: 12px;
-  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25);
+  background: var(--bt-surface, #141C1E);
+  border: 1px solid var(--bt-border, rgba(176, 198, 193, 0.16));
+  border-radius: 14px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -30,7 +30,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 20px;
-  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  border-bottom: 1px solid var(--bt-border, rgba(176, 198, 193, 0.16));
+  background: var(--bt-surface-2, #1A2426);
 }
 
 .headerLeft {
@@ -43,18 +44,19 @@
   width: 32px;
   height: 32px;
   border-radius: 6px;
-  background: #0F172A;
+  background: rgba(41, 201, 138, 0.14);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #FFFFFF;
+  color: var(--bt-accent, #29C98A);
   flex-shrink: 0;
+  border: 1px solid rgba(41, 201, 138, 0.28);
 }
 
 .title {
   font-size: 15px;
   font-weight: 600;
-  color: #0F172A;
+  color: var(--bt-text, #EDF3F0);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -64,11 +66,11 @@
 .sponsorPill {
   font-size: 11px;
   font-weight: 500;
-  color: #475569;
-  background: #F1F5F9;
+  color: var(--bt-accent, #29C98A);
+  background: rgba(41, 201, 138, 0.12);
   padding: 2px 7px;
   border-radius: 4px;
-  border: 1px solid #E2E8F0;
+  border: 1px solid rgba(41, 201, 138, 0.28);
 }
 
 .closeBtn {
@@ -80,14 +82,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #64748B;
+  color: var(--bt-text-secondary, #AAB8B3);
   cursor: pointer;
-  transition: background-color 0.12s ease, color 0.12s ease;
+  transition: all 0.12s ease;
 }
 
 .closeBtn:hover {
-  background: #F1F5F9;
-  color: #0F172A;
+  background: var(--bt-surface-3, #202B2D);
+  color: var(--bt-text, #EDF3F0);
 }
 
 .body {
@@ -100,13 +102,13 @@
 .description {
   font-size: 13px;
   line-height: 1.5;
-  color: #334155;
+  color: var(--bt-text-secondary, #AAB8B3);
   margin: 0;
 }
 
 .modelCard {
-  background: #F8FAFC;
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: var(--bt-dark-well, #0B0F11);
+  border: 1px solid var(--bt-border-subtle, rgba(176, 198, 193, 0.12));
   border-radius: 8px;
   padding: 12px 14px;
   display: flex;
@@ -122,50 +124,50 @@
 }
 
 .modelKey {
-  color: #64748B;
+  color: var(--bt-text-secondary, #AAB8B3);
   font-weight: 450;
 }
 
 .modelVal {
-  color: #0F172A;
-  font-weight: 550;
-  font-family: var(--bt-font-mono);
+  color: var(--bt-text, #EDF3F0);
+  font-weight: 600;
+  font-family: var(--bt-font-mono, monospace);
 }
 
 .presetPill {
-  font-family: var(--bt-font-mono);
+  font-family: var(--bt-font-mono, monospace);
   font-size: 11px;
   font-weight: 500;
   padding: 4px 8px;
   border-radius: 4px;
-  background: #F1F5F9;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  color: #475569;
+  background: var(--bt-surface-2, #1A2426);
+  border: 1px solid var(--bt-border-subtle, rgba(176, 198, 193, 0.12));
+  color: var(--bt-text-secondary, #AAB8B3);
   cursor: pointer;
   transition: all 0.12s ease;
 }
 
 .presetPill:hover {
-  background: #FFFFFF;
-  border-color: #94A3B8;
-  color: #0F172A;
+  background: var(--bt-surface-3, #202B2D);
+  border-color: rgba(176, 198, 193, 0.28);
+  color: var(--bt-text, #EDF3F0);
 }
 
 .presetPillActive {
-  background: #0F172A !important;
-  color: #FFFFFF !important;
-  border-color: #0F172A !important;
+  background: rgba(41, 201, 138, 0.15) !important;
+  color: var(--bt-accent, #29C98A) !important;
+  border-color: var(--bt-accent, #29C98A) !important;
 }
 
 .customTextArea {
   width: 100%;
-  font-family: var(--bt-font-sans);
+  font-family: var(--bt-font-sans, sans-serif);
   font-size: 12px;
   line-height: 1.5;
-  color: #0F172A;
-  background: #F8FAFC;
-  border: 1px solid rgba(15, 23, 42, 0.1);
-  border-radius: 6px;
+  color: var(--bt-text, #EDF3F0);
+  background: var(--bt-dark-well, #0B0F11);
+  border: 1px solid var(--bt-border, rgba(176, 198, 193, 0.16));
+  border-radius: 8px;
   padding: 8px 10px;
   resize: vertical;
   outline: none;
@@ -174,14 +176,14 @@
 }
 
 .customTextArea:focus {
-  border-color: #10B981;
-  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15);
-  background: #FFFFFF;
+  border-color: var(--bt-accent, #29C98A);
+  box-shadow: 0 0 0 2px rgba(41, 201, 138, 0.25);
+  background: var(--bt-dark-well, #0B0F11);
 }
 
 .testRunCard {
-  background: #F8FAFC;
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: var(--bt-dark-well, #0B0F11);
+  border: 1px solid var(--bt-border-subtle, rgba(176, 198, 193, 0.12));
   border-radius: 8px;
   padding: 10px 12px;
   display: flex;
@@ -195,8 +197,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 20px;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
-  background: #F8FAFC;
+  border-top: 1px solid var(--bt-border, rgba(176, 198, 193, 0.16));
+  background: var(--bt-surface-2, #1A2426);
 }
 
 .referralLinkBtn {
@@ -205,17 +207,18 @@
   gap: 6px;
   padding: 6px 14px;
   border-radius: 6px;
-  background: #0F172A;
-  color: #FFFFFF;
+  background: rgba(41, 201, 138, 0.14);
+  color: var(--bt-accent, #29C98A);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
-  border: 1px solid #0F172A;
-  transition: background-color 0.12s ease;
+  border: 1px solid var(--bt-accent, #29C98A);
+  transition: all 0.12s ease;
 }
 
 .referralLinkBtn:hover {
-  background: #1E293B;
+  background: var(--bt-accent, #29C98A);
+  color: #06090A;
 }
 
 .testActionBtn {
@@ -224,16 +227,17 @@
   gap: 6px;
   padding: 6px 12px;
   border-radius: 6px;
-  background: #FFFFFF;
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  color: #0F172A;
+  background: var(--bt-surface-3, #202B2D);
+  border: 1px solid var(--bt-border, rgba(176, 198, 193, 0.16));
+  color: var(--bt-text, #EDF3F0);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.12s ease, border-color 0.12s ease;
+  transition: all 0.12s ease;
 }
 
 .testActionBtn:hover {
-  background: #F1F5F9;
-  border-color: #94A3B8;
+  background: var(--bt-accent, #29C98A);
+  color: #06090A;
+  border-color: var(--bt-accent, #29C98A);
 }

@@ -1,26 +1,19 @@
-/* ── Studio Chassis Window Frame (Unslop Pass 6 & 7) ─────────────────────── */
+/* ── Studio Chassis Window Frame ────────────────────────────────────────── */
 .shellWrapper {
   display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   position: relative;
-  background: transparent;
+  background: var(--bt-bg, #0B1011);
 }
 
 .shell {
   display: flex;
-  width: calc(100vw - 24px);
-  max-width: 1560px;
-  height: calc(100vh - 24px);
-  border-radius: 16px;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
-  background: #FFFFFF;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  box-shadow: 0 20px 50px -12px rgba(15, 23, 42, 0.09),
-              0 4px 16px -2px rgba(15, 23, 42, 0.04);
+  background: var(--bt-bg-elevated, #101719);
   position: relative;
   z-index: 1;
 }
@@ -42,15 +35,45 @@
   overflow: hidden;
   position: relative;
   z-index: 1;
-  background: #F8FAFC;
+  background: var(--bt-bg);
 }
 
 .main {
   flex: 1;
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
   outline: none;
   position: relative;
   z-index: 1;
   background: transparent;
+}
+
+.routeTransitionWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  width: 100%;
+  animation: workspaceEntrance 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes workspaceEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.996);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .routeTransitionWrapper {
+    animation: none !important;
+  }
 }

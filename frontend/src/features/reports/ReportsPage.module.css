@@ -1,4 +1,4 @@
-/* ── Reports Workspace: Daylight Executive Studio Aesthetic ──────────────── */
+/* ── Reports Workspace: Authoritative Dark Obsidian Studio Aesthetic (DESIGN.md §2) ── */
 .reports {
   display: flex;
   flex-direction: column;
@@ -24,10 +24,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 24px;
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 18px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  background: var(--bt-surface, #141C1E);
+  border: 1px solid var(--bt-border, rgba(176, 198, 193, 0.16));
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
   gap: 16px;
   flex-wrap: wrap;
 }
@@ -44,10 +44,10 @@
   align-items: center;
   gap: 8px;
   padding: 8px 18px;
-  border-radius: 10px;
-  background: #F8FAFC;
-  border: 1px solid #E2E8F0;
-  color: #0F172A;
+  border-radius: 8px;
+  background: var(--bt-surface-2, #1A2426);
+  border: 1px solid var(--bt-border-subtle, rgba(176, 198, 193, 0.12));
+  color: var(--bt-text, #EDF3F0);
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
@@ -55,8 +55,8 @@
 }
 
 .secondaryBtn:hover {
-  background: #F1F5F9;
-  border-color: #CBD5E1;
+  background: var(--bt-surface-3, #202B2D);
+  border-color: rgba(176, 198, 193, 0.28);
   transform: translateY(-1px);
 }
 
@@ -65,33 +65,33 @@
   align-items: center;
   gap: 8px;
   padding: 8px 20px;
-  border-radius: 10px;
-  background: #DCFCE7;
-  border: 1px solid #86EFAC;
-  color: #065F46;
+  border-radius: 8px;
+  background: rgba(41, 201, 138, 0.14);
+  border: 1px solid var(--bt-accent, #29C98A);
+  color: var(--bt-accent, #29C98A);
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
+  box-shadow: 0 0 12px rgba(41, 201, 138, 0.15);
 }
 
 .exportBtn:hover {
-  background: #10B981;
-  color: #FFFFFF;
+  background: var(--bt-accent, #29C98A);
+  color: #06090A;
   transform: translateY(-1px);
 }
 
 /* ── JSON Preview Drawer ────────────────────────────────────────────────── */
 .jsonViewer {
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 20px;
+  background: var(--bt-surface, #141C1E);
+  border: 1px solid var(--bt-border, rgba(176, 198, 193, 0.16));
+  border-radius: 14px;
   padding: 20px 24px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
 }
 
 .jsonViewerHeader {
@@ -99,17 +99,17 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: 10px;
-  border-bottom: 1px solid #E2E8F0;
+  border-bottom: 1px solid var(--bt-border, rgba(176, 198, 193, 0.16));
 }
 
 .jsonPre {
-  background: #F8FAFC;
-  border: 1px solid #E2E8F0;
-  border-radius: 12px;
+  background: var(--bt-dark-well, #0B0F11);
+  border: 1px solid var(--bt-border, rgba(176, 198, 193, 0.16));
+  border-radius: 10px;
   padding: 16px;
-  font-family: var(--bt-font-mono);
+  font-family: var(--bt-font-mono, monospace);
   font-size: 11px;
-  color: #0F172A;
+  color: var(--bt-text, #EDF3F0);
   overflow-x: auto;
   max-height: 280px;
   margin: 0;
@@ -118,14 +118,14 @@
 
 /* ── Run Identifier Card ────────────────────────────────────────────────── */
 .idCard {
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 20px;
+  background: var(--bt-surface, #141C1E);
+  border: 1px solid var(--bt-border, rgba(176, 198, 193, 0.16));
+  border-radius: 14px;
   padding: 20px 24px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
   position: relative;
   overflow: hidden;
 }
@@ -134,10 +134,10 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  background: #F8FAFC;
+  background: var(--bt-surface-2, #1A2426);
   padding: 14px 16px;
-  border-radius: 12px;
-  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  border: 1px solid var(--bt-border-subtle, rgba(176, 198, 193, 0.12));
 }
 
 .idLabel {
@@ -145,14 +145,14 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #64748B;
+  color: var(--bt-text-secondary, #AAB8B3);
 }
 
 .idValue {
-  font-family: var(--bt-font-mono);
+  font-family: var(--bt-font-mono, monospace);
   font-size: 12px;
   font-weight: 700;
-  color: #0F172A;
+  color: var(--bt-text, #EDF3F0);
   word-break: break-all;
 }
 
@@ -165,14 +165,14 @@
 }
 
 .panel {
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 20px;
+  background: var(--bt-surface, #141C1E);
+  border: 1px solid var(--bt-border, rgba(176, 198, 193, 0.16));
+  border-radius: 14px;
   padding: 24px 28px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
   position: relative;
   overflow: hidden;
 }
@@ -182,7 +182,7 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: 14px;
-  border-bottom: 1px solid #E2E8F0;
+  border-bottom: 1px solid var(--bt-border, rgba(176, 198, 193, 0.16));
 }
 
 .panelTitle {
@@ -190,7 +190,7 @@
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #0F172A;
+  color: var(--bt-text, #EDF3F0);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -203,9 +203,9 @@
 }
 
 .ruleItem {
-  background: #F8FAFC;
-  border: 1px solid #E2E8F0;
-  border-radius: 14px;
+  background: var(--bt-surface-2, #1A2426);
+  border: 1px solid var(--bt-border-subtle, rgba(176, 198, 193, 0.12));
+  border-radius: 10px;
   padding: 16px 20px;
   display: flex;
   align-items: center;
@@ -214,14 +214,14 @@
 }
 
 .ruleItem:hover {
-  background: #FFFFFF;
-  border-color: #CBD5E1;
+  background: var(--bt-surface-3, #202B2D);
+  border-color: rgba(176, 198, 193, 0.28);
   transform: translateY(-1px);
 }
 
 .ruleItemIssue {
-  border-color: #FCA5A5;
-  background: #FEF2F2;
+  border-color: rgba(240, 79, 117, 0.45);
+  background: rgba(32, 20, 24, 0.95);
 }
 
 .ruleLeft {
@@ -233,14 +233,14 @@
 .ruleName {
   font-weight: 700;
   font-size: 14px;
-  color: #0F172A;
+  color: var(--bt-text, #EDF3F0);
   letter-spacing: -0.01em;
 }
 
 .ruleCode {
-  font-family: var(--bt-font-mono);
+  font-family: var(--bt-font-mono, monospace);
   font-size: 11px;
-  color: #64748B;
+  color: var(--bt-text-secondary, #AAB8B3);
 }
 
 .badgePass {
@@ -250,9 +250,9 @@
   letter-spacing: 0.06em;
   padding: 4px 10px;
   border-radius: 9999px;
-  background: #DCFCE7;
-  color: #065F46;
-  border: 1px solid #86EFAC;
+  background: rgba(41, 201, 138, 0.14);
+  color: var(--bt-accent, #29C98A);
+  border: 1px solid rgba(41, 201, 138, 0.28);
 }
 
 .badgeIssue {
@@ -262,16 +262,16 @@
   letter-spacing: 0.06em;
   padding: 4px 10px;
   border-radius: 9999px;
-  background: #FEE2E2;
-  color: #DC2626;
-  border: 1px solid #FECACA;
+  background: rgba(240, 79, 117, 0.18);
+  color: var(--bt-error, #F04F75);
+  border: 1px solid rgba(240, 79, 117, 0.35);
 }
 
 /* ── Coverage Notice Box ────────────────────────────────────────────────── */
 .coverageBox {
-  background: #F8FAFC;
-  border: 1px solid #E2E8F0;
-  border-radius: 14px;
+  background: var(--bt-surface-2, #1A2426);
+  border: 1px solid var(--bt-border-subtle, rgba(176, 198, 193, 0.12));
+  border-radius: 10px;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -287,13 +287,13 @@
 .coverageVal {
   font-size: 13px;
   font-weight: 700;
-  color: #DC2626;
-  font-family: var(--bt-font-mono);
+  color: var(--bt-error, #F04F75);
+  font-family: var(--bt-font-mono, monospace);
 }
 
 .coverageDesc {
   font-size: 12px;
-  color: #475569;
+  color: var(--bt-text-secondary, #AAB8B3);
   line-height: 1.6;
 }
 

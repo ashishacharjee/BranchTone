@@ -1,0 +1,869 @@
+/* ── BranchTone 7-Workspace Master Studio Showcase ──────────────────────── */
+.showcaseWrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #06090A;
+  background-image: 
+    radial-gradient(ellipse 90% 50% at 50% -10%, rgba(16, 185, 129, 0.14), transparent 70%),
+    radial-gradient(ellipse 70% 40% at 85% 60%, rgba(16, 185, 129, 0.06), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 15% 75%, rgba(240, 79, 117, 0.04), transparent 60%);
+  color: #EDF3F0;
+  padding: 16px 24px 32px;
+  overflow-x: hidden;
+  position: relative;
+  user-select: none;
+}
+
+/* ── Top Header ─────────────────────────────────────────────────────────── */
+.topHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px 18px;
+  border-bottom: 1px solid rgba(176, 198, 193, 0.12);
+  margin-bottom: 16px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.brandGroup {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logoWaveform {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 26px;
+}
+
+.waveformBar {
+  width: 3.5px;
+  background: #10B981;
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+.brandTitles {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.brandTitle {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #EDF3F0;
+  line-height: 1.1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brandSubtitle {
+  font-size: 11px;
+  color: #AAB8B3;
+  letter-spacing: 0.02em;
+}
+
+.centerTagline {
+  font-size: 14px;
+  font-weight: 450;
+  color: #AAB8B3;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+.taglineHighlight {
+  color: #10B981;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+}
+
+.headerRightPills {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.studioPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #10B981;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.15);
+}
+
+.viewModeToggle {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(20, 28, 30, 0.85);
+  border: 1px solid rgba(176, 198, 193, 0.18);
+  border-radius: 8px;
+  padding: 3px;
+  gap: 4px;
+}
+
+.toggleBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 5px;
+  border: none;
+  background: transparent;
+  color: #AAB8B3;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.toggleBtnActive {
+  background: rgba(16, 185, 129, 0.18);
+  color: #10B981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+}
+
+/* ── Bento Grid ─────────────────────────────────────────────────────────── */
+.bentoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr 1fr;
+  grid-auto-rows: auto;
+  gap: 16px;
+  width: 100%;
+}
+
+@media (max-width: 1360px) {
+  .bentoGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .bentoGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Bento Card Base ────────────────────────────────────────────────────── */
+.bentoCard {
+  background: rgba(16, 23, 25, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bentoCard:hover {
+  border-color: rgba(16, 185, 129, 0.42);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.12);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(176, 198, 193, 0.12);
+  background: rgba(11, 16, 17, 0.65);
+}
+
+.cardTitleLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badgeNum {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #10B981;
+  color: #04100B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+.cardTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: #EDF3F0;
+  letter-spacing: -0.01em;
+}
+
+.cardSubtitle {
+  font-size: 10.5px;
+  color: #87958F;
+  margin-left: 2px;
+}
+
+.cardExpandBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(176, 198, 193, 0.08);
+  border: 1px solid rgba(176, 198, 193, 0.16);
+  color: #AAB8B3;
+  font-size: 10.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cardExpandBtn:hover {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10B981;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.cardBody {
+  padding: 12px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 11.5px;
+}
+
+/* ── Panel 1: Project Overview ───────────────────────────────────────────── */
+.overviewLayout {
+  display: grid;
+  grid-template-columns: 85px 1fr;
+  gap: 10px;
+  height: 100%;
+}
+
+.miniSidebar {
+  background: rgba(11, 16, 17, 0.85);
+  border: 1px solid rgba(176, 198, 193, 0.12);
+  border-radius: 8px;
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 9.5px;
+}
+
+.miniSidebarBrand {
+  font-size: 10px;
+  font-weight: 700;
+  color: #10B981;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.miniNavList {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.miniNavItem {
+  padding: 3px 5px;
+  border-radius: 4px;
+  color: #87958F;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 9px;
+  transition: all 0.12s;
+}
+
+.miniNavItemActive {
+  background: rgba(16, 185, 129, 0.16);
+  color: #10B981;
+  font-weight: 600;
+}
+
+.miniSidebarReady {
+  margin-top: auto;
+  font-size: 8.5px;
+  color: #10B981;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.overviewMain {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lighthouseBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(20, 32, 34, 0.9) 0%, rgba(10, 16, 18, 0.95) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.lighthouseArtSvg {
+  width: 90px;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.lighthouseMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 1;
+}
+
+.storyTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #EDF3F0;
+  letter-spacing: -0.01em;
+}
+
+.storyTag {
+  font-size: 10px;
+  color: #AAB8B3;
+}
+
+.bannerBtns {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.miniBtnEmerald {
+  padding: 3px 9px;
+  border-radius: 4px;
+  background: #10B981;
+  color: #04100B;
+  font-size: 10px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.miniBtnEmerald:hover {
+  background: #35D69A;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.miniBtnOutline {
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(176, 198, 193, 0.08);
+  border: 1px solid rgba(176, 198, 193, 0.16);
+  color: #EDF3F0;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.statPillsRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.statPill {
+  background: rgba(11, 16, 17, 0.85);
+  border: 1px solid rgba(176, 198, 193, 0.12);
+  border-radius: 6px;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.statPillAlert {
+  border-color: rgba(240, 79, 117, 0.35);
+  background: rgba(32, 20, 24, 0.8);
+}
+
+.statPillNum {
+  font-family: var(--bt-font-mono, monospace);
+  font-size: 13px;
+  font-weight: 700;
+  color: #EDF3F0;
+}
+
+.statPillNumAlert {
+  color: #F04F75;
+}
+
+.statPillLabel {
+  font-size: 9px;
+  color: #87958F;
+  text-transform: uppercase;
+}
+
+.overviewBottomRow {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 6px;
+}
+
+.healthMiniBox {
+  background: rgba(11, 16, 17, 0.85);
+  border: 1px solid rgba(176, 198, 193, 0.12);
+  border-radius: 6px;
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.radialGauge {
+  width: 44px;
+  height: 44px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.activityList {
+  background: rgba(11, 16, 17, 0.85);
+  border: 1px solid rgba(176, 198, 193, 0.12);
+  border-radius: 6px;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 9px;
+  color: #AAB8B3;
+}
+
+/* ── Panel 2: Story Graph ────────────────────────────────────────────────── */
+.graphToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(176, 198, 193, 0.08);
+}
+
+.routeToggle {
+  display: flex;
+  gap: 4px;
+}
+
+.routePillBtn {
+  padding: 3px 8px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 600;
+  border: 1px solid rgba(176, 198, 193, 0.16);
+  background: rgba(20, 28, 30, 0.8);
+  color: #AAB8B3;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.routePillBtnActive {
+  background: rgba(16, 185, 129, 0.18);
+  color: #10B981;
+  border-color: #10B981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.25);
+}
+
+.graphArea {
+  position: relative;
+  height: 155px;
+  background: radial-gradient(circle at center, rgba(16, 24, 26, 0.8) 0%, rgba(8, 12, 13, 0.95) 100%);
+  border: 1px solid rgba(176, 198, 193, 0.12);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.graphSvgLayer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.nodeCard {
+  position: absolute;
+  padding: 4px 6px;
+  border-radius: 6px;
+  background: rgba(16, 23, 25, 0.92);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  font-size: 9px;
+  font-weight: 600;
+  color: #EDF3F0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: all 0.15s;
+}
+
+.nodeCard:hover {
+  transform: translateY(-1px);
+  border-color: #10B981;
+}
+
+.nodeCardIssue {
+  border-color: #F04F75;
+  background: rgba(32, 20, 24, 0.95);
+  box-shadow: 0 0 12px rgba(240, 79, 117, 0.4);
+}
+
+.nodeThumbBox {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: #0B1011;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.legendBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 9.5px;
+  color: #87958F;
+  padding-top: 4px;
+}
+
+.legendDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.transportBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: rgba(11, 16, 17, 0.9);
+  border: 1px solid rgba(176, 198, 193, 0.12);
+  font-size: 10.5px;
+}
+
+.transportPlayBtn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #10B981;
+  color: #04100B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+/* ── Panel 3: Narrative Map ──────────────────────────────────────────────── */
+.timelineTracksSvg {
+  width: 100%;
+  height: 160px;
+  background: rgba(8, 12, 13, 0.9);
+  border: 1px solid rgba(176, 198, 193, 0.12);
+  border-radius: 8px;
+}
+
+.eventDetailsBox {
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: rgba(11, 16, 17, 0.85);
+  border: 1px solid rgba(176, 198, 193, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 10px;
+}
+
+.eventTitle {
+  font-weight: 700;
+  color: #F59E0B;
+}
+
+/* ── Panel 4: Cue Library ────────────────────────────────────────────────── */
+.cueTableWrap {
+  border: 1px solid rgba(176, 198, 193, 0.12);
+  border-radius: 6px;
+  overflow: hidden;
+  background: rgba(11, 16, 17, 0.9);
+}
+
+.cueTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+
+.cueTable th {
+  background: rgba(20, 28, 30, 0.9);
+  padding: 5px 8px;
+  text-align: left;
+  font-size: 9px;
+  text-transform: uppercase;
+  color: #87958F;
+}
+
+.cueTable td {
+  padding: 5px 8px;
+  border-bottom: 1px solid rgba(176, 198, 193, 0.06);
+  color: #EDF3F0;
+}
+
+.okBadge {
+  font-size: 8.5px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(16, 185, 129, 0.15);
+  color: #10B981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.cuePlayerBox {
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: rgba(11, 16, 17, 0.9);
+  border: 1px solid rgba(176, 198, 193, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.waveformWaveSvg {
+  width: 100%;
+  height: 38px;
+}
+
+/* ── Panel 5: Route Lab ──────────────────────────────────────────────────── */
+.routeSequenceSvg {
+  width: 100%;
+  height: 52px;
+  background: rgba(8, 12, 13, 0.9);
+  border: 1px solid rgba(176, 198, 193, 0.12);
+  border-radius: 6px;
+}
+
+.routeLabSplit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.passageSnapshotCard {
+  background: rgba(11, 16, 17, 0.85);
+  border: 1px solid rgba(176, 198, 193, 0.12);
+  border-radius: 6px;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 10px;
+}
+
+.issuePill {
+  font-size: 9px;
+  font-weight: 700;
+  color: #F04F75;
+  background: rgba(240, 79, 117, 0.18);
+  border: 1px solid rgba(240, 79, 117, 0.35);
+  padding: 1px 5px;
+  border-radius: 3px;
+  align-self: flex-start;
+}
+
+/* ── Panel 6: Validation Centre ──────────────────────────────────────────── */
+.validationTableWrap {
+  border: 1px solid rgba(176, 198, 193, 0.12);
+  border-radius: 6px;
+  overflow: hidden;
+  background: rgba(11, 16, 17, 0.9);
+}
+
+.findingsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+
+.findingsTable th {
+  background: rgba(20, 28, 30, 0.9);
+  padding: 5px 8px;
+  text-align: left;
+  font-size: 9px;
+  color: #87958F;
+}
+
+.findingsTable td {
+  padding: 5px 8px;
+  border-bottom: 1px solid rgba(176, 198, 193, 0.06);
+}
+
+.findingDetailCard {
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: rgba(32, 20, 24, 0.85);
+  border: 1px solid rgba(240, 79, 117, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 10px;
+}
+
+.findingDetailTitle {
+  font-weight: 700;
+  color: #F04F75;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── Panel 7: Reports (Full Width) ───────────────────────────────────────── */
+.reportsFullCard {
+  grid-column: 1 / -1;
+}
+
+.reportsGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1.2fr 0.9fr;
+  gap: 10px;
+}
+
+@media (max-width: 1200px) {
+  .reportsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.reportWidget {
+  background: rgba(11, 16, 17, 0.85);
+  border: 1px solid rgba(176, 198, 193, 0.12);
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.widgetTitle {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #AAB8B3;
+  letter-spacing: 0.04em;
+}
+
+.progressMeterRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meterLabelRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9.5px;
+  color: #87958F;
+}
+
+.meterTrack {
+  height: 5px;
+  background: rgba(20, 28, 30, 0.9);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.meterFill {
+  height: 100%;
+  background: #10B981;
+  border-radius: 3px;
+}
+
+/* ── Global Footer ───────────────────────────────────────────────────────── */
+.bottomFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 12px 6px;
+  margin-top: 16px;
+  border-top: 1px solid rgba(176, 198, 193, 0.12);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.featurePills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.featurePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  background: rgba(20, 28, 30, 0.8);
+  border: 1px solid rgba(176, 198, 193, 0.15);
+  color: #AAB8B3;
+  font-size: 11px;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+
+.featurePill:hover {
+  background: rgba(16, 185, 129, 0.14);
+  color: #10B981;
+  border-color: rgba(16, 185, 129, 0.35);
+  transform: translateY(-1px);
+}
+
+.footerBrandRight {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #10B981;
+  font-size: 11.5px;
+  font-weight: 600;
+}

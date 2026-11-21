@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   FileText,
   Download,
@@ -13,6 +13,7 @@ import {
   getStoryVersion,
   getReportExportPayload,
 } from '../../services/fixtures';
+import { fetchReportJson } from '../../services/api';
 import styles from './ReportsPage.module.css';
 
 export function ReportsPage() {
@@ -22,8 +23,16 @@ export function ReportsPage() {
 
   const [showJsonPreview, setShowJsonPreview] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [liveJson, setLiveJson] = useState<string | null>(null);
 
-  const formattedJson = JSON.stringify(reportPayload, null, 2);
+  const formattedJson = liveJson ?? JSON.stringify(reportPayload, null, 2);
+
+  // Background fetch live backend report when available
+  useEffect(() => {
+    fetchReportJson(demoEnvelope.project.project_id, 'run_the_last_signal_demo_v1')
+      .then((data) => setLiveJson(JSON.stringify(data, null, 2)))
+      .catch(() => {});
+  }, [demoEnvelope.project.project_id]);
 
   const handleExportJson = () => {
     const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(formattedJson);

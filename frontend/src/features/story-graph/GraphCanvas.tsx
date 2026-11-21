@@ -5,10 +5,12 @@ import {
   BackgroundVariant,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import { Maximize2, Share2, ZoomIn, Check } from 'lucide-react';
+import { Maximize2, Share2, ZoomIn, Check, FileCode } from 'lucide-react';
 import { PassageNode } from './PassageNode';
 import type { Node, Edge, ReactFlowInstance } from '@xyflow/react';
 import { getPassages, getStoryEdges, getRoutes, getRoute } from '../../services/fixtures';
+import { useWorkspaceStore } from '../../stores/workspace';
+import { StoryImportModal } from '../../components/StoryImportModal';
 import styles from './GraphCanvas.module.css';
 
 interface GraphCanvasProps {
@@ -37,13 +39,20 @@ export function GraphCanvas({
   onSelectRoute,
   onSelectPassage,
 }: GraphCanvasProps) {
+  const loadedStoryIR = useWorkspaceStore((state) => state.loadedStoryIR);
+  const resetToDemo = useWorkspaceStore((state) => state.reset);
+
   const currentRouteId = selectedRouteId ?? 'route_b';
   const routes = getRoutes();
-  const passages = getPassages();
-  const edges = getStoryEdges();
+  const passages = loadedStoryIR ? loadedStoryIR.passages : getPassages();
+  const storyEdges = loadedStoryIR
+    ? (loadedStoryIR.edges as unknown as Array<{ edge_id: string; source_passage_id: string; target_passage_id: string; route_ids?: string[] }>)
+    : getStoryEdges();
 
   const [rfInstance, setRfInstance] = useState<ReactFlowInstance | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [isImportModalOpen, setIsImportModalOpen] = useState(false);
+  const [customPositions, setCustomPositions] = useState<Record<string, { x: number; y: number }>>({});
   const canvasRef = useRef<HTMLDivElement>(null);
 
   const activeRoute = getRoute(currentRouteId);
@@ -79,12 +88,22 @@ export function GraphCanvas({
     setTimeout(() => setToastMessage(null), 2500);
   }, [currentRouteId, selectedPassageId]);
 
-  // Generate React Flow nodes from fixtures
+  const handleNodeDragStop = useCallback((_: unknown, node: Node) => {
+    setCustomPositions((prev) => ({
+      ...prev,
+      [node.id]: node.position,
+    }));
+  }, []);
+
+  // Generate React Flow nodes from fixtures or loaded story IR
   const flowNodes: Node[] = useMemo(() => {
-    return passages.map((passage) => {
-      const coords = NODE_COORDINATES[passage.passage_id] ?? { x: 100, y: 100 };
+    return passages.map((passage, index) => {
+      const coords = customPositions[passage.passage_id] ?? NODE_COORDINATES[passage.passage_id] ?? {
+        x: 40 + (index % 3) * 260,
+        y: 60 + Math.floor(index / 3) * 160,
+      };
       const isSelected = passage.passage_id === selectedPassageId;
-      const isOnActiveRoute = activePassageIds.has(passage.passage_id);
+      const isOnActiveRoute = loadedStoryIR ? true : activePassageIds.has(passage.passage_id);
 
       return {
         id: passage.passage_id,
@@ -98,13 +117,13 @@ export function GraphCanvas({
         },
       };
     });
-  }, [passages, selectedPassageId, activePassageIds, onSelectPassage]);
+  }, [passages, selectedPassageId, activePassageIds, onSelectPassage, loadedStoryIR, customPositions]);
 
   // Generate React Flow edges with route highlighting and cue issue semantics
   const flowEdges: Edge[] = useMemo(() => {
-    return edges.map((e) => {
-      const isOnActiveRoute = e.route_ids.includes(currentRouteId);
-      const isAirVentIssueEdge = e.edge_id === 'edge_lobby_airvent' && currentRouteId === 'route_b';
+    return storyEdges.map((e) => {
+      const isOnActiveRoute = loadedStoryIR ? true : (e.route_ids ? e.route_ids.includes(currentRouteId) : false);
+      const isAirVentIssueEdge = !loadedStoryIR && e.edge_id === 'edge_lobby_airvent' && currentRouteId === 'route_b';
 
       let strokeColor = 'rgba(176, 198, 193, 0.2)';
       let strokeWidth = 1.5;
@@ -145,7 +164,7 @@ export function GraphCanvas({
         },
       };
     });
-  }, [edges, currentRouteId]);
+  }, [storyEdges, currentRouteId, loadedStoryIR]);
 
   const handleNodeClick = useCallback(
     (_: React.MouseEvent, node: Node) => {
@@ -166,29 +185,66 @@ export function GraphCanvas({
 
       {/* ── Top Toolbar ───────────────────────────────────────────── */}
       <div className={styles.toolbar}>
-        {/* Route Selector Pills */}
-        <div className={styles.routeSelector} role="group" aria-label="Route selector">
-          <span className={styles.routeLabel}>Routes:</span>
-          {routes.map((r) => {
-            const isActive = r.route_id === currentRouteId;
-            return (
-              <button
-                key={r.route_id}
-                type="button"
-                className={[styles.routePill, isActive ? styles.routePillActive : ''].join(' ')}
-                onClick={() => onSelectRoute(r.route_id)}
-                aria-pressed={isActive}
-                aria-label={`Select ${r.name}`}
-              >
-                <span className={styles.pillBadge}>{r.route_code}</span>
-                <span>{r.name}</span>
-              </button>
-            );
-          })}
-        </div>
+        {/* Route Selector Pills or Custom Story Controls */}
+        {loadedStoryIR ? (
+          <div className={styles.routeSelector} role="group" aria-label="Loaded story banner">
+            <span className={styles.routeLabel}>Loaded Story IR:</span>
+            <span style={{ fontSize: '12px', fontWeight: 600, color: '#10B981', fontFamily: 'var(--bt-font-mono)' }}>
+              {loadedStoryIR.story_version.source_filename} ({loadedStoryIR.passages.length} passages, {loadedStoryIR.edges.length} edges)
+            </span>
+            <button
+              type="button"
+              className={styles.routePill}
+              onClick={() => resetToDemo()}
+              title="Reset back to The Last Signal canonical demonstration graph"
+              aria-label="Reset to demo story"
+              style={{ padding: '3px 10px', fontSize: '11px' }}
+            >
+              Reset to Demo Story
+            </button>
+          </div>
+        ) : (
+          <div className={styles.routeSelector} role="group" aria-label="Route selector">
+            <span className={styles.routeLabel}>Routes:</span>
+            {routes.map((r) => {
+              const isActive = r.route_id === currentRouteId;
+              return (
+                <button
+                  key={r.route_id}
+                  type="button"
+                  className={[styles.routePill, isActive ? styles.routePillActive : ''].join(' ')}
+                  onClick={() => onSelectRoute(r.route_id)}
+                  aria-pressed={isActive}
+                  aria-label={`Select ${r.name}`}
+                >
+                  <span className={styles.pillBadge}>{r.route_code}</span>
+                  <span>{r.name}</span>
+                </button>
+              );
+            })}
+          </div>
+        )}
 
         {/* Viewport controls (active) */}
         <div className={styles.toolbarActions} role="group" aria-label="Graph viewport actions">
+          <button
+            type="button"
+            className={styles.actionBtn}
+            onClick={() => setIsImportModalOpen(true)}
+            title="Import custom story (.twee / .ink) with AST parser"
+            aria-label="Import story"
+            style={{
+              background: 'rgba(16, 185, 129, 0.12)',
+              color: '#10B981',
+              borderColor: 'rgba(16, 185, 129, 0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px',
+            }}
+          >
+            <FileCode size={13} aria-hidden="true" />
+            <span>Import</span>
+          </button>
           <button
             type="button"
             className={styles.actionBtn}
@@ -227,10 +283,11 @@ export function GraphCanvas({
           edges={flowEdges}
           nodeTypes={nodeTypes}
           onNodeClick={handleNodeClick}
+          onNodeDragStop={handleNodeDragStop}
           onInit={setRfInstance}
           fitView
           fitViewOptions={{ padding: 0.15 }}
-          nodesDraggable={false}
+          nodesDraggable={true}
           nodesConnectable={false}
           elementsSelectable={true}
           panOnDrag={true}
@@ -263,6 +320,12 @@ export function GraphCanvas({
           Route path
         </span>
       </div>
+
+      {/* ── Story Import AST Modal ─────────────────────────────────── */}
+      <StoryImportModal
+        isOpen={isImportModalOpen}
+        onClose={() => setIsImportModalOpen(false)}
+      />
     </div>
   );
 }
