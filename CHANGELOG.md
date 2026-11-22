@@ -1,5 +1,17 @@
 # CHANGELOG.md — Pack and Implementation History
 
+## 2.19 — 22 November 2026 (Mobile Touch Optimization & Production Code Privacy Hardening)
+
+- **Mobile Viewport & Touch Optimization:**
+  * Added responsive `@media (max-width: 768px)` and `@media (max-width: 480px)` styles to `branchtone.html` with `touch-action: manipulation` and `-webkit-tap-highlight-color: transparent` across all interactive elements.
+  * Added responsive piano scaling (120px on tablets, 100px on mobile phones) with touchbeam animations.
+  * Added sticky horizontal scroll segmented navigation in `Sidebar.module.css` and responsive `AppShell.module.css` layout for mobile screens.
+  * Pinned DAW bottom transport bar with `max(8px, env(safe-area-inset-bottom))` padding.
+- **Production Code Privacy & Security Hardening:**
+  * Enforced `build.sourcemap: false` in `vite.config.ts` to prevent TypeScript source code exposure in browser network inspectors.
+  * Conducted automated secret audit confirming zero API keys, credentials, or private secrets in version control.
+  * Preserved strict input sanitization, MIME-type header checks, and path traversal guards across all backend routes.
+
 ## 2.18 — 22 November 2026 (BranchTone HTML Studio, Build Notes & Local Server Verification)
 
 - **BranchTone HTML Single-File App & Build Notes:**

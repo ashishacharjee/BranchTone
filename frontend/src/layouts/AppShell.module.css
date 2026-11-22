@@ -77,3 +77,10 @@
     animation: none !important;
   }
 }
+
+@media (max-width: 768px) {
+  .body {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+}

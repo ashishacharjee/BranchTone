@@ -492,3 +492,20 @@
 .modalSecondaryBtn:hover {
   background: var(--bt-surface-3);
 }
+
+@media (max-width: 768px) {
+  .topbar {
+    padding: 6px 10px;
+    gap: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .breadcrumb,
+  .searchContainer {
+    display: none;
+  }
+  .actions {
+    margin-left: auto;
+    gap: 6px;
+  }
+}

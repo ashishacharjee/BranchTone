@@ -271,3 +271,39 @@
   font-weight: 500;
   color: var(--bt-text);
 }
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    border-right: none;
+    border-bottom: 1px solid var(--bt-border);
+    padding: 6px 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .sidebar::-webkit-scrollbar {
+    display: none;
+  }
+  .brand, .projectSelector, .statusIndicator, .engineStatus, .complianceAlert, .statusBar {
+    display: none;
+  }
+  .navList {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    padding: 0;
+  }
+  .navItem {
+    margin: 0;
+  }
+  .navLink {
+    padding: 6px 12px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+}
