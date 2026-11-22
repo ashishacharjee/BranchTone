@@ -1,5 +1,15 @@
 # CHANGELOG.md — Pack and Implementation History
 
+## 2.18 — 22 November 2026 (BranchTone HTML Studio, Build Notes & Local Server Verification)
+
+- **BranchTone HTML Single-File App & Build Notes:**
+  * Added dedicated `branchtone html/` and `branchtone_html/` packages containing the latest `branchtone.html` (132 KB) and `BRANCHTONE_BUILD_NOTES.md`.
+  * Updated `frontend/public/branchtone.html` and root `branchtone.html` with two-octave live piano synthesizer, stage spotlighting, "Find your first bug" quest onboarding card, Linear-style keycap navigation (1-7), and 3-step wax seal SHA-256 report verification.
+  * Added `/branchtone.html` and `/branchtone` endpoints to FastAPI backend in `backend/app/main.py`.
+- **Local Server Verification:**
+  * Verified live endpoints returning HTTP 200: `http://127.0.0.1:5173/` (Vite), `http://127.0.0.1:5173/branchtone.html`, `http://127.0.0.1:8000/api/health`, and `http://127.0.0.1:8000/branchtone.html`.
+  * Verified all 43 backend Pytest tests and frontend production build pass with 0 errors.
+
 ## 2.17 — 21 November 2026 (Full Studio Parity, Interactive Transport, & 100% Test Pass)
 
 - **Interactive Audio Playback & Real-time Synthesis:**

@@ -90,6 +90,18 @@ async def root(request: Request) -> Response:
     return JSONResponse({"message": "BranchTone API — see /docs for available endpoints."})
 
 
+@app.get("/branchtone.html")
+@app.get("/branchtone")
+async def serve_branchtone_html() -> Response:
+    root_branchtone = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "branchtone.html"))
+    if os.path.isfile(root_branchtone):
+        return FileResponse(root_branchtone)
+    public_branchtone = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "frontend", "public", "branchtone.html"))
+    if os.path.isfile(public_branchtone):
+        return FileResponse(public_branchtone)
+    return JSONResponse({"error": "branchtone.html not found"}, status_code=404)
+
+
 @app.get("/studio")
 @app.get("/app")
 @app.get("/app/{full_path:path}")
