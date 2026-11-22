@@ -10,7 +10,7 @@
     "frontend"
   ],
   "scripts": {
-    "build": "npm run build --prefix frontend",
+    "build": "npm run build --prefix frontend && node -e \"const fs=require('fs'); fs.copyFileSync('frontend/dist/index.html', 'frontend/dist/app.html'); fs.copyFileSync('frontend/public/branchtone.html', 'frontend/dist/index.html');\"",
     "dev": "npm run dev --prefix frontend",
     "dev:backend": "backend\\.venv\\Scripts\\python.exe -m uvicorn app.main:app --app-dir backend --port 8000 --reload",
     "test": "npm run test --prefix frontend",
@@ -18,5 +18,8 @@
     "test:all": "npm test && npm run test:backend",
     "typecheck": "npm run typecheck --prefix frontend",
     "preview": "npm run preview --prefix frontend"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.68.2"
   }
 }

@@ -9,7 +9,15 @@
       "destination": "/api/health"
     },
     {
-      "source": "/((?!assets/|favicon\\.svg|api/).*)",
+      "source": "/branchtone",
+      "destination": "/branchtone.html"
+    },
+    {
+      "source": "/react",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/((?!assets/|favicon\\.svg|api/|branchtone\\.html|branchtone|react|app\\.html|master-assets/|thumbnails/).*)",
       "destination": "/index.html"
     }
   ]

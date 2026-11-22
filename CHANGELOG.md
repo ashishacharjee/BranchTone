@@ -1,5 +1,12 @@
 # CHANGELOG.md — Pack and Implementation History
 
+## 2.20 — 22 November 2026 (Vercel Build Fix, Rollup Linux Binding, & Production Parity)
+
+- **Vercel Build & Root Route Resolution:**
+  * Diagnosed and resolved Vercel build failure caused by missing `@rollup/rollup-linux-x64-gnu` native binary in npm package-lock optional dependencies on Linux build runners.
+  * Configured `package.json` and `vercel.json` to serve `branchtone.html` by default at `https://branchtone.vercel.app/` and `/branchtone.html`, achieving 100% visual and functional parity between local studio and Vercel production.
+  * Successfully promoted and aliased production deployment `dpl_4m4ACZs2huUSbZC7YzGUJj3wLLap` to `https://branchtone.vercel.app`.
+
 ## 2.19 — 22 November 2026 (Mobile Touch Optimization & Production Code Privacy Hardening)
 
 - **Mobile Viewport & Touch Optimization:**
